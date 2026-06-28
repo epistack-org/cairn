@@ -1,0 +1,29 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:xf50Otqj322Xirv5T8cRCFQ2QNbl8ETqaXpHQU5_7yc",
+  "assertion": {
+    "title": "The Huanan Seafood Wholesale Market in Wuhan was the early epicenter of the COVID-19 pandemic",
+    "authors": "Worobey M, et al.",
+    "venue": "Science",
+    "year": 2022,
+    "volume": "377(6609):951-959",
+    "doi": "10.1126/science.abp8715",
+    "verification": "unverified-fixture",
+    "role": "the early-case dataset shared by the proximity trio"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "3ca30075f217b1a9f4a3561617b615863aa034f098a37515a45718e6a178c10d19c24bed0f42dd7269f48bb436113f844be93ec4b566bc81aa234dc90494ee0e",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

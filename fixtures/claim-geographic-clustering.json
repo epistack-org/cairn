@@ -1,0 +1,27 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:jvRVZNPTavDWS_tVy6gYBGdh-maUCNtuh8kg3Ff245U",
+  "assertion": {
+    "text": "Early COVID-19 cases cluster geographically around the Huanan market.",
+    "subject": "tt:GvYuWTVm_R7W8Wm4SlIkCPi6s4HzgoHdezfuHTlISd4",
+    "polarity": "supports-zoonosis",
+    "illustrative_LR": 5.0
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:xf50Otqj322Xirv5T8cRCFQ2QNbl8ETqaXpHQU5_7yc"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "e13f9cb68859216fde5d32c3e8f5cb4e506edeee61a05a30829b78316fec11c446190e15b747b9680a0dd7324f765e708361994a94dcb5fd88c708cd92f06303",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

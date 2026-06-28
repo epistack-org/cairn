@@ -1,0 +1,27 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:sDChqfVUB8hYu1bEhpF4hRPUBYfRtKQtjt6qSKokwC8",
+  "assertion": {
+    "text": "SARS-CoV-2-positive environmental samples concentrate in the Huanan market.",
+    "subject": "tt:GvYuWTVm_R7W8Wm4SlIkCPi6s4HzgoHdezfuHTlISd4",
+    "polarity": "supports-zoonosis",
+    "illustrative_LR": 5.0
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:xf50Otqj322Xirv5T8cRCFQ2QNbl8ETqaXpHQU5_7yc"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "beaa2ee4542ee275e1170620e2d44f88a2fbd67e8cc10dacdf846db7a4dc9f2b596c2a71675ddd3ec641951d41f01af9cae62c6491918ae69636e3d694afb206",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

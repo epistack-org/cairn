@@ -1,0 +1,27 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:LssTHL8LClmXabpXdgP968YvUl0YfIAv6U_FnT-oyhc",
+  "assertion": {
+    "text": "Two distinct SARS-CoV-2 lineages (A and B) indicate multiple market introductions.",
+    "subject": "tt:GvYuWTVm_R7W8Wm4SlIkCPi6s4HzgoHdezfuHTlISd4",
+    "polarity": "supports-zoonosis",
+    "illustrative_LR": 4.0
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:eYWfL6VVid1cE0av9w0z8OnpN9YtE6GZB8_yWoun-F0"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "c543c256110892ea9d643597acfe62bb97189e0bba095f685cca17ea8270fd6816b32b418e5a3fc53636ae5028efd981dfe9dfae40a23c8ae075bb97a5604005",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

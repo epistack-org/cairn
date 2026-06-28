@@ -1,0 +1,19 @@
+[project]
+name = "cairn"
+version = "0.0.1"
+description = "The decoupled epistack scoring engine: a content-addressed/signed knowledge record + a measured n_eff + a shared-upstream refuse-to-combine detector."
+requires-python = ">=3.10"
+dependencies = ["jsonschema>=4", "cryptography>=41", "rfc8785>=0.1.2"]
+
+[project.scripts]
+cairn = "cairn.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["cairn"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

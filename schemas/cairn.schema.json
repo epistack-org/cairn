@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://epistack.dev/ns/cairn.v0.schema.json",
+  "title": "Cairn record (v0)",
+  "description": "A nanopublication-shaped, content-addressed, signed knowledge artifact. One envelope for claims (verbs) and entities (nouns).",
+  "type": "object",
+  "required": ["@context", "@type", "id", "assertion", "provenance", "pubinfo"],
+  "additionalProperties": false,
+  "properties": {
+    "@context": { "const": "https://epistack.dev/ns/cairn.v0.jsonld" },
+    "@type": {
+      "type": "string",
+      "enum": ["epi:Claim", "epi:Entity", "epi:Source", "epi:Schema", "epi:Cluster"]
+    },
+    "id": {
+      "description": "Trusty URI = tt: + base64url(SHA-256(JCS(content))); empty only on an unminted draft.",
+      "type": "string",
+      "pattern": "^(tt:[A-Za-z0-9_-]{43})?$"
+    },
+    "assertion": {
+      "description": "What is claimed / what exists.",
+      "type": "object",
+      "minProperties": 1
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["derivedFrom", "mintedBy", "method", "at"],
+      "additionalProperties": false,
+      "properties": {
+        "derivedFrom": {
+          "description": "Upstream Cairn Trusty URIs this record derives from (the non-independence edge set).",
+          "type": "array",
+          "items": { "type": "string", "pattern": "^tt:[A-Za-z0-9_-]{43}$" },
+          "uniqueItems": true
+        },
+        "mintedBy": { "type": "string", "minLength": 1 },
+        "method": { "type": "string", "minLength": 1 },
+        "at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "pubinfo": {
+      "type": "object",
+      "required": ["sig"],
+      "additionalProperties": true,
+      "properties": {
+        "conformsTo": { "type": "string", "pattern": "^tt:[A-Za-z0-9_-]{43}$" },
+        "sig": {
+          "type": "object",
+          "required": ["alg", "key", "value"],
+          "additionalProperties": true,
+          "properties": {
+            "alg": { "const": "ed25519" },
+            "key": { "type": "string", "pattern": "^([0-9a-f]{64})?$" },
+            "value": { "type": "string", "pattern": "^([0-9a-f]{128})?$" },
+            "by": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

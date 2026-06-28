@@ -1,0 +1,36 @@
+# cairn CI — build the self-verifying container, then smoke the demo.
+#
+# The Containerfile mints the fixtures and runs the 17-test pytest suite AT BUILD
+# TIME, so a green `docker build` *is* the test pass. No registry push, no secrets:
+# the scoring engine stays plain git + one container by design the
+# moat is non-portable; the *scoring* must run on a fresh machine).
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Serialize per ref; never cancel a main run, cancel superseded branch runs.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  test:
+    runs-on: ubuntu          #  host-mode runner: host docker available
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: build + self-verify (mints fixtures + runs the 17-test suite at build time)
+        run: |
+          set -euo pipefail
+          docker build -t cairn:ci -f Containerfile .
+
+      - name: HSM-trio demo smoke (REFUSE-TO-COMBINE / n_eff=1 vs naive 125:1)
+        run: docker run --rm cairn:ci
+
+      - name: cleanup (shared-filesystem hygiene)
+        if: always()
+        run: docker image rm cairn:ci 2>/dev/null || true

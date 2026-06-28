@@ -1,0 +1,29 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:eYWfL6VVid1cE0av9w0z8OnpN9YtE6GZB8_yWoun-F0",
+  "assertion": {
+    "title": "The molecular epidemiology of multiple zoonotic origins of SARS-CoV-2",
+    "authors": "Pekar JE, et al.",
+    "venue": "Science",
+    "year": 2022,
+    "volume": "377(6609):960-966",
+    "doi": "10.1126/science.abp8337",
+    "verification": "unverified-fixture",
+    "role": "a genuinely distinct (molecular) upstream"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "ad755c519994dba28b07aa5f0447e61c0c3c0563296f3261f51eeb68e2176da52fc608cf33b72fcaba275e62bf8b7c9d7cdc474e4ec4527209fcaf3b7ea11f00",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Cluster",
+  "id": "tt:GvYuWTVm_R7W8Wm4SlIkCPi6s4HzgoHdezfuHTlISd4",
+  "assertion": {
+    "name": "Huanan Seafood Market early-case cluster",
+    "aliases": [
+      "HSM cluster",
+      "the proximity trio"
+    ],
+    "kind": "EvidenceCluster",
+    "geo": "Wuhan, Jianghan District",
+    "note": "the three proximity lines about this cluster share one upstream"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "8b5740eb40b75a559788a9506fd7cec7da835fc4c4e44fac122b4907fba27f70caeae59908601ffa8345207743bf5ec2296c82f9a3fb3432d975afa936a01a04",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

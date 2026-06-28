@@ -1,0 +1,28 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:nhGoZVqXfCcuZiqYCfg_qL-uZ9GQbavIMbxDYOYbyu4",
+  "assertion": {
+    "name": "SARS-CoV-2 furin cleavage site",
+    "aliases": [
+      "FCS",
+      "S1/S2 polybasic cleavage site"
+    ],
+    "kind": "GenomicFeature",
+    "note": "the lab-leak-side crux entity; contrast referent"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "e76e9e38635c96604209394bb0b9c5868d6b001743bd2be05740460c0963a75c35daee78718eba8e2fcd7aa8a20ae0b5760103472c289c084fa4c5c1ea7bce0f",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}
