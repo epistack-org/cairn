@@ -11,12 +11,15 @@ COPY schemas ./schemas
 COPY fixtures ./fixtures
 COPY demo ./demo
 COPY tests ./tests
+COPY assessment ./assessment
 
 RUN pip install --no-cache-dir -e . && pip install --no-cache-dir pytest
 
-# self-verifying image: mint fixtures + prove the spans resolve + run the suite at build time
+# self-verifying image: mint fixtures + prove the spans resolve + recompute the
+# measured n_eff from the pinned assessment run + run the suite, all at build time
 RUN python fixtures/build_fixtures.py >/dev/null \
  && python -m cairn ground 'fixtures/*.json' >/dev/null \
+ && python -m cairn assess 'assessment/runs/heterogeneous.json' 'assessment/runs/homogeneous-control.json' 'assessment/runs/clean-diverse.json' --battery assessment/probes.json >/dev/null \
  && python -m pytest -q
 
 CMD ["python", "demo/hsm_trio.py"]

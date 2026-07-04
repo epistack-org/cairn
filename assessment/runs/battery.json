@@ -1,0 +1,187 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Schema",
+  "id": "tt:Ad33h5QFG-_Znxvt1TG7I9ZL_mbSqybtw1qoCNHxf7I",
+  "assertion": {
+    "battery_id": "hsm-crux-v1",
+    "title": "HSM-crux assessor probe battery (v1)",
+    "crux": "Did SARS-CoV-2 emerge via zoonotic spillover associated with the Huanan Seafood Wholesale Market, as opposed to a non-market or non-zoonotic introduction?",
+    "answer_space": [
+      "YES",
+      "NO",
+      "UNCERTAIN"
+    ],
+    "binarization": {
+      "affirm": "YES -> 1, else (NO | UNCERTAIN) -> 0. The primary vector fed to neff.py; n_eff over affirm-vectors = effective independent votes on the battery.",
+      "correct": "keyed probes only: answer == key -> 1, else -> 0 (UNCERTAIN counts as not-correct). Secondary reliability / error-correlation readout."
+    },
+    "probes": [
+      {
+        "id": "F1",
+        "class": "faithfulness",
+        "text": "Worobey et al. (2022) state that the earliest known December-2019 COVID-19 cases — including some without reported direct market links — were geographically centered on the Huanan market.",
+        "key": "YES",
+        "grounds": [
+          {
+            "source": "src-worobey-2022",
+            "quote": "the earliest known COVID-19 cases from December 2019, including those without reported direct links, were geographically centered on this market"
+          }
+        ],
+        "rationale": "Verbatim claim of the Worobey abstract; the A1 corpus grounds claim-geographic-clustering to this span (L5/ENTAILS)."
+      },
+      {
+        "id": "F2",
+        "class": "faithfulness",
+        "text": "Worobey et al. (2022) report that live SARS-CoV-2-susceptible mammals were sold at the Huanan market in late 2019.",
+        "key": "YES",
+        "grounds": [
+          {
+            "source": "src-worobey-2022",
+            "quote": "live SARS-CoV-2-susceptible mammals were sold at the market in late 2019"
+          }
+        ],
+        "rationale": "Verbatim; grounds claim-live-mammal-sales (L5/ENTAILS)."
+      },
+      {
+        "id": "F3",
+        "class": "faithfulness",
+        "text": "Worobey et al. (2022) report that SARS-CoV-2-positive environmental samples inside the market were spatially associated with vendors selling live mammals.",
+        "key": "YES",
+        "grounds": [
+          {
+            "source": "src-worobey-2022",
+            "quote": "within the market, SARS-CoV-2-positive environmental samples were spatially associated with vendors selling live mammals"
+          }
+        ],
+        "rationale": "Verbatim; grounds claim-environmental-sampling (L4/SUPPORTS)."
+      },
+      {
+        "id": "F4",
+        "class": "faithfulness",
+        "text": "Worobey et al. (2022) report that they had sufficient evidence to define the upstream events — the specific animal source — of SARS-CoV-2.",
+        "key": "NO",
+        "grounds": [
+          {
+            "source": "src-worobey-2022",
+            "quote": "there is insufficient evidence to define upstream events"
+          }
+        ],
+        "rationale": "The abstract explicitly disclaims this; a faithful reader answers NO. Tests over-reading."
+      },
+      {
+        "id": "F5",
+        "class": "faithfulness",
+        "text": "Pekar et al. (2022) conclude that SARS-CoV-2's early genomic diversity comprised two distinct lineages (A and B) arising from at least two separate cross-species transmission events.",
+        "key": "YES",
+        "grounds": [
+          {
+            "source": "src-pekar-2022",
+            "quote": "these lineages were the result of at least two separate cross-species transmission events into humans"
+          }
+        ],
+        "rationale": "Verbatim; grounds claim-two-lineages (L4/ENTAILS)."
+      },
+      {
+        "id": "F6",
+        "class": "faithfulness",
+        "text": "Pekar et al. (2022) estimate the first (lineage B) zoonotic transmission occurred around mid-to-late November 2019.",
+        "key": "YES",
+        "grounds": [
+          {
+            "source": "src-pekar-2022",
+            "quote": "The first zoonotic transmission likely involved lineage B viruses around 18 November 2019"
+          }
+        ],
+        "rationale": "18 November 2019 is mid-to-late November; faithful YES."
+      },
+      {
+        "id": "F7",
+        "class": "faithfulness",
+        "text": "Pekar et al. (2022) conclude that SARS-CoV-2 was already circulating widely in humans well before November 2019.",
+        "key": "NO",
+        "grounds": [
+          {
+            "source": "src-pekar-2022",
+            "quote": "it is unlikely that SARS-CoV-2 circulated widely in humans before November 2019"
+          }
+        ],
+        "rationale": "The abstract concludes the opposite; faithful NO. Tests polarity reversal."
+      },
+      {
+        "id": "F8",
+        "class": "faithfulness",
+        "text": "The corpus sources report direct genomic sequencing that identifies the specific intermediate animal host from which SARS-CoV-2 spilled over.",
+        "key": "NO",
+        "grounds": [
+          {
+            "source": "src-worobey-2022",
+            "quote": "there is insufficient evidence to define upstream events"
+          }
+        ],
+        "rationale": "Neither abstract reports an identified intermediate host; the Worobey abstract disclaims defined upstream events. Hallucination negative-control: an assessor that answers YES is fabricating."
+      },
+      {
+        "id": "I1",
+        "class": "inferential",
+        "text": "On balance, the available corpus evidence supports the Huanan market as the epicenter of the earliest documented COVID-19 outbreak.",
+        "key": null,
+        "cairn_principled": null,
+        "rationale": "Judgment integrating the proximity lines. Worobey asserts 'epicenter'; a reader may still weigh ascertainment bias. Scored as agreement only."
+      },
+      {
+        "id": "I2",
+        "class": "inferential",
+        "text": "On balance, the available corpus evidence makes zoonotic (animal-to-human) spillover a more probable explanation for SARS-CoV-2's emergence than a non-zoonotic introduction.",
+        "key": null,
+        "cairn_principled": null,
+        "rationale": "The central crux disposition. Genuine judgment; scored as agreement only."
+      },
+      {
+        "id": "I3",
+        "class": "inferential",
+        "text": "The three Worobey proximity findings (geographic centering, live-mammal sales, environmental-sample association) are statistically INDEPENDENT lines of evidence whose likelihood ratios may legitimately be multiplied.",
+        "key": null,
+        "cairn_principled": "NO",
+        "rationale": "The refuse-to-combine core: all three derive from the single Worobey early-case dataset, so they share an upstream and MUST NOT be multiplied as independent. An assessor answering YES commits the exact error Cairn exists to catch."
+      },
+      {
+        "id": "I4",
+        "class": "inferential",
+        "text": "The Pekar molecular two-lineage finding rests on data distinct from Worobey's market-proximity findings, so the two may legitimately be treated as independent and combined.",
+        "key": null,
+        "cairn_principled": "YES",
+        "rationale": "Distinct upstreams (molecular epidemiology vs early-case geography). Cairn's provenance detector returns COMBINABLE for this pair; the principled answer is YES. Opposite-polarity companion to I3."
+      },
+      {
+        "id": "I5",
+        "class": "inferential",
+        "text": "The corpus justifies reporting a single confident point-estimate odds ratio (on the order of 100:1) for zoonosis versus the alternative.",
+        "key": null,
+        "cairn_principled": "NO",
+        "rationale": "Cairn's thesis: with correlated evidence the honest output is an interval/refusal, not a confident point posterior. YES is the over-confidence failure mode."
+      },
+      {
+        "id": "I6",
+        "class": "inferential",
+        "text": "The corpus evidence is sufficient to definitively rule out any non-market introduction of SARS-CoV-2 into humans.",
+        "key": null,
+        "cairn_principled": "NO",
+        "rationale": "Both abstracts hedge upstream/circumstance; 'definitively rule out' overclaims. YES is the overclaim failure mode."
+      }
+    ]
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "define",
+    "at": "2026-07-05T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "7df6644c0ffbc01baf05eeff66479e2637e6a620ae721ae873f206c8cd40036df8ccaabd8e592f2e7d8b59ddc825e02f2cf34b15efae507997087a0ae82eb108",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

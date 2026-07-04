@@ -10,7 +10,7 @@
     "@context": { "const": "https://epistack.dev/ns/cairn.v0.jsonld" },
     "@type": {
       "type": "string",
-      "enum": ["epi:Claim", "epi:Entity", "epi:Source", "epi:Schema", "epi:Cluster"]
+      "enum": ["epi:Claim", "epi:Entity", "epi:Source", "epi:Schema", "epi:Cluster", "epi:Assessment"]
     },
     "id": {
       "description": "Trusty URI = tt: + base64url(SHA-256(JCS(content))); empty only on an unminted draft.",
@@ -78,6 +78,20 @@
       "then": {
         "properties": {
           "assertion": { "required": ["text", "grounding"] }
+        }
+      }
+    },
+    {
+      "$comment": "An epi:Assessment (A2) MUST carry the measurement's identifying fields so a run is mechanically re-checkable by `cairn assess`.",
+      "if": {
+        "required": ["@type"],
+        "properties": { "@type": { "const": "epi:Assessment" } }
+      },
+      "then": {
+        "properties": {
+          "assertion": {
+            "required": ["assessor", "protocol", "partition", "probeSet", "answers", "affirm_vector"]
+          }
         }
       }
     }

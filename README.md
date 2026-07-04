@@ -16,8 +16,12 @@ Claude-Code transcript structurally cannot produce**:
    the signature block is excluded from the content hash, so many teams can
    **endorse one content-id** (the n_eff-over-endorsers promotion model).
 2. **Kish n_eff** (`cairn/neff.py`) — `n_eff = k / (1 + (k-1)·φ̄)`, the measured
-   effective-independence number. "9 assessors agreed" at n_eff ≈ 2.2 is a
-   headline lie the engine refuses to tell. (Anchored to "Nine Judges, Two
+   effective-independence number. "9 assessors agreed" is a headline lie when they
+   share errors. Now **measured on our own corpus** (roadmap A2, `cairn/assessment.py`
+   + `cairn assess`): a 9-assessor panel on the COVID-HSM crux gives **n_eff = 1.06**
+   when they share the evidence (a homogeneous panel: exactly **1.00**) — within-vendor
+   model diversity buys ≈ 0 independence. See
+   [`assessment/ASSESSMENT.md`](assessment/ASSESSMENT.md). (Anchor: "Nine Judges, Two
    Effective Votes", arXiv:2605.29800.)
 3. **The layer-(a) shared-source detector** (`cairn/provenance.py`) — walks the
    `derivedFrom` DAG; if claims proposed as "independent" share an upstream it
@@ -33,8 +37,9 @@ Claude-Code transcript structurally cannot produce**:
 ```bash
 uv venv .venv --python 3.12 && uv pip install --python .venv -e . pytest
 .venv/bin/python fixtures/build_fixtures.py     # mint the vetted COVID corpus (sha-pinned)
-.venv/bin/python -m pytest -q                   # 27 tests
+.venv/bin/python -m pytest -q                   # 39 tests
 .venv/bin/cairn ground 'fixtures/*.json'        # 4/4 claim spans resolve to their source
+.venv/bin/cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json  # recompute measured n_eff
 .venv/bin/python demo/hsm_trio.py               # the head-to-head
 # or, fully self-contained:
 docker build -t cairn -f Containerfile . && docker run --rm cairn
@@ -48,9 +53,11 @@ abstract (`cairn ground` → 4/4 resolve). A naive transcript multiplies their
 likelihood ratios (5×5×5 = 125:1). Cairn:
 
 - **REFUSE-TO-COMBINE** — the three trace to one upstream → multiplying is undefined;
-- **n_eff = 1.00 (not 3)** — they co-move, so they are ~one effective vote;
+- **measured n_eff** (A2) — a 9-assessor panel on the crux gives n_eff = 1.06 sharing
+  evidence (homogeneous 1.00), rising to only 1.63 with *every* diversity lever — 9
+  assessors are ~1–2 effective votes, not 9;
 - and where independence *does* hold (a proximity line + the molecular two-lineages
-  line, Pekar 2022 — disjoint upstream) it returns **COMBINABLE**, n_eff ≈ 2.
+  line, Pekar 2022 — disjoint upstream) it returns **COMBINABLE**.
 
 That is *knowing when not to compute*, mechanically — the delta the baseline can't produce.
 The corpus is **vetted, not illustrative**: real sources, real spans, entailment
@@ -64,6 +71,7 @@ cairn validate record.json              # schema + id + signature integrity
 cairn neff matrix.json                  # n_eff over a binary agreement matrix
 cairn intersect 'fixtures/*.json'       # refuse-to-combine verdict over a claim set
 cairn ground 'fixtures/*.json'          # verify claims' spans resolve to their cited source
+cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json  # recompute + verify measured n_eff
 ```
 
 ## Layout
@@ -74,13 +82,16 @@ cairn ground 'fixtures/*.json'          # verify claims' spans resolve to their 
 | `cairn/neff.py` | Kish n_eff over correlated assessors |
 | `cairn/provenance.py` | the shared-upstream / refuse-to-combine detector |
 | `cairn/grounding.py` | the span-grounding / faithfulness check (`source.excerpt[char_span] == quote`) |
+| `cairn/assessment.py` | recompute + verify the measured n_eff from a pinned assessor run (`cairn assess`) |
 | `cairn/trusty.py`, `canonical.py`, `keys.py` | content-addressing, JCS, signing primitives |
 | `schemas/cairn.schema.json` | the envelope JSON Schema (Draft 2020-12) incl. the grounding tuple + Trust-Ladder enum |
 | `fixtures/` | the **vetted** COVID corpus — span-grounded claims (L4/L5) + two sha-pinned sources |
 | `fixtures/sources/*.abstract.txt` | the byte-exact retrieved abstracts (the raw `source_doc`s) |
 | `fixtures/PROVENANCE.md` | retrieval record, rung rationale, and the honest vetting decisions |
 | `demo/hsm_trio.py` | the naive-vs-Cairn head-to-head |
-| `tests/` | 27 pytest checks incl. the published n_eff anchor + the grounding leg |
+| `assessment/` | the **measured** A2 assessor pass: probe battery, evidence partitions, panel + pinned runs |
+| `assessment/ASSESSMENT.md` | the measured n_eff, the diversity levers, and the adversarial audit's honest caveats |
+| `tests/` | 39 pytest checks incl. the n_eff anchor, the grounding leg + the measured-assessor pass |
 
 ## Disciplines / honest debts
 

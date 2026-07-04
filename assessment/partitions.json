@@ -1,0 +1,47 @@
+{
+  "note": "Evidence partitions = the disjoint 'views' granted to assessors. The primary diversity lever: an assessor may only use what its partition grants. `sources`/`claims` are A1 fixture slugs (fixtures/INDEX.json). show_excerpts=false means the assessor sees the source's bibliographic metadata and the claim texts but NOT the abstract text — so it cannot independently verify grounding and must rely on unverified summaries. An assessor asked a probe about evidence outside its partition should answer UNCERTAIN; that honest abstention is part of what decorrelates the panel.",
+  "views": {
+    "FULL": {
+      "sources": ["src-worobey-2022", "src-pekar-2022"],
+      "claims": ["claim-geographic-clustering", "claim-environmental-sampling", "claim-live-mammal-sales", "claim-two-lineages"],
+      "show_excerpts": true,
+      "desc": "Sees everything (both abstracts + all four extracted claims). Highest information, but shared with every other FULL assessor — the correlated baseline."
+    },
+    "WOROBEY_ONLY": {
+      "sources": ["src-worobey-2022"],
+      "claims": ["claim-geographic-clustering", "claim-environmental-sampling", "claim-live-mammal-sales"],
+      "show_excerpts": true,
+      "desc": "Only the Worobey market-proximity evidence; blind to the Pekar molecular line."
+    },
+    "PEKAR_ONLY": {
+      "sources": ["src-pekar-2022"],
+      "claims": ["claim-two-lineages"],
+      "show_excerpts": true,
+      "desc": "Only the Pekar molecular-epidemiology evidence; blind to the Worobey proximity lines."
+    },
+    "PROXIMITY_SPATIAL": {
+      "sources": ["src-worobey-2022"],
+      "claims": ["claim-geographic-clustering", "claim-environmental-sampling"],
+      "show_excerpts": true,
+      "desc": "Only the two spatial proximity lines; blind to live-mammal trade and molecular evidence."
+    },
+    "PROXIMITY_TRADE": {
+      "sources": ["src-worobey-2022", "src-pekar-2022"],
+      "claims": ["claim-live-mammal-sales", "claim-two-lineages"],
+      "show_excerpts": true,
+      "desc": "Only the trade-and-molecular lines; blind to the geographic/environmental spatial evidence."
+    },
+    "SOURCES_ONLY": {
+      "sources": ["src-worobey-2022", "src-pekar-2022"],
+      "claims": [],
+      "show_excerpts": true,
+      "desc": "Both raw abstracts, no pre-extracted claims — must read and interpret the sources unaided."
+    },
+    "CLAIMS_ONLY": {
+      "sources": ["src-worobey-2022", "src-pekar-2022"],
+      "claims": ["claim-geographic-clustering", "claim-environmental-sampling", "claim-live-mammal-sales", "claim-two-lineages"],
+      "show_excerpts": false,
+      "desc": "The four claim texts + source citations but NOT the abstracts — relies on unverified summaries, cannot check grounding."
+    }
+  }
+}

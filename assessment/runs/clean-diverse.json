@@ -1,0 +1,774 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Cluster",
+  "id": "tt:AnYHtH8Sx6WSEfcUaHFXJcnfCU8QMPniXJCf-8fJB90",
+  "assertion": {
+    "kind": "assessment-run",
+    "panel": "clean-diverse",
+    "probeSet": "hsm-crux-v1",
+    "probe_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8",
+      "I1",
+      "I2",
+      "I3",
+      "I4",
+      "I5",
+      "I6"
+    ],
+    "assessors": [
+      {
+        "assessor": "D1",
+        "model_tier": "opus",
+        "protocol": "LITERAL",
+        "partition": "FULL",
+        "granted": [
+          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+        ],
+        "answers": {
+          "F1": "YES",
+          "F2": "YES",
+          "F3": "YES",
+          "F4": "NO",
+          "F5": "YES",
+          "F6": "YES",
+          "F7": "NO",
+          "F8": "NO",
+          "I1": "YES",
+          "I2": "YES",
+          "I3": "UNCERTAIN",
+          "I4": "UNCERTAIN",
+          "I5": "NO",
+          "I6": "NO"
+        },
+        "affirm_vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "assessment_id": "tt:NLJUlB39vL1pim8w40jHwHo8RxxXihKyrmM9PCAPKOI"
+      },
+      {
+        "assessor": "D2",
+        "model_tier": "sonnet",
+        "protocol": "BASE_RATE",
+        "partition": "FULL",
+        "granted": [
+          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+        ],
+        "answers": {
+          "F1": "YES",
+          "F2": "YES",
+          "F3": "YES",
+          "F4": "NO",
+          "F5": "YES",
+          "F6": "YES",
+          "F7": "NO",
+          "F8": "NO",
+          "I1": "YES",
+          "I2": "YES",
+          "I3": "NO",
+          "I4": "UNCERTAIN",
+          "I5": "NO",
+          "I6": "NO"
+        },
+        "affirm_vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "assessment_id": "tt:IBr5jK1-0hXz86aV3ncFvEv4Tsy7ch34ydamnrZ8v9s"
+      },
+      {
+        "assessor": "D3",
+        "model_tier": "haiku",
+        "protocol": "ADVERSARIAL",
+        "partition": "FULL",
+        "granted": [
+          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+        ],
+        "answers": {
+          "F1": "YES",
+          "F2": "YES",
+          "F3": "YES",
+          "F4": "NO",
+          "F5": "YES",
+          "F6": "YES",
+          "F7": "NO",
+          "F8": "NO",
+          "I1": "UNCERTAIN",
+          "I2": "YES",
+          "I3": "NO",
+          "I4": "YES",
+          "I5": "NO",
+          "I6": "NO"
+        },
+        "affirm_vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "assessment_id": "tt:FwqpKvB16urGBtFn0i9NuIV5BVjZBgETOmOxQ5yNKtA"
+      },
+      {
+        "assessor": "D4",
+        "model_tier": "fable",
+        "protocol": "LITERAL",
+        "partition": "FULL",
+        "granted": [
+          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+        ],
+        "answers": {
+          "F1": "YES",
+          "F2": "YES",
+          "F3": "YES",
+          "F4": "NO",
+          "F5": "YES",
+          "F6": "YES",
+          "F7": "NO",
+          "F8": "NO",
+          "I1": "YES",
+          "I2": "YES",
+          "I3": "NO",
+          "I4": "UNCERTAIN",
+          "I5": "NO",
+          "I6": "NO"
+        },
+        "affirm_vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "assessment_id": "tt:m17aOlDpKF66VilOu0BdsLl33-8VaAJdB2-CZ-pj3x4"
+      },
+      {
+        "assessor": "D5",
+        "model_tier": "opus",
+        "protocol": "ADVERSARIAL",
+        "partition": "FULL",
+        "granted": [
+          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+        ],
+        "answers": {
+          "F1": "YES",
+          "F2": "YES",
+          "F3": "YES",
+          "F4": "NO",
+          "F5": "YES",
+          "F6": "YES",
+          "F7": "NO",
+          "F8": "NO",
+          "I1": "YES",
+          "I2": "YES",
+          "I3": "NO",
+          "I4": "UNCERTAIN",
+          "I5": "NO",
+          "I6": "NO"
+        },
+        "affirm_vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "assessment_id": "tt:JbVJiLDIGhjmqvVyyyjLNLxe-31lDEUyDMNad685OHg"
+      },
+      {
+        "assessor": "D6",
+        "model_tier": "sonnet",
+        "protocol": "LITERAL",
+        "partition": "FULL",
+        "granted": [
+          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+        ],
+        "answers": {
+          "F1": "YES",
+          "F2": "YES",
+          "F3": "YES",
+          "F4": "NO",
+          "F5": "YES",
+          "F6": "YES",
+          "F7": "NO",
+          "F8": "NO",
+          "I1": "YES",
+          "I2": "YES",
+          "I3": "UNCERTAIN",
+          "I4": "UNCERTAIN",
+          "I5": "NO",
+          "I6": "NO"
+        },
+        "affirm_vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "assessment_id": "tt:G7eXZwCQvqIH_EtRpds-sSVthSjAbFpl2BI8UShzgv0"
+      },
+      {
+        "assessor": "D7",
+        "model_tier": "haiku",
+        "protocol": "BASE_RATE",
+        "partition": "FULL",
+        "granted": [
+          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+        ],
+        "answers": {
+          "F1": "YES",
+          "F2": "YES",
+          "F3": "YES",
+          "F4": "NO",
+          "F5": "YES",
+          "F6": "YES",
+          "F7": "NO",
+          "F8": "NO",
+          "I1": "YES",
+          "I2": "YES",
+          "I3": "UNCERTAIN",
+          "I4": "UNCERTAIN",
+          "I5": "NO",
+          "I6": "NO"
+        },
+        "affirm_vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "assessment_id": "tt:WKDZAq1f1wOtRh87s4sgjMoxjSvAEDy-fldArK16cUw"
+      },
+      {
+        "assessor": "D8",
+        "model_tier": "fable",
+        "protocol": "ADVERSARIAL",
+        "partition": "FULL",
+        "granted": [
+          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+        ],
+        "answers": {
+          "F1": "YES",
+          "F2": "YES",
+          "F3": "YES",
+          "F4": "NO",
+          "F5": "YES",
+          "F6": "YES",
+          "F7": "NO",
+          "F8": "NO",
+          "I1": "YES",
+          "I2": "YES",
+          "I3": "NO",
+          "I4": "UNCERTAIN",
+          "I5": "NO",
+          "I6": "NO"
+        },
+        "affirm_vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "assessment_id": "tt:K9ECwIcrkQ-kHR-ZdwknSMvhGKcyDT8FbWonec9xgdo"
+      },
+      {
+        "assessor": "D9",
+        "model_tier": "opus",
+        "protocol": "BASE_RATE",
+        "partition": "FULL",
+        "granted": [
+          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+        ],
+        "answers": {
+          "F1": "YES",
+          "F2": "YES",
+          "F3": "YES",
+          "F4": "NO",
+          "F5": "YES",
+          "F6": "YES",
+          "F7": "NO",
+          "F8": "NO",
+          "I1": "YES",
+          "I2": "YES",
+          "I3": "NO",
+          "I4": "UNCERTAIN",
+          "I5": "NO",
+          "I6": "NO"
+        },
+        "affirm_vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "assessment_id": "tt:HrbI2cDV_9uVr8ipuS-umUb-XS-EI7W6ghyttZRGlTs"
+      }
+    ],
+    "vectors": [
+      [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "neff": {
+      "k": 9,
+      "phi_bar": 0.9365079365079365,
+      "n_eff": 1.0598130841121496,
+      "n_eff_capped": 1.0598130841121496
+    },
+    "pairwise_phi": [
+      {
+        "i": 0,
+        "j": 1,
+        "phi": 1.0
+      },
+      {
+        "i": 0,
+        "j": 2,
+        "phi": 0.7142857142857143
+      },
+      {
+        "i": 0,
+        "j": 3,
+        "phi": 1.0
+      },
+      {
+        "i": 0,
+        "j": 4,
+        "phi": 1.0
+      },
+      {
+        "i": 0,
+        "j": 5,
+        "phi": 1.0
+      },
+      {
+        "i": 0,
+        "j": 6,
+        "phi": 1.0
+      },
+      {
+        "i": 0,
+        "j": 7,
+        "phi": 1.0
+      },
+      {
+        "i": 0,
+        "j": 8,
+        "phi": 1.0
+      },
+      {
+        "i": 1,
+        "j": 2,
+        "phi": 0.7142857142857143
+      },
+      {
+        "i": 1,
+        "j": 3,
+        "phi": 1.0
+      },
+      {
+        "i": 1,
+        "j": 4,
+        "phi": 1.0
+      },
+      {
+        "i": 1,
+        "j": 5,
+        "phi": 1.0
+      },
+      {
+        "i": 1,
+        "j": 6,
+        "phi": 1.0
+      },
+      {
+        "i": 1,
+        "j": 7,
+        "phi": 1.0
+      },
+      {
+        "i": 1,
+        "j": 8,
+        "phi": 1.0
+      },
+      {
+        "i": 2,
+        "j": 3,
+        "phi": 0.7142857142857143
+      },
+      {
+        "i": 2,
+        "j": 4,
+        "phi": 0.7142857142857143
+      },
+      {
+        "i": 2,
+        "j": 5,
+        "phi": 0.7142857142857143
+      },
+      {
+        "i": 2,
+        "j": 6,
+        "phi": 0.7142857142857143
+      },
+      {
+        "i": 2,
+        "j": 7,
+        "phi": 0.7142857142857143
+      },
+      {
+        "i": 2,
+        "j": 8,
+        "phi": 0.7142857142857143
+      },
+      {
+        "i": 3,
+        "j": 4,
+        "phi": 1.0
+      },
+      {
+        "i": 3,
+        "j": 5,
+        "phi": 1.0
+      },
+      {
+        "i": 3,
+        "j": 6,
+        "phi": 1.0
+      },
+      {
+        "i": 3,
+        "j": 7,
+        "phi": 1.0
+      },
+      {
+        "i": 3,
+        "j": 8,
+        "phi": 1.0
+      },
+      {
+        "i": 4,
+        "j": 5,
+        "phi": 1.0
+      },
+      {
+        "i": 4,
+        "j": 6,
+        "phi": 1.0
+      },
+      {
+        "i": 4,
+        "j": 7,
+        "phi": 1.0
+      },
+      {
+        "i": 4,
+        "j": 8,
+        "phi": 1.0
+      },
+      {
+        "i": 5,
+        "j": 6,
+        "phi": 1.0
+      },
+      {
+        "i": 5,
+        "j": 7,
+        "phi": 1.0
+      },
+      {
+        "i": 5,
+        "j": 8,
+        "phi": 1.0
+      },
+      {
+        "i": 6,
+        "j": 7,
+        "phi": 1.0
+      },
+      {
+        "i": 6,
+        "j": 8,
+        "phi": 1.0
+      },
+      {
+        "i": 7,
+        "j": 8,
+        "phi": 1.0
+      }
+    ]
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:Ad33h5QFG-_Znxvt1TG7I9ZL_mbSqybtw1qoCNHxf7I",
+      "tt:NLJUlB39vL1pim8w40jHwHo8RxxXihKyrmM9PCAPKOI",
+      "tt:IBr5jK1-0hXz86aV3ncFvEv4Tsy7ch34ydamnrZ8v9s",
+      "tt:FwqpKvB16urGBtFn0i9NuIV5BVjZBgETOmOxQ5yNKtA",
+      "tt:m17aOlDpKF66VilOu0BdsLl33-8VaAJdB2-CZ-pj3x4",
+      "tt:JbVJiLDIGhjmqvVyyyjLNLxe-31lDEUyDMNad685OHg",
+      "tt:G7eXZwCQvqIH_EtRpds-sSVthSjAbFpl2BI8UShzgv0",
+      "tt:WKDZAq1f1wOtRh87s4sgjMoxjSvAEDy-fldArK16cUw",
+      "tt:K9ECwIcrkQ-kHR-ZdwknSMvhGKcyDT8FbWonec9xgdo",
+      "tt:HrbI2cDV_9uVr8ipuS-umUb-XS-EI7W6ghyttZRGlTs"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "aggregate",
+    "at": "2026-07-05T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "f67a2460f2bd7d377131483bb47e22af6efaba8d02dc2c326226ee145a14d8b62f1ba356fc411ddc925477716e4ec353fc0c277b443f67eae99303e23e518b00",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

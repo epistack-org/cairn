@@ -82,14 +82,22 @@ def main() -> int:
         print(f"    shared upstream: {up}  ({store[up]['assertion']['title'][:48]}...)")
     print("    => the 3 'lines' trace to ONE dataset; multiplying is undefined.")
 
-    # illustrative co-movement: shared upstream -> vectors move together -> phi_bar=1
-    trio_vectors = [[1, 1, 0, 1, 0]] * 3
-    r = neff.neff_from_matrix(trio_vectors)
-    print("  measured effective independence (illustrative co-movement vectors):")
-    print(f"    k={r['k']}, phi_bar={r['phi_bar']:.2f}, n_eff={r['n_eff']:.2f}  (NOT {r['k']})")
+    # MEASURED effective independence (A2): a heterogeneous assessor panel on the HSM
+    # crux. Real votes, pinned in assessment/runs/ and re-checkable with `cairn assess`
+    # -- this replaces the earlier illustrative co-movement vectors.
+    runs = Path(__file__).resolve().parents[1] / "assessment" / "runs"
+    m = json.loads((runs / "heterogeneous.json").read_text())["assertion"]["neff"]
+    cm = json.loads((runs / "homogeneous-control.json").read_text())["assertion"]["neff"]
+    dm = json.loads((runs / "clean-diverse.json").read_text())["assertion"]["neff"]
+    print("  MEASURED effective independence (A2 -- real assessor votes, re-checkable via `cairn assess`):")
+    print(f"    homogeneous control (9x same model/evidence/protocol): "
+          f"phi_bar={cm['phi_bar']:.2f}, n_eff={cm['n_eff_capped']:.2f}")
+    print(f"    clean-diverse (FULL evidence; vary model tier + protocol): "
+          f"phi_bar={dm['phi_bar']:.2f}, n_eff={dm['n_eff_capped']:.2f}   <- diversity barely helps")
+    print(f"    all levers (+ evidence partition): "
+          f"phi_bar={m['phi_bar']:.2f}, n_eff={m['n_eff_capped']:.2f}  (NOT {m['k']}; audit: partition-inflated)")
     print(f"  honest output: a BOUND from the single strongest line (LR<={max(lr(x) for x in trio):g}),")
-    print("    an interval, and the qualitative crux routed to a human"
-          " -- never the point estimate.")
+    print("    an interval, and the qualitative crux routed to a human -- never the point estimate.")
 
     line()
     print("CONTRAST — where independence DOES hold")
@@ -113,7 +121,9 @@ def main() -> int:
     out = {
         "grounding": {k: gr[k] for k in ("ok", "checked", "grounded")},
         "trio_verdict": {k: verdict[k] for k in ("independent", "verdict", "shared_upstreams")},
-        "trio_neff": r,
+        "panel_neff": m,
+        "control_neff": cm,
+        "clean_diverse_neff": dm,
         "naive_combined_LR": naive,
         "contrast_verdict": {k: vc[k] for k in ("independent", "verdict")},
         "contrast_neff": rp,

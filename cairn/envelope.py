@@ -34,7 +34,7 @@ from .keys import SigningKey, verify as _verify_sig
 CONTEXT = "https://epistack.dev/ns/cairn.v0.jsonld"  # v0 context IRI (not yet dereferenceable)
 
 # @type vocabulary (spike C: ~5 core types, extend bottom-up)
-TYPES = ("epi:Claim", "epi:Entity", "epi:Source", "epi:Schema", "epi:Cluster")
+TYPES = ("epi:Claim", "epi:Entity", "epi:Source", "epi:Schema", "epi:Cluster", "epi:Assessment")
 
 SCHEMA_PATH = Path(__file__).resolve().parents[1] / "schemas" / "cairn.schema.json"
 

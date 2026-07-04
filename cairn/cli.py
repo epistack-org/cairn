@@ -11,7 +11,7 @@ import json
 import sys
 from pathlib import Path
 
-from . import envelope, grounding, neff, provenance
+from . import assessment, envelope, grounding, neff, provenance
 from .keys import SigningKey
 
 
@@ -75,6 +75,23 @@ def cmd_ground(args) -> int:
     return 0 if report["ok"] else 1  # nonzero == a span failed to resolve (script-detectable)
 
 
+def cmd_assess(args) -> int:
+    battery = json.loads(Path(args.battery).read_text())
+    reports = []
+    ok = True
+    for pat in args.run:
+        for fn in sorted(glob.glob(pat)):
+            rep = assessment.check_run(json.loads(Path(fn).read_text()), battery)
+            rep["file"] = fn
+            reports.append(rep)
+            ok = ok and rep["ok"]
+    if not reports:
+        print("ASSESS: no run files matched", file=sys.stderr)
+        return 1
+    print(json.dumps(reports[0] if len(reports) == 1 else reports, indent=2))
+    return 0 if ok else 1  # nonzero == a recomputed vector/n_eff disagreed with what was pinned
+
+
 def cmd_intersect(args) -> int:
     store = _load_store(args.store)
     ids = args.claims or list(store.keys())
@@ -115,6 +132,11 @@ def build_parser() -> argparse.ArgumentParser:
     g.add_argument("store", nargs="+", help="glob(s) of record JSON files (the store)")
     g.add_argument("--claims", nargs="*", help="Trusty URIs to check (default: all claims in store)")
     g.set_defaults(func=cmd_ground)
+
+    a = sub.add_parser("assess", help="recompute + verify measured n_eff over a pinned assessment run")
+    a.add_argument("run", nargs="+", help="glob(s) of assessment-run JSON (epi:Cluster records)")
+    a.add_argument("--battery", default="assessment/probes.json", help="probe battery JSON (default: assessment/probes.json)")
+    a.set_defaults(func=cmd_assess)
     return p
 
 

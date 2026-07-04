@@ -1,0 +1,28 @@
+{
+  "panels": {
+    "heterogeneous": {
+      "k": 9,
+      "phi_bar": 0.5644532462892413,
+      "n_eff": 1.6317277582706993,
+      "mean_pairwise_hamming": 3.0555555555555554
+    },
+    "homogeneous-control": {
+      "k": 9,
+      "phi_bar": 1.0,
+      "n_eff": 1.0,
+      "mean_pairwise_hamming": 0.0
+    },
+    "clean-diverse": {
+      "k": 9,
+      "phi_bar": 0.9365079365079365,
+      "n_eff": 1.0598130841121496,
+      "mean_pairwise_hamming": 0.4444444444444444
+    }
+  },
+  "headline": {
+    "stochastic_floor_neff": 1.0,
+    "model_and_protocol_neff": 1.0598130841121496,
+    "all_levers_neff": 1.6317277582706993
+  },
+  "reading": "homogeneous-control = stochastic floor (same model+evidence+protocol -> n_eff~=1). clean-diverse isolates model-tier + protocol independence with evidence held FULL. heterogeneous additionally varies the evidence partition. Per the adversarial audit (assessment/AUDIT.json) the clean-diverse -> heterogeneous gap is driven mainly by evidence-partition starvation, not independent competence; the honest effective-independence estimate on the HSM crux is ~1-2 votes, not k."
+}

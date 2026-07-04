@@ -1,0 +1,1857 @@
+[
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:L8R3vFM30KOiharETgFBWdvRA6bmGy2aNiEnUC9mBKw",
+    "assertion": {
+      "assessor": "H1",
+      "model_tier": "opus",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:H1",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "2fb116f2ed537e145f2b57bd62de42829ba6e9957aecf9f2b0628461c1bd1724",
+        "value": "42312a89c94ced959fd0e18c7eba0ba37afcc70c267c3d3d222abae7dad2173db4d3ca0f8fd2f4d0d2a5d41dadf7928d2da4c518ea2bebecd810f16614a6f502",
+        "by": "assessor:H1"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:GSHEJJpsvAG2nQ-DyobQH7NoHYjNlVyGzZwk_Xn719Q",
+    "assertion": {
+      "assessor": "H2",
+      "model_tier": "sonnet",
+      "protocol": "BASE_RATE",
+      "partition": "WOROBEY_ONLY",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "UNCERTAIN",
+        "F6": "UNCERTAIN",
+        "F7": "UNCERTAIN",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 5
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI"
+      ],
+      "mintedBy": "assessor:H2",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "a567cd48fb3107cab692a10be0b38a7cdea9d898434069674f1fc86d21134313",
+        "value": "b5cee151d33131733a98ac3993a865bbfde69ecbfffadfbefd0f752526ec8ce913da7323f8138cd19ce0706d43374fcc65ff57a6a5862f0dc76ed7823e1d2b03",
+        "by": "assessor:H2"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:PBZHnkVOe4bTPK3pYzLh9Oj_7gcB-xPqdvwVuAOLSGw",
+    "assertion": {
+      "assessor": "H3",
+      "model_tier": "haiku",
+      "protocol": "ADVERSARIAL",
+      "partition": "PEKAR_ONLY",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "UNCERTAIN",
+        "F2": "UNCERTAIN",
+        "F3": "UNCERTAIN",
+        "F4": "UNCERTAIN",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "UNCERTAIN",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 4
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:H3",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "7178270c5bbff2f2702243c3797abb52602701fdd7d31a908b22962a3f02aeee",
+        "value": "de1a99546cac4f8efa4240d8e3f73df55d6329708c4a14ab473911eecb92f507dc0ee1d49d9592ea84738b9c606c5703e7b55b2e8a59d4d0f7030a98f3bbdb00",
+        "by": "assessor:H3"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:-9IGfwzbawKXwfw2CM72g_DwHwOYGH29UkCRFgvtMJk",
+    "assertion": {
+      "assessor": "H4",
+      "model_tier": "fable",
+      "protocol": "LITERAL",
+      "partition": "PROXIMITY_SPATIAL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "UNCERTAIN",
+        "F6": "UNCERTAIN",
+        "F7": "UNCERTAIN",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "UNCERTAIN",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 5
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI"
+      ],
+      "mintedBy": "assessor:H4",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "bbdc29e50c7c3bd135e3fd235b003f0bc0f622a8348b6bc9d56aa596ed960db4",
+        "value": "8d8873f3317258d5ca24e70270e88a1f0a2ef23eb3e4aeb9db770a3ea18ebb92817f717fa18ffbfab10c42569674724ae76ba9937ee6e0d45c5f0a7b2248f704",
+        "by": "assessor:H4"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:yNQSxcjiAEliPMlbuYJW_l5hXN_QM8IwiT8Qa9BYjxs",
+    "assertion": {
+      "assessor": "H5",
+      "model_tier": "opus",
+      "protocol": "BASE_RATE",
+      "partition": "PROXIMITY_TRADE",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "YES",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:H5",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "b5b6153670438d38a239cab896287a15498d1d75a2903111b89eabe13bd0cf4e",
+        "value": "870ab9ef21ecdc0de482da739eadfd151fbe54a663c2794d20639dca4dd066a225ddfcbf3af9d9e0c1ae353c70ecc2f67fe6cfaeaafd278795d06ec2f12aeb01",
+        "by": "assessor:H5"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:m8xyb1J0qgqXuby6OH9tvhODh474XabVzMyED4UIaww",
+    "assertion": {
+      "assessor": "H6",
+      "model_tier": "sonnet",
+      "protocol": "ADVERSARIAL",
+      "partition": "SOURCES_ONLY",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "UNCERTAIN",
+        "I3": "NO",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:H6",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "42e92c16ab04f1a60ad512d2e403200f16f0422cc117ecbbeac1a526cb60d152",
+        "value": "2f13a328eee30cb1d759ab1b443abdd22839220d38b72a61d30fdd4318fc2be2424ab233cc17e19d8ed680a5daef1b92ebea40defe5c3477df6e08e79a0aa405",
+        "by": "assessor:H6"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:up63oL0q4MUgpC7ldJb6VoAqD6A3lyBoL9YeMWO-koA",
+    "assertion": {
+      "assessor": "H7",
+      "model_tier": "haiku",
+      "protocol": "LITERAL",
+      "partition": "CLAIMS_ONLY",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "UNCERTAIN",
+        "F5": "YES",
+        "F6": "UNCERTAIN",
+        "F7": "UNCERTAIN",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "UNCERTAIN",
+        "I3": "NO",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "UNCERTAIN"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 5
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:H7",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "7d2aa29d25f76d9a22bf7c24cbb1f8271018b44a5ac8f461390837d8d9e70d1a",
+        "value": "f364e10d2c6be1508b07c64200e111f73cad1d9e3fea1bb673688c4386ae824012a060650ca88ed8db2777e06d59c084317ef1e4191c7eb019c26f8e4dc9a10b",
+        "by": "assessor:H7"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:Skn7PqowFr_4xTapiXnf5FsReXgNodn5xb_Jt_JGWtk",
+    "assertion": {
+      "assessor": "H8",
+      "model_tier": "fable",
+      "protocol": "ADVERSARIAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:H8",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "4dfbadb20e2b8ca9abffc09403adf45c2e9844018396aafac1f3b1b486b9de8e",
+        "value": "539ce3c7793dd81bccb31b467fa30a77f8c903970ef72c1fc7aca5e51bc9e1f057550d13080683074581ae944bbf2801ec6ebdb5563a3b6a71538e651b685d0b",
+        "by": "assessor:H8"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:n7Y59LcLpBAEH7J9QBemPZhRJxHkOTHhlmJ3VjxKG9s",
+    "assertion": {
+      "assessor": "H9",
+      "model_tier": "opus",
+      "protocol": "BASE_RATE",
+      "partition": "PEKAR_ONLY",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "UNCERTAIN",
+        "F2": "UNCERTAIN",
+        "F3": "UNCERTAIN",
+        "F4": "UNCERTAIN",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "UNCERTAIN",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 4
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:H9",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "300eddb98948ac3498f9822bd138eff012179b5bdf27cf89c6cce051241756d0",
+        "value": "50ca0cd113c0bf875e6a57468a23ddbc99bb514ef1f953c49096ff30477747326b2e9c136f051a2d3e36daac173a44f3be09c9ed6bc34cb7f1ed09867bd6a40a",
+        "by": "assessor:H9"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:VNez2jm5-CGtpwlWi_os-pWe8FsTp-Wo01bCouXcFJg",
+    "assertion": {
+      "assessor": "C1",
+      "model_tier": "opus",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:C1",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "4206d9224a9dbe657ee0365d5b2d98e62b48f3c80e6075e673d199ff1b096f9d",
+        "value": "9cfd9c30bac636a5f218380fa2bb1cd767866b8b304ce7971e3f66a35641d3a771e48d5e5f7dee27031d437640214ce2e25e6c212974b4d69cb83b3f39f8a402",
+        "by": "assessor:C1"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:BLmIIN5NjpMkrp1N2xFZbJ5EojLwb6t2W__xQHZlit0",
+    "assertion": {
+      "assessor": "C2",
+      "model_tier": "opus",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:C2",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "6b659d73269d91cf4c2695c9587e4ca31ef06509693a7b405963eadb8f98c978",
+        "value": "3ad9b7bd308c3818592aaddb1b82f58b762199de186c6b8e6a33ad0bba30d8348a61ae1affb9bf9e9b584751b9281690eb2bffc8b75195054f65840904c65d0e",
+        "by": "assessor:C2"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:uvLT8zhA-UUygo1tE0mlsE2Lb67LLUadBzZE6n5h3wk",
+    "assertion": {
+      "assessor": "C3",
+      "model_tier": "opus",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:C3",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "cd89588590a941cd68a0c74a742d249a18e0bf7a9da88041c10f47161d73309a",
+        "value": "f6b180d58528602ef82e2b463fe86bcc831a1302a11efcfbd44e7695c6bbdf275e9e76137a0323cb516d0772480a3d98f1ab832b004e7d5d934c7f9efbc1bd07",
+        "by": "assessor:C3"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:Hk-Z7FogquSDyfD9WtWWD2p6GszV7aZGmp_AQWoh23A",
+    "assertion": {
+      "assessor": "C4",
+      "model_tier": "opus",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:C4",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "6ce9c0f1719b387f868cc882bb9262092a07102c1d01a95f9998b5bd1f8a5202",
+        "value": "5e07678606c9452d03342996bdb762c1ddee66bab34eb64e6646acbc9cddb87b2255c70ef5b7ec86411bcb5fc0d2928c054a4d47a82078ee8765ff628618ae00",
+        "by": "assessor:C4"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:AFzQZ1ogvotPpspETTmY8zrTz7RmvtxIK_m1VqEDnaI",
+    "assertion": {
+      "assessor": "C5",
+      "model_tier": "opus",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:C5",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "a5f3657e38b9a04ec9e9adcb5bee5ff2017369404e8ecda8bfa81cadf49e9e59",
+        "value": "28c76bc0e45c638e24831ecb53a3db10ea8d762f8e4c90695c19d2cdab2d1cc26e2f57ad5e69f747552af8662d8e11fc8767f319a325399ba4701a5c37f7240f",
+        "by": "assessor:C5"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:JJh08KzzlBvOzmAejl1xuS6ldy4w_1VczKURn0vnQoY",
+    "assertion": {
+      "assessor": "C6",
+      "model_tier": "opus",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:C6",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "c55c3473944f4007e3109f7ca38353c9714857f8ccd4df83b184fe0890aefe0b",
+        "value": "43ca8e0640a9653de60f7a9b26d893eb8e080c9d24646bd16033716b9988220b95d813cd9fd3357273c3b820ced0079a39b7be04f2bbf9ce338b93e43f7ac807",
+        "by": "assessor:C6"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:uvwEhU91u4CKq73mevjcsiHT6GFVn3rAVIszfAPgdBQ",
+    "assertion": {
+      "assessor": "C7",
+      "model_tier": "opus",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:C7",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "475772101cadbb01f8714bfcd424d144ee3c15bdb617eefb80a05edfe75089fd",
+        "value": "6512cb778eceb1904cd8a75ae1f6f9a87f6634aec6a618d490f7787798c7aa5dd16d3fb773140bd0c77eb2d54925e9575ab66b3967264949d29b808c3a2cd101",
+        "by": "assessor:C7"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:FhJabUTgvYxGtiC4F_3rt6i8nFe17-S2rG-WzLxNj40",
+    "assertion": {
+      "assessor": "C8",
+      "model_tier": "opus",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:C8",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "8800ec01b144cc0934e3c2cff4e15ec7478697b916a4857b3badc72d906fc1af",
+        "value": "1f7721ca9bd7d25e1aeee4a6b11ecd8dda03250ceb4844f77391a7c60a46707e4890a37b12eef3b5f0a554bab1b24f95329d8a7817b4bb8f73331ee9d42e3c0c",
+        "by": "assessor:C8"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:v7LuW-Y_ktEw5_FpFAaKJQycdQXB6oSImCQcYuzundU",
+    "assertion": {
+      "assessor": "C9",
+      "model_tier": "opus",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:C9",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "eaaed66e6fff04fe4dc2df9f9dcb4872326a02191a714c522a7d141f3baba65c",
+        "value": "0f415a911dc738b6606f7606820e7b4acf8d4494d05dfeecb6009221d6d39ad0cc3f2ffcdf48823f85ebe95c9bab956580e41fd91058eef5b38ad4555e19f601",
+        "by": "assessor:C9"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:NLJUlB39vL1pim8w40jHwHo8RxxXihKyrmM9PCAPKOI",
+    "assertion": {
+      "assessor": "D1",
+      "model_tier": "opus",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:D1",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "c4de3c1933f738ef930377b7029d1827058999058d7b3f016b85e572606cba5b",
+        "value": "542453b9de70ca98116cf575fa2abcdd4de39853b376474e4c5b1777aafdc5a1f942d411fa5fb42193bf112b25abbb12d794b9c76e95b5a4f5c03b99331d3100",
+        "by": "assessor:D1"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:IBr5jK1-0hXz86aV3ncFvEv4Tsy7ch34ydamnrZ8v9s",
+    "assertion": {
+      "assessor": "D2",
+      "model_tier": "sonnet",
+      "protocol": "BASE_RATE",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:D2",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "d82fbdcfe72e4254296bb3b9ce6d5ce598ca2de2a22d13d2c12aebd513684422",
+        "value": "b2538111596bd00b3c9103c990b3e36eba43988a9f32757b3753f202545f5dcc66ee6faa1242ea9b34dacc53d5696a67989354d28c7e58b6d8bea7920a48cf00",
+        "by": "assessor:D2"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:FwqpKvB16urGBtFn0i9NuIV5BVjZBgETOmOxQ5yNKtA",
+    "assertion": {
+      "assessor": "D3",
+      "model_tier": "haiku",
+      "protocol": "ADVERSARIAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "UNCERTAIN",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "YES",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:D3",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "72fd49346a777519bf5043b5f1aee883f8174e2ed3daf647014bc4b8083254f3",
+        "value": "0805a623423367f6366e7b980b246ede0983210c59274aaab18f2e81c4ea1e6e7a9a92183b9c929e9f42935c676373943f29b0f432e03e6ed61c6648bf5c6206",
+        "by": "assessor:D3"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:m17aOlDpKF66VilOu0BdsLl33-8VaAJdB2-CZ-pj3x4",
+    "assertion": {
+      "assessor": "D4",
+      "model_tier": "fable",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:D4",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "6201de8407bfaa21c7e816fc97091b83bf04e89a4ebd5164d4559444a37b971d",
+        "value": "e70ec7bf5cdaac9f11249c081447d58b7b27a4685894b37b17197acc6ea99ea3eeb6f2c6651db24523dcdab50c17b2ec34ca1c18d58ee40b3234dc2f4d76e807",
+        "by": "assessor:D4"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:JbVJiLDIGhjmqvVyyyjLNLxe-31lDEUyDMNad685OHg",
+    "assertion": {
+      "assessor": "D5",
+      "model_tier": "opus",
+      "protocol": "ADVERSARIAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:D5",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "5962e046823522d2b875b652696550a2aa31f0c4c6614ce0e46676c7e74bac44",
+        "value": "b5b44694716fde62e537e369f04eae58384ab8d451286cf80e1af0c2a5277198fe561f69f9cadadaaf036e5bf942bfde06bab17cbcf912905c36a8c923427f02",
+        "by": "assessor:D5"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:G7eXZwCQvqIH_EtRpds-sSVthSjAbFpl2BI8UShzgv0",
+    "assertion": {
+      "assessor": "D6",
+      "model_tier": "sonnet",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:D6",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "4e2923167ab58684a90c25af3989b75a1401be3aed2b9c4e646110f2978c3a1f",
+        "value": "ef2d44c3b8daea25856bb0edd12315959f756fffa15842e1c6ca0c1400f45167f4c2d6eee261a6b17e5609ec17cb132a9376b0622ac31e3e545b912e3cd04e00",
+        "by": "assessor:D6"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:WKDZAq1f1wOtRh87s4sgjMoxjSvAEDy-fldArK16cUw",
+    "assertion": {
+      "assessor": "D7",
+      "model_tier": "haiku",
+      "protocol": "BASE_RATE",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:D7",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "347c086bb7c3eaae039e79a6751d0ffbdc98f57a33ac21502944e566b5cec821",
+        "value": "e17b9d926bb538701b252a843dfd6ca713f7ce4615ca78ff0972ede45ca82f4b36f9c64c265b069ece3da47524d5030cd2c1bf2586ed45cf2981f2219ff65905",
+        "by": "assessor:D7"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:K9ECwIcrkQ-kHR-ZdwknSMvhGKcyDT8FbWonec9xgdo",
+    "assertion": {
+      "assessor": "D8",
+      "model_tier": "fable",
+      "protocol": "ADVERSARIAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:D8",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "bd3c4cad4b50a088bb66390799aa85f73091bf8cac665729c59d6cbfdcf7a192",
+        "value": "f39da442372add62b1b343cdb309bbb3ee6c952cd4312b98798ecad29442a0fdf8c108d030fe5382d004af7f01486ae484ad84ae3b8fcf670795e0c8bf7ad40a",
+        "by": "assessor:D8"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:HrbI2cDV_9uVr8ipuS-umUb-XS-EI7W6ghyttZRGlTs",
+    "assertion": {
+      "assessor": "D9",
+      "model_tier": "opus",
+      "protocol": "BASE_RATE",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:D9",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "fcfda923091f714ef4df71013103b729b512768402ed3d4f3ed73ca857a8ed81",
+        "value": "dc1f4647512c7b89681134a8e4605174ed1e6397c6a94fda2e881af170b406747834aa57f167eff50fda13235bd861f8b2569185ed88964d138ffd7ca90d9e05",
+        "by": "assessor:D9"
+      }
+    }
+  }
+]
