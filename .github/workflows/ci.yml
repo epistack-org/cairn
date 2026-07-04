@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   test:
-    runs-on: ubuntu          #  host-mode runner: host docker available
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
