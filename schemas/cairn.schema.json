@@ -18,9 +18,13 @@
       "pattern": "^(tt:[A-Za-z0-9_-]{43})?$"
     },
     "assertion": {
-      "description": "What is claimed / what exists.",
+      "description": "What is claimed / what exists. Open object; when a claim/source declares Trust-Ladder or grounding fields they must conform to $defs below.",
       "type": "object",
-      "minProperties": 1
+      "minProperties": 1,
+      "properties": {
+        "grounding": { "$ref": "#/$defs/grounding" },
+        "verification": { "$ref": "#/$defs/verification" }
+      }
     },
     "provenance": {
       "type": "object",
@@ -54,6 +58,73 @@
             "value": { "type": "string", "pattern": "^([0-9a-f]{128})?$" },
             "by": { "type": "string" }
           }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$comment": "Faithfulness invariant: an entailment-checked/accepted (L4/L5) claim MUST carry a grounding tuple. Bare/lower-rung claims stay valid so the envelope remains general.",
+      "if": {
+        "required": ["@type"],
+        "properties": {
+          "@type": { "const": "epi:Claim" },
+          "assertion": {
+            "required": ["verification"],
+            "properties": { "verification": { "enum": ["L4", "L5"] } }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "assertion": { "required": ["text", "grounding"] }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "trustyUri": { "type": "string", "pattern": "^tt:[A-Za-z0-9_-]{43}$" },
+    "verification": {
+      "description": "Trust-Ladder rung (internal research notes toolchest/01-provenance-and-nonindependence.md + internal notes): L1 Observed artifact · L2 Parsed artifact · L3 Attributed claim · L4 Entailment-checked claim · L5 Accepted library claim · L6 Analysis conclusion. The legacy 'unverified-fixture' value is intentionally NOT admissible: any record still carrying it fails validation.",
+      "type": "string",
+      "enum": ["L1", "L2", "L3", "L4", "L5", "L6"]
+    },
+    "grounding": {
+      "description": "The faithfulness tuple (internal research notes toolchest/02-claim-argument-mining.md:95-98; internal notes:122): every claim node carries (source_doc, char_span, extractor, entailment_label). `cairn ground` mechanically checks that source.assertion.excerpt[char_span] == quote and that source is in provenance.derivedFrom.",
+      "type": "object",
+      "required": ["source", "char_span", "quote", "extractor", "entailment_label"],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "description": "source_doc: Trusty URI of the epi:Source the span indexes into (must also appear in provenance.derivedFrom).",
+          "$ref": "#/$defs/trustyUri"
+        },
+        "char_span": {
+          "description": "[start, end) character offsets into source.assertion.excerpt.",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": "integer", "minimum": 0 }
+        },
+        "quote": {
+          "description": "The exact substring source.assertion.excerpt[start:end] — re-checkable on a fresh machine.",
+          "type": "string",
+          "minLength": 1
+        },
+        "extractor": {
+          "description": "The tool/model/human that produced this span-grounded claim.",
+          "type": "string",
+          "minLength": 1
+        },
+        "entailment_label": {
+          "description": "NLI verdict of span -> claim. Canonical SUPPORTS/REFUTES/NEI plus the richer ENTAILS/CONTRADICTS/IS-IRRELEVANT-TO.",
+          "type": "string",
+          "enum": ["ENTAILS", "SUPPORTS", "REFUTES", "NEI", "CONTRADICTS", "IS-IRRELEVANT-TO"]
+        },
+        "source_sha256": {
+          "description": "Optional integrity bind: sha256 of source.assertion.excerpt at extraction time.",
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
         }
       }
     }

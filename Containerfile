@@ -14,7 +14,9 @@ COPY tests ./tests
 
 RUN pip install --no-cache-dir -e . && pip install --no-cache-dir pytest
 
-# self-verifying image: mint fixtures + run the suite at build time
-RUN python fixtures/build_fixtures.py >/dev/null && python -m pytest -q
+# self-verifying image: mint fixtures + prove the spans resolve + run the suite at build time
+RUN python fixtures/build_fixtures.py >/dev/null \
+ && python -m cairn ground 'fixtures/*.json' >/dev/null \
+ && python -m pytest -q
 
 CMD ["python", "demo/hsm_trio.py"]

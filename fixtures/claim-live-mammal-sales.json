@@ -1,19 +1,19 @@
 {
   "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
   "@type": "epi:Claim",
-  "id": "tt:LvhPCfZOuZLzUm3-lIRxcFbHGG15zRO8ApWaSH1JpHI",
+  "id": "tt:k-XCi9ovkXLfQjg9KbzuBDe4o9SvzDyAB_mVHgfKcbw",
   "assertion": {
-    "text": "The earliest known December-2019 COVID-19 cases were geographically centered on the Huanan market, including cases with no reported direct market link.",
+    "text": "Live SARS-CoV-2-susceptible mammals were sold at the Huanan market in late 2019.",
     "subject": "tt:GvYuWTVm_R7W8Wm4SlIkCPi6s4HzgoHdezfuHTlISd4",
     "polarity": "supports-zoonosis",
     "illustrative_LR": 5.0,
     "grounding": {
       "source": "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
       "char_span": [
-        365,
-        509
+        526,
+        598
       ],
-      "quote": "the earliest known COVID-19 cases from December 2019, including those without reported direct links, were geographically centered on this market",
+      "quote": "live SARS-CoV-2-susceptible mammals were sold at the market in late 2019",
       "extractor": "agent:claude-opus-4-8[1m]/A1-source-vetting",
       "entailment_label": "ENTAILS",
       "source_sha256": "93f3dc1858bf1dba8891cc8413568244915ca66c4908d690066ad3e12f1caba4"
@@ -32,7 +32,7 @@
     "sig": {
       "alg": "ed25519",
       "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
-      "value": "12947f99e1560f92a61285c24bc0160b80069bf144bcbdd28bb321de9ac2e4a52ace6a27e21f5b896172ba37c4e60bf6ecfc7403854471448e55594b747fcf00",
+      "value": "6bd5672745d2677162ee99bd2d247bb42bbfb7f5487d251dd346c1051c12d44edf11053ef416f3de7c932e82c465117ebfc158623ae0a268b29d6b59540b8a0b",
       "by": "keystone:epistack-corpus"
     }
   }

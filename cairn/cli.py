@@ -11,7 +11,7 @@ import json
 import sys
 from pathlib import Path
 
-from . import envelope, neff, provenance
+from . import envelope, grounding, neff, provenance
 from .keys import SigningKey
 
 
@@ -68,6 +68,13 @@ def cmd_neff(args) -> int:
     return 0
 
 
+def cmd_ground(args) -> int:
+    store = _load_store(args.store)
+    report = grounding.check_store(store, args.claims)
+    print(json.dumps(report, indent=2, ensure_ascii=False))
+    return 0 if report["ok"] else 1  # nonzero == a span failed to resolve (script-detectable)
+
+
 def cmd_intersect(args) -> int:
     store = _load_store(args.store)
     ids = args.claims or list(store.keys())
@@ -103,6 +110,11 @@ def build_parser() -> argparse.ArgumentParser:
     i.add_argument("store", nargs="+", help="glob(s) of record JSON files (the store)")
     i.add_argument("--claims", nargs="*", help="Trusty URIs to test (default: all in store)")
     i.set_defaults(func=cmd_intersect)
+
+    g = sub.add_parser("ground", help="verify claims' spans resolve to their cited source excerpts")
+    g.add_argument("store", nargs="+", help="glob(s) of record JSON files (the store)")
+    g.add_argument("--claims", nargs="*", help="Trusty URIs to check (default: all claims in store)")
+    g.set_defaults(func=cmd_ground)
     return p
 
 

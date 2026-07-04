@@ -1,16 +1,28 @@
 {
   "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
   "@type": "epi:Claim",
-  "id": "tt:sDChqfVUB8hYu1bEhpF4hRPUBYfRtKQtjt6qSKokwC8",
+  "id": "tt:yxj8ZJI49rev8nc7HEM94B8oMz8TIxxJafFGZXfaTjg",
   "assertion": {
-    "text": "SARS-CoV-2-positive environmental samples concentrate in the Huanan market.",
+    "text": "Within the Huanan market, SARS-CoV-2-positive environmental samples were spatially associated with stalls selling live mammals.",
     "subject": "tt:GvYuWTVm_R7W8Wm4SlIkCPi6s4HzgoHdezfuHTlISd4",
     "polarity": "supports-zoonosis",
-    "illustrative_LR": 5.0
+    "illustrative_LR": 5.0,
+    "grounding": {
+      "source": "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+      "char_span": [
+        608,
+        728
+      ],
+      "quote": "within the market, SARS-CoV-2-positive environmental samples were spatially associated with vendors selling live mammals",
+      "extractor": "agent:claude-opus-4-8[1m]/A1-source-vetting",
+      "entailment_label": "SUPPORTS",
+      "source_sha256": "93f3dc1858bf1dba8891cc8413568244915ca66c4908d690066ad3e12f1caba4"
+    },
+    "verification": "L4"
   },
   "provenance": {
     "derivedFrom": [
-      "tt:xf50Otqj322Xirv5T8cRCFQ2QNbl8ETqaXpHQU5_7yc"
+      "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI"
     ],
     "mintedBy": "keystone:epistack-corpus",
     "method": "extract",
@@ -20,7 +32,7 @@
     "sig": {
       "alg": "ed25519",
       "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
-      "value": "beaa2ee4542ee275e1170620e2d44f88a2fbd67e8cc10dacdf846db7a4dc9f2b596c2a71675ddd3ec641951d41f01af9cae62c6491918ae69636e3d694afb206",
+      "value": "930a213def8234e03a49da15260b476f08a5721ab51189a9b9aa20cb9b41f91e9e391d9111ac5b0a72eec2c5c45bbeea0e24a5b08269243555d002c321823f0e",
       "by": "keystone:epistack-corpus"
     }
   }

@@ -1,16 +1,28 @@
 {
   "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
   "@type": "epi:Claim",
-  "id": "tt:LssTHL8LClmXabpXdgP968YvUl0YfIAv6U_FnT-oyhc",
+  "id": "tt:yXi-om_bzhaup0C-Y8sKyX48X1Z-6lIlaryvFDWnYHI",
   "assertion": {
-    "text": "Two distinct SARS-CoV-2 lineages (A and B) indicate multiple market introductions.",
+    "text": "SARS-CoV-2's early genomic diversity comprised two distinct lineages (A and B) that resulted from at least two separate zoonotic (cross-species) transmission events into humans.",
     "subject": "tt:GvYuWTVm_R7W8Wm4SlIkCPi6s4HzgoHdezfuHTlISd4",
     "polarity": "supports-zoonosis",
-    "illustrative_LR": 4.0
+    "illustrative_LR": 4.0,
+    "grounding": {
+      "source": "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc",
+      "char_span": [
+        247,
+        561
+      ],
+      "quote": "We show that SARS-CoV-2 genomic diversity before February 2020 likely comprised only two distinct viral lineages, denoted \"A\" and \"B.\" Phylodynamic rooting methods, coupled with epidemic simulations, reveal that these lineages were the result of at least two separate cross-species transmission events into humans.",
+      "extractor": "agent:claude-opus-4-8[1m]/A1-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "c046d96297900e9d067e47ab0e17d2dedf317037c19d09d9593689c17f5adbfe"
+    },
+    "verification": "L4"
   },
   "provenance": {
     "derivedFrom": [
-      "tt:eYWfL6VVid1cE0av9w0z8OnpN9YtE6GZB8_yWoun-F0"
+      "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
     ],
     "mintedBy": "keystone:epistack-corpus",
     "method": "extract",
@@ -20,7 +32,7 @@
     "sig": {
       "alg": "ed25519",
       "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
-      "value": "c543c256110892ea9d643597acfe62bb97189e0bba095f685cca17ea8270fd6816b32b418e5a3fc53636ae5028efd981dfe9dfae40a23c8ae075bb97a5604005",
+      "value": "55eff61661ed344872a1caa509bcdf89f51b60b10e01a962b6417cf436e8295378d9fe4603bd4ac739fbdcb00f78075a0205870964e5f2446305a91c12810c07",
       "by": "keystone:epistack-corpus"
     }
   }

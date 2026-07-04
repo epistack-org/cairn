@@ -1,7 +1,8 @@
 # cairn CI — build the self-verifying container, then smoke the demo.
 #
-# The Containerfile mints the fixtures and runs the 17-test pytest suite AT BUILD
-# TIME, so a green `docker build` *is* the test pass. No registry push, no secrets:
+# The Containerfile mints the fixtures, proves the claim spans resolve (cairn
+# ground), and runs the pytest suite AT BUILD TIME, so a green `docker build` *is*
+# the test pass. No registry push, no secrets:
 # the scoring engine stays plain git + one container by design the
 # moat is non-portable; the *scoring* must run on a fresh machine).
 name: ci
@@ -23,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: build + self-verify (mints fixtures + runs the 17-test suite at build time)
+      - name: build + self-verify (mints fixtures + cairn ground + runs the pytest suite at build time)
         run: |
           set -euo pipefail
           docker build -t cairn:ci -f Containerfile .

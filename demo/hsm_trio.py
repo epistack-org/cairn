@@ -15,7 +15,7 @@ import json
 import math
 from pathlib import Path
 
-from cairn import neff, provenance
+from cairn import grounding, neff, provenance
 
 FX = Path(__file__).resolve().parents[1] / "fixtures"
 
@@ -37,7 +37,7 @@ def main() -> int:
     index, store = load_store()
     trio = [index["claim-geographic-clustering"],
             index["claim-environmental-sampling"],
-            index["claim-ascertainment-centroid"]]
+            index["claim-live-mammal-sales"]]
     molecular = index["claim-two-lineages"]
 
     def text(rid):
@@ -51,6 +51,18 @@ def main() -> int:
     for rid in trio:
         print(f"  - {text(rid):66s}")
         print(f"      LR~{lr(rid):g}  derivedFrom {store[rid]['provenance']['derivedFrom'][0]}")
+
+    line()
+    print("FAITHFULNESS — every line is span-grounded to a retrieved source (L4/L5)")
+    line()
+    gr = grounding.check_store(store, trio + [molecular])
+    for r in gr["results"]:
+        src = store[r["source"]]["assertion"]
+        print(f"  {text(r['claim'])[:60]:60s}")
+        print(f"    [{r['verification']}/{r['entailment_label']}] {src['excerpt_kind']} of {src['doi']}"
+              f"  char_span {r['char_span']} resolves=={r['resolves']}")
+    print(f"  => {gr['grounded']}/{gr['checked']} claims mechanically resolve: "
+          "source.excerpt[char_span] == quote (re-checkable on a fresh machine).")
 
     line()
     print("NAIVE BASELINE (what a single transcript does)")
@@ -99,6 +111,7 @@ def main() -> int:
 
     # machine-readable artifact (the Cairn verdict other tools/teams consume)
     out = {
+        "grounding": {k: gr[k] for k in ("ok", "checked", "grounded")},
         "trio_verdict": {k: verdict[k] for k in ("independent", "verdict", "shared_upstreams")},
         "trio_neff": r,
         "naive_combined_LR": naive,
