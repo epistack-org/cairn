@@ -15,7 +15,7 @@ import json
 import math
 from pathlib import Path
 
-from cairn import grounding, neff, provenance
+from cairn import frechet, grounding, neff, provenance
 
 FX = Path(__file__).resolve().parents[1] / "fixtures"
 
@@ -103,8 +103,23 @@ def main() -> int:
     if cv:
         print(f"      within-Anthropic phi={cv['within_anthropic_phi']:.2f} | within-GLM phi={cv['within_glm_phi']:.2f}"
               f" | CROSS-vendor phi={cv['cross_vendor_phi']:.2f}  ->  k=18 combined n_eff={cv['combined_neff']:.2f}")
-    print(f"  honest output: a BOUND from the single strongest line (LR<={max(lr(x) for x in trio):g}),")
-    print("    an interval, and the qualitative crux routed to a human -- never the point estimate.")
+    # A3 -- the Fréchet/p-box interval. The honest object is an INTERVAL, not a point,
+    # and its width is the refusal. `cairn frechet`; pinned in assessment/frechet.json.
+    fv = frechet.frechet_verdict([lr(r) for r in trio], shared_upstream=not verdict["independent"],
+                                 n_eff=cm["n_eff_capped"])
+    def fmt_iv(iv):
+        return "[" + ", ".join(("inf" if x == "inf" else f"{x:g}") for x in iv) + "]"
+    print("  A3 -- Fréchet/p-box interval (the honest object is an interval, not a point):")
+    print(f"    naive point             : LR={fv['naive_lr']:g}  (posterior {fv['naive_posterior']:.3f})   <- the fake certainty")
+    print(f"    redundancy interval     : LR in [{fv['interval_lr'][0]:g}, {fv['interval_lr'][1]:g}]  "
+          f"(posterior [{fv['interval_posterior'][0]:.3f}, {fv['interval_posterior'][1]:.3f}])  "
+          f"width={fv['width_decades']:.2f} decades")
+    print(f"    disclosed (not a bound) : PLOD envelope {fmt_iv(fv['plod_envelope_lr'])}  |  "
+          f"full-agnostic {fmt_iv(fv['full_frechet_lr'])} = posterior [0,1], VACUOUS")
+    print(f"    measured point (n_eff=1): LR={fv['measured']['lr']:g}  -> at the redundant floor, NOT the product")
+    print(f"    VERDICT: {fv['verdict']}")
+    print(f"      width {fv['width_decades']:.2f} > {fv['max_width_decades']} decades -> cap the claim at LR={fv['honest_bound_lr']:g} "
+          "(a cap, not a proven lower bound), emit the interval, route the crux to a human -- never the point.")
 
     line()
     print("CONTRAST — where independence DOES hold")
@@ -118,6 +133,9 @@ def main() -> int:
     print(f"    VERDICT: {vc['verdict']}  (no shared upstream)")
     print(f"    n_eff over genuinely-distinct lines: k={rp['k']}, "
           f"phi_bar={rp['phi_bar']:.2f}, n_eff={rp['n_eff']:.2f}")
+    fc = frechet.frechet_verdict([lr(trio[0]), lr(molecular)], shared_upstream=not vc["independent"])
+    print(f"    Fréchet: {fc['verdict']} -> combined LR={fc['point_lr']:g} "
+          f"(posterior {fc['point_posterior']:.3f}); the one licensed cross-family product (never 125x4=500).")
     print("    => here combining is licensed.\n")
 
     print("Delta the baseline structurally cannot produce: a mechanical "
@@ -134,6 +152,8 @@ def main() -> int:
         "naive_combined_LR": naive,
         "contrast_verdict": {k: vc[k] for k in ("independent", "verdict")},
         "contrast_neff": rp,
+        "frechet_trio": fv,          # A3: the honest interval + refusal (delta 3 + delta 4)
+        "frechet_contrast": fc,      # A3: the one licensed cross-family product
     }
     (FX.parent / "out").mkdir(exist_ok=True)
     (FX.parent / "out" / "hsm_trio_verdict.json").write_text(json.dumps(out, indent=2) + "\n")

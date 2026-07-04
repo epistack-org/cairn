@@ -1,0 +1,188 @@
+{
+  "note": "A3 Fréchet/p-box interval — deterministic re-derivation over the pinned fixtures + pairwise-φ arrays; recompute with assessment/build_frechet.py.",
+  "trio": {
+    "prior": 0.5,
+    "k": 3,
+    "lrs": [
+      5.0,
+      5.0,
+      5.0
+    ],
+    "marginals": {
+      "p_H": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "p_notH": [
+        0.1,
+        0.1,
+        0.1
+      ],
+      "base_neg": 0.1,
+      "illustrative": true
+    },
+    "naive_lr": 125.0,
+    "naive_posterior": 0.9920634920634921,
+    "full_frechet_lr": [
+      0.0,
+      "inf"
+    ],
+    "full_frechet_posterior": [
+      0.0,
+      1.0
+    ],
+    "plod_envelope_lr": [
+      1.25,
+      499.9999999999999
+    ],
+    "plod_envelope_posterior": [
+      0.5555555555555556,
+      0.998003992015968
+    ],
+    "max_width_decades": 0.5,
+    "regime": "REDUNDANT",
+    "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+    "interval_lr": [
+      5.0,
+      125.0
+    ],
+    "interval_posterior": [
+      0.8333333333333334,
+      0.9920634920634921
+    ],
+    "width_decades": 1.3979400086720377,
+    "honest_bound_lr": 5.0,
+    "honest_bound_posterior": 0.8333333333333334,
+    "measured": {
+      "n_eff": 1.0,
+      "lr": 5.0,
+      "posterior": 0.8333333333333334
+    },
+    "claims": [
+      "claim-geographic-clustering",
+      "claim-environmental-sampling",
+      "claim-live-mammal-sales"
+    ],
+    "provenance": {
+      "verdict": "REFUSE-TO-COMBINE",
+      "shared_upstreams": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI"
+      ]
+    }
+  },
+  "contrast": {
+    "prior": 0.5,
+    "k": 2,
+    "lrs": [
+      5.0,
+      4.0
+    ],
+    "marginals": {
+      "p_H": [
+        0.5,
+        0.4
+      ],
+      "p_notH": [
+        0.1,
+        0.1
+      ],
+      "base_neg": 0.1,
+      "illustrative": true
+    },
+    "naive_lr": 20.0,
+    "naive_posterior": 0.9523809523809523,
+    "full_frechet_lr": [
+      0.0,
+      "inf"
+    ],
+    "full_frechet_posterior": [
+      0.0,
+      1.0
+    ],
+    "plod_envelope_lr": [
+      2.0,
+      39.99999999999999
+    ],
+    "plod_envelope_posterior": [
+      0.6666666666666666,
+      0.975609756097561
+    ],
+    "max_width_decades": 0.5,
+    "regime": "INDEPENDENT",
+    "verdict": "COMBINABLE-WITH-INTERVAL",
+    "interval_lr": [
+      20.0,
+      20.0
+    ],
+    "interval_posterior": [
+      0.9523809523809523,
+      0.9523809523809523
+    ],
+    "width_decades": 0.0,
+    "honest_bound_lr": 20.0,
+    "honest_bound_posterior": 0.9523809523809523,
+    "point_lr": 20.0,
+    "point_posterior": 0.9523809523809523,
+    "measured": null,
+    "claims": [
+      "claim-geographic-clustering",
+      "claim-two-lineages"
+    ],
+    "provenance": {
+      "verdict": "COMBINABLE",
+      "shared_upstreams": []
+    }
+  },
+  "neff_pbox": {
+    "homogeneous-control": {
+      "phi_support": [
+        1.0,
+        1.0
+      ],
+      "n_eff_lo": 1.0,
+      "n_eff_hi": 1.0,
+      "n_eff_hi_uncapped": 1.0,
+      "width": 0.0,
+      "point": 1.0
+    },
+    "clean-diverse": {
+      "phi_support": [
+        0.7142857142857143,
+        1.0
+      ],
+      "n_eff_lo": 1.0,
+      "n_eff_hi": 1.3404255319148937,
+      "n_eff_hi_uncapped": 1.3404255319148937,
+      "width": 0.34042553191489366,
+      "point": 1.0598130841121496
+    },
+    "glm-diverse": {
+      "phi_support": [
+        0.8660254037844387,
+        1.0
+      ],
+      "n_eff_lo": 1.0,
+      "n_eff_hi": 1.1351878526059485,
+      "n_eff_hi_uncapped": 1.1351878526059485,
+      "width": 0.13518785260594846,
+      "point": 1.048561181547453
+    },
+    "heterogeneous": {
+      "phi_support": [
+        -0.025949964805384102,
+        1.0
+      ],
+      "n_eff_lo": 1.0,
+      "n_eff_hi": 9.0,
+      "n_eff_hi_uncapped": 11.35789601477246,
+      "width": 8.0,
+      "point": 1.6317277582706993
+    }
+  },
+  "policy": {
+    "prior": 0.5,
+    "base_neg": 0.1,
+    "max_width_decades": 0.5
+  }
+}

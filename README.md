@@ -33,15 +33,27 @@ Claude-Code transcript structurally cannot produce**:
    `cairn ground` mechanically checks that `source.excerpt[char_span] == quote`
    and that the cited source is a real upstream (`derivedFrom`). Not "the paper
    supports this" as prose — the exact bytes, re-checkable on a fresh machine.
+5. **The Fréchet / p-box interval** (`cairn/frechet.py`) — the quantitative form of
+   refuse-to-combine (roadmap A3, `cairn frechet`). A naive transcript multiplies the
+   trio's likelihood ratios into a point (125:1). Cairn emits an **interval whose
+   width is the refusal**: the naive point is only the *independence ceiling* of a
+   redundancy interval `[5, 125]` whose floor is the single strongest line, the
+   A2-measured `n_eff ≈ 1` places the honest estimate *at that floor* (`LR^{n_eff}`),
+   and — since the honest interval spans 25× — the verdict is
+   **REFUSE-TO-COMBINE-AS-POINT** (exit 2). It ships the *true* dependence-free bound
+   (`[0, ∞]`, vacuous) and the positive-dependence envelope (`[1.25, 500]`) alongside,
+   correctly labelled, so a model is never mistaken for a bound. See
+   [`assessment/FRECHET.md`](assessment/FRECHET.md).
 
 ## Run it
 
 ```bash
 uv venv .venv --python 3.12 && uv pip install --python .venv -e . pytest
 .venv/bin/python fixtures/build_fixtures.py     # mint the vetted COVID corpus (sha-pinned)
-.venv/bin/python -m pytest -q                   # 41 tests
+.venv/bin/python -m pytest -q                   # 64 tests
 .venv/bin/cairn ground 'fixtures/*.json'        # 4/4 claim spans resolve to their source
 .venv/bin/cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json  # recompute measured n_eff
+.venv/bin/cairn frechet fixtures/claim-geographic-clustering.json fixtures/claim-environmental-sampling.json fixtures/claim-live-mammal-sales.json fixtures/src-worobey-2022.json  # -> REFUSE-TO-COMBINE-AS-POINT (exit 2): the honest interval
 .venv/bin/python demo/hsm_trio.py               # the head-to-head
 # or, fully self-contained:
 docker build -t cairn -f Containerfile . && docker run --rm cairn
@@ -58,8 +70,11 @@ likelihood ratios (5×5×5 = 125:1). Cairn:
 - **measured n_eff** (A2) — a 9-assessor panel on the crux gives n_eff = 1.06 sharing
   evidence (homogeneous 1.00), rising to only 1.63 with *every* diversity lever — 9
   assessors are ~1–2 effective votes, not 9;
+- **the Fréchet interval** (A3) — instead of the fake 125:1 point it emits the honest
+  interval `[5, 125]` (the naive point is the independence *ceiling*; measured n_eff≈1
+  puts the truth at the *floor*), width 1.4 decades → **REFUSE-TO-COMBINE-AS-POINT**;
 - and where independence *does* hold (a proximity line + the molecular two-lineages
-  line, Pekar 2022 — disjoint upstream) it returns **COMBINABLE**.
+  line, Pekar 2022 — disjoint upstream) it returns **COMBINABLE** (`LR = 20`, never 500).
 
 That is *knowing when not to compute*, mechanically — the delta the baseline can't produce.
 The corpus is **vetted, not illustrative**: real sources, real spans, entailment
@@ -74,6 +89,7 @@ cairn neff matrix.json                  # n_eff over a binary agreement matrix
 cairn intersect 'fixtures/*.json'       # refuse-to-combine verdict over a claim set
 cairn ground 'fixtures/*.json'          # verify claims' spans resolve to their cited source
 cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json  # recompute + verify measured n_eff
+cairn frechet 'fixtures/claim-*.json' 'fixtures/src-*.json'  # Fréchet/p-box interval + refuse-when-too-wide verdict
 ```
 
 ## Layout
@@ -84,6 +100,7 @@ cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json
 | `cairn/neff.py` | Kish n_eff over correlated assessors |
 | `cairn/provenance.py` | the shared-upstream / refuse-to-combine detector |
 | `cairn/grounding.py` | the span-grounding / faithfulness check (`source.excerpt[char_span] == quote`) |
+| `cairn/frechet.py` | the Fréchet/p-box interval + refuse-as-point verdict (A3) — the honest interval, not a point |
 | `cairn/assessment.py` | recompute + verify the measured n_eff from a pinned assessor run (`cairn assess`) |
 | `cairn/trusty.py`, `canonical.py`, `keys.py` | content-addressing, JCS, signing primitives |
 | `schemas/cairn.schema.json` | the envelope JSON Schema (Draft 2020-12) incl. the grounding tuple + Trust-Ladder enum |
@@ -93,7 +110,9 @@ cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json
 | `demo/hsm_trio.py` | the naive-vs-Cairn head-to-head |
 | `assessment/` | the **measured** A2 assessor pass: probe battery, evidence partitions, panel + pinned runs |
 | `assessment/ASSESSMENT.md` | the measured n_eff, the diversity levers, and the adversarial audit's honest caveats |
-| `tests/` | 41 pytest checks incl. the n_eff anchor, the grounding leg, the measured-assessor pass + the cross-vendor leg |
+| `assessment/FRECHET.md` | the A3 interval: the three nested regimes, the n_eff p-box, and the model-vs-bound honesty |
+| `assessment/frechet.py`, `frechet_pba_check.py` | pin the A3 interval artifact; cross-check it against the `pba` library (dev-only) |
+| `tests/` | 64 pytest checks incl. the n_eff anchor, the grounding leg, the measured-assessor pass, the cross-vendor leg + the Fréchet/p-box leg |
 
 ## Disciplines / honest debts
 
@@ -106,7 +125,8 @@ cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json
   judgment calls that could not be sourced from the abstracts were **recorded, not
   fabricated** — see `fixtures/PROVENANCE.md`. `n_eff` agreement vectors in the demo
   remain *illustrative* (measuring them over heterogeneous assessors is roadmap A2).
-- This engine does **layer (a)** (explicit shared source). Legs **(b)** shared
-  derivation (ProvSQL) and **(c)** hidden confounder (causal tooling) + the Fréchet
-  interval are the next slices, not yet here.
+- This engine does **layer (a)** (explicit shared source) and the **Fréchet/p-box
+  interval** (A3, `cairn/frechet.py`) — the honest interval + principled refusal.
+  Legs **(b)** shared derivation (ProvSQL) and **(c)** hidden confounder (causal
+  tooling) are the next slices, not yet here.
 

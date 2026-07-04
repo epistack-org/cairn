@@ -5,6 +5,12 @@ description = "The decoupled epistack scoring engine: a content-addressed/signed
 requires-python = ">=3.10"
 dependencies = ["jsonschema>=4", "cryptography>=41", "rfc8785>=0.1.2"]
 
+# The scored core is stdlib-light. `analysis` is a an internal library extra only:
+# `pba` (numpy/scipy/matplotlib) independently cross-checks the A3 Fréchet bounds
+# (assessment/frechet_pba_check.py) — never imported by the core or the container.
+[project.optional-dependencies]
+analysis = ["pba"]
+
 [project.scripts]
 cairn = "cairn.cli:main"
 

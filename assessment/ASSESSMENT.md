@@ -154,12 +154,21 @@ revision — instead of the flattering 1.63 — *is* the engine's discipline (de
 - **Single run, k = 9 per panel.** No replicates yet; the full pairwise-φ arrays are
   pinned in each cluster so A3 can carry the dependence uncertainty into an interval.
 
-## Hand-off to A3 (Fréchet interval)
+## Delivered in A3 (Fréchet interval) — `assessment/FRECHET.md`
 
-Each cluster pins `neff.pairwise_phi` (all 36 pairwise φ values). A3 turns the
-*measured dependence* — its spread, not a point — into a Fréchet/p-box interval:
-"interval width = the honesty signal." The clean-diverse vs heterogeneous gap is the
-empirical handle on how much the dependence assumption moves the bound.
+Each cluster pins `neff.pairwise_phi` (all 36 pairwise φ values); **A3 consumes them
+directly**. It turns the *measured dependence* — its spread, not a point — into a
+Fréchet/p-box interval ("interval width = the honesty signal") via
+`cairn/frechet.py` + `cairn frechet`:
+
+- The **n_eff p-box** reads each panel's pairwise-φ *spread* into an n_eff interval,
+  and it **mechanizes this document's audit**: heterogeneous → `[1.0, 9.0]` (width
+  8.0, *untrustworthy*), clean-diverse → `[1.0, 1.34]` (tight), homogeneous → `[1,1]`.
+  The wide box is the "1.63 is starvation, not competence" finding, computed.
+- The **combine interval** places the measured `n_eff ≈ 1` at the redundant floor of
+  the trio's `[5, 125]` (via `LR^{n_eff}`), so the honest crux estimate is `LR = 5`,
+  never the naive product 125 → **REFUSE-TO-COMBINE-AS-POINT**. See `FRECHET.md` for
+  the full model-vs-bound treatment (the naive point is not even a Fréchet ceiling).
 
 ## Reproduce
 
