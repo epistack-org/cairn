@@ -71,6 +71,25 @@ def mean_pairwise_hamming(vectors: Sequence[Sequence[int]]) -> float:
     return sum(hamming(vectors[i], vectors[j]) for i, j in pairs) / len(pairs)
 
 
+def vendor_decomposition(vectors_a: Sequence[Sequence[int]], vectors_b: Sequence[Sequence[int]]) -> dict:
+    """Within-A, within-B, and cross (A×B) mean phi + combined n_eff over A∪B.
+
+    Isolates the vendor axis: if cross-vendor phi ≈ within-vendor phi, assessor
+    agreement is driven by the evidence, not shared model lineage — cross-vendor
+    diversity does not manufacture independence.
+    """
+    cross_vals = [neff.phi(u, v) for u in vectors_a for v in vectors_b]
+    cross = sum(cross_vals) / len(cross_vals) if cross_vals else 0.0
+    return {
+        "within_a": neff.mean_phi(vectors_a),
+        "within_b": neff.mean_phi(vectors_b),
+        "cross": cross,
+        "combined": neff.neff_from_matrix(list(vectors_a) + list(vectors_b)),
+        "n_a": len(vectors_a),
+        "n_b": len(vectors_b),
+    }
+
+
 def analyze(answers_by_assessor: Sequence[dict], battery: dict) -> dict:
     """Pure analysis: answers -> vectors -> {vectors, neff, pairwise_phi}. No records."""
     vectors = [affirm_vector(a, battery) for a in answers_by_assessor]

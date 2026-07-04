@@ -51,8 +51,9 @@ def build_battery() -> dict:
 def build_assessment_record(spec: dict, answers: dict) -> dict:
     rec = envelope.new_record(
         "epi:Assessment",
-        {"assessor": spec["id"], "model_tier": spec["tier"], "protocol": spec["protocol"],
-         "partition": spec["partition"], "probeSet": PROBESET, "granted": spec["granted"],
+        {"assessor": spec["id"], "model_tier": spec["tier"], "vendor": spec.get("vendor", "anthropic"),
+         "protocol": spec["protocol"], "partition": spec["partition"], "probeSet": PROBESET,
+         "granted": spec["granted"],
          "answers": answers, "affirm_vector": assessment.affirm_vector(answers, panel.BATTERY),
          "reliability": assessment.reliability(answers, panel.BATTERY)},
         minted_by=f"assessor:{spec['id']}", method="assess", at=AT,
@@ -68,8 +69,8 @@ def build_cluster(panel_name: str, specs: list, votes: dict, battery_id: str, as
     for s, aid in zip(specs, assessment_ids):
         ans = votes[s["id"]]
         assessors.append({
-            "assessor": s["id"], "model_tier": s["tier"], "protocol": s["protocol"],
-            "partition": s["partition"], "granted": s["granted"],
+            "assessor": s["id"], "model_tier": s["tier"], "vendor": s.get("vendor", "anthropic"),
+            "protocol": s["protocol"], "partition": s["partition"], "granted": s["granted"],
             "answers": ans, "affirm_vector": assessment.affirm_vector(ans, panel.BATTERY),
             "assessment_id": aid,
         })
@@ -127,20 +128,42 @@ def axis_analysis(clusters: dict) -> dict:
             "k": ne["k"], "phi_bar": ne["phi_bar"], "n_eff": ne["n_eff_capped"],
             "mean_pairwise_hamming": assessment.mean_pairwise_hamming(vecs),
         }
+    cross_vendor = None
+    if "clean-diverse" in clusters and "glm-diverse" in clusters:
+        dec = assessment.vendor_decomposition(
+            clusters["clean-diverse"]["assertion"]["vectors"],
+            clusters["glm-diverse"]["assertion"]["vectors"],
+        )
+        cross_vendor = {
+            "within_anthropic_phi": dec["within_a"],
+            "within_glm_phi": dec["within_b"],
+            "cross_vendor_phi": dec["cross"],
+            "combined_k": dec["n_a"] + dec["n_b"],
+            "combined_neff": dec["combined"]["n_eff_capped"],
+            "reading": (
+                "cross_vendor_phi vs within_*_phi: if comparable, assessor agreement is driven by "
+                "the evidence, not shared model lineage -> cross-vendor diversity does NOT manufacture "
+                "independence, and ~1 effective vote is a property of the evidence, not the vendor."
+            ),
+        }
+
     return {
         "panels": panels,
+        "cross_vendor": cross_vendor,
         "headline": {
             "stochastic_floor_neff": panels.get("homogeneous-control", {}).get("n_eff"),
             "model_and_protocol_neff": panels.get("clean-diverse", {}).get("n_eff"),
             "all_levers_neff": panels.get("heterogeneous", {}).get("n_eff"),
+            "cross_vendor_neff": (cross_vendor or {}).get("combined_neff"),
         },
         "reading": (
             "homogeneous-control = stochastic floor (same model+evidence+protocol -> n_eff~=1). "
             "clean-diverse isolates model-tier + protocol independence with evidence held FULL. "
-            "heterogeneous additionally varies the evidence partition. Per the adversarial audit "
-            "(assessment/AUDIT.json) the clean-diverse -> heterogeneous gap is driven mainly by "
-            "evidence-partition starvation, not independent competence; the honest effective-"
-            "independence estimate on the HSM crux is ~1-2 votes, not k."
+            "glm-diverse is the same but a non-Anthropic vendor (Zhipu GLM-4.6); cross_vendor "
+            "compares within- vs cross-vendor correlation. heterogeneous additionally varies the "
+            "evidence partition. Per the adversarial audit (assessment/AUDIT.json) the clean-diverse "
+            "-> heterogeneous gap is driven mainly by evidence-partition starvation, not competence; "
+            "the honest effective-independence estimate on the HSM crux is ~1-2 votes, not k."
         ),
     }
 

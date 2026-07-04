@@ -18,13 +18,15 @@ molecular contrast. Assessors answer a **14-probe battery** (`probes.json`) — 
 
 ## The measured result
 
-Three 9-assessor panels, each answering the same battery. `phi_bar` (φ̄) is the mean
-pairwise φ-coefficient over the binary affirm-vectors; `n_eff = k / (1 + (k-1)·φ̄)`.
+Four 9-assessor panels (three Anthropic, one cross-vendor GLM), each answering the
+same battery. `phi_bar` (φ̄) is the mean pairwise φ-coefficient over the binary
+affirm-vectors; `n_eff = k / (1 + (k-1)·φ̄)`.
 
 | panel | what it isolates | φ̄ | **n_eff** | mean pairwise Hamming |
 |---|---|---:|---:|---:|
 | **homogeneous-control** — 9× Opus, FULL evidence, LITERAL | stochastic floor | 1.000 | **1.00** | 0.00 |
-| **clean-diverse** — FULL evidence, vary model tier × protocol | genuine cross-assessor independence | 0.937 | **1.06** | 0.44 |
+| **clean-diverse** — FULL evidence, vary model tier × protocol | cross-assessor independence (Anthropic) | 0.937 | **1.06** | 0.44 |
+| **glm-diverse** — FULL evidence, vary protocol, **Zhipu GLM-4.6** | cross-*vendor* independence | 0.948 | **1.05** | 0.39 |
 | **heterogeneous** — vary model × **evidence-partition** × protocol | all diversity levers | 0.564 | **1.63** | 3.06 |
 
 **Headline: 9 assessors are ~1 effective vote, not 9.** Nine identical-cell Opus
@@ -38,6 +40,33 @@ corpus, and it is the **conservative** direction for a refuse-to-combine engine.
 The heterogeneous panel reaches n_eff = 1.63 — but see the audit: that gain is not
 competence.
 
+## Cross-vendor test — does a genuinely foreign vendor break the floor?
+
+A2's first pass used only Anthropic models, leaving an honest open question: is the
+≈1 effective vote a *within-vendor* artifact (shared pretraining), or a property of
+the evidence? With a Zhipu **GLM-4.6** key now on hand, we ran a 9-assessor
+**glm-diverse** panel — same FULL evidence and protocol spread as clean-diverse, but a
+different vendor, company, and training lineage — and measured correlation *within* vs
+*across* vendors:
+
+| pairing | mean φ |
+|---|---:|
+| within-Anthropic (clean-diverse) | 0.937 |
+| within-GLM (glm-diverse) | 0.948 |
+| **cross-vendor (Anthropic × GLM)** | **0.946** |
+
+**The floor is not a vendor artifact.** Cross-vendor φ (0.946) is indistinguishable
+from within-vendor φ (0.937 / 0.948) — a Claude and a GLM agree at the *same* rate two
+Claudes do. The combined **k = 18** two-vendor panel has **n_eff = 1.06**; 7 of 9 GLM
+assessors returned a vector identical to the Anthropic consensus. This *refutes* our
+own prior hypothesis (that cross-vendor diversity would lower φ̄).
+
+So the redundancy lives in the **evidence**, not the model family. This is the
+stronger result: a foreign assessor does not buy an independent vote when the evidence
+already determines the answer — precisely the condition cairn's layer-(a) provenance
+detector flags (shared upstream → refuse to combine). The honest n_eff on this crux is
+~1 regardless of how many vendors you poll.
+
 ## Reproducibility (the A1 mirror)
 
 The live assessor run is the non-deterministic *instrument reading*; its **result is
@@ -47,10 +76,10 @@ pinned** and re-checkable with zero model access — exactly as A1 pinned its so
 - `assessment/raw_votes.json` — the captured votes (+ one-line reasons), the audit trail.
 - `assessment/runs/` — the minted, signed Cairn records:
   - `battery.json` (`epi:Schema`) — the probe-battery instrument;
-  - `assessments.json` — 27 `epi:Assessment` records (one per assessor), each
+  - `assessments.json` — 36 `epi:Assessment` records (one per assessor), each
     `derivedFrom` **the source ids it was actually granted**;
-  - `heterogeneous.json` / `homogeneous-control.json` / `clean-diverse.json`
-    (`epi:Cluster`) — each panel's matrix + `neff` + full pairwise-φ;
+  - `heterogeneous.json` / `homogeneous-control.json` / `clean-diverse.json` /
+    `glm-diverse.json` (`epi:Cluster`) — each panel's matrix + `neff` + full pairwise-φ;
   - `axis_analysis.json` — the decomposition below.
 - **`cairn assess`** recomputes each matrix and n_eff straight from the recorded
   answers and asserts they equal what was pinned (nonzero exit on any drift). It runs
@@ -82,7 +111,8 @@ substring of its abstract (also enforced mechanically by
    models + protocols barely diverge — the clean-diverse panel's n_eff = 1.06, and
    same-partition pairs in the heterogeneous panel are near-identical (e.g. the
    Haiku/ADVERSARIAL and Opus/BASE_RATE PEKAR_ONLY assessors answered **identically**).
-   Within-vendor models share pretraining; they are **not** independent assessors.
+   The models are **not** independent assessors — and the cross-vendor test above shows
+   this is not merely shared pretraining: a foreign vendor (GLM-4.6) correlates just as much.
 2. **Most of the heterogeneous panel's spread is evidence-partition *starvation*,
    not judgment.** A PEKAR_ONLY assessor answers a Worobey faithfulness probe
    UNCERTAIN (→ 0) because it was **blinded**, not because it disagrees. That
@@ -107,15 +137,17 @@ revision — instead of the flattering 1.63 — *is* the engine's discipline (de
 | **evidence-partition** (primary) | yes — 7 disjoint views | large **apparent** effect, but mostly starvation (see audit) |
 | **reasoning protocol** (literal / base-rate / adversarial) | yes | small; flips some inferential probes |
 | **model tier** (Opus/Sonnet/Haiku/Fable) | yes | **≈ 0** (within-vendor; shared pretraining) |
-| **cross-vendor models** (LiteLLM) | **no** — no non-Anthropic API keys exist on this host | the only lever that would lower the within-vendor floor; unavailable |
+| **cross-vendor models** (Zhipu GLM-4.6 via z.ai) | **yes** — key retrieved 2026-07-04 | **measured ≈ 0** — cross-vendor φ (0.946) ≈ within-vendor φ; a foreign vendor does not lower the floor |
 | **human-at-crux** | slot open | not yet cast; the battery is human-answerable — the operator can add a vote |
 
 ## Honest caveats
 
-- **Within-vendor floor.** Every assessor is an Anthropic model. Shared pretraining
-  is a correlation floor we cannot measure away without cross-vendor keys (none exist
-  here). Cross-vendor assessors would only *lower* φ̄ — so our n_eff is a conservative
-  (low) estimate of independence, the safe direction.
+- **The floor is not within-vendor** (now tested). We originally hypothesized the
+  correlation was shared pretraining and that a cross-vendor assessor would lower φ̄.
+  **Refuted**: a Zhipu GLM-4.6 panel agrees with the Anthropic panel at the same φ
+  (cross-vendor 0.946 ≈ within-vendor 0.937/0.948). The redundancy is in the evidence,
+  not the vendor — so n_eff ≈ 1 is not an artifact we can diversify away. (Still open:
+  a *human*-at-crux assessor, the one genuinely different epistemic source.)
 - **Partition-decorrelation ≠ competence-decorrelation.** Made explicit above; it is
   why the honest headline is the clean-diverse 1.06, not the heterogeneous 1.63.
 - **UNCERTAIN → 0** in the affirm-vector (abstention is scored as non-affirmation).
@@ -136,9 +168,10 @@ empirical handle on how much the dependence assumption moves the bound.
 .venv/bin/python assessment/build_assessment.py
 .venv/bin/cairn assess assessment/runs/heterogeneous.json \
   assessment/runs/homogeneous-control.json assessment/runs/clean-diverse.json \
-  --battery assessment/probes.json
+  assessment/runs/glm-diverse.json --battery assessment/probes.json
 .venv/bin/python -m pytest -q tests/test_assessment.py
 
-# re-measure (needs model access) — regenerate the pinned prompts, then re-run the panel:
-.venv/bin/python assessment/gen_prompts.py
+# re-measure (needs model access) — regenerate the pinned prompts, then re-run panels:
+.venv/bin/python assessment/gen_prompts.py       # Anthropic panels run via the ultracode Workflow
+.venv/bin/python assessment/zai_assess.py        # cross-vendor GLM panel via z.ai (needs ~/.config/epistack/zai.env)
 ```

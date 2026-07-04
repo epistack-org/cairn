@@ -96,6 +96,13 @@ def main() -> int:
           f"phi_bar={dm['phi_bar']:.2f}, n_eff={dm['n_eff_capped']:.2f}   <- diversity barely helps")
     print(f"    all levers (+ evidence partition): "
           f"phi_bar={m['phi_bar']:.2f}, n_eff={m['n_eff_capped']:.2f}  (NOT {m['k']}; audit: partition-inflated)")
+    gm = json.loads((runs / "glm-diverse.json").read_text())["assertion"]["neff"]
+    cv = json.loads((runs / "axis_analysis.json").read_text()).get("cross_vendor") or {}
+    print(f"    cross-vendor GLM-4.6 (FULL evidence, non-Anthropic vendor): "
+          f"phi_bar={gm['phi_bar']:.2f}, n_eff={gm['n_eff_capped']:.2f}")
+    if cv:
+        print(f"      within-Anthropic phi={cv['within_anthropic_phi']:.2f} | within-GLM phi={cv['within_glm_phi']:.2f}"
+              f" | CROSS-vendor phi={cv['cross_vendor_phi']:.2f}  ->  k=18 combined n_eff={cv['combined_neff']:.2f}")
     print(f"  honest output: a BOUND from the single strongest line (LR<={max(lr(x) for x in trio):g}),")
     print("    an interval, and the qualitative crux routed to a human -- never the point estimate.")
 

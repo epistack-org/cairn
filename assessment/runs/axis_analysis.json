@@ -17,12 +17,27 @@
       "phi_bar": 0.9365079365079365,
       "n_eff": 1.0598130841121496,
       "mean_pairwise_hamming": 0.4444444444444444
+    },
+    "glm-diverse": {
+      "k": 9,
+      "phi_bar": 0.9478987681383928,
+      "n_eff": 1.048561181547453,
+      "mean_pairwise_hamming": 0.3888888888888889
     }
+  },
+  "cross_vendor": {
+    "within_anthropic_phi": 0.9365079365079365,
+    "within_glm_phi": 0.9478987681383928,
+    "cross_vendor_phi": 0.9455365094829616,
+    "combined_k": 18,
+    "combined_neff": 1.0558760573644512,
+    "reading": "cross_vendor_phi vs within_*_phi: if comparable, assessor agreement is driven by the evidence, not shared model lineage -> cross-vendor diversity does NOT manufacture independence, and ~1 effective vote is a property of the evidence, not the vendor."
   },
   "headline": {
     "stochastic_floor_neff": 1.0,
     "model_and_protocol_neff": 1.0598130841121496,
-    "all_levers_neff": 1.6317277582706993
+    "all_levers_neff": 1.6317277582706993,
+    "cross_vendor_neff": 1.0558760573644512
   },
-  "reading": "homogeneous-control = stochastic floor (same model+evidence+protocol -> n_eff~=1). clean-diverse isolates model-tier + protocol independence with evidence held FULL. heterogeneous additionally varies the evidence partition. Per the adversarial audit (assessment/AUDIT.json) the clean-diverse -> heterogeneous gap is driven mainly by evidence-partition starvation, not independent competence; the honest effective-independence estimate on the HSM crux is ~1-2 votes, not k."
+  "reading": "homogeneous-control = stochastic floor (same model+evidence+protocol -> n_eff~=1). clean-diverse isolates model-tier + protocol independence with evidence held FULL. glm-diverse is the same but a non-Anthropic vendor (Zhipu GLM-4.6); cross_vendor compares within- vs cross-vendor correlation. heterogeneous additionally varies the evidence partition. Per the adversarial audit (assessment/AUDIT.json) the clean-diverse -> heterogeneous gap is driven mainly by evidence-partition starvation, not competence; the honest effective-independence estimate on the HSM crux is ~1-2 votes, not k."
 }

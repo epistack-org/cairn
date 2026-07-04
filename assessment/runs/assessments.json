@@ -2,10 +2,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:L8R3vFM30KOiharETgFBWdvRA6bmGy2aNiEnUC9mBKw",
+    "id": "tt:Ppl1PCVAcDq1dryrTQvkxg6vXl0MfQbLl2XixuUYyCE",
     "assertion": {
       "assessor": "H1",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -63,7 +64,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "2fb116f2ed537e145f2b57bd62de42829ba6e9957aecf9f2b0628461c1bd1724",
-        "value": "42312a89c94ced959fd0e18c7eba0ba37afcc70c267c3d3d222abae7dad2173db4d3ca0f8fd2f4d0d2a5d41dadf7928d2da4c518ea2bebecd810f16614a6f502",
+        "value": "49820ef0298c7aa487cc353e6c4de91019820297b09af636360764104e0fa2a04c074ff665b9457d1aa7b3f7c89c5a653b4fc4d001b605e23b3aba91eedc6d02",
         "by": "assessor:H1"
       }
     }
@@ -71,10 +72,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:GSHEJJpsvAG2nQ-DyobQH7NoHYjNlVyGzZwk_Xn719Q",
+    "id": "tt:K043PBCeiyAicFbBYLYrx0HklnIRQmRBE8BNmeWlfis",
     "assertion": {
       "assessor": "H2",
       "model_tier": "sonnet",
+      "vendor": "anthropic",
       "protocol": "BASE_RATE",
       "partition": "WOROBEY_ONLY",
       "probeSet": "hsm-crux-v1",
@@ -130,7 +132,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "a567cd48fb3107cab692a10be0b38a7cdea9d898434069674f1fc86d21134313",
-        "value": "b5cee151d33131733a98ac3993a865bbfde69ecbfffadfbefd0f752526ec8ce913da7323f8138cd19ce0706d43374fcc65ff57a6a5862f0dc76ed7823e1d2b03",
+        "value": "66a8aa2a5f5ac3ca907e4d834b61cd0aff5cb266a49201c21e1ac347b7b87a66289d8c6d0043f0c6c31739ae36d26cf0a79fc2394ae0d51b7941c140fbe42206",
         "by": "assessor:H2"
       }
     }
@@ -138,10 +140,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:PBZHnkVOe4bTPK3pYzLh9Oj_7gcB-xPqdvwVuAOLSGw",
+    "id": "tt:KuO8Gr-wpl6aiEL6uYbIei2J1Tz4gTVWhuZokdDKAaY",
     "assertion": {
       "assessor": "H3",
       "model_tier": "haiku",
+      "vendor": "anthropic",
       "protocol": "ADVERSARIAL",
       "partition": "PEKAR_ONLY",
       "probeSet": "hsm-crux-v1",
@@ -197,7 +200,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "7178270c5bbff2f2702243c3797abb52602701fdd7d31a908b22962a3f02aeee",
-        "value": "de1a99546cac4f8efa4240d8e3f73df55d6329708c4a14ab473911eecb92f507dc0ee1d49d9592ea84738b9c606c5703e7b55b2e8a59d4d0f7030a98f3bbdb00",
+        "value": "dcef07b22d8e8694f2dd3365375e7b78de1ac1cef04afc76d31fe2167ae30bf2c4a48170c1d04c75c58514d7f24a0ec6b4fb4181e43df0ffb2dd866beb900a03",
         "by": "assessor:H3"
       }
     }
@@ -205,10 +208,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:-9IGfwzbawKXwfw2CM72g_DwHwOYGH29UkCRFgvtMJk",
+    "id": "tt:ioD7u_jARtK-igosqLFRoY3UoKCt515w7kSc_VfKEkU",
     "assertion": {
       "assessor": "H4",
       "model_tier": "fable",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "PROXIMITY_SPATIAL",
       "probeSet": "hsm-crux-v1",
@@ -264,7 +268,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "bbdc29e50c7c3bd135e3fd235b003f0bc0f622a8348b6bc9d56aa596ed960db4",
-        "value": "8d8873f3317258d5ca24e70270e88a1f0a2ef23eb3e4aeb9db770a3ea18ebb92817f717fa18ffbfab10c42569674724ae76ba9937ee6e0d45c5f0a7b2248f704",
+        "value": "deee5a1750b8731ce70b0d0ec620ba4170f5fa435beb4a900a6b829acef057313faa64116e9cab238d1a6e3891fd44cccf55156a19bd37f94ba8a910170e6902",
         "by": "assessor:H4"
       }
     }
@@ -272,10 +276,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:yNQSxcjiAEliPMlbuYJW_l5hXN_QM8IwiT8Qa9BYjxs",
+    "id": "tt:kpPIaopHL-jDCPnqbZRwZfBUKLNSTLRyRATyELNWeSo",
     "assertion": {
       "assessor": "H5",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "BASE_RATE",
       "partition": "PROXIMITY_TRADE",
       "probeSet": "hsm-crux-v1",
@@ -333,7 +338,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "b5b6153670438d38a239cab896287a15498d1d75a2903111b89eabe13bd0cf4e",
-        "value": "870ab9ef21ecdc0de482da739eadfd151fbe54a663c2794d20639dca4dd066a225ddfcbf3af9d9e0c1ae353c70ecc2f67fe6cfaeaafd278795d06ec2f12aeb01",
+        "value": "0a416dee41887d46fb6e9ff134f6456fbaaad10a58769baeed9d861e7b81f85b3ae04cdf953e0a3c97ab867a94af2efe734d645193a79612c883b2ea6903c603",
         "by": "assessor:H5"
       }
     }
@@ -341,10 +346,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:m8xyb1J0qgqXuby6OH9tvhODh474XabVzMyED4UIaww",
+    "id": "tt:K0sPIzZbFOnV56mLPE3vNu8Ha0KObTT9NBUlEaEa9AA",
     "assertion": {
       "assessor": "H6",
       "model_tier": "sonnet",
+      "vendor": "anthropic",
       "protocol": "ADVERSARIAL",
       "partition": "SOURCES_ONLY",
       "probeSet": "hsm-crux-v1",
@@ -402,7 +408,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "42e92c16ab04f1a60ad512d2e403200f16f0422cc117ecbbeac1a526cb60d152",
-        "value": "2f13a328eee30cb1d759ab1b443abdd22839220d38b72a61d30fdd4318fc2be2424ab233cc17e19d8ed680a5daef1b92ebea40defe5c3477df6e08e79a0aa405",
+        "value": "5a2db37115c0acc62b89d0720cd00eda8994acf0f28b8e3085b12a218230a745bf2ffa8e7ca675951bcaec447a84fa436e0ff74bba6c16eefa6a0014355af906",
         "by": "assessor:H6"
       }
     }
@@ -410,10 +416,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:up63oL0q4MUgpC7ldJb6VoAqD6A3lyBoL9YeMWO-koA",
+    "id": "tt:gSMiqkPlbzV16FyMN-kJesw7c0DZIHXt45TRsfScWDA",
     "assertion": {
       "assessor": "H7",
       "model_tier": "haiku",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "CLAIMS_ONLY",
       "probeSet": "hsm-crux-v1",
@@ -471,7 +478,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "7d2aa29d25f76d9a22bf7c24cbb1f8271018b44a5ac8f461390837d8d9e70d1a",
-        "value": "f364e10d2c6be1508b07c64200e111f73cad1d9e3fea1bb673688c4386ae824012a060650ca88ed8db2777e06d59c084317ef1e4191c7eb019c26f8e4dc9a10b",
+        "value": "54a2688e31a91a6a53585283e2a7431cfa390fe446e637e7b491f8e394e9b8cec776ec77e10dfa9e2624934e14aa978b4fd021bccbfdbf5c2ee4eda078ceb00b",
         "by": "assessor:H7"
       }
     }
@@ -479,10 +486,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:Skn7PqowFr_4xTapiXnf5FsReXgNodn5xb_Jt_JGWtk",
+    "id": "tt:XwtPiUrrGnTZikolCBgwA0hzpRSgDbtHExamgT2Xph0",
     "assertion": {
       "assessor": "H8",
       "model_tier": "fable",
+      "vendor": "anthropic",
       "protocol": "ADVERSARIAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -540,7 +548,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "4dfbadb20e2b8ca9abffc09403adf45c2e9844018396aafac1f3b1b486b9de8e",
-        "value": "539ce3c7793dd81bccb31b467fa30a77f8c903970ef72c1fc7aca5e51bc9e1f057550d13080683074581ae944bbf2801ec6ebdb5563a3b6a71538e651b685d0b",
+        "value": "f85e7f2894e50cb794df3c218b8cd4bc84c3b82d06378cc86a55279dc832b23971ae22ba9788f0de0b2327218af90d165b41b6bc6d44f37dc10d299254cf0a0d",
         "by": "assessor:H8"
       }
     }
@@ -548,10 +556,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:n7Y59LcLpBAEH7J9QBemPZhRJxHkOTHhlmJ3VjxKG9s",
+    "id": "tt:NVEH1tC1l7LdBvxoCgT4susd1ukRpBmoFBNMn-smNjc",
     "assertion": {
       "assessor": "H9",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "BASE_RATE",
       "partition": "PEKAR_ONLY",
       "probeSet": "hsm-crux-v1",
@@ -607,7 +616,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "300eddb98948ac3498f9822bd138eff012179b5bdf27cf89c6cce051241756d0",
-        "value": "50ca0cd113c0bf875e6a57468a23ddbc99bb514ef1f953c49096ff30477747326b2e9c136f051a2d3e36daac173a44f3be09c9ed6bc34cb7f1ed09867bd6a40a",
+        "value": "a2662db9721d97645e21a2388d2664ddbe17868207ae557d92d115881774bda5dfd2ed393a0662552408616c53ed2682bb81b0c9f60ed0139a0cb831873a5f0d",
         "by": "assessor:H9"
       }
     }
@@ -615,10 +624,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:VNez2jm5-CGtpwlWi_os-pWe8FsTp-Wo01bCouXcFJg",
+    "id": "tt:zB1gVGXeb6FXoLOhr5ynhiYcxfilRP4eqCDtH-fnmFM",
     "assertion": {
       "assessor": "C1",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -676,7 +686,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "4206d9224a9dbe657ee0365d5b2d98e62b48f3c80e6075e673d199ff1b096f9d",
-        "value": "9cfd9c30bac636a5f218380fa2bb1cd767866b8b304ce7971e3f66a35641d3a771e48d5e5f7dee27031d437640214ce2e25e6c212974b4d69cb83b3f39f8a402",
+        "value": "0216497897173fcd758fb6df1094497db3c800c991979b52d58e861a14c8c12e085029b68d7af44387fb3d379f843de1e6e78360dca31e4a5f50f6504907c903",
         "by": "assessor:C1"
       }
     }
@@ -684,10 +694,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:BLmIIN5NjpMkrp1N2xFZbJ5EojLwb6t2W__xQHZlit0",
+    "id": "tt:b3_R8UaYybIUNSxmmCyS4Ff_OqfV6Cwuw2-RpRelvnM",
     "assertion": {
       "assessor": "C2",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -745,7 +756,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "6b659d73269d91cf4c2695c9587e4ca31ef06509693a7b405963eadb8f98c978",
-        "value": "3ad9b7bd308c3818592aaddb1b82f58b762199de186c6b8e6a33ad0bba30d8348a61ae1affb9bf9e9b584751b9281690eb2bffc8b75195054f65840904c65d0e",
+        "value": "a3713a3f4ae77dabef2ffa4ab37613b0aa91387b0971fc39cf284a4436ea53e4ef512b122cb55722828a20f9e4e38fbc787cde491b705d32bf14e44c28f27a0e",
         "by": "assessor:C2"
       }
     }
@@ -753,10 +764,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:uvLT8zhA-UUygo1tE0mlsE2Lb67LLUadBzZE6n5h3wk",
+    "id": "tt:0ilQZg9luK_SBYF6niJvi_xcDQOOsuXT6xZdNvGyLao",
     "assertion": {
       "assessor": "C3",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -814,7 +826,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "cd89588590a941cd68a0c74a742d249a18e0bf7a9da88041c10f47161d73309a",
-        "value": "f6b180d58528602ef82e2b463fe86bcc831a1302a11efcfbd44e7695c6bbdf275e9e76137a0323cb516d0772480a3d98f1ab832b004e7d5d934c7f9efbc1bd07",
+        "value": "d4a2851236494c9feaf0f88584163eaf247f28ba26b589276f8bb83feb39d53123d04a5c533feb2d95a6259116d4c212c9efe12011b1b6e27ca11a254d5ea206",
         "by": "assessor:C3"
       }
     }
@@ -822,10 +834,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:Hk-Z7FogquSDyfD9WtWWD2p6GszV7aZGmp_AQWoh23A",
+    "id": "tt:6F6sWcnwOsC0_jTTgg5y_gRNO7ECnnl5_bTNix-wLAA",
     "assertion": {
       "assessor": "C4",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -883,7 +896,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "6ce9c0f1719b387f868cc882bb9262092a07102c1d01a95f9998b5bd1f8a5202",
-        "value": "5e07678606c9452d03342996bdb762c1ddee66bab34eb64e6646acbc9cddb87b2255c70ef5b7ec86411bcb5fc0d2928c054a4d47a82078ee8765ff628618ae00",
+        "value": "8e2381be71eb6c120a20160cfe0ac8bf671bda19f8c355f49daee536d0ddbd887fa7a1cdcfd2b9b1ffe0b4c5f481e93780e73dff76b29911776dbdcb4e42670e",
         "by": "assessor:C4"
       }
     }
@@ -891,10 +904,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:AFzQZ1ogvotPpspETTmY8zrTz7RmvtxIK_m1VqEDnaI",
+    "id": "tt:hMIkk1s7g-ZWcjreCytYq4jj-Wm76CzJHoh77g-UQgc",
     "assertion": {
       "assessor": "C5",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -952,7 +966,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "a5f3657e38b9a04ec9e9adcb5bee5ff2017369404e8ecda8bfa81cadf49e9e59",
-        "value": "28c76bc0e45c638e24831ecb53a3db10ea8d762f8e4c90695c19d2cdab2d1cc26e2f57ad5e69f747552af8662d8e11fc8767f319a325399ba4701a5c37f7240f",
+        "value": "0073a52895b6a7a59fb89bead4c3e8c2a7cc77bc6b82814e85c2c08a7d6258fa80453cf7cd7183535fdf09f95918b70e86610da9cd8e4cfda3ee7e34bc84e407",
         "by": "assessor:C5"
       }
     }
@@ -960,10 +974,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:JJh08KzzlBvOzmAejl1xuS6ldy4w_1VczKURn0vnQoY",
+    "id": "tt:SyNFKUI73UMkAOGqdK5xOOpbZ1dIJklLkoTfnB9JLNk",
     "assertion": {
       "assessor": "C6",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1021,7 +1036,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "c55c3473944f4007e3109f7ca38353c9714857f8ccd4df83b184fe0890aefe0b",
-        "value": "43ca8e0640a9653de60f7a9b26d893eb8e080c9d24646bd16033716b9988220b95d813cd9fd3357273c3b820ced0079a39b7be04f2bbf9ce338b93e43f7ac807",
+        "value": "7bd9d6925144af7d05e984bfbfe4ebb224e4f4a710df04884960ad3d078e3f054f3bdfc960a8f605a8a9a220c6b70a8e9654b506dfb65b9913461583cdb96d03",
         "by": "assessor:C6"
       }
     }
@@ -1029,10 +1044,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:uvwEhU91u4CKq73mevjcsiHT6GFVn3rAVIszfAPgdBQ",
+    "id": "tt:fLnFfdVfGrIY-ty2xr6kjz98TuArQs_2XsmAwrRdLWg",
     "assertion": {
       "assessor": "C7",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1090,7 +1106,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "475772101cadbb01f8714bfcd424d144ee3c15bdb617eefb80a05edfe75089fd",
-        "value": "6512cb778eceb1904cd8a75ae1f6f9a87f6634aec6a618d490f7787798c7aa5dd16d3fb773140bd0c77eb2d54925e9575ab66b3967264949d29b808c3a2cd101",
+        "value": "adc4484f8958634a07703ea296437115a4242faf0713cb29c603af7497766bbe76e03f88787bbef1efe2a1d8970ca42e94364ee456ffe7ccac847d7e50ea9404",
         "by": "assessor:C7"
       }
     }
@@ -1098,10 +1114,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:FhJabUTgvYxGtiC4F_3rt6i8nFe17-S2rG-WzLxNj40",
+    "id": "tt:-frdR8-JDbHbQCS6GtMssbExzxN2HR1i_QhuAf4dres",
     "assertion": {
       "assessor": "C8",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1159,7 +1176,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "8800ec01b144cc0934e3c2cff4e15ec7478697b916a4857b3badc72d906fc1af",
-        "value": "1f7721ca9bd7d25e1aeee4a6b11ecd8dda03250ceb4844f77391a7c60a46707e4890a37b12eef3b5f0a554bab1b24f95329d8a7817b4bb8f73331ee9d42e3c0c",
+        "value": "14c491e694cc6eda820131d66f6f2f3b57a92dbaf361699504678fa5bc37a8ec696c27d9646f9765573867a50d696d92f6d9a47ccb128c1711ba0c09d60cba0e",
         "by": "assessor:C8"
       }
     }
@@ -1167,10 +1184,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:v7LuW-Y_ktEw5_FpFAaKJQycdQXB6oSImCQcYuzundU",
+    "id": "tt:gStxXYWRK1DscJHy802YGK9C5CiQ-mVYtX9JAzxQt-c",
     "assertion": {
       "assessor": "C9",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1228,7 +1246,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "eaaed66e6fff04fe4dc2df9f9dcb4872326a02191a714c522a7d141f3baba65c",
-        "value": "0f415a911dc738b6606f7606820e7b4acf8d4494d05dfeecb6009221d6d39ad0cc3f2ffcdf48823f85ebe95c9bab956580e41fd91058eef5b38ad4555e19f601",
+        "value": "b7b5dbbfd1d8fbf15c3f1b8c3ad2d29b0aefc77407ae2bc9e68d8d09b80756df50118dd49bcb7950cd0f9a58cbd74101e8f3867da2cdb4b177ede39d55fe6009",
         "by": "assessor:C9"
       }
     }
@@ -1236,10 +1254,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:NLJUlB39vL1pim8w40jHwHo8RxxXihKyrmM9PCAPKOI",
+    "id": "tt:NcR5tIMsXXRcEtYb-FMhG2eukz3VHqC7GAKolOhaFPk",
     "assertion": {
       "assessor": "D1",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1297,7 +1316,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "c4de3c1933f738ef930377b7029d1827058999058d7b3f016b85e572606cba5b",
-        "value": "542453b9de70ca98116cf575fa2abcdd4de39853b376474e4c5b1777aafdc5a1f942d411fa5fb42193bf112b25abbb12d794b9c76e95b5a4f5c03b99331d3100",
+        "value": "d1a9ba7a5ba7531153f6caf6c89001200db92abdffe3c3190d2af4ba4f1aad70934f6a04a9402380bb8e412b6b7617466101003091ecb4cc393ac07896b6590d",
         "by": "assessor:D1"
       }
     }
@@ -1305,10 +1324,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:IBr5jK1-0hXz86aV3ncFvEv4Tsy7ch34ydamnrZ8v9s",
+    "id": "tt:j9Yu9DtddDEhaJio3LkC6LoCibCV3PMnBijunBW7Smw",
     "assertion": {
       "assessor": "D2",
       "model_tier": "sonnet",
+      "vendor": "anthropic",
       "protocol": "BASE_RATE",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1366,7 +1386,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "d82fbdcfe72e4254296bb3b9ce6d5ce598ca2de2a22d13d2c12aebd513684422",
-        "value": "b2538111596bd00b3c9103c990b3e36eba43988a9f32757b3753f202545f5dcc66ee6faa1242ea9b34dacc53d5696a67989354d28c7e58b6d8bea7920a48cf00",
+        "value": "9ab6586e4fe08ed80396f87edf49194cc7ce3d63c3f200971b7e2cc533e7a3cadf5d939cc929e27fa23f217730207d822b5245469e0b7f9c4a5ca86be5d4bc08",
         "by": "assessor:D2"
       }
     }
@@ -1374,10 +1394,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:FwqpKvB16urGBtFn0i9NuIV5BVjZBgETOmOxQ5yNKtA",
+    "id": "tt:Rd08J7nj-v__i2uWXpiTIx8kzEgqToMkvYhw_ShhgS8",
     "assertion": {
       "assessor": "D3",
       "model_tier": "haiku",
+      "vendor": "anthropic",
       "protocol": "ADVERSARIAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1435,7 +1456,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "72fd49346a777519bf5043b5f1aee883f8174e2ed3daf647014bc4b8083254f3",
-        "value": "0805a623423367f6366e7b980b246ede0983210c59274aaab18f2e81c4ea1e6e7a9a92183b9c929e9f42935c676373943f29b0f432e03e6ed61c6648bf5c6206",
+        "value": "5c75b1c89b213d8114002c06e60e656c753aba2929ea466fb15a8e29c4eb18afc6dee93df22a5ef8dcc45751cb58d4f825d55015f3382a26d5ee2de589d1af07",
         "by": "assessor:D3"
       }
     }
@@ -1443,10 +1464,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:m17aOlDpKF66VilOu0BdsLl33-8VaAJdB2-CZ-pj3x4",
+    "id": "tt:ZCEyRGtkUTuOg0FW8IqRCaTLVCwyZHJPhTN6PkGJmXs",
     "assertion": {
       "assessor": "D4",
       "model_tier": "fable",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1504,7 +1526,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "6201de8407bfaa21c7e816fc97091b83bf04e89a4ebd5164d4559444a37b971d",
-        "value": "e70ec7bf5cdaac9f11249c081447d58b7b27a4685894b37b17197acc6ea99ea3eeb6f2c6651db24523dcdab50c17b2ec34ca1c18d58ee40b3234dc2f4d76e807",
+        "value": "54680894cbd47aceef3fb2f64dffcf4ea50360660fa08629ecce8a6fa7fe8ebddf568d42ce7c4aea5af4986000a379c5778383b7b0e44958de77423f38e8ef0c",
         "by": "assessor:D4"
       }
     }
@@ -1512,10 +1534,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:JbVJiLDIGhjmqvVyyyjLNLxe-31lDEUyDMNad685OHg",
+    "id": "tt:noU78wPXUEzQ0_Zq-YMHGxjCde-7eR_xiSCjj3Nv5qE",
     "assertion": {
       "assessor": "D5",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "ADVERSARIAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1573,7 +1596,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "5962e046823522d2b875b652696550a2aa31f0c4c6614ce0e46676c7e74bac44",
-        "value": "b5b44694716fde62e537e369f04eae58384ab8d451286cf80e1af0c2a5277198fe561f69f9cadadaaf036e5bf942bfde06bab17cbcf912905c36a8c923427f02",
+        "value": "90ef1428648a0d80a8bb397e07935ec47e01afe0fdfe6f140a16fa726886c267a4c102ad180ed9179373d825ab04573c7cd23bd58157672f8851662cab48c500",
         "by": "assessor:D5"
       }
     }
@@ -1581,10 +1604,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:G7eXZwCQvqIH_EtRpds-sSVthSjAbFpl2BI8UShzgv0",
+    "id": "tt:fnPq3ScLS1R6N-RoaLVL14KralmYnRpg2HHr91eZndU",
     "assertion": {
       "assessor": "D6",
       "model_tier": "sonnet",
+      "vendor": "anthropic",
       "protocol": "LITERAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1642,7 +1666,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "4e2923167ab58684a90c25af3989b75a1401be3aed2b9c4e646110f2978c3a1f",
-        "value": "ef2d44c3b8daea25856bb0edd12315959f756fffa15842e1c6ca0c1400f45167f4c2d6eee261a6b17e5609ec17cb132a9376b0622ac31e3e545b912e3cd04e00",
+        "value": "09aa7651bcec5d558646dd17952a7c65fe7fbf2bb15123623bd5101efcda03281fcfd8c31f2a4581bda5e466814b26c48b2a9b5a909f80db28045e38d426fe09",
         "by": "assessor:D6"
       }
     }
@@ -1650,10 +1674,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:WKDZAq1f1wOtRh87s4sgjMoxjSvAEDy-fldArK16cUw",
+    "id": "tt:xO0AmIYSmNjq1r7iChbdMdk7A7A3UETg-lv0kBi8bqw",
     "assertion": {
       "assessor": "D7",
       "model_tier": "haiku",
+      "vendor": "anthropic",
       "protocol": "BASE_RATE",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1711,7 +1736,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "347c086bb7c3eaae039e79a6751d0ffbdc98f57a33ac21502944e566b5cec821",
-        "value": "e17b9d926bb538701b252a843dfd6ca713f7ce4615ca78ff0972ede45ca82f4b36f9c64c265b069ece3da47524d5030cd2c1bf2586ed45cf2981f2219ff65905",
+        "value": "f285e56df7c9deb0a6bfe66872bfd547bb2e65a1158838c0c6f3a88bf9460d917d3f61fa27128bd88ca895773db57f516697289db62a6029260eeec90eb9c503",
         "by": "assessor:D7"
       }
     }
@@ -1719,10 +1744,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:K9ECwIcrkQ-kHR-ZdwknSMvhGKcyDT8FbWonec9xgdo",
+    "id": "tt:aHVmHtV1gu1A_uLVq9VD5fHO5StrNhNB0IHnrN3AiW4",
     "assertion": {
       "assessor": "D8",
       "model_tier": "fable",
+      "vendor": "anthropic",
       "protocol": "ADVERSARIAL",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1780,7 +1806,7 @@
       "sig": {
         "alg": "ed25519",
         "key": "bd3c4cad4b50a088bb66390799aa85f73091bf8cac665729c59d6cbfdcf7a192",
-        "value": "f39da442372add62b1b343cdb309bbb3ee6c952cd4312b98798ecad29442a0fdf8c108d030fe5382d004af7f01486ae484ad84ae3b8fcf670795e0c8bf7ad40a",
+        "value": "c469988ade7f6181009543d8f90872ddd8ab17db2de1619a397bc2e4a7661f716a0695c4e1de5774e449a52b17c88ea10cca4924463266cf8b28579e6d845f0a",
         "by": "assessor:D8"
       }
     }
@@ -1788,10 +1814,11 @@
   {
     "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
     "@type": "epi:Assessment",
-    "id": "tt:HrbI2cDV_9uVr8ipuS-umUb-XS-EI7W6ghyttZRGlTs",
+    "id": "tt:KFa2IAZEr3I5CnskDCkF6NDnz9hihKHk4ureuZw3NXs",
     "assertion": {
       "assessor": "D9",
       "model_tier": "opus",
+      "vendor": "anthropic",
       "protocol": "BASE_RATE",
       "partition": "FULL",
       "probeSet": "hsm-crux-v1",
@@ -1849,8 +1876,638 @@
       "sig": {
         "alg": "ed25519",
         "key": "fcfda923091f714ef4df71013103b729b512768402ed3d4f3ed73ca857a8ed81",
-        "value": "dc1f4647512c7b89681134a8e4605174ed1e6397c6a94fda2e881af170b406747834aa57f167eff50fda13235bd861f8b2569185ed88964d138ffd7ca90d9e05",
+        "value": "a6b7b931d08b2008d3aff694a42dee2c98e9f980f8c61ac97478f28ce9516df349cfd8a42b91b3eada64e6a452e7e17bfac81ffd8e93c3b53e3f229b9176a00e",
         "by": "assessor:D9"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:FQFskJkogxaLbAFJ5kj6Td_AJu9u7p4zya30Rv5ZICY",
+    "assertion": {
+      "assessor": "G1",
+      "model_tier": "glm-4.6",
+      "vendor": "zai",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:G1",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "4a20d9c9e8fb6bafe2349c9701b92c5d6c4cb6a804fee2994825f1c8e3a2ee71",
+        "value": "8f6f9164f50c344991c3b17fb7b46a02b0da7fbed15994850e343ef8f0401a50249c4954c7a2220febb6a38bd9f6a77f255f9ee3d4424ba1ef4457e5f7e7b603",
+        "by": "assessor:G1"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:3OBKHnSSlDNwR571F-c54VTkt1p59r_iKC9pfd0BH9M",
+    "assertion": {
+      "assessor": "G2",
+      "model_tier": "glm-4.6",
+      "vendor": "zai",
+      "protocol": "BASE_RATE",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "YES",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:G2",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "d5e82ee1d27225c6ff3ef90576733941068cfdb1cd564879b1f98e9f15e5ded2",
+        "value": "c215832877990ca65d5ed82877ac26ca446a898b2dda0b680420681ff3652399b242eed52309dfd326c581f98e8228509ec61f73b0b8aa62aae64cdc2d27a50e",
+        "by": "assessor:G2"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:X4bofuQYarwxvRshPWsaXU6oW069YeTZ2Vj1-zd24jo",
+    "assertion": {
+      "assessor": "G3",
+      "model_tier": "glm-4.6",
+      "vendor": "zai",
+      "protocol": "ADVERSARIAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "NO",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:G3",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "e6a9c2fb198fba667dc70ccaa65d0cf41b077bc80b28aed870f90a0e95686eaf",
+        "value": "71e9083719db427d9765f8d5f3d7ef821a0fe8a3eb9297dc234915c43f4bfaf2dcd8851d297e14dbd5e5d70811c260806a179241ee562b1425cc3a7c995d600b",
+        "by": "assessor:G3"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:LtVDWaZEzvCkrXVDy375GYFmJcDeSJe3eyWUvWWe1I4",
+    "assertion": {
+      "assessor": "G4",
+      "model_tier": "glm-4.6",
+      "vendor": "zai",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "UNCERTAIN",
+        "I6": "UNCERTAIN"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:G4",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "f92db577be96ee0f8b4ec7ebfcc99ee736006e4b693f0adc9dbaad9cfc8394e7",
+        "value": "da34f12f192459a18fff1aef77c3d3cae729fe39bdf9f9628befb35645b400ed374a473db89dfd85c0f583b3967079ab901d1695f2386618744da8a4fafb760b",
+        "by": "assessor:G4"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:s0F32O8eRi1l0CE7CmdOzBu0f_C6MMo_xFIiqpG95LA",
+    "assertion": {
+      "assessor": "G5",
+      "model_tier": "glm-4.6",
+      "vendor": "zai",
+      "protocol": "ADVERSARIAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "NO",
+        "I4": "NO",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:G5",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "695206ca28dfab7c02cb06527040a2e91d998907cdfe97ffe0eafcb5c4e901a0",
+        "value": "2639d32960d4d83d1d04e8a021e12275d47cd7025539a7e9533f67b1123d11797b0623d3282d0afc6fc786ae36ba9265c3a9fc1fab8841d0ee8e50ccc912a704",
+        "by": "assessor:G5"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:jcm71e_I2fYTv5kqVyTc8ogFzQVRC8wa5mctCyKZ810",
+    "assertion": {
+      "assessor": "G6",
+      "model_tier": "glm-4.6",
+      "vendor": "zai",
+      "protocol": "LITERAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:G6",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "89a3fd8a177ec686021d2a785a34df8e8e89f81687e2c9e044d64d6def88a12b",
+        "value": "75ffd229d65e190924ca64e1a6022492368757470161b0c4c1323ec284a957bff24ae96fd6af979d7e88e48f453d86fafac74de5d2aaca5b06186edd2e33eb01",
+        "by": "assessor:G6"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:p-ZP3emPqi8G_mffSbAbd-LLblnRwXjr61IZr0Ey9M8",
+    "assertion": {
+      "assessor": "G7",
+      "model_tier": "glm-4.6",
+      "vendor": "zai",
+      "protocol": "BASE_RATE",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:G7",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "323df5b1e0fdd4ee93083f0f85fc8dcd8ed56832bb8b5a4b9f05ca5a6e4335ba",
+        "value": "3313c011bb2016db4573d6cc30352892318c640c17560d87bafedf143548f449f7deca4d827966cee7c3d56c59f79309ff902b70d28d9f45028e21e3a34bfa08",
+        "by": "assessor:G7"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:04NBJfxxbdkZoLDfs-EGcr88-PViV8jZdcckEN8QiME",
+    "assertion": {
+      "assessor": "G8",
+      "model_tier": "glm-4.6",
+      "vendor": "zai",
+      "protocol": "ADVERSARIAL",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "UNCERTAIN",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:G8",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "3d22e7e3496e503608dbfaa8d78012354642685ecbb3d4e95fc3b7f7993bc450",
+        "value": "aa610a5bd633af3bd667fd16f2963b77016ce5861f1bdb843a203b038956bb6bb1bae4464d04d7cf9d869cf2f2d1b1bacbe7ab5115ed00f42511b43f7594d708",
+        "by": "assessor:G8"
+      }
+    }
+  },
+  {
+    "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+    "@type": "epi:Assessment",
+    "id": "tt:9empcKlQHZWzpIm8Oehk0dtVhcqHdV_iW7Uqu5M-_s0",
+    "assertion": {
+      "assessor": "G9",
+      "model_tier": "glm-4.6",
+      "vendor": "zai",
+      "protocol": "BASE_RATE",
+      "partition": "FULL",
+      "probeSet": "hsm-crux-v1",
+      "granted": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "YES",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "affirm_vector": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "reliability": {
+        "keyed": 8,
+        "correct": 8
+      }
+    },
+    "provenance": {
+      "derivedFrom": [
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+      ],
+      "mintedBy": "assessor:G9",
+      "method": "assess",
+      "at": "2026-07-05T00:00:00Z"
+    },
+    "pubinfo": {
+      "sig": {
+        "alg": "ed25519",
+        "key": "337de4f6c05fef0c2fd24b91e9db77328e029fd6808895f2f9c0fdbebd319263",
+        "value": "e6e250bb0858a2ab2d644e48940f38f8480e2fa7213a1a0bec39be761fde7e7f64a8d81cd7e42af7e3a96703dec733543f0de51d11abf71253c0eaeb6c588600",
+        "by": "assessor:G9"
       }
     }
   }

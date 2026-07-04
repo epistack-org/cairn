@@ -1,7 +1,7 @@
 {
   "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
   "@type": "epi:Cluster",
-  "id": "tt:zjG3-Cu3rOzPTxeUa7aDBVB_gH64eKxUde_NQZYBBEo",
+  "id": "tt:qZUWPmd05P_GRfjSKQl_-9lYow5aQV9Sl6ol1yPgyA4",
   "assertion": {
     "kind": "assessment-run",
     "panel": "heterogeneous",
@@ -26,6 +26,7 @@
       {
         "assessor": "H1",
         "model_tier": "opus",
+        "vendor": "anthropic",
         "protocol": "LITERAL",
         "partition": "FULL",
         "granted": [
@@ -64,11 +65,12 @@
           0,
           0
         ],
-        "assessment_id": "tt:L8R3vFM30KOiharETgFBWdvRA6bmGy2aNiEnUC9mBKw"
+        "assessment_id": "tt:Ppl1PCVAcDq1dryrTQvkxg6vXl0MfQbLl2XixuUYyCE"
       },
       {
         "assessor": "H2",
         "model_tier": "sonnet",
+        "vendor": "anthropic",
         "protocol": "BASE_RATE",
         "partition": "WOROBEY_ONLY",
         "granted": [
@@ -106,11 +108,12 @@
           0,
           0
         ],
-        "assessment_id": "tt:GSHEJJpsvAG2nQ-DyobQH7NoHYjNlVyGzZwk_Xn719Q"
+        "assessment_id": "tt:K043PBCeiyAicFbBYLYrx0HklnIRQmRBE8BNmeWlfis"
       },
       {
         "assessor": "H3",
         "model_tier": "haiku",
+        "vendor": "anthropic",
         "protocol": "ADVERSARIAL",
         "partition": "PEKAR_ONLY",
         "granted": [
@@ -148,11 +151,12 @@
           0,
           0
         ],
-        "assessment_id": "tt:PBZHnkVOe4bTPK3pYzLh9Oj_7gcB-xPqdvwVuAOLSGw"
+        "assessment_id": "tt:KuO8Gr-wpl6aiEL6uYbIei2J1Tz4gTVWhuZokdDKAaY"
       },
       {
         "assessor": "H4",
         "model_tier": "fable",
+        "vendor": "anthropic",
         "protocol": "LITERAL",
         "partition": "PROXIMITY_SPATIAL",
         "granted": [
@@ -190,11 +194,12 @@
           0,
           0
         ],
-        "assessment_id": "tt:-9IGfwzbawKXwfw2CM72g_DwHwOYGH29UkCRFgvtMJk"
+        "assessment_id": "tt:ioD7u_jARtK-igosqLFRoY3UoKCt515w7kSc_VfKEkU"
       },
       {
         "assessor": "H5",
         "model_tier": "opus",
+        "vendor": "anthropic",
         "protocol": "BASE_RATE",
         "partition": "PROXIMITY_TRADE",
         "granted": [
@@ -233,11 +238,12 @@
           0,
           0
         ],
-        "assessment_id": "tt:yNQSxcjiAEliPMlbuYJW_l5hXN_QM8IwiT8Qa9BYjxs"
+        "assessment_id": "tt:kpPIaopHL-jDCPnqbZRwZfBUKLNSTLRyRATyELNWeSo"
       },
       {
         "assessor": "H6",
         "model_tier": "sonnet",
+        "vendor": "anthropic",
         "protocol": "ADVERSARIAL",
         "partition": "SOURCES_ONLY",
         "granted": [
@@ -276,11 +282,12 @@
           0,
           0
         ],
-        "assessment_id": "tt:m8xyb1J0qgqXuby6OH9tvhODh474XabVzMyED4UIaww"
+        "assessment_id": "tt:K0sPIzZbFOnV56mLPE3vNu8Ha0KObTT9NBUlEaEa9AA"
       },
       {
         "assessor": "H7",
         "model_tier": "haiku",
+        "vendor": "anthropic",
         "protocol": "LITERAL",
         "partition": "CLAIMS_ONLY",
         "granted": [
@@ -319,11 +326,12 @@
           0,
           0
         ],
-        "assessment_id": "tt:up63oL0q4MUgpC7ldJb6VoAqD6A3lyBoL9YeMWO-koA"
+        "assessment_id": "tt:gSMiqkPlbzV16FyMN-kJesw7c0DZIHXt45TRsfScWDA"
       },
       {
         "assessor": "H8",
         "model_tier": "fable",
+        "vendor": "anthropic",
         "protocol": "ADVERSARIAL",
         "partition": "FULL",
         "granted": [
@@ -362,11 +370,12 @@
           0,
           0
         ],
-        "assessment_id": "tt:Skn7PqowFr_4xTapiXnf5FsReXgNodn5xb_Jt_JGWtk"
+        "assessment_id": "tt:XwtPiUrrGnTZikolCBgwA0hzpRSgDbtHExamgT2Xph0"
       },
       {
         "assessor": "H9",
         "model_tier": "opus",
+        "vendor": "anthropic",
         "protocol": "BASE_RATE",
         "partition": "PEKAR_ONLY",
         "granted": [
@@ -404,7 +413,7 @@
           0,
           0
         ],
-        "assessment_id": "tt:n7Y59LcLpBAEH7J9QBemPZhRJxHkOTHhlmJ3VjxKG9s"
+        "assessment_id": "tt:NVEH1tC1l7LdBvxoCgT4susd1ukRpBmoFBNMn-smNjc"
       }
     ],
     "vectors": [
@@ -745,15 +754,15 @@
   "provenance": {
     "derivedFrom": [
       "tt:Ad33h5QFG-_Znxvt1TG7I9ZL_mbSqybtw1qoCNHxf7I",
-      "tt:L8R3vFM30KOiharETgFBWdvRA6bmGy2aNiEnUC9mBKw",
-      "tt:GSHEJJpsvAG2nQ-DyobQH7NoHYjNlVyGzZwk_Xn719Q",
-      "tt:PBZHnkVOe4bTPK3pYzLh9Oj_7gcB-xPqdvwVuAOLSGw",
-      "tt:-9IGfwzbawKXwfw2CM72g_DwHwOYGH29UkCRFgvtMJk",
-      "tt:yNQSxcjiAEliPMlbuYJW_l5hXN_QM8IwiT8Qa9BYjxs",
-      "tt:m8xyb1J0qgqXuby6OH9tvhODh474XabVzMyED4UIaww",
-      "tt:up63oL0q4MUgpC7ldJb6VoAqD6A3lyBoL9YeMWO-koA",
-      "tt:Skn7PqowFr_4xTapiXnf5FsReXgNodn5xb_Jt_JGWtk",
-      "tt:n7Y59LcLpBAEH7J9QBemPZhRJxHkOTHhlmJ3VjxKG9s"
+      "tt:Ppl1PCVAcDq1dryrTQvkxg6vXl0MfQbLl2XixuUYyCE",
+      "tt:K043PBCeiyAicFbBYLYrx0HklnIRQmRBE8BNmeWlfis",
+      "tt:KuO8Gr-wpl6aiEL6uYbIei2J1Tz4gTVWhuZokdDKAaY",
+      "tt:ioD7u_jARtK-igosqLFRoY3UoKCt515w7kSc_VfKEkU",
+      "tt:kpPIaopHL-jDCPnqbZRwZfBUKLNSTLRyRATyELNWeSo",
+      "tt:K0sPIzZbFOnV56mLPE3vNu8Ha0KObTT9NBUlEaEa9AA",
+      "tt:gSMiqkPlbzV16FyMN-kJesw7c0DZIHXt45TRsfScWDA",
+      "tt:XwtPiUrrGnTZikolCBgwA0hzpRSgDbtHExamgT2Xph0",
+      "tt:NVEH1tC1l7LdBvxoCgT4susd1ukRpBmoFBNMn-smNjc"
     ],
     "mintedBy": "keystone:epistack-corpus",
     "method": "aggregate",
@@ -763,7 +772,7 @@
     "sig": {
       "alg": "ed25519",
       "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
-      "value": "7183628d06e75151e52ea3090d4c204a15623dd2781089a5bd620834df0bdad2cad0e04cd75d42a301c7d8d6cbe74478781c2c260dd6e50fdcc31cdb4b880e07",
+      "value": "2c99ffd020c157dcdcfe8cba1418dcecd5ceadf7dc08749ff41beac258c11d4e2e3919272410566dc89cc8fc64bf4b9ac82b0503ead9ef789f058e5152edaf0e",
       "by": "keystone:epistack-corpus"
     }
   }

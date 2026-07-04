@@ -20,9 +20,11 @@ Claude-Code transcript structurally cannot produce**:
    share errors. Now **measured on our own corpus** (roadmap A2, `cairn/assessment.py`
    + `cairn assess`): a 9-assessor panel on the COVID-HSM crux gives **n_eff = 1.06**
    when they share the evidence (a homogeneous panel: exactly **1.00**) — within-vendor
-   model diversity buys ≈ 0 independence. See
-   [`assessment/ASSESSMENT.md`](assessment/ASSESSMENT.md). (Anchor: "Nine Judges, Two
-   Effective Votes", arXiv:2605.29800.)
+   model diversity buys ≈ 0 independence, **and so does cross-vendor**: a Zhipu GLM-4.6
+   panel agrees at the same φ (cross-vendor 0.946 ≈ within-vendor 0.937/0.948), so a
+   two-vendor k=18 panel is still n_eff ≈ 1 — the redundancy is in the evidence, not the
+   model family. See [`assessment/ASSESSMENT.md`](assessment/ASSESSMENT.md). (Anchor:
+   "Nine Judges, Two Effective Votes", arXiv:2605.29800.)
 3. **The layer-(a) shared-source detector** (`cairn/provenance.py`) — walks the
    `derivedFrom` DAG; if claims proposed as "independent" share an upstream it
    returns **REFUSE-TO-COMBINE**, naming the shared tuple.
@@ -37,7 +39,7 @@ Claude-Code transcript structurally cannot produce**:
 ```bash
 uv venv .venv --python 3.12 && uv pip install --python .venv -e . pytest
 .venv/bin/python fixtures/build_fixtures.py     # mint the vetted COVID corpus (sha-pinned)
-.venv/bin/python -m pytest -q                   # 39 tests
+.venv/bin/python -m pytest -q                   # 41 tests
 .venv/bin/cairn ground 'fixtures/*.json'        # 4/4 claim spans resolve to their source
 .venv/bin/cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json  # recompute measured n_eff
 .venv/bin/python demo/hsm_trio.py               # the head-to-head
@@ -91,7 +93,7 @@ cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json
 | `demo/hsm_trio.py` | the naive-vs-Cairn head-to-head |
 | `assessment/` | the **measured** A2 assessor pass: probe battery, evidence partitions, panel + pinned runs |
 | `assessment/ASSESSMENT.md` | the measured n_eff, the diversity levers, and the adversarial audit's honest caveats |
-| `tests/` | 39 pytest checks incl. the n_eff anchor, the grounding leg + the measured-assessor pass |
+| `tests/` | 41 pytest checks incl. the n_eff anchor, the grounding leg, the measured-assessor pass + the cross-vendor leg |
 
 ## Disciplines / honest debts
 

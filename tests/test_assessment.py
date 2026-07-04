@@ -15,7 +15,7 @@ from cairn import assessment, envelope, provenance
 ROOT = Path(__file__).resolve().parents[1]
 RUNS = ROOT / "assessment" / "runs"
 FX = ROOT / "fixtures"
-CLUSTER_FILES = ["heterogeneous.json", "homogeneous-control.json", "clean-diverse.json"]
+CLUSTER_FILES = ["heterogeneous.json", "homogeneous-control.json", "clean-diverse.json", "glm-diverse.json"]
 
 pytestmark = pytest.mark.skipif(
     not (RUNS / "heterogeneous.json").exists(),
@@ -150,3 +150,28 @@ def test_axis_ordering_partition_decorrelates_beyond_model_and_protocol():
         # evidence partition (heterogeneous): phi control >= clean-diverse >= heterogeneous.
         assert n["homogeneous-control"]["phi_bar"] >= n["clean-diverse"]["phi_bar"]
         assert n["clean-diverse"]["phi_bar"] >= n["heterogeneous"]["phi_bar"]
+
+
+# --- cross-vendor (GLM) leg -------------------------------------------------
+glm_only = pytest.mark.skipif(
+    not (RUNS / "glm-diverse.json").exists(), reason="glm-diverse panel not built yet"
+)
+
+
+@glm_only
+def test_glm_panel_is_zai_vendor():
+    glm = _load(RUNS / "glm-diverse.json")
+    assert glm["assertion"]["panel"] == "glm-diverse"
+    for a in glm["assertion"]["assessors"]:
+        assert a["vendor"] == "zai"
+        assert a["model_tier"] == "glm-4.6"
+
+
+@glm_only
+def test_cross_vendor_decomposition_present_and_wellformed():
+    cv = _load(RUNS / "axis_analysis.json").get("cross_vendor")
+    assert cv is not None, "cross_vendor decomposition missing from axis_analysis.json"
+    assert cv["combined_k"] == 18
+    for k in ("within_anthropic_phi", "within_glm_phi", "cross_vendor_phi"):
+        assert -1.0 <= cv[k] <= 1.0
+    assert cv["combined_neff"] >= 1.0

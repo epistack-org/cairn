@@ -1,10 +1,10 @@
 {
   "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
   "@type": "epi:Cluster",
-  "id": "tt:ZLWEATDBsb4IPhStB6Evg5-NyouoynkxZkQYKeLekpk",
+  "id": "tt:FddIAtRItfxpCuWPKnqYINY8r850J1Eg71F0paBG04Q",
   "assertion": {
     "kind": "assessment-run",
-    "panel": "homogeneous-control",
+    "panel": "glm-diverse",
     "probeSet": "hsm-crux-v1",
     "probe_ids": [
       "F1",
@@ -24,9 +24,9 @@
     ],
     "assessors": [
       {
-        "assessor": "C1",
-        "model_tier": "opus",
-        "vendor": "anthropic",
+        "assessor": "G1",
+        "model_tier": "glm-4.6",
+        "vendor": "zai",
         "protocol": "LITERAL",
         "partition": "FULL",
         "granted": [
@@ -65,145 +65,13 @@
           0,
           0
         ],
-        "assessment_id": "tt:zB1gVGXeb6FXoLOhr5ynhiYcxfilRP4eqCDtH-fnmFM"
+        "assessment_id": "tt:FQFskJkogxaLbAFJ5kj6Td_AJu9u7p4zya30Rv5ZICY"
       },
       {
-        "assessor": "C2",
-        "model_tier": "opus",
-        "vendor": "anthropic",
-        "protocol": "LITERAL",
-        "partition": "FULL",
-        "granted": [
-          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
-          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
-        ],
-        "answers": {
-          "F1": "YES",
-          "F2": "YES",
-          "F3": "YES",
-          "F4": "NO",
-          "F5": "YES",
-          "F6": "YES",
-          "F7": "NO",
-          "F8": "NO",
-          "I1": "YES",
-          "I2": "YES",
-          "I3": "UNCERTAIN",
-          "I4": "UNCERTAIN",
-          "I5": "NO",
-          "I6": "NO"
-        },
-        "affirm_vector": [
-          1,
-          1,
-          1,
-          0,
-          1,
-          1,
-          0,
-          0,
-          1,
-          1,
-          0,
-          0,
-          0,
-          0
-        ],
-        "assessment_id": "tt:b3_R8UaYybIUNSxmmCyS4Ff_OqfV6Cwuw2-RpRelvnM"
-      },
-      {
-        "assessor": "C3",
-        "model_tier": "opus",
-        "vendor": "anthropic",
-        "protocol": "LITERAL",
-        "partition": "FULL",
-        "granted": [
-          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
-          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
-        ],
-        "answers": {
-          "F1": "YES",
-          "F2": "YES",
-          "F3": "YES",
-          "F4": "NO",
-          "F5": "YES",
-          "F6": "YES",
-          "F7": "NO",
-          "F8": "NO",
-          "I1": "YES",
-          "I2": "YES",
-          "I3": "UNCERTAIN",
-          "I4": "UNCERTAIN",
-          "I5": "NO",
-          "I6": "NO"
-        },
-        "affirm_vector": [
-          1,
-          1,
-          1,
-          0,
-          1,
-          1,
-          0,
-          0,
-          1,
-          1,
-          0,
-          0,
-          0,
-          0
-        ],
-        "assessment_id": "tt:0ilQZg9luK_SBYF6niJvi_xcDQOOsuXT6xZdNvGyLao"
-      },
-      {
-        "assessor": "C4",
-        "model_tier": "opus",
-        "vendor": "anthropic",
-        "protocol": "LITERAL",
-        "partition": "FULL",
-        "granted": [
-          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
-          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
-        ],
-        "answers": {
-          "F1": "YES",
-          "F2": "YES",
-          "F3": "YES",
-          "F4": "NO",
-          "F5": "YES",
-          "F6": "YES",
-          "F7": "NO",
-          "F8": "NO",
-          "I1": "YES",
-          "I2": "YES",
-          "I3": "UNCERTAIN",
-          "I4": "UNCERTAIN",
-          "I5": "NO",
-          "I6": "NO"
-        },
-        "affirm_vector": [
-          1,
-          1,
-          1,
-          0,
-          1,
-          1,
-          0,
-          0,
-          1,
-          1,
-          0,
-          0,
-          0,
-          0
-        ],
-        "assessment_id": "tt:6F6sWcnwOsC0_jTTgg5y_gRNO7ECnnl5_bTNix-wLAA"
-      },
-      {
-        "assessor": "C5",
-        "model_tier": "opus",
-        "vendor": "anthropic",
-        "protocol": "LITERAL",
+        "assessor": "G2",
+        "model_tier": "glm-4.6",
+        "vendor": "zai",
+        "protocol": "BASE_RATE",
         "partition": "FULL",
         "granted": [
           "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
@@ -221,7 +89,51 @@
           "I1": "YES",
           "I2": "YES",
           "I3": "NO",
-          "I4": "UNCERTAIN",
+          "I4": "YES",
+          "I5": "NO",
+          "I6": "NO"
+        },
+        "affirm_vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "assessment_id": "tt:3OBKHnSSlDNwR571F-c54VTkt1p59r_iKC9pfd0BH9M"
+      },
+      {
+        "assessor": "G3",
+        "model_tier": "glm-4.6",
+        "vendor": "zai",
+        "protocol": "ADVERSARIAL",
+        "partition": "FULL",
+        "granted": [
+          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+        ],
+        "answers": {
+          "F1": "YES",
+          "F2": "YES",
+          "F3": "YES",
+          "F4": "NO",
+          "F5": "YES",
+          "F6": "YES",
+          "F7": "NO",
+          "F8": "NO",
+          "I1": "YES",
+          "I2": "YES",
+          "I3": "NO",
+          "I4": "NO",
           "I5": "NO",
           "I6": "NO"
         },
@@ -241,12 +153,100 @@
           0,
           0
         ],
-        "assessment_id": "tt:hMIkk1s7g-ZWcjreCytYq4jj-Wm76CzJHoh77g-UQgc"
+        "assessment_id": "tt:X4bofuQYarwxvRshPWsaXU6oW069YeTZ2Vj1-zd24jo"
       },
       {
-        "assessor": "C6",
-        "model_tier": "opus",
-        "vendor": "anthropic",
+        "assessor": "G4",
+        "model_tier": "glm-4.6",
+        "vendor": "zai",
+        "protocol": "LITERAL",
+        "partition": "FULL",
+        "granted": [
+          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+        ],
+        "answers": {
+          "F1": "YES",
+          "F2": "YES",
+          "F3": "YES",
+          "F4": "NO",
+          "F5": "YES",
+          "F6": "YES",
+          "F7": "NO",
+          "F8": "NO",
+          "I1": "YES",
+          "I2": "YES",
+          "I3": "UNCERTAIN",
+          "I4": "UNCERTAIN",
+          "I5": "UNCERTAIN",
+          "I6": "UNCERTAIN"
+        },
+        "affirm_vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "assessment_id": "tt:LtVDWaZEzvCkrXVDy375GYFmJcDeSJe3eyWUvWWe1I4"
+      },
+      {
+        "assessor": "G5",
+        "model_tier": "glm-4.6",
+        "vendor": "zai",
+        "protocol": "ADVERSARIAL",
+        "partition": "FULL",
+        "granted": [
+          "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+          "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
+        ],
+        "answers": {
+          "F1": "YES",
+          "F2": "YES",
+          "F3": "YES",
+          "F4": "NO",
+          "F5": "YES",
+          "F6": "YES",
+          "F7": "NO",
+          "F8": "NO",
+          "I1": "YES",
+          "I2": "YES",
+          "I3": "NO",
+          "I4": "NO",
+          "I5": "NO",
+          "I6": "NO"
+        },
+        "affirm_vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "assessment_id": "tt:s0F32O8eRi1l0CE7CmdOzBu0f_C6MMo_xFIiqpG95LA"
+      },
+      {
+        "assessor": "G6",
+        "model_tier": "glm-4.6",
+        "vendor": "zai",
         "protocol": "LITERAL",
         "partition": "FULL",
         "granted": [
@@ -285,13 +285,13 @@
           0,
           0
         ],
-        "assessment_id": "tt:SyNFKUI73UMkAOGqdK5xOOpbZ1dIJklLkoTfnB9JLNk"
+        "assessment_id": "tt:jcm71e_I2fYTv5kqVyTc8ogFzQVRC8wa5mctCyKZ810"
       },
       {
-        "assessor": "C7",
-        "model_tier": "opus",
-        "vendor": "anthropic",
-        "protocol": "LITERAL",
+        "assessor": "G7",
+        "model_tier": "glm-4.6",
+        "vendor": "zai",
+        "protocol": "BASE_RATE",
         "partition": "FULL",
         "granted": [
           "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
@@ -329,13 +329,13 @@
           0,
           0
         ],
-        "assessment_id": "tt:fLnFfdVfGrIY-ty2xr6kjz98TuArQs_2XsmAwrRdLWg"
+        "assessment_id": "tt:p-ZP3emPqi8G_mffSbAbd-LLblnRwXjr61IZr0Ey9M8"
       },
       {
-        "assessor": "C8",
-        "model_tier": "opus",
-        "vendor": "anthropic",
-        "protocol": "LITERAL",
+        "assessor": "G8",
+        "model_tier": "glm-4.6",
+        "vendor": "zai",
+        "protocol": "ADVERSARIAL",
         "partition": "FULL",
         "granted": [
           "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
@@ -373,13 +373,13 @@
           0,
           0
         ],
-        "assessment_id": "tt:-frdR8-JDbHbQCS6GtMssbExzxN2HR1i_QhuAf4dres"
+        "assessment_id": "tt:04NBJfxxbdkZoLDfs-EGcr88-PViV8jZdcckEN8QiME"
       },
       {
-        "assessor": "C9",
-        "model_tier": "opus",
-        "vendor": "anthropic",
-        "protocol": "LITERAL",
+        "assessor": "G9",
+        "model_tier": "glm-4.6",
+        "vendor": "zai",
+        "protocol": "BASE_RATE",
         "partition": "FULL",
         "granted": [
           "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
@@ -397,7 +397,7 @@
           "I1": "YES",
           "I2": "YES",
           "I3": "UNCERTAIN",
-          "I4": "UNCERTAIN",
+          "I4": "YES",
           "I5": "NO",
           "I6": "NO"
         },
@@ -413,11 +413,11 @@
           1,
           1,
           0,
-          0,
+          1,
           0,
           0
         ],
-        "assessment_id": "tt:gStxXYWRK1DscJHy802YGK9C5CiQ-mVYtX9JAzxQt-c"
+        "assessment_id": "tt:9empcKlQHZWzpIm8Oehk0dtVhcqHdV_iW7Uqu5M-_s0"
       }
     ],
     "vectors": [
@@ -449,7 +449,7 @@
         1,
         1,
         0,
-        0,
+        1,
         0,
         0
       ],
@@ -561,22 +561,22 @@
         1,
         1,
         0,
-        0,
+        1,
         0,
         0
       ]
     ],
     "neff": {
       "k": 9,
-      "phi_bar": 1.0,
-      "n_eff": 1.0,
-      "n_eff_capped": 1.0
+      "phi_bar": 0.9478987681383928,
+      "n_eff": 1.048561181547453,
+      "n_eff_capped": 1.048561181547453
     },
     "pairwise_phi": [
       {
         "i": 0,
         "j": 1,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 0,
@@ -611,37 +611,37 @@
       {
         "i": 0,
         "j": 8,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 1,
         "j": 2,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 1,
         "j": 3,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 1,
         "j": 4,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 1,
         "j": 5,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 1,
         "j": 6,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 1,
         "j": 7,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 1,
@@ -676,7 +676,7 @@
       {
         "i": 2,
         "j": 8,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 3,
@@ -701,7 +701,7 @@
       {
         "i": 3,
         "j": 8,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 4,
@@ -721,7 +721,7 @@
       {
         "i": 4,
         "j": 8,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 5,
@@ -736,7 +736,7 @@
       {
         "i": 5,
         "j": 8,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 6,
@@ -746,27 +746,27 @@
       {
         "i": 6,
         "j": 8,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       },
       {
         "i": 7,
         "j": 8,
-        "phi": 1.0
+        "phi": 0.8660254037844387
       }
     ]
   },
   "provenance": {
     "derivedFrom": [
       "tt:Ad33h5QFG-_Znxvt1TG7I9ZL_mbSqybtw1qoCNHxf7I",
-      "tt:zB1gVGXeb6FXoLOhr5ynhiYcxfilRP4eqCDtH-fnmFM",
-      "tt:b3_R8UaYybIUNSxmmCyS4Ff_OqfV6Cwuw2-RpRelvnM",
-      "tt:0ilQZg9luK_SBYF6niJvi_xcDQOOsuXT6xZdNvGyLao",
-      "tt:6F6sWcnwOsC0_jTTgg5y_gRNO7ECnnl5_bTNix-wLAA",
-      "tt:hMIkk1s7g-ZWcjreCytYq4jj-Wm76CzJHoh77g-UQgc",
-      "tt:SyNFKUI73UMkAOGqdK5xOOpbZ1dIJklLkoTfnB9JLNk",
-      "tt:fLnFfdVfGrIY-ty2xr6kjz98TuArQs_2XsmAwrRdLWg",
-      "tt:-frdR8-JDbHbQCS6GtMssbExzxN2HR1i_QhuAf4dres",
-      "tt:gStxXYWRK1DscJHy802YGK9C5CiQ-mVYtX9JAzxQt-c"
+      "tt:FQFskJkogxaLbAFJ5kj6Td_AJu9u7p4zya30Rv5ZICY",
+      "tt:3OBKHnSSlDNwR571F-c54VTkt1p59r_iKC9pfd0BH9M",
+      "tt:X4bofuQYarwxvRshPWsaXU6oW069YeTZ2Vj1-zd24jo",
+      "tt:LtVDWaZEzvCkrXVDy375GYFmJcDeSJe3eyWUvWWe1I4",
+      "tt:s0F32O8eRi1l0CE7CmdOzBu0f_C6MMo_xFIiqpG95LA",
+      "tt:jcm71e_I2fYTv5kqVyTc8ogFzQVRC8wa5mctCyKZ810",
+      "tt:p-ZP3emPqi8G_mffSbAbd-LLblnRwXjr61IZr0Ey9M8",
+      "tt:04NBJfxxbdkZoLDfs-EGcr88-PViV8jZdcckEN8QiME",
+      "tt:9empcKlQHZWzpIm8Oehk0dtVhcqHdV_iW7Uqu5M-_s0"
     ],
     "mintedBy": "keystone:epistack-corpus",
     "method": "aggregate",
@@ -776,7 +776,7 @@
     "sig": {
       "alg": "ed25519",
       "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
-      "value": "e50215165dbf99feece24868084f549c48629137f4bb6c58b0c0fdc44d75b9a0694d6621850020c677c1fdc1015f939e42f26d4c9436ddac568b9b4aacb9d20e",
+      "value": "8f4388de92750fe22303111eeaa28ff21f57a08374f83a51c019a38bceda52f9ac3b29bccc4e249b8ab9bdb5b8067b684a5752c3aa6a24a66096bf443dcf1c0b",
       "by": "keystone:epistack-corpus"
     }
   }

@@ -82,11 +82,28 @@ CLEAN = [
     {"id": "D9", "tier": "opus",   "partition": "FULL", "protocol": "BASE_RATE"},
 ]
 
+# Cross-vendor panel: genuinely non-Anthropic assessors (Zhipu GLM-4.6 via z.ai),
+# FULL evidence, protocol spread mirroring clean-diverse -> isolates the VENDOR axis.
+# Measured via the z.ai OpenAI-compatible API (assessment/zai_assess.py), not the
+# Workflow (whose subagents are Anthropic-only).
+GLM_DIVERSE = [
+    {"id": "G1", "tier": "glm-4.6", "vendor": "zai", "partition": "FULL", "protocol": "LITERAL"},
+    {"id": "G2", "tier": "glm-4.6", "vendor": "zai", "partition": "FULL", "protocol": "BASE_RATE"},
+    {"id": "G3", "tier": "glm-4.6", "vendor": "zai", "partition": "FULL", "protocol": "ADVERSARIAL"},
+    {"id": "G4", "tier": "glm-4.6", "vendor": "zai", "partition": "FULL", "protocol": "LITERAL"},
+    {"id": "G5", "tier": "glm-4.6", "vendor": "zai", "partition": "FULL", "protocol": "ADVERSARIAL"},
+    {"id": "G6", "tier": "glm-4.6", "vendor": "zai", "partition": "FULL", "protocol": "LITERAL"},
+    {"id": "G7", "tier": "glm-4.6", "vendor": "zai", "partition": "FULL", "protocol": "BASE_RATE"},
+    {"id": "G8", "tier": "glm-4.6", "vendor": "zai", "partition": "FULL", "protocol": "ADVERSARIAL"},
+    {"id": "G9", "tier": "glm-4.6", "vendor": "zai", "partition": "FULL", "protocol": "BASE_RATE"},
+]
+
 # panel name -> specs. Names double as raw_votes.json keys and epi:Cluster panel labels.
 PANELS = {
     "heterogeneous": HETEROGENEOUS,
     "homogeneous-control": CONTROL,
     "clean-diverse": CLEAN,
+    "glm-diverse": GLM_DIVERSE,
 }
 
 
