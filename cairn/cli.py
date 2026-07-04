@@ -11,7 +11,7 @@ import json
 import sys
 from pathlib import Path
 
-from . import assessment, envelope, frechet, grounding, neff, provenance
+from . import assessment, envelope, frechet, grounding, headtohead, neff, provenance
 from .keys import SigningKey
 
 
@@ -115,6 +115,45 @@ def cmd_frechet(args) -> int:
     return 0 if v["verdict"] == "COMBINABLE-WITH-INTERVAL" else 2  # nonzero == refused-as-point (like intersect)
 
 
+def _print_headtohead(art: dict) -> None:
+    c, s = art["baseline_consensus"], art["summary"]
+    print("=== A4 — careful-baseline head-to-head (COVID-HSM crux) ===\n")
+    print(f"CAREFUL BASELINE panel (n={c['n']}, evidence-only, no cairn):")
+    print(f"  noticed shared source: {c['noticed_shared_source_fraction']*100:.0f}%   "
+          f"flagged confounder: {c['flagged_confounder_fraction']*100:.0f}%   "
+          f"hedged / refused naive product: {c['hedged_fraction']*100:.0f}%")
+    print(f"  gave a point estimate: {c['gave_point_fraction']*100:.0f}% (values {c['combined_lr_values']}, never 125)   "
+          f"measured n_eff: {c['computed_neff_count']}/{c['n']}")
+    print("\nThe four deltas — what the careful transcript reaches in prose vs the artifact it cannot emit:\n")
+    for r in art["deltas"]:
+        print(f"[delta {r['id']}] {r['name']}  →  {r['verdict']}")
+        print(f"   baseline (in prose): {r['baseline_reached_in_prose']}")
+        print(f"   structurally cannot: {r['baseline_structurally_cannot']}")
+        print(f"   cairn artifact     : {r['cairn_output']}\n")
+    print(f"SUMMARY: structurally impossible for a single transcript = delta(s) {s['structurally_impossible']}; "
+          f"structural residual (prose ok, reproducible artifact absent) = delta(s) {s['structural_residual']}.")
+    none = "none" if s["baseline_produced_none_of_the_four_artifacts"] else "some"
+    print(f"delta_demonstrated={s['delta_demonstrated']} — cairn refuses the trio as a point; the baseline "
+          f"produced {none} of the four mechanical artifacts.\n")
+    print(s["headline"])
+
+
+def cmd_headtohead(args) -> int:
+    baseline = _read_json(args.baseline)
+    index = json.loads(Path(args.index).read_text())
+    store = _load_store(args.store)
+    neff_summary, trio_neff = headtohead.load_neff(args.runs_dir)
+    cairn = headtohead.cairn_outputs(index, store, neff_summary, trio_neff=trio_neff)
+    art = headtohead.build(baseline, cairn)
+    if args.json:
+        print(json.dumps(art, indent=2, ensure_ascii=False))
+    else:
+        _print_headtohead(art)
+    # exit 2 == the refusal-delta is demonstrated on a fresh machine (cairn refuses the
+    # trio; the baseline panel produced none of the four artifacts), mirroring `frechet`.
+    return 2 if headtohead.demonstrated(art) else 0
+
+
 def cmd_intersect(args) -> int:
     store = _load_store(args.store)
     ids = args.claims or list(store.keys())
@@ -173,6 +212,18 @@ def build_parser() -> argparse.ArgumentParser:
     a.add_argument("run", nargs="+", help="glob(s) of assessment-run JSON (epi:Cluster records)")
     a.add_argument("--battery", default="assessment/probes.json", help="probe battery JSON (default: assessment/probes.json)")
     a.set_defaults(func=cmd_assess)
+
+    h = sub.add_parser("headtohead", help="A4 careful-baseline head-to-head over the four deltas "
+                                          "(exit 2 == the refusal-delta is demonstrated)")
+    h.add_argument("store", nargs="+", help="glob(s) of fixture record JSON files (the store)")
+    h.add_argument("--baseline", default="assessment/baseline.json",
+                   help="pinned careful-baseline panel (default: assessment/baseline.json)")
+    h.add_argument("--index", default="fixtures/INDEX.json",
+                   help="fixtures slug→id index (default: fixtures/INDEX.json)")
+    h.add_argument("--runs-dir", default="assessment/runs",
+                   help="A2 pinned assessment runs dir (default: assessment/runs)")
+    h.add_argument("--json", action="store_true", help="emit the machine-readable artifact instead of the table")
+    h.set_defaults(func=cmd_headtohead)
     return p
 
 

@@ -15,7 +15,7 @@ import json
 import math
 from pathlib import Path
 
-from cairn import frechet, grounding, neff, provenance
+from cairn import frechet, grounding, headtohead, neff, provenance
 
 FX = Path(__file__).resolve().parents[1] / "fixtures"
 
@@ -138,9 +138,31 @@ def main() -> int:
           f"(posterior {fc['point_posterior']:.3f}); the one licensed cross-family product (never 125x4=500).")
     print("    => here combining is licensed.\n")
 
-    print("Delta the baseline structurally cannot produce: a mechanical "
-          "shared-upstream proof")
-    print("+ a measured n_eff that knows when NOT to multiply.\n")
+    # A4 -- the CAREFUL baseline. The "NAIVE BASELINE" above is a strawman (math.prod).
+    # This is a measured panel of 5 careful Claude-Code investigations on the same crux
+    # (evidence only, no cairn; pinned in assessment/baseline.json), re-scored delta by
+    # delta against cairn's live outputs. The honest finding is NOT that cairn out-reasons
+    # a careful analyst -- it is the split between reaching an insight in prose and emitting
+    # a reproducible, machine-checkable, hard-gated artifact.
+    line()
+    print("CAREFUL BASELINE vs CAIRN — the four deltas (A4, measured; `cairn headtohead`)")
+    line()
+    bl = json.loads((FX.parent / "assessment" / "baseline.json").read_text())
+    neff_summary, trio_neff = headtohead.load_neff(FX.parent / "assessment" / "runs")
+    h2h = headtohead.build(bl, headtohead.cairn_outputs(index, store, neff_summary, trio_neff))
+    bc = h2h["baseline_consensus"]
+    print(f"  careful panel (n={bc['n']}, evidence-only): noticed shared source {bc['noticed_shared_source_fraction']*100:.0f}%, "
+          f"flagged confounder {bc['flagged_confounder_fraction']*100:.0f}%, hedged {bc['hedged_fraction']*100:.0f}%; "
+          f"points {bc['combined_lr_values']} (never 125); measured n_eff {bc['computed_neff_count']}/{bc['n']}")
+    for r in h2h["deltas"]:
+        print(f"    delta {r['id']} [{r['verdict']:22s}] {r['name'][:46]}")
+        print(f"      prose : {r['baseline_reached_in_prose']}")
+        print(f"      cairn : {r['cairn_output'][:96]}")
+    s = h2h["summary"]
+    print(f"  => structurally impossible for a transcript: delta {s['structurally_impossible']}; "
+          f"residual (prose ok, artifact absent): delta {s['structural_residual']}.")
+    print("  => the careful baseline reconstructs the REASONING in prose; the delta is the reproducible,")
+    print("     exit-code-gated, contestable ARTIFACT -- mechanization, not cognition.\n")
 
     # machine-readable artifact (the Cairn verdict other tools/teams consume)
     out = {
@@ -154,6 +176,11 @@ def main() -> int:
         "contrast_neff": rp,
         "frechet_trio": fv,          # A3: the honest interval + refusal (delta 3 + delta 4)
         "frechet_contrast": fc,      # A3: the one licensed cross-family product
+        "head_to_head": {            # A4: careful-baseline panel vs the four deltas
+            "baseline_consensus": h2h["baseline_consensus"],
+            "deltas": h2h["deltas"],
+            "summary": h2h["summary"],
+        },
     }
     (FX.parent / "out").mkdir(exist_ok=True)
     (FX.parent / "out" / "hsm_trio_verdict.json").write_text(json.dumps(out, indent=2) + "\n")

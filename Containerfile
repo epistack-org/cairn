@@ -21,6 +21,7 @@ RUN python fixtures/build_fixtures.py >/dev/null \
  && python -m cairn ground 'fixtures/*.json' >/dev/null \
  && python -m cairn assess 'assessment/runs/heterogeneous.json' 'assessment/runs/homogeneous-control.json' 'assessment/runs/clean-diverse.json' 'assessment/runs/glm-diverse.json' --battery assessment/probes.json >/dev/null \
  && ( python -m cairn frechet fixtures/claim-geographic-clustering.json fixtures/claim-environmental-sampling.json fixtures/claim-live-mammal-sales.json fixtures/src-worobey-2022.json >/dev/null ; test $? -eq 2 ) \
+ && ( python -m cairn headtohead 'fixtures/*.json' >/dev/null ; test $? -eq 2 ) \
  && python -m pytest -q
 
 CMD ["python", "demo/hsm_trio.py"]
