@@ -13,7 +13,8 @@ aggregator produces measured φ just as well as a GPU you rack yourself; owning 
 a separate *sovereignty* goal (defer to P5/D8). OpenRouter gives the widest set of genuinely
 different open-weight families behind one OpenAI-compatible key, for a few dollars, and
 **decouples P4 from the D8 host decision**. The M1 Mac Studio is worth adding as *one* owned,
-offline vote (the sovereignty proof), not as the whole panel.
+offline vote (the sovereignty proof), not as the whole panel — that's the `ollama_assess.py`
+sibling ([`OLLAMA.md`](OLLAMA.md)); shared machinery lives in `oai_assess.py`.
 
 ## Config
 
