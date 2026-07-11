@@ -1,0 +1,352 @@
+{
+  "note": "P4 cross-family assessor votes via OpenRouter (off-7-19). Measured, NOT a pinned 7/19 artifact. Wire into build_assessment.py + the kernel φ-flip post-freeze.",
+  "panel_key": "openrouter-crossfamily",
+  "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+  "temperature": 0.3,
+  "dry_run": false,
+  "neff": {
+    "k": 5,
+    "phi_bar": 0.9163977794943223,
+    "n_eff": 1.0716755655535648,
+    "n_eff_capped": 1.0716755655535648
+  },
+  "votes": [
+    {
+      "id": "X1",
+      "family": "llama",
+      "model": "meta-llama/llama-3.3-70b-instruct",
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "YES",
+        "I5": "UNCERTAIN",
+        "I6": "NO"
+      },
+      "reasons": {
+        "F1": "Worobey et al. (2022) state that the earliest known December-2019 COVID-19 cases were geographically centered on the Huanan market, including cases with no reported direct market link.",
+        "F2": "Worobey et al. (2022) report that live SARS-CoV-2-susceptible mammals were sold at the Huanan market in late 2019.",
+        "F3": "Worobey et al. (2022) report that SARS-CoV-2-positive environmental samples inside the market were spatially associated with vendors selling live mammals.",
+        "F4": "Worobey et al. (2022) state that there is insufficient evidence to define upstream events, and exact circumstances remain obscure.",
+        "F5": "Pekar et al. (2022) conclude that SARS-CoV-2's early genomic diversity comprised two distinct lineages (A and B) arising from at least two separate cross-species transmission events.",
+        "F6": "Pekar et al. (2022) estimate the first (lineage B) zoonotic transmission occurred around 18 November 2019 (23 October to 8 December).",
+        "F7": "Pekar et al. (2022) conclude that it is unlikely that SARS-CoV-2 circulated widely in humans before November 2019.",
+        "F8": "The corpus sources do not report direct genomic sequencing that identifies the specific intermediate animal host from which SARS-CoV-2 spilled over.",
+        "I1": "Worobey et al. (2022) state that the Huanan Seafood Wholesale Market in Wuhan was the early epicenter of the COVID-19 pandemic.",
+        "I2": "The available corpus evidence, including the findings of Worobey et al. (2022) and Pekar et al. (2022), supports zoonotic spillover as a probable explanation for SARS-CoV-2's emergence.",
+        "I3": "The Evidence does not provide information about the statistical independence of the three Worobey proximity findings.",
+        "I4": "The Pekar molecular two-lineage finding and Worobey's market-proximity findings appear to be based on distinct data.",
+        "I5": "The Evidence does not provide a basis for reporting a single confident point-estimate odds ratio for zoonosis versus the alternative.",
+        "I6": "The corpus evidence is not sufficient to definitively rule out any non-market introduction of SARS-CoV-2 into humans, as the exact circumstances remain obscure."
+      }
+    },
+    {
+      "id": "X2",
+      "family": "qwen",
+      "model": "qwen/qwen-2.5-72b-instruct",
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "YES",
+        "I5": "UNCERTAIN",
+        "I6": "NO"
+      },
+      "reasons": {
+        "F1": "Worobey et al. (2022) explicitly state that the earliest known December-2019 cases were geographically centered on the Huanan market, including cases with no reported direct market link.",
+        "F2": "Worobey et al. (2022) report that live SARS-CoV-2-susceptible mammals were sold at the Huanan market in late 2019.",
+        "F3": "Worobey et al. (2022) report that SARS-CoV-2-positive environmental samples inside the market were spatially associated with vendors selling live mammals.",
+        "F4": "Worobey et al. (2022) state that there is insufficient evidence to define upstream events, and exact circumstances remain obscure.",
+        "F5": "Pekar et al. (2022) conclude that SARS-CoV-2's early genomic diversity comprised two distinct lineages (A and B) arising from at least two separate cross-species transmission events.",
+        "F6": "Pekar et al. (2022) estimate the first (lineage B) zoonotic transmission occurred around mid-to-late November 2019.",
+        "F7": "Pekar et al. (2022) conclude that it is unlikely that SARS-CoV-2 circulated widely in humans before November 2019.",
+        "F8": "The corpus sources do not report direct genomic sequencing that identifies the specific intermediate animal host from which SARS-CoV-2 spilled over.",
+        "I1": "The evidence from Worobey et al. (2022) supports the Huanan market as the epicenter of the earliest documented COVID-19 outbreak.",
+        "I2": "The evidence from both Worobey et al. (2022) and Pekar et al. (2022) supports zoonotic spillover as a more probable explanation for SARS-CoV-2's emergence than a non-zoonotic introduction.",
+        "I3": "The evidence does not provide enough information to determine if the three Worobey proximity findings are statistically independent lines of evidence.",
+        "I4": "The Pekar molecular two-lineage finding is based on genomic data, which is distinct from Worobey's market-proximity findings, allowing them to be treated as independent.",
+        "I5": "The corpus does not provide enough information to justify reporting a single confident point-estimate odds ratio (on the order of 100:1) for zoonosis versus the alternative.",
+        "I6": "The corpus evidence does not definitively rule out any non-market introduction of SARS-CoV-2 into humans."
+      }
+    },
+    {
+      "id": "X3",
+      "family": "deepseek",
+      "model": "deepseek/deepseek-chat",
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "YES",
+        "I4": "YES",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "reasons": {
+        "F1": "Worobey et al. (2022) explicitly state that the earliest known December-2019 COVID-19 cases were geographically centered on the Huanan market, including cases without direct market links.",
+        "F2": "Worobey et al. (2022) report that live SARS-CoV-2-susceptible mammals were sold at the Huanan market in late 2019.",
+        "F3": "Worobey et al. (2022) report that SARS-CoV-2-positive environmental samples inside the market were spatially associated with vendors selling live mammals.",
+        "F4": "Worobey et al. (2022) state there is insufficient evidence to define upstream events, including the specific animal source of SARS-CoV-2.",
+        "F5": "Pekar et al. (2022) conclude that SARS-CoV-2's early genomic diversity comprised two distinct lineages (A and B) arising from at least two separate cross-species transmission events.",
+        "F6": "Pekar et al. (2022) estimate the first zoonotic transmission (lineage B) occurred around mid-to-late November 2019.",
+        "F7": "Pekar et al. (2022) conclude it is unlikely that SARS-CoV-2 circulated widely in humans before November 2019.",
+        "F8": "The corpus does not report direct genomic sequencing identifying the specific intermediate animal host.",
+        "I1": "The corpus evidence, including geographic centering and environmental samples, supports the Huanan market as the epicenter of the earliest documented COVID-19 outbreak.",
+        "I2": "The corpus evidence, including zoonotic transmission events and live-mammal sales, makes zoonotic spillover more probable than non-zoonotic introduction.",
+        "I3": "The three Worobey findings (geographic centering, live-mammal sales, environmental-sample association) are statistically independent lines of evidence.",
+        "I4": "The Pekar molecular two-lineage finding is based on genomic data, distinct from Worobey's market-proximity findings, allowing them to be treated as independent.",
+        "I5": "The corpus does not provide sufficient evidence to justify a single confident point-estimate odds ratio for zoonosis versus the alternative.",
+        "I6": "The corpus evidence is not sufficient to definitively rule out any non-market introduction of SARS-CoV-2 into humans."
+      }
+    },
+    {
+      "id": "X4",
+      "family": "mistral",
+      "model": "mistralai/mistral-large",
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "UNCERTAIN",
+        "I4": "YES",
+        "I5": "NO",
+        "I6": "NO"
+      },
+      "reasons": {
+        "F1": "Worobey et al. (2022) explicitly state that the earliest known December-2019 COVID-19 cases, including those without reported direct links, were geographically centered on the Huanan market.",
+        "F2": "Worobey et al. (2022) report that live SARS-CoV-2-susceptible mammals were sold at the Huanan market in late 2019.",
+        "F3": "Worobey et al. (2022) report that SARS-CoV-2-positive environmental samples within the market were spatially associated with vendors selling live mammals.",
+        "F4": "Worobey et al. (2022) state that there is insufficient evidence to define upstream events, including the specific animal source of SARS-CoV-2.",
+        "F5": "Pekar et al. (2022) conclude that SARS-CoV-2's early genomic diversity comprised two distinct lineages (A and B) resulting from at least two separate cross-species transmission events.",
+        "F6": "Pekar et al. (2022) estimate the first (lineage B) zoonotic transmission occurred around 18 November 2019 (with a range of 23 October to 8 December).",
+        "F7": "Pekar et al. (2022) conclude that it is unlikely that SARS-CoV-2 circulated widely in humans before November 2019.",
+        "F8": "The corpus sources do not report direct genomic sequencing that identifies the specific intermediate animal host from which SARS-CoV-2 spilled over.",
+        "I1": "Worobey et al. (2022) explicitly state that the Huanan market was the epicenter of the COVID-19 pandemic, supported by geographic and environmental evidence.",
+        "I2": "Both Worobey et al. (2022) and Pekar et al. (2022) indicate that zoonotic spillover is the more probable explanation for SARS-CoV-2's emergence, with evidence of live mammal sales and multiple cross-species transmission events.",
+        "I3": "The Evidence does not explicitly state whether the three Worobey proximity findings are statistically independent or whether their likelihood ratios may be multiplied.",
+        "I4": "The Pekar molecular findings (genomic lineages) and Worobey's market-proximity findings are based on distinct datasets (genomic vs. epidemiological/environmental), so they may be treated as independent.",
+        "I5": "The corpus does not provide sufficient evidence to justify reporting a single confident point-estimate odds ratio (e.g., 100:1) for zoonosis versus the alternative.",
+        "I6": "The corpus evidence does not definitively rule out non-market introduction of SARS-CoV-2, as upstream events and exact circumstances remain obscure."
+      }
+    },
+    {
+      "id": "X5",
+      "family": "gemma",
+      "model": "google/gemma-2-27b-it",
+      "answers": {
+        "F1": "YES",
+        "F2": "YES",
+        "F3": "YES",
+        "F4": "NO",
+        "F5": "YES",
+        "F6": "YES",
+        "F7": "NO",
+        "F8": "NO",
+        "I1": "YES",
+        "I2": "YES",
+        "I3": "YES",
+        "I4": "YES",
+        "I5": "UNCERTAIN",
+        "I6": "NO"
+      },
+      "reasons": {
+        "F1": "Worobey et al. (2022) directly state this.",
+        "F2": "Worobey et al. (2022) directly state this.",
+        "F3": "Worobey et al. (2022) directly state this.",
+        "F4": "Worobey et al. (2022) state they lacked sufficient evidence to define upstream events.",
+        "F5": "Pekar et al. (2022) directly state this.",
+        "F6": "Pekar et al. (2022) directly state this.",
+        "F7": "Pekar et al. (2022) conclude the opposite, that it was unlikely SARS-CoV-2 was circulating widely before November 2019.",
+        "F8": "The corpus does not report any direct genomic sequencing identifying the specific intermediate animal host.",
+        "I1": "The Worobey findings strongly support the Huanan market as the epicenter.",
+        "I2": "The two-lineage finding supports zoonotic spillover as a more probable explanation.",
+        "I3": "The three Worobey findings are presented as independent observations.",
+        "I4": "The Worobey and Pekar findings are based on distinct data.",
+        "I5": "While the evidence is strong, it does not justify a precise odds ratio estimate.",
+        "I6": "The corpus does not rule out all non-market introductions."
+      }
+    }
+  ],
+  "probe_ids": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8",
+    "I1",
+    "I2",
+    "I3",
+    "I4",
+    "I5",
+    "I6"
+  ],
+  "assessor_order": [
+    "X1:llama",
+    "X2:qwen",
+    "X3:deepseek",
+    "X4:mistral",
+    "X5:gemma"
+  ],
+  "affirm_vectors": {
+    "X1:llama": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+    ],
+    "X2:qwen": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+    ],
+    "X3:deepseek": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "X4:mistral": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+    ],
+    "X5:gemma": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+    ]
+  },
+  "agreement_matrix": {
+    "labels": [
+      "X1:llama",
+      "X2:qwen",
+      "X3:deepseek",
+      "X4:mistral",
+      "X5:gemma"
+    ],
+    "phi": [
+      [
+        1.0,
+        1.0,
+        0.860663,
+        1.0,
+        0.860663
+      ],
+      [
+        1.0,
+        1.0,
+        0.860663,
+        1.0,
+        0.860663
+      ],
+      [
+        0.860663,
+        0.860663,
+        1.0,
+        0.860663,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        0.860663,
+        1.0,
+        0.860663
+      ],
+      [
+        0.860663,
+        0.860663,
+        1.0,
+        0.860663,
+        1.0
+      ]
+    ]
+  },
+  "phi_basis": "measured"
+}
