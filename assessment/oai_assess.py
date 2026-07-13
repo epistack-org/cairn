@@ -125,8 +125,46 @@ def measure_one(spec: dict, raw_call) -> tuple[dict, dict, dict]:
     raise SystemExit(f"{spec['id']} ({spec.get('model')}) failed after retries: {last}")
 
 
+def usage_cost(usage: dict) -> dict:
+    """Normalize a provider `usage` block to ``{prompt, completion, total, cost_usd}``.
+
+    OpenRouter returns the REAL dollar `cost` per call (upstream-inference cost, not a list price), so
+    the honest figure is reported, not modelled from a per-model price table we would have to keep in
+    sync. A provider that omits `cost` (or the dry-run's ``{}``) yields ``cost_usd=None`` — recorded as
+    "unknown", never silently zero, because a zero we invented is worse than an admitted gap."""
+    if not usage:
+        return {"prompt": 0, "completion": 0, "total": 0, "cost_usd": None}
+    cost = usage.get("cost")
+    if cost is None:
+        cost = (usage.get("cost_details") or {}).get("upstream_inference_cost")
+    return {
+        "prompt": usage.get("prompt_tokens", 0),
+        "completion": usage.get("completion_tokens", 0),
+        "total": usage.get("total_tokens", 0),
+        "cost_usd": float(cost) if cost is not None else None,
+    }
+
+
+def panel_cost(votes: list[dict]) -> dict:
+    """Total tokens + $ over a panel's votes (each vote carries its own ``usage``). A first-class
+    output, not a print — the S2 DoD's "cost recorded honestly" has to point at a persisted number.
+    ``cost_usd`` is None if ANY vote lacks a cost (partial totals mislead more than an admitted gap)."""
+    costs = [usage_cost(v.get("usage") or {}) for v in votes]
+    dollars = [c["cost_usd"] for c in costs]
+    return {
+        "prompt_tokens": sum(c["prompt"] for c in costs),
+        "completion_tokens": sum(c["completion"] for c in costs),
+        "total_tokens": sum(c["total"] for c in costs),
+        "cost_usd": (round(sum(d for d in dollars if d is not None), 6)
+                     if dollars and all(d is not None for d in dollars) else None),
+        "priced_votes": sum(1 for d in dollars if d is not None),
+        "k": len(votes),
+    }
+
+
 def run_panel(specs: list[dict], raw_call, *, dry_run: bool) -> list[dict]:
-    """Collect one vote per spec (live via raw_call, or offline mock)."""
+    """Collect one vote per spec (live via raw_call, or offline mock). Each vote carries its ``usage``
+    (tokens + provider cost) so the panel's spend can be totalled downstream (:func:`panel_cost`)."""
     votes = []
     for i, spec in enumerate(specs):
         if dry_run:
@@ -134,23 +172,30 @@ def run_panel(specs: list[dict], raw_call, *, dry_run: bool) -> list[dict]:
         else:
             ans, reasons, usage = measure_one(spec, raw_call)
         vec = affirm_vector(ans)
-        tok = "dry" if dry_run else usage.get("total_tokens", "?")
-        print(f"  {spec['id']} {spec['family']:12s} ({spec['protocol']:11s}) affirm={vec} tok={tok}")
+        c = usage_cost(usage)
+        tok = "dry" if dry_run else c["total"]
+        dol = "" if dry_run or c["cost_usd"] is None else f" ${c['cost_usd']:.5f}"
+        print(f"  {spec['id']} {spec['family']:12s} ({spec['protocol']:11s}) affirm={vec} tok={tok}{dol}")
         votes.append({"id": spec["id"], "family": spec["family"], "model": spec["model"],
-                      "answers": ans, "reasons": reasons})
+                      "answers": ans, "reasons": reasons, "usage": usage})
     return votes
 
 
 def finish(votes: list[dict], *, out_path, panel_key: str, endpoint: str, temperature: float,
            dry_run: bool, note: str) -> dict:
-    """Compute + print the cross-family n_eff and write the votes artifact."""
+    """Compute + print the cross-family n_eff and write the votes artifact (with the panel's spend)."""
     r = crossfamily_neff(votes)
+    cost = panel_cost(votes)
     print(f"\ncross-family: k={r['k']}  phi_bar={r['phi_bar']:.3f}  n_eff={r['n_eff']:.3f}"
           f"{'  (mock — dry-run)' if dry_run else ''}")
+    if not dry_run:
+        usd = f"${cost['cost_usd']:.4f}" if cost["cost_usd"] is not None else "unknown"
+        print(f"  spend: {cost['total_tokens']} tokens, {usd} over k={cost['k']} "
+              f"({cost['priced_votes']} priced)")
     print("  (A2 prior: cross-vendor φ ≈ within-vendor φ → expect n_eff ≈ 1; the redundancy is in the evidence.)")
     Path(out_path).write_text(json.dumps(
         {"note": note, "panel_key": panel_key, "endpoint": endpoint, "temperature": temperature,
-         "dry_run": dry_run, "neff": r, "votes": votes}, indent=2, ensure_ascii=False) + "\n")
+         "dry_run": dry_run, "neff": r, "cost": cost, "votes": votes}, indent=2, ensure_ascii=False) + "\n")
     print(f"wrote {len(votes)} votes -> {out_path}")
     return r
 
