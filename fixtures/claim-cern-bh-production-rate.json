@@ -1,0 +1,39 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:AoTX0JqInR3l4hzBD1h4Mz3DCnoW84OYg3OVWmWiU7Q",
+  "assertion": {
+    "text": "The theoretical production rate for black holes in heavy-ion collisions is negligible ('absurdly small') on particle-physics grounds alone.",
+    "subject": "tt:d-YAhSNoApLNm3rFdK-vVmRkyP64d0eXqIU9xSG5UhM",
+    "grounding": {
+      "source": "tt:wxzUg3iEzPXs15wQpPAIe2-AqiucQqMJ54BmAtNvbGY",
+      "char_span": [
+        160,
+        259
+      ],
+      "quote": "We estimate the parameters relevant to black hole production; we find that they are absurdly small.",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "4f1bf34242c2eb1c83cfbe6e756fb6e16f7b92042dc6e3393b7059ee1f14ae9c"
+    },
+    "verification": "L5",
+    "illustrative_LR": 4.0,
+    "polarity": "supports-lhc-safety"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:wxzUg3iEzPXs15wQpPAIe2-AqiucQqMJ54BmAtNvbGY"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "584f93c5f8b38246878c1d3a4fd655bbce71afa0e2a85888d02e2b4cfcc8159a2babcdfc5c346c0a5aa129109cde00819a84528bcd9eb1fff9b8845798690309",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

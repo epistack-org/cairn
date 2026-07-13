@@ -24,13 +24,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: build + self-verify (mints fixtures + cairn ground + runs the pytest suite at build time)
+      - name: build + self-verify (mints all 3 corpora + cairn ground + runs the pytest suite at build time)
         run: |
           set -euo pipefail
           docker build -t cairn:ci -f Containerfile .
 
       - name: HSM-trio demo smoke (REFUSE-TO-COMBINE / n_eff=1 vs naive 125:1)
         run: docker run --rm cairn:ci
+
+      - name: three worked examples smoke (covid / eggs / cern all REFUSE-TO-COMBINE)
+        run: docker run --rm cairn:ci python demo/worked_examples.py
 
       - name: cleanup (shared-filesystem hygiene)
         if: always()

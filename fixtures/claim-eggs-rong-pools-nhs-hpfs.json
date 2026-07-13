@@ -1,0 +1,37 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:03SuLd-IRZ_zEHsnauw-rmQT5Om8ZNDESxki7xgQj3k",
+  "assertion": {
+    "text": "The BMJ 2013 meta-analysis lists Hu 1999's Nurses' Health Study and Health Professionals Follow-up Study analyses among its pooled input studies.",
+    "subject": "tt:1QbyJPrVKK2eKnqaxGRQToJvfVAUWtgXqhIrb3scw90",
+    "grounding": {
+      "source": "tt:Mb5LxEcVlQzV1NZMbKaHikexGKDsNnAILcjBq-fwnU0",
+      "char_span": [
+        2490,
+        2545
+      ],
+      "quote": "Hu et al36 | 1999 | Nurses’ Health Study | USA | Female",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "c0b06aab867e54989aaabc8852bbd18814cc2f1c3bbdf59e87b9a31615f3729c"
+    },
+    "verification": "L5"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:Mb5LxEcVlQzV1NZMbKaHikexGKDsNnAILcjBq-fwnU0"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "1aae99079be714338edb958c328865d05529444af3a53e946422d2c218864285dd6fc5a45c35c10bb187bcceba94a740ba1fc681903c8abb9b67784b5ac0d102",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

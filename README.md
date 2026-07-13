@@ -45,22 +45,67 @@ Claude-Code transcript structurally cannot produce**:
    correctly labelled, so a model is never mistaken for a bound. See
    [`assessment/FRECHET.md`](assessment/FRECHET.md).
 
+## The three worked examples
+
+Cairn ships **three** vetted, span-grounded cases. In each one, several lines of evidence
+look independent, are treated as independent, and **are not** — and in each one the
+refusal is mechanical, byte-checkable, and reproducible on a fresh machine.
+
+| case | the apparently independent lines | what they actually share | how far up |
+|---|---|---|---|
+| **covid-origins** | 3 proximity lines (geographic clustering, live-mammal sales, environmental sampling) | **one dataset** — Worobey 2022's early-case data | 1 hop |
+| **eggs-good-for-you** | 3 reassuring meta-analyses (*BMJ* 2013, *Eur J Nutr* 2021 "nearly 2 million individuals", *BMJ* 2020) | **one cohort backbone** — the same nurses & health professionals (NHS/HPFS) | **2 hops (transitive)** |
+| **cern-black-hole** | 3 collider-safety assurances (LSAG 2008, Giddings & Mangano 2008, Jaffe 2000 — *two accelerators, three author teams, eight years apart*) | **one premise** — "cosmic rays have hit astronomical bodies harder for billions of years and they're still here" | 1 hop |
+
+Each case declares its structure in [`fixtures/CASES.json`](fixtures/CASES.json), and the
+build **mechanically verifies the declaration against what the detector actually finds**
+before writing a single record. "Cairn ships 3 worked examples" is a checked property of
+the corpus, not a sentence in this README (`tests/test_cases.py`).
+
+The three are deliberately different *shapes* of shared upstream — a **dataset**, a
+**cohort**, a **premise** — because layer-(a) non-independence is not only about sharing a
+corpus. The eggs case is the subtlest and the most important:
+
+> Every egg review is **individually correct**. They each de-duplicate properly; there is
+> no villain and no error to point at in any single paper. The non-independence is a
+> property of the **composition**, and the shared backbone is invisible at the claim level
+> — it is two hops up, found only by walking the DAG. *"Nearly 2 million individuals" is
+> not 2 million independent people.*
+
+And the CERN case is the sharpest test of the thesis, because it is the case with the
+**strongest** expert consensus (Phase 2 measured the highest inter-assessor agreement here,
+φ̄ = 0.328, yet n_eff = 2.16). An engine that rewarded consensus would score it as
+overwhelming. **It does not say the LHC is unsafe** — it says three assurances that share a
+premise are not three votes.
+
+Full vetting records, including what we *could not* verify and the hypotheses we **cut**
+because the literature did not support them:
+[`fixtures/PROVENANCE.md`](fixtures/PROVENANCE.md) (covid) ·
+[`fixtures/PROVENANCE-eggs.md`](fixtures/PROVENANCE-eggs.md) ·
+[`fixtures/PROVENANCE-cern.md`](fixtures/PROVENANCE-cern.md).
+
 ## Run it
 
 ```bash
 uv venv .venv --python 3.12 && uv pip install --python .venv -e . pytest
-.venv/bin/python fixtures/build_fixtures.py     # mint the vetted COVID corpus (sha-pinned)
-.venv/bin/python -m pytest -q                   # 76 tests
-.venv/bin/cairn ground 'fixtures/*.json'        # 4/4 claim spans resolve to their source
+.venv/bin/python fixtures/build_fixtures.py     # mint all 3 vetted corpora (sha-pinned)
+.venv/bin/python -m pytest -q                   # 96 tests
+.venv/bin/python demo/worked_examples.py        # all three cases, side by side
+.venv/bin/cairn ground 'fixtures/*.json'        # 16/16 claim spans resolve to their source
 .venv/bin/cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json  # recompute measured n_eff
 .venv/bin/cairn frechet fixtures/claim-geographic-clustering.json fixtures/claim-environmental-sampling.json fixtures/claim-live-mammal-sales.json fixtures/src-worobey-2022.json  # -> REFUSE-TO-COMBINE-AS-POINT (exit 2): the honest interval
 .venv/bin/cairn headtohead 'fixtures/*.json'    # -> the four-delta head-to-head vs a careful baseline (exit 2 == delta demonstrated)
 .venv/bin/python demo/hsm_trio.py               # the head-to-head (naive + careful baseline vs Cairn)
+
+# the other two cases refuse the same way (exit 2 == refused):
+.venv/bin/cairn intersect 'fixtures/*.json' --claims $(python3 -c "import json;i=json.load(open('fixtures/INDEX.json'));print(' '.join(i[s] for s in ['claim-eggs-rong-no-association','claim-eggs-godos-no-association','claim-eggs-drouin-no-association']))")
+.venv/bin/cairn intersect 'fixtures/*.json' --claims $(python3 -c "import json;i=json.load(open('fixtures/INDEX.json'));print(' '.join(i[s] for s in ['claim-cern-astro-stability','claim-cern-wd-ns-bound','claim-cern-moon-strangelet']))")
+
 # or, fully self-contained:
 docker build -t cairn -f Containerfile . && docker run --rm cairn
 ```
 
-### The demo (`demo/hsm_trio.py`)
+### The deep demo (`demo/hsm_trio.py`)
 
 The COVID "three independent lines of proximity evidence" all derive from **one**
 early-case dataset (Worobey 2022) — and each is **span-grounded** to that paper's
@@ -118,29 +163,52 @@ cairn headtohead 'fixtures/*.json'      # A4: careful-baseline head-to-head over
 | `cairn/assessment.py` | recompute + verify the measured n_eff from a pinned assessor run (`cairn assess`) |
 | `cairn/trusty.py`, `canonical.py`, `keys.py` | content-addressing, JCS, signing primitives |
 | `schemas/cairn.schema.json` | the envelope JSON Schema (Draft 2020-12) incl. the grounding tuple + Trust-Ladder enum |
-| `fixtures/` | the **vetted** COVID corpus — span-grounded claims (L4/L5) + two sha-pinned sources |
-| `fixtures/sources/*.abstract.txt` | the byte-exact retrieved abstracts (the raw `source_doc`s) |
-| `fixtures/PROVENANCE.md` | retrieval record, rung rationale, and the honest vetting decisions |
-| `demo/hsm_trio.py` | the naive-vs-Cairn head-to-head |
+| `fixtures/` | the **vetted** corpora for all **3 worked examples** — span-grounded claims (L4/L5) + sha-pinned sources |
+| `fixtures/CASES.json` | the case manifest: what each example claims (laundered set, shared upstream, contrast). The build verifies it against the detector; CI re-checks it |
+| `fixtures/sources/*.abstract.txt` | the byte-exact retrieved sources (the raw `source_doc`s) |
+| `fixtures/PROVENANCE.md`, `PROVENANCE-eggs.md`, `PROVENANCE-cern.md` | per-case retrieval record, rung rationale, and the honest vetting decisions — **including the hypotheses we cut and the things we could not verify** |
+| `assessment/probes.json`, `probes-eggs.json`, `probes-cern.json` | one probe battery per case (crux + keyed faithfulness probes + inferential probes) |
+| `demo/worked_examples.py` | all three cases side by side — the wide view |
+| `demo/hsm_trio.py` | the naive-vs-Cairn head-to-head — the deep view (COVID) |
 | `assessment/` | the **measured** A2 assessor pass: probe battery, evidence partitions, panel + pinned runs |
 | `assessment/ASSESSMENT.md` | the measured n_eff, the diversity levers, and the adversarial audit's honest caveats |
 | `assessment/FRECHET.md` | the A3 interval: the three nested regimes, the n_eff p-box, and the model-vs-bound honesty |
 | `assessment/HEAD_TO_HEAD.md` | the A4 method: the fair careful-baseline panel, the four-delta table, and the honest concessions |
 | `assessment/baseline.json`, `build_headtohead.py` | the pinned careful-baseline panel (captured runs) + the deterministic head-to-head re-score → `head_to_head.json` |
 | `assessment/frechet.py`, `frechet_pba_check.py` | pin the A3 interval artifact; cross-check it against the `pba` library (dev-only) |
-| `tests/` | 76 pytest checks incl. the n_eff anchor, the grounding leg, the measured-assessor pass, the cross-vendor leg, the Fréchet/p-box leg + the A4 head-to-head leg |
+| `tests/` | 96 pytest checks incl. the n_eff anchor, the grounding leg, the measured-assessor pass, the cross-vendor leg, the Fréchet/p-box leg, the A4 head-to-head leg + the 3-case structural leg (`test_cases.py`) |
 
 ## Disciplines / honest debts
 
 - **JCS for v0** (git-native); RDFC-1.0 (RDF-canonical) is the documented migration —
   switching changes the URI scheme (one-way door).
-- **Fixtures are vetted (roadmap A1).** Every claim is span-grounded to a
+- **Fixtures are vetted (roadmap A1; all 3 cases).** Every claim is span-grounded to a
   first-party, byte-verified source and carries a Trust-Ladder rung (L1 sources;
   L4/L5 claims) — no record sits at `unverified-fixture` (the value is no longer
-  admissible; any record still carrying it fails `cairn validate`). Two grounding
-  judgment calls that could not be sourced from the abstracts were **recorded, not
-  fabricated** — see `fixtures/PROVENANCE.md`. `n_eff` agreement vectors in the demo
-  remain *illustrative* (measuring them over heterogeneous assessors is roadmap A2).
+  admissible; any record still carrying it fails `cairn validate`). Judgment calls that
+  could not be sourced were **recorded, not fabricated** — see the three `PROVENANCE*.md`.
+  `n_eff` agreement vectors in the demo remain *illustrative* (measuring them over
+  heterogeneous assessors is roadmap A2).
+- **Two case hypotheses were CUT because the literature did not support them.** We went
+  looking for eggs meta-analyses that double-count cohorts *inside* their own pooled
+  estimates — they don't; they de-duplicate properly, and asserting otherwise would have
+  been the exact fabrication this engine exists to refuse. And we went looking for "every
+  LHC safety assurance leans on the cosmic-ray argument" — the 2003 report's black-hole
+  conclusion is *theoretical* (Hawking decay), so the blanket claim is false and the CERN
+  crux is stated **conditionally** instead. The real structures turned out to be subtler
+  and stronger. Both cuts are documented in the per-case `PROVENANCE`.
+- **The CERN corpus has a weaker retrieval guarantee than COVID, and says so.** A1 required
+  byte-identical text from two independently operated services. For the arXiv papers,
+  INSPIRE-HEP serves an identical abstract but declares its source as **`arXiv`** — it
+  *mirrors* the same upstream, so it is not a second witness. (We hit the shared-upstream
+  problem inside our own verification pipeline.) Crossref confirms the *bibliographic*
+  record but deposits no abstract text. The text is therefore single-sourced, and that is
+  recorded on each record rather than glossed.
+- **Author-level non-independence is a real gap.** Mangano co-authored both the
+  Giddings-Mangano bound and the LSAG review that leans on it. The layer-(a) detector walks
+  the provenance DAG and **does not read author lists**, so it cannot currently see this. It
+  is recorded on the source record and probed in the battery — an honest debt, not a silent
+  one.
 - This engine does **layer (a)** (explicit shared source) and the **Fréchet/p-box
   interval** (A3, `cairn/frechet.py`) — the honest interval + principled refusal.
   Legs **(b)** shared derivation (ProvSQL) and **(c)** hidden confounder (causal

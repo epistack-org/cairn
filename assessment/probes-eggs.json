@@ -1,0 +1,141 @@
+{
+  "battery_id": "eggs-crux-v1",
+  "title": "Egg/CVD-crux assessor probe battery (v1)",
+  "crux": "Do the several apparently independent meta-analyses finding no association between egg consumption and cardiovascular disease constitute independent confirmations of that null result?",
+  "note": "The measurement instrument for the eggs worked example (dev/cairn#9), mirroring hsm-crux-v1. Faithfulness probes have an objective KEY pinned to an exact substring of a vetted source (fixtures/sources/*.abstract.txt), so 'correct' is defined by the retrieved record, not by contested nutritional truth — tests/test_batteries.py mechanically re-checks that every `grounds.quote` is a literal substring of the cited source's sha-pinned excerpt. Inferential probes have key=null; cairn's principled position is recorded in `cairn_principled` and is NOT scored as an error.\n\nWHAT THIS CASE IS AND IS NOT. We set out to test the hypothesis that the egg meta-analyses sloppily double-count the same cohorts inside their own pooled estimates. THAT HYPOTHESIS IS FALSE and this battery does not assert it: the careful reviews state explicit de-duplication rules (Godos 2021 body: 'If more than one study was conducted on the same cohort, only the dataset including the larger number of individuals...'), and a 2022 review explicitly finds and REMOVES participant overlap. No within-review double-count is proven anywhere in this literature, and probe F5 exists to stop an assessor — or us — from claiming one.\n\nThe real structure is subtler: every review is LOCALLY CORRECT, and the non-independence emerges only in COMPOSITION. Rong 2013, Godos 2021 and Drouin-Chartier 2020 each re-pool the same NHS/HPFS participant backbone (each says so in its own Table 1). Treating their agreement as three confirmations counts one cohort backbone three times. There is no villain and no error to point at — which is exactly why a mechanical DAG walk beats careful reading here.\n\nSCOPE LIMIT (honest): the egg evidence base is NOT only the US cohorts. Godos's table also carries genuinely independent Asian (JPHC, CKB), European (EPIC, NLCS) and other cohorts, and Drouin-Chartier's abstract reports a geographic interaction. So n_eff > 1 — it is simply far below the number of meta-analyses. Probe I5 pins this down; claiming the US cohorts are the whole evidence base would itself be a fabrication.",
+  "answer_space": ["YES", "NO", "UNCERTAIN"],
+  "binarization": {
+    "affirm": "YES -> 1, else (NO | UNCERTAIN) -> 0. The primary vector fed to neff.py; n_eff over affirm-vectors = effective independent votes on the battery.",
+    "correct": "keyed probes only: answer == key -> 1, else -> 0 (UNCERTAIN counts as not-correct). Secondary reliability / error-correlation readout."
+  },
+  "probes": [
+    {
+      "id": "F1",
+      "class": "faithfulness",
+      "text": "Rong et al. (BMJ 2013) conclude that eating up to one egg per day is not associated with increased risk of coronary heart disease or stroke.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-rong-2013", "quote": "Higher consumption of eggs (up to one egg per day) is not associated with increased risk of coronary heart disease or stroke."}
+      ],
+      "rationale": "Verbatim; grounds claim-eggs-rong-no-association (L5/ENTAILS)."
+    },
+    {
+      "id": "F2",
+      "class": "faithfulness",
+      "text": "Drouin-Chartier et al. (BMJ 2020) report that an increase of one egg per day was not associated with cardiovascular disease risk in their updated meta-analysis.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-drouin-chartier-2020", "quote": "an increase of one egg per day was not associated with cardiovascular disease risk"}
+      ],
+      "rationale": "Verbatim; grounds claim-eggs-drouin-no-association (L5/ENTAILS)."
+    },
+    {
+      "id": "F3",
+      "class": "faithfulness",
+      "text": "The BMJ 2013 meta-analysis (Rong et al.) lists Hu 1999's Nurses' Health Study analysis among the studies it pools.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-rong-2013", "quote": "Hu et al36 | 1999 | Nurses’ Health Study | USA | Female"}
+      ],
+      "rationale": "Verbatim from the review's own Table 1 (included studies). This is the inclusion edge, evidenced by bytes. NOTE: it is NOT in the abstract — an assessor given only abstracts cannot answer this, and should answer UNCERTAIN. That abstention is itself informative: it is exactly why the laundering is invisible to abstract-level reading."
+    },
+    {
+      "id": "F4",
+      "class": "faithfulness",
+      "text": "The Eur J Nutr 2021 meta-analysis (Godos et al.) lists Hu 1999 (HPFS + NHS) among the studies it pools — the same cohort backbone the BMJ 2013 meta-analysis pools.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-godos-2021", "quote": "Hu [16] | HPFS, 1986 and NHS, 1980 (US)"}
+      ],
+      "rationale": "Verbatim from Godos's Table 1. Together with F3 this is the whole case: two 'independent' reviews, one shared backbone, each admitting it in its own table."
+    },
+    {
+      "id": "F5",
+      "class": "faithfulness",
+      "text": "Godos et al. (2021) double-count the NHS/HPFS participants inside their own pooled estimate, having stated no rule against including multiple reports of the same cohort.",
+      "key": "NO",
+      "grounds": [
+        {"source": "src-godos-2021", "quote": "Thirty-nine studies including nearly 2 million individuals"}
+      ],
+      "rationale": "THE ANTI-FABRICATION PROBE, and it guards against OUR OWN most tempting error. Godos states an explicit de-duplication rule in the paper body; no within-review double-count is proven anywhere in this literature. An assessor answering YES has invented a villain. The non-independence in this case is BETWEEN reviews, not inside any one of them — and a case built on a manufactured internal double-count would be precisely the lie this engine exists to refuse."
+    },
+    {
+      "id": "F6",
+      "class": "faithfulness",
+      "text": "Hu et al. (1999) analysed two prospective cohorts: the Health Professionals Follow-up Study and the Nurses' Health Study.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-hu-1999", "quote": "Two prospective cohort studies, the Health Professionals Follow-up Study (1986-1994) and the Nurses' Health Study (1980-1994)."}
+      ],
+      "rationale": "Verbatim. The primary studies DO name their cohorts in the abstract; the meta-analyses do not. That asymmetry is the whole reason the shared backbone is invisible downstream."
+    },
+    {
+      "id": "F7",
+      "class": "faithfulness",
+      "text": "Drouin-Chartier et al. (2020) is purely a meta-analysis of other people's cohorts, and is not itself a primary analysis of the NHS/HPFS participants.",
+      "key": "NO",
+      "grounds": [
+        {"source": "src-drouin-chartier-2020", "quote": "Prospective cohort study, and a systematic review and meta-analysis of prospective cohort studies."}
+      ],
+      "rationale": "The abstract states it is BOTH. That dual nature is the mechanism: the same participants enter the evidence base once as primary data and again inside a pooled estimate. A faithful reader answers NO."
+    },
+    {
+      "id": "F8",
+      "class": "faithfulness",
+      "text": "The corpus sources report a randomised controlled trial demonstrating that egg consumption causes cardiovascular disease.",
+      "key": "NO",
+      "grounds": [
+        {"source": "src-rong-2013", "quote": "Dose-response meta-analysis of prospective cohort studies."}
+      ],
+      "rationale": "Hallucination negative-control. This literature is observational cohort evidence throughout; no RCT of egg consumption and CVD events appears in the corpus. An assessor answering YES is fabricating."
+    },
+    {
+      "id": "I1",
+      "class": "inferential",
+      "text": "The three reassuring findings (Rong 2013, Godos 2021, Drouin-Chartier 2020) are INDEPENDENT confirmations of the egg/CVD null result, whose agreement may be treated as three separate votes.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The refuse-to-combine core of this case. All three re-pool the same NHS/HPFS backbone; the provenance intersection collapses to ent-nhs-hpfs-cohorts, found only by walking two hops up the DAG. An assessor answering YES commits the error cairn exists to catch — and here every surface cue (three journals, three author teams, three decades of data, 'nearly 2 million individuals') pushes toward YES."
+    },
+    {
+      "id": "I2",
+      "class": "inferential",
+      "text": "Hu 1999's NHS/HPFS finding and Djoussé 2008's Physicians' Health Study finding rest on disjoint participant pools, so the two may legitimately be treated as independent and combined.",
+      "key": null,
+      "cairn_principled": "YES",
+      "rationale": "The opposite-polarity companion to I1. Two primary analyses of genuinely different people ARE independent on the provenance dimension; cairn returns COMBINABLE. An engine that refused everything would be useless — this probe checks the detector still says yes when independence really holds."
+    },
+    {
+      "id": "I3",
+      "class": "inferential",
+      "text": "Because the 2021 meta-analysis covers 'nearly 2 million individuals', its null result rests on a correspondingly enormous number of independent observations.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The headline-number failure mode. The participant count is not an independence count: the same nurses and health professionals appear inside multiple pooled studies, and the same cohorts recur across reviews. Answering YES converts a big number into false precision — the 'nine assessors agreed' lie wearing a lab coat."
+    },
+    {
+      "id": "I4",
+      "class": "inferential",
+      "text": "Each of these meta-analyses is individually methodologically sound, so there is no non-independence problem to worry about.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The sophisticated trap, and the probe that most distinguishes this case from COVID. The premise is TRUE — each review really is locally correct and de-duplicates properly — and the conclusion is still FALSE. Non-independence here is a property of the COMPOSITION, not a defect in any component. No amount of per-paper rigour detects it; only walking the shared DAG does."
+    },
+    {
+      "id": "I5",
+      "class": "inferential",
+      "text": "The entire egg/CVD evidence base reduces to the NHS/HPFS cohorts, so the effective number of independent evidence streams is essentially one.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "THE ANTI-OVERCLAIM PROBE — it guards the boundary on the other side. The shared backbone is real, but the literature ALSO contains genuinely independent Asian (JPHC, CKB), European (EPIC, NLCS) and other cohorts, and Drouin-Chartier reports a geographic interaction. So n_eff is well ABOVE 1 — it is simply far below the number of meta-analyses (the Phase-2 corpus run measured n_eff 3.97 here, the highest of the three cases). Answering YES overstates cairn's own finding, which would be its own kind of fabrication."
+    },
+    {
+      "id": "I6",
+      "class": "inferential",
+      "text": "An assessor who reads only the abstracts of these meta-analyses is in a position to detect that they share a cohort backbone.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The retrievability point, stated as a probe. The meta-analyses never name their constituent cohorts in their abstracts — the inclusion edges exist ONLY in Table 1. An abstract-level reader (human or model) structurally CANNOT see the overlap. That is why this corpus grounds the two reviews to abstract + the complete included-studies table, and why probe F3/F4 are answerable at all."
+    }
+  ]
+}

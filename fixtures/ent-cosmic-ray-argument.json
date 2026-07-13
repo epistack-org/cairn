@@ -1,0 +1,30 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:d-YAhSNoApLNm3rFdK-vVmRkyP64d0eXqIU9xSG5UhM",
+  "assertion": {
+    "name": "The cosmic-ray / astronomical-stability safety argument",
+    "aliases": [
+      "the cosmic-ray argument",
+      "the astrophysical survival bound"
+    ],
+    "kind": "Premise",
+    "statement": "Cosmic rays have bombarded the Earth, Sun, Moon, white dwarfs and neutron stars at centre-of-mass energies at or above those of collider experiments for billions of years; those bodies still exist; therefore such collisions are not catastrophic.",
+    "note": "This is the load-bearing empirical premise shared by the LHC and RHIC safety assurances. Each citing paper invokes it in its own abstract, so every derivedFrom edge into this node is span-grounded (see the claims' grounding.quote). It is a PREMISE, not a dataset — the generalization of layer-(a): a shared upstream need not be a shared corpus, it can be a shared argument.",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "4234521f3eaf0c206c3c6ac84d9064471b3753007d9a3f2f7adc9197c5eecc30ef3b033956aa7a342e273efbbbdfe42e4d7f64f23a4efbae4fb51a0d53e0d909",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

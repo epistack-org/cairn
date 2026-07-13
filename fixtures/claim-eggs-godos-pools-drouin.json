@@ -1,0 +1,37 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:CbxqJorPwsIjJgl0vsqjiXBVHVhIAL8Zw6Es0k29wzU",
+  "assertion": {
+    "text": "The Eur J Nutr 2021 meta-analysis ALSO pools Drouin-Chartier 2020, which re-analyses the same NHS/HPFS participants over a longer follow-up window — so the backbone enters this review by two separate paths.",
+    "subject": "tt:1QbyJPrVKK2eKnqaxGRQToJvfVAUWtgXqhIrb3scw90",
+    "grounding": {
+      "source": "tt:Pw5mj-DNntkCZfmYOLyovcxKpP1hpeBgh_doWCbGPd0",
+      "char_span": [
+        17796,
+        17859
+      ],
+      "quote": "Drouin-Chartier [48] | HPFS, 1986, NHS, 1980, NHS II, 1991 (US)",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "0cd54915d2077111969e052717153e89314a5ce3226f1849b6f4e333313a1faf"
+    },
+    "verification": "L5"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:Pw5mj-DNntkCZfmYOLyovcxKpP1hpeBgh_doWCbGPd0"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "536432e54730bcead8dd50cf4c13fb305bc839095ee21522f21d7f03206bf631fa83064ce971c436a1c23b80c9b7509de10c822bd7e6d512933492f7ae68df02",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

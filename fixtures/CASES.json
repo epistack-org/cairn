@@ -1,0 +1,57 @@
+{
+  "covid-origins": {
+    "title": "COVID origins — the Huanan-market proximity trio",
+    "crux": "Did SARS-CoV-2 emerge via zoonotic spillover associated with the Huanan Seafood Wholesale Market, as opposed to a non-market or non-zoonotic introduction?",
+    "battery": "assessment/probes.json",
+    "shared_upstream": "src-worobey-2022",
+    "shared_upstream_kind": "dataset (one paper's early-case data)",
+    "laundered_set": [
+      "claim-geographic-clustering",
+      "claim-environmental-sampling",
+      "claim-live-mammal-sales"
+    ],
+    "contrast_pair": [
+      "claim-geographic-clustering",
+      "claim-two-lineages"
+    ],
+    "punchline": "Three apparently independent lines of proximity evidence all derive from ONE early-case dataset (Worobey 2022). The naive transcript multiplies 5x5x5 = 125:1; the provenance intersection collapses to a single upstream, so the product is undefined.",
+    "n_eff_corpus_scale": 2.85
+  },
+  "eggs-good-for-you": {
+    "title": "Are eggs good for you — the egg/CVD meta-analyses",
+    "crux": "Do the several apparently independent meta-analyses finding no association between egg consumption and cardiovascular disease constitute independent confirmations of that null result?",
+    "battery": "assessment/probes-eggs.json",
+    "shared_upstream": "ent-nhs-hpfs-cohorts",
+    "shared_upstream_kind": "cohort (one shared participant backbone, TWO HOPS UP)",
+    "laundered_set": [
+      "claim-eggs-rong-no-association",
+      "claim-eggs-godos-no-association",
+      "claim-eggs-drouin-no-association"
+    ],
+    "contrast_pair": [
+      "claim-eggs-hu-no-association",
+      "claim-eggs-djousse-no-association"
+    ],
+    "punchline": "Three apparently independent reassuring findings — a 2013 BMJ dose-response meta-analysis, a 2021 meta-analysis of 39 studies and 'nearly 2 million individuals', and a 2020 BMJ three-cohort study plus updated meta-analysis — all re-pool the SAME nurses and health professionals (NHS/HPFS). Each review de-duplicates internally and is locally correct; the laundering happens BETWEEN them, at the aggregation layer. 'Nearly 2 million individuals' is not 2 million independent people. The shared upstream is invisible at the claim level — it is two hops up, found only by walking the DAG.",
+    "n_eff_corpus_scale": 3.97,
+    "exercises": "the TRANSITIVE shared-ancestor detector — the first real corpus to do so (previously proven only against a synthetic fixture in tests)"
+  },
+  "cern-black-hole": {
+    "title": "CERN black hole — the LHC/RHIC safety assurances",
+    "crux": "IF microscopic black holes produced at the LHC do not decay (i.e. conditional on the Hawking-radiation argument failing), do the collider-safety reviews constitute multiple INDEPENDENT lines of evidence that they are still harmless?",
+    "battery": "assessment/probes-cern.json",
+    "shared_upstream": "ent-cosmic-ray-argument",
+    "shared_upstream_kind": "premise (one load-bearing empirical argument)",
+    "laundered_set": [
+      "claim-cern-astro-stability",
+      "claim-cern-wd-ns-bound",
+      "claim-cern-moon-strangelet"
+    ],
+    "contrast_pair": [
+      "claim-cern-bh-production-rate",
+      "claim-cern-astro-stability"
+    ],
+    "punchline": "Three safety assurances that look maximally independent — three papers, two accelerators, three author teams, eight years apart, three different hypothetical catastrophes — all reach 'safe' through ONE premise: cosmic rays have hit astronomical bodies harder for billions of years and they are still here. Each paper says so in its own abstract. This is the case with the STRONGEST expert consensus, and cairn prices it honestly (effective independence ~1) rather than rewarding it. It does NOT say the LHC is unsafe — it says three assurances sharing a premise are not three votes.",
+    "n_eff_corpus_scale": 2.16
+  }
+}

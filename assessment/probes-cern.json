@@ -1,0 +1,141 @@
+{
+  "battery_id": "cern-crux-v1",
+  "title": "LHC-safety-crux assessor probe battery (v1)",
+  "crux": "IF microscopic black holes produced at the LHC do not decay (i.e. conditional on the Hawking-radiation argument failing), do the collider-safety reviews constitute multiple INDEPENDENT lines of evidence that they are still harmless?",
+  "note": "The measurement instrument for the cern worked example (dev/cairn#9), mirroring hsm-crux-v1. Each assessor answers every probe seeing only its granted evidence partition. Faithfulness probes have an objective KEY pinned to an exact substring of a vetted source abstract (fixtures/sources/*.abstract.txt), so 'correct' is defined by the retrieved record, not by contested ultimate truth — `tests/test_batteries.py` mechanically re-checks that every `grounds.quote` is a literal substring of the cited source's sha-pinned excerpt. Inferential probes have key=null (genuine judgment); where cairn's thesis has a principled position it is recorded in `cairn_principled` and is NOT scored as an error.\n\nWHY THE CRUX IS CONDITIONAL: the safety literature runs two distinct argument families — (A) theoretical, black holes evaporate via Hawking radiation; (B) empirical, the cosmic-ray / astronomical-survival argument. Family (A) is a genuinely SEPARATE line (the 2003 LHC Safety Study Group rests its black-hole conclusion on it), so 'every assurance shares one premise' would be an overclaim and this battery does not make it. But the public concern — and the reason the 2008 reviews were commissioned — is precisely 'what if it does NOT decay?'. Conditional on (A) failing, what is left standing is (B), and (B) is ONE argument. That is what this battery scores.\n\nWHAT THIS CASE IS NOT: nothing here says the LHC is unsafe. Probe I5 pins that down explicitly. The finding is about the ARITHMETIC of combining assurances, not about the safety conclusion — which may well be correct. This is the case with the STRONGEST expert consensus in the corpus (Phase-2 measured the highest inter-assessor agreement, phi-bar 0.328, yet n_eff 2.16), which makes it the sharpest test of whether the engine prices consensus honestly instead of rewarding it.",
+  "answer_space": ["YES", "NO", "UNCERTAIN"],
+  "binarization": {
+    "affirm": "YES -> 1, else (NO | UNCERTAIN) -> 0. The primary vector fed to neff.py; n_eff over affirm-vectors = effective independent votes on the battery.",
+    "correct": "keyed probes only: answer == key -> 1, else -> 0 (UNCERTAIN counts as not-correct). Secondary reliability / error-correlation readout."
+  },
+  "probes": [
+    {
+      "id": "F1",
+      "class": "faithfulness",
+      "text": "Ellis et al. (2008), the CERN LHC Safety Assessment Group review, state that the stability of astronomical bodies indicates that LHC-energy collisions cannot be dangerous.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-ellis-2008", "quote": "The stability of astronomical bodies indicates that such collisions cannot be dangerous."}
+      ],
+      "rationale": "Verbatim claim of the LSAG abstract; grounds claim-cern-astro-stability (L5/ENTAILS)."
+    },
+    {
+      "id": "F2",
+      "class": "faithfulness",
+      "text": "Ellis et al. (2008) conclude that even IF some microscopic black holes were stable, the stability of astronomical bodies constrains their possible accretion rate so strongly that they present no conceivable danger.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-ellis-2008", "quote": "The stability of astronomical bodies constrains strongly the possible rate of accretion by any such microscopic black holes, so that they present no conceivable danger."}
+      ],
+      "rationale": "Verbatim. This is the stable-BH crux leg, and it routes through the astronomical-stability premise."
+    },
+    {
+      "id": "F3",
+      "class": "faithfulness",
+      "text": "Giddings & Mangano (2008) rule out the dangerous accretion scenarios by arguing that black holes produced by cosmic rays striking white dwarfs and neutron stars would have catalyzed their decay on timescales incompatible with their observed lifetimes.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-giddings-mangano-2008", "quote": "black holes produced by cosmic rays impinging on much denser white dwarfs and neutron stars would then catalyze their decay on timescales incompatible with their known lifetimes"}
+      ],
+      "rationale": "Verbatim; grounds claim-cern-wd-ns-bound (L5/ENTAILS). This is the paper that patches the hole in the naive cosmic-ray argument."
+    },
+    {
+      "id": "F4",
+      "class": "faithfulness",
+      "text": "Jaffe et al. (2000), reviewing disaster scenarios at RHIC, cite the continued existence of the Moon despite billions of years of cosmic-ray exposure as powerful empirical evidence against dangerous strangelet production.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-jaffe-2000", "quote": "the continued existence of the Moon, in the form we know it, despite billions of years of cosmic ray exposure, provides powerful empirical evidence against the possibility of dangerous strangelet production"}
+      ],
+      "rationale": "Verbatim; grounds claim-cern-moon-strangelet (L5/ENTAILS). A DIFFERENT accelerator, author team and catastrophe — reaching for the SAME premise."
+    },
+    {
+      "id": "F5",
+      "class": "faithfulness",
+      "text": "Ellis et al. (2008) present their review as a fully independent re-derivation that does not rely on the earlier 2003 LHC Safety Study Group analysis.",
+      "key": "NO",
+      "grounds": [
+        {"source": "src-ellis-2008", "quote": "we review their 2003 analysis in light of additional experimental results and theoretical understanding, which enable us to confirm, update and extend the conclusions of the LHC Safety Study Group"}
+      ],
+      "rationale": "The abstract states the OPPOSITE: it is an update/extension of the 2003 report, a self-declared non-independence edge. A faithful reader answers NO. This probe tests whether an assessor notices a dependence the source itself admits."
+    },
+    {
+      "id": "F6",
+      "class": "faithfulness",
+      "text": "Ellis et al. (2008) report that microscopic black holes produced at the LHC are expected to decay by Hawking radiation before reaching the detector walls.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-ellis-2008", "quote": "Any microscopic black holes produced at the LHC are expected to decay by Hawking radiation before they reach the detector walls."}
+      ],
+      "rationale": "Verbatim. This is argument family (A) — the theoretical line, genuinely distinct from the cosmic-ray family. Its presence is why the crux must be stated conditionally."
+    },
+    {
+      "id": "F7",
+      "class": "faithfulness",
+      "text": "Giddings & Mangano (2008) report observational detection of an actual TeV-scale black hole.",
+      "key": "NO",
+      "grounds": [
+        {"source": "src-giddings-mangano-2008", "quote": "in what is regarded as an extremely hypothetical scenario in which they are stable"}
+      ],
+      "rationale": "Hallucination negative-control. The paper analyses a hypothetical scenario; no black hole has been detected. An assessor answering YES is fabricating."
+    },
+    {
+      "id": "F8",
+      "class": "faithfulness",
+      "text": "Jaffe et al. (2000) base their black-hole conclusion on an estimate that the relevant production parameters are absurdly small — a theoretical rate calculation rather than an astronomical-survival argument.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-jaffe-2000", "quote": "We estimate the parameters relevant to black hole production; we find that they are absurdly small."}
+      ],
+      "rationale": "Verbatim; grounds claim-cern-bh-production-rate (L5/ENTAILS). This is the genuinely INDEPENDENT line — the COMBINABLE contrast."
+    },
+    {
+      "id": "I1",
+      "class": "inferential",
+      "text": "The three safety assurances (Ellis et al. 2008 on astronomical stability, Giddings & Mangano 2008 on white dwarfs and neutron stars, Jaffe et al. 2000 on the Moon) are INDEPENDENT lines of evidence whose likelihood ratios may legitimately be multiplied.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The refuse-to-combine core of this case. Three papers, two accelerators, three author teams, eight years apart — and all three route through the SAME cosmic-ray/astronomical-survival premise, each saying so in its own abstract. They share an upstream and MUST NOT be multiplied as independent. An assessor answering YES commits the exact error cairn exists to catch — and here the surface cues (different authors, different fields, different decades) all push toward YES."
+    },
+    {
+      "id": "I2",
+      "class": "inferential",
+      "text": "Jaffe et al.'s theoretical black-hole production-rate estimate and Ellis et al.'s astronomical-stability argument rest on distinct evidence, so the two may legitimately be treated as independent and combined.",
+      "key": null,
+      "cairn_principled": "YES",
+      "rationale": "The opposite-polarity companion to I1. A particle-physics rate calculation and an empirical astrophysical survival bound are genuinely distinct upstreams; cairn's provenance detector returns COMBINABLE for this pair. An engine that refused EVERYTHING would be useless — this probe checks the detector still says yes when independence really holds."
+    },
+    {
+      "id": "I3",
+      "class": "inferential",
+      "text": "Because multiple expert panels, spanning two accelerators and two decades, independently concluded that the collisions are safe, the probability of catastrophe can be bounded far more tightly than any single review could bound it.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The consensus-laundering failure mode, and the sharpest probe in the battery. The number of concurring panels is NOT the number of independent arguments. Answering YES converts apparent corroboration into a false precision — the headline lie ('nine assessors agreed') in its most seductive form, because here the consensus is real, expert, and correct."
+    },
+    {
+      "id": "I4",
+      "class": "inferential",
+      "text": "Conditional on microscopic black holes NOT decaying via Hawking radiation, the remaining safety assurances still rest on more than one independent empirical argument.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The conditional crux, stated directly. Strip out argument family (A) — the theoretical decay line — and what remains across LSAG, Giddings-Mangano and the RHIC review is one empirical argument: cosmic rays have hit denser bodies harder for longer and those bodies survive. Effective independence ~1."
+    },
+    {
+      "id": "I5",
+      "class": "inferential",
+      "text": "The corpus evidence indicates that the LHC is dangerous, or that the safety conclusion reached by the reviews is wrong.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The anti-misreading probe, and it is deliberately load-bearing. Cairn REFUSES TO COMBINE these assurances as independent; it does NOT overturn them. Giddings & Mangano may be entirely correct — the point is that it is ONE line, not four, and a refusal to multiply is not a claim of danger. An assessor (or a reader of our own writeup) who answers YES has misread the engine's output in the most damaging possible direction."
+    },
+    {
+      "id": "I6",
+      "class": "inferential",
+      "text": "The fact that M. L. Mangano co-authored BOTH the Giddings & Mangano astrophysical bound AND the LSAG review that leans on it is irrelevant to whether the two documents count as independent evidence.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "Author-level non-independence, on top of the shared premise. cairn's layer-(a) detector works on the provenance DAG and does not currently read author lists — so this probe marks a REAL gap in the engine, honestly: the overlap is recorded on src-giddings-mangano-2008 as `author_overlap_note` but is not yet mechanically enforced. Answering YES is wrong, and cairn cannot presently prove it wrong. Recorded, not papered over."
+    }
+  ]
+}

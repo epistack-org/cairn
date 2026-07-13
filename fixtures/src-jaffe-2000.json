@@ -1,0 +1,44 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:wxzUg3iEzPXs15wQpPAIe2-AqiucQqMJ54BmAtNvbGY",
+  "assertion": {
+    "title": "Review of speculative \"disaster scenarios\" at RHIC",
+    "authors": "Jaffe RL, Busza W, Sandweiss J, Wilczek F",
+    "venue": "Reviews of Modern Physics",
+    "year": 2000,
+    "volume": "72",
+    "pages": "1125-1140",
+    "doi": "10.1103/RevModPhys.72.1125",
+    "arxiv": "hep-ph/9910333",
+    "url": "https://arxiv.org/abs/hep-ph/9910333",
+    "excerpt_kind": "abstract (arXiv, whitespace-normalized)",
+    "excerpt": "We discuss speculative disaster scenarios inspired by hypothetical new fundamental processes that might occur in high energy relativistic heavy ion collisions. We estimate the parameters relevant to black hole production; we find that they are absurdly small. We show that other accelerator and (especially) cosmic ray environments have already provided far more auspicious opportunities for transition to a new vacuum state, so that existing observations provide stringent bounds. We discuss in most detail the possibility of producing a dangerous strangelet. We argue that four separate requirements are necessary for this to occur: existence of large stable strangelets, metastability of intermediate size strangelets, negative charge for strangelets along the stability line, and production of intermediate size strangelets in the heavy ion environment. We discuss both theoretical and experimental reasons why each of these appears unlikely; in particular, we know of no plausible suggestion for why the third or especially the fourth might be true. Given minimal physical assumptions the continued existence of the Moon, in the form we know it, despite billions of years of cosmic ray exposure, provides powerful empirical evidence against the possibility of dangerous strangelet production.",
+    "excerpt_sha256": "4f1bf34242c2eb1c83cfbe6e756fb6e16f7b92042dc6e3393b7059ee1f14ae9c",
+    "retrieval": {
+      "fetched_at": "2026-07-13",
+      "method": "arXiv Atom API (id_list=hep-ph/9910333); whitespace-normalized; bibliographic record confirmed via Crossref",
+      "cross_verified": "bibliographic only — INSPIRE mirrors arXiv (see src-ellis-2008)",
+      "sources": [
+        "https://export.arxiv.org/api/query?id_list=hep-ph/9910333",
+        "https://api.crossref.org/works/10.1103/RevModPhys.72.1125"
+      ]
+    },
+    "verification": "L1",
+    "role": "a DIFFERENT accelerator (RHIC), a DIFFERENT author team, eight years earlier, a DIFFERENT catastrophe (strangelets) — and the same premise"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "580ce985ca90e739f2259791f99a58b9d52050e6031dea9aec75473f6bc2757bd5869cb4d3d0512dbeb6142cfce03d7b72f67ae4e0e2f1fe89c282bd95905a02",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

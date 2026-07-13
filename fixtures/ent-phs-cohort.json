@@ -1,0 +1,29 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:BFddlAPXU6ZkraOwbjs3WNgFnV7lFF-6_JvfqW8bsTs",
+  "assertion": {
+    "name": "The Physicians' Health Study I cohort",
+    "aliases": [
+      "PHS",
+      "PHS I"
+    ],
+    "kind": "Cohort",
+    "note": "A genuinely DISJOINT participant pool (21,327 male physicians) — the contrast referent. Independence on the provenance dimension really does hold between this and NHS/HPFS.",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "044baf48289a8d66e3a8c0c1026a1005901cc0ef8f2bf0bd73c3009cdd4ac1cf6ac454f5b8bfba685caa1d83d2cc146ad23f6200ce54441f54fa7f022b0fe106",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

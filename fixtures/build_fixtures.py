@@ -37,6 +37,9 @@ AT = "2026-06-28T00:00:00Z"
 KEY = SigningKey.from_seed_hex("c0" * 32, label="keystone:epistack-corpus")
 # who performed the span extraction (the faithfulness tuple's `extractor`)
 EXTRACTOR = "agent:claude-opus-4-8[1m]/A1-source-vetting"
+# the floor-#3 cases (eggs / cern) were vetted in a later pass, by a different model;
+# the extractor is part of the faithfulness tuple, so it is recorded honestly per claim.
+EXTRACTOR_F3 = "agent:claude-fable-5/floor3-source-vetting"
 
 # Pinned abstracts (version of record). The build fails loudly if a byte drifts.
 SOURCES = {
@@ -48,6 +51,57 @@ SOURCES = {
         "file": "pekar-2022.abstract.txt",
         "sha256": "c046d96297900e9d067e47ab0e17d2dedf317037c19d09d9593689c17f5adbfe",
     },
+    # --- cern (LHC-safety) case. arXiv Atom <summary>, whitespace-normalized:
+    #     " ".join(text.split()) — arXiv hard-wraps abstracts and pads the leading line.
+    #     That normalization is the ONLY transform; see fixtures/PROVENANCE-cern.md.
+    "ellis": {
+        "file": "ellis-2008.abstract.txt",
+        "sha256": "030c49f7802c2564f5ae9115af3e65c3da314533c520b67c6ab9b3fd24c68e90",
+    },
+    "giddings-mangano": {
+        "file": "giddings-mangano-2008.abstract.txt",
+        "sha256": "36ed1846d1d8fccac5a8bcd37f6a0516c0ac96f0801650d45438ab2da95d2a33",
+    },
+    "jaffe": {
+        "file": "jaffe-2000.abstract.txt",
+        "sha256": "4f1bf34242c2eb1c83cfbe6e756fb6e16f7b92042dc6e3393b7059ee1f14ae9c",
+    },
+    # --- eggs (egg consumption / CVD) case. PubMed structured abstracts, serialized as
+    #     "LABEL: text" one section per line. The two meta-analyses additionally carry
+    #     their COMPLETE Table 1 (included studies) from the Europe PMC OA JATS XML —
+    #     the inclusion edges exist nowhere else. See fixtures/PROVENANCE-eggs.md.
+    "hu-1999": {
+        "file": "hu-1999.abstract.txt",
+        "sha256": "ce74e4ba732856e977c96ddd3cba2480a85ce33eba8e16e0720ada87c1162769",
+    },
+    "drouin-chartier-2020": {
+        "file": "drouin-chartier-2020.abstract.txt",
+        "sha256": "69e0dd0797c9dd95bf70517efcaf6ad105d0c93d252e6a15df90b173cd34f786",
+    },
+    "djousse-2008": {
+        "file": "djousse-2008.abstract.txt",
+        "sha256": "4b21e2cb029cd3779142f162fa16f6fec91c0c3e4439681182ac58569706f8ca",
+    },
+    "rong-2013": {
+        "file": "rong-2013.abstract.txt",
+        "sha256": "c0b06aab867e54989aaabc8852bbd18814cc2f1c3bbdf59e87b9a31615f3729c",
+    },
+    "godos-2021": {
+        "file": "godos-2021.abstract.txt",
+        "sha256": "0cd54915d2077111969e052717153e89314a5ce3226f1849b6f4e333313a1faf",
+    },
+}
+
+# src-<record slug> -> key into SOURCES (used to bind grounding.source_sha256)
+_SHA_KEYS = {
+    "src-ellis-2008": "ellis",
+    "src-giddings-mangano-2008": "giddings-mangano",
+    "src-jaffe-2000": "jaffe",
+    "src-hu-1999": "hu-1999",
+    "src-drouin-chartier-2020": "drouin-chartier-2020",
+    "src-djousse-2008": "djousse-2008",
+    "src-rong-2013": "rong-2013",
+    "src-godos-2021": "godos-2021",
 }
 
 
@@ -56,6 +110,102 @@ def load_excerpt(slug: str) -> str:
     got = hashlib.sha256(text.encode("utf-8")).hexdigest()
     assert got == SOURCES[slug]["sha256"], f"{slug} excerpt sha mismatch: {got}"
     return text
+
+
+# --- The worked examples (floor deliverable #3) -------------------------------------
+#
+# Each case DECLARES its structure here, and `main()` mechanically verifies the
+# declaration against what the provenance detector actually finds before writing a
+# single file. A case whose `laundered_set` fails to REFUSE, or whose shared upstream
+# is not the one the detector names, fails the build. The README's "3 worked examples"
+# is therefore a checked property of the corpus, not a sentence in a markdown file.
+#
+# `n_eff_corpus_scale` records what the Phase-2 corpus run measured for the same crux
+# at 2,261-paper scale. It is a REPORTED number for the writeup,
+# not an input to anything here — the fixtures stay substrate-free by construction.
+CASES = {
+    "covid-origins": {
+        "title": "COVID origins — the Huanan-market proximity trio",
+        "crux": "Did SARS-CoV-2 emerge via zoonotic spillover associated with the Huanan "
+                "Seafood Wholesale Market, as opposed to a non-market or non-zoonotic "
+                "introduction?",
+        "battery": "assessment/probes.json",
+        "shared_upstream": "src-worobey-2022",
+        "shared_upstream_kind": "dataset (one paper's early-case data)",
+        "laundered_set": [
+            "claim-geographic-clustering",
+            "claim-environmental-sampling",
+            "claim-live-mammal-sales",
+        ],
+        "contrast_pair": ["claim-geographic-clustering", "claim-two-lineages"],
+        "punchline": "Three apparently independent lines of proximity evidence all derive "
+                     "from ONE early-case dataset (Worobey 2022). The naive transcript "
+                     "multiplies 5x5x5 = 125:1; the provenance intersection collapses to a "
+                     "single upstream, so the product is undefined.",
+        "n_eff_corpus_scale": 2.85,
+    },
+    "eggs-good-for-you": {
+        "title": "Are eggs good for you — the egg/CVD meta-analyses",
+        "crux": "Do the several apparently independent meta-analyses finding no association "
+                "between egg consumption and cardiovascular disease constitute independent "
+                "confirmations of that null result?",
+        "battery": "assessment/probes-eggs.json",
+        "shared_upstream": "ent-nhs-hpfs-cohorts",
+        "shared_upstream_kind": "cohort (one shared participant backbone, TWO HOPS UP)",
+        "laundered_set": [
+            "claim-eggs-rong-no-association",     # BMJ 2013 meta-analysis
+            "claim-eggs-godos-no-association",    # Eur J Nutr 2021 meta-analysis (39 studies)
+            "claim-eggs-drouin-no-association",   # BMJ 2020 cohorts + updated meta-analysis
+        ],
+        "contrast_pair": ["claim-eggs-hu-no-association", "claim-eggs-djousse-no-association"],
+        "punchline": "Three apparently independent reassuring findings — a 2013 BMJ "
+                     "dose-response meta-analysis, a 2021 meta-analysis of 39 studies and "
+                     "'nearly 2 million individuals', and a 2020 BMJ three-cohort study plus "
+                     "updated meta-analysis — all re-pool the SAME nurses and health "
+                     "professionals (NHS/HPFS). Each review de-duplicates internally and is "
+                     "locally correct; the laundering happens BETWEEN them, at the aggregation "
+                     "layer. 'Nearly 2 million individuals' is not 2 million independent people. "
+                     "The shared upstream is invisible at the claim level — it is two hops up, "
+                     "found only by walking the DAG.",
+        "n_eff_corpus_scale": 3.97,
+        "exercises": "the TRANSITIVE shared-ancestor detector — the first real corpus to do so "
+                     "(previously proven only against a synthetic fixture in tests)",
+    },
+    "cern-black-hole": {
+        "title": "CERN black hole — the LHC/RHIC safety assurances",
+        # The crux is deliberately CONDITIONAL, and that precision is load-bearing.
+        # The safety literature runs two distinct argument families:
+        #   (A) theoretical — microscopic black holes evaporate (Hawking radiation);
+        #   (B) empirical  — the cosmic-ray / astronomical-survival argument.
+        # Family (A) is a genuinely separate line (the 2003 LHC Safety Study Group rests
+        # its black-hole conclusion on it), so "every assurance shares one premise" would
+        # be an OVERCLAIM and we do not make it. But the public concern — and the reason
+        # the 2008 reviews were commissioned — is precisely "what if the black hole does
+        # NOT decay?". Conditional on (A) failing, everything left standing is (B), and
+        # (B) is one argument. That is the crux this case scores.
+        "crux": "IF microscopic black holes produced at the LHC do not decay (i.e. conditional "
+                "on the Hawking-radiation argument failing), do the collider-safety reviews "
+                "constitute multiple INDEPENDENT lines of evidence that they are still harmless?",
+        "battery": "assessment/probes-cern.json",
+        "shared_upstream": "ent-cosmic-ray-argument",
+        "shared_upstream_kind": "premise (one load-bearing empirical argument)",
+        "laundered_set": [
+            "claim-cern-astro-stability",     # Ellis et al. 2008 (LSAG) — LHC
+            "claim-cern-wd-ns-bound",         # Giddings & Mangano 2008 — LHC
+            "claim-cern-moon-strangelet",     # Jaffe et al. 2000 — RHIC
+        ],
+        "contrast_pair": ["claim-cern-bh-production-rate", "claim-cern-astro-stability"],
+        "punchline": "Three safety assurances that look maximally independent — three papers, "
+                     "two accelerators, three author teams, eight years apart, three different "
+                     "hypothetical catastrophes — all reach 'safe' through ONE premise: cosmic "
+                     "rays have hit astronomical bodies harder for billions of years and they "
+                     "are still here. Each paper says so in its own abstract. This is the case "
+                     "with the STRONGEST expert consensus, and cairn prices it honestly "
+                     "(effective independence ~1) rather than rewarding it. It does NOT say the "
+                     "LHC is unsafe — it says three assurances sharing a premise are not three votes.",
+        "n_eff_corpus_scale": 2.16,
+    },
+}
 
 
 def mk(slug, type_, assertion, derived_from=None, method="assert"):
@@ -73,6 +223,584 @@ def span_of(excerpt: str, quote: str) -> list[int]:
     i = excerpt.find(quote)
     assert i >= 0, f"quote is not a literal substring of the source excerpt: {quote[:60]!r}..."
     return [i, i + len(quote)]
+
+
+def mk_claim(recs, slug, *, text, subject, source_slug, excerpt, quote, label, rung, lr=None,
+             extractor=EXTRACTOR_F3, also_derived_from=(), polarity=None):
+    """Mint a span-grounded claim (the generic helper the floor-#3 cases use).
+
+    ``also_derived_from`` carries *extra* non-independence edges beyond the source
+    the claim is grounded in — e.g. a shared load-bearing premise. It is what the
+    layer-(a) detector intersects over.
+
+    ``lr=None`` mints a claim with NO ``illustrative_LR``. That is deliberate for
+    *structural* claims — the ones whose job is to evidence a derivedFrom edge with
+    bytes (e.g. "this meta-analysis lists the NHS/HPFS cohorts in its Table 1").
+    They are evidence ABOUT the DAG, not evidential lines to be combined, and
+    `cairn frechet` selects only claims carrying an ``illustrative_LR``, so they are
+    correctly excluded from any combination.
+    """
+    assertion = {
+        "text": text,
+        "subject": recs[subject]["id"],
+        "grounding": {
+            "source": recs[source_slug]["id"],
+            "char_span": span_of(excerpt, quote),
+            "quote": quote,
+            "extractor": extractor,
+            "entailment_label": label,
+            "source_sha256": SOURCES[_SHA_KEYS[source_slug]]["sha256"],
+        },
+        "verification": rung,
+    }
+    if lr is not None:
+        # demo-only naive-baseline input (not a vetted quantity)
+        assertion["illustrative_LR"] = lr
+    if polarity:
+        assertion["polarity"] = polarity
+    derived = [recs[source_slug]["id"]] + [recs[s]["id"] for s in also_derived_from]
+    recs[slug] = mk(slug, "epi:Claim", assertion, derived_from=derived, method="extract")
+    return recs[slug]
+
+
+def build_cern(recs: dict[str, dict]) -> None:
+    """Worked example #3 — "will the LHC create a black hole that destroys the Earth".
+
+    The laundered-corroboration structure (VERIFIED against the real literature, not
+    assumed — see fixtures/PROVENANCE-cern.md):
+
+    Three safety assurances that look maximally independent — **three different
+    papers, two different accelerators (RHIC 2000, LHC 2008), three different author
+    teams, eight years apart, three different hypothetical catastrophes (strangelets,
+    black holes, vacuum decay)** — all reach their reassuring conclusion through **one**
+    load-bearing empirical premise: *cosmic rays have bombarded astronomical bodies at
+    higher energies for billions of years, and those bodies are still here.*
+
+    Each paper says so **in its own abstract**, so the shared-premise edge is
+    span-grounded, not asserted by us (`cairn ground` re-checks the exact bytes):
+
+      * Ellis et al. 2008 (the LSAG report): "The stability of astronomical bodies
+        indicates that such collisions cannot be dangerous."
+      * Giddings & Mangano 2008: black holes from cosmic rays hitting "much denser white
+        dwarfs and neutron stars would then catalyze their decay on timescales
+        incompatible with their known lifetimes".
+      * Jaffe et al. 2000 (RHIC): "the continued existence of the Moon ... despite
+        billions of years of cosmic ray exposure, provides powerful empirical evidence".
+
+    -> `cairn intersect` REFUSES the trio, naming `ent-cosmic-ray-argument`.
+
+    This is the sharpest test of the thesis: it is the case with the *strongest* expert
+    consensus, and cairn prices that consensus honestly (effective independence ~1)
+    instead of rewarding it. **It does not say the LHC is unsafe** — it says you may not
+    multiply three assurances that share a premise as though they were three votes.
+
+    The contrast (COMBINABLE): Jaffe's *theoretical* black-hole production estimate
+    ("absurdly small") does NOT route through cosmic rays — it is a particle-physics
+    rate calculation. Disjoint upstream -> combining IS licensed.
+    """
+    ellis = load_excerpt("ellis")
+    gm = load_excerpt("giddings-mangano")
+    jaffe = load_excerpt("jaffe")
+
+    # --- the shared load-bearing premise (the noun the three assurances all lean on) ---
+    recs["ent-cosmic-ray-argument"] = mk(
+        "ent-cosmic-ray-argument", "epi:Entity",
+        {
+            "name": "The cosmic-ray / astronomical-stability safety argument",
+            "aliases": ["the cosmic-ray argument", "the astrophysical survival bound"],
+            "kind": "Premise",
+            "statement": "Cosmic rays have bombarded the Earth, Sun, Moon, white dwarfs "
+                         "and neutron stars at centre-of-mass energies at or above those "
+                         "of collider experiments for billions of years; those bodies "
+                         "still exist; therefore such collisions are not catastrophic.",
+            "note": "This is the load-bearing empirical premise shared by the LHC and RHIC "
+                    "safety assurances. Each citing paper invokes it in its own abstract, "
+                    "so every derivedFrom edge into this node is span-grounded (see the "
+                    "claims' grounding.quote). It is a PREMISE, not a dataset — the "
+                    "generalization of layer-(a): a shared upstream need not be a shared "
+                    "corpus, it can be a shared argument.",
+            "verification": "L1",
+        },
+    )
+
+    # --- Sources (L1 observed artifacts: retrieved from arXiv, sha-pinned) ---
+    recs["src-ellis-2008"] = mk(
+        "src-ellis-2008", "epi:Source",
+        {
+            "title": "Review of the Safety of LHC Collisions",
+            "authors": "Ellis J, Giudice G, Mangano ML, Tkachev I, Wiedemann U "
+                       "(the CERN LHC Safety Assessment Group, LSAG)",
+            "venue": "Journal of Physics G: Nuclear and Particle Physics",
+            "year": 2008, "volume": "35", "issue": "11", "pages": "115004",
+            "doi": "10.1088/0954-3899/35/11/115004",
+            "arxiv": "0806.3414",
+            "url": "https://arxiv.org/abs/0806.3414",
+            "excerpt_kind": "abstract (arXiv v1, whitespace-normalized)",
+            "excerpt": ellis,
+            "excerpt_sha256": SOURCES["ellis"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-13",
+                "method": "arXiv Atom API (export.arxiv.org/api/query?id_list=0806.3414); "
+                          "whitespace-normalized (' '.join(text.split())); bibliographic "
+                          "record independently confirmed via Crossref (DOI/title/journal/pages)",
+                "cross_verified": "bibliographic only — see note",
+                "cross_verification_note": "INSPIRE-HEP serves a byte-identical abstract but "
+                                           "declares its source as 'arXiv', so it MIRRORS the "
+                                           "same upstream and is NOT an independent witness to "
+                                           "the text. We record that rather than claim two "
+                                           "agreeing services: it is the very error this engine "
+                                           "exists to catch. Crossref confirms the bibliographic "
+                                           "record but deposits no abstract text (IOP).",
+                "sources": [
+                    "https://export.arxiv.org/api/query?id_list=0806.3414",
+                    "https://api.crossref.org/works/10.1088/0954-3899/35/11/115004",
+                ],
+            },
+            "verification": "L1",
+            "role": "the LSAG safety assurance — note it is ONE document, though popular "
+                    "accounts sometimes cite 'the LSAG report' and 'Ellis et al. (2008)' as "
+                    "two independent reviews; they are the same paper by the same five authors",
+            "declares_derivation_from": {
+                "what": "the 2003 LHC Safety Study Group report",
+                "quote": "we review their 2003 analysis in light of additional experimental "
+                         "results and theoretical understanding, which enable us to confirm, "
+                         "update and extend the conclusions of the LHC Safety Study Group",
+                "note": "the source itself states it is an UPDATE of the 2003 report, not an "
+                        "independent re-derivation — a second, self-declared non-independence edge",
+            },
+        },
+        method="ingest",
+    )
+    recs["src-giddings-mangano-2008"] = mk(
+        "src-giddings-mangano-2008", "epi:Source",
+        {
+            "title": "Astrophysical implications of hypothetical stable TeV-scale black holes",
+            "authors": "Giddings SB, Mangano MM",
+            "venue": "Physical Review D",
+            "year": 2008, "volume": "78", "pages": "035009",
+            "doi": "10.1103/PhysRevD.78.035009",
+            "arxiv": "0806.3381",
+            "url": "https://arxiv.org/abs/0806.3381",
+            "excerpt_kind": "abstract (arXiv v1, whitespace-normalized)",
+            "excerpt": gm,
+            "excerpt_sha256": SOURCES["giddings-mangano"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-13",
+                "method": "arXiv Atom API (id_list=0806.3381); whitespace-normalized; "
+                          "bibliographic record confirmed via Crossref",
+                "cross_verified": "bibliographic only — INSPIRE mirrors arXiv (see src-ellis-2008)",
+                "sources": [
+                    "https://export.arxiv.org/api/query?id_list=0806.3381",
+                    "https://api.crossref.org/works/10.1103/PhysRevD.78.035009",
+                ],
+            },
+            "verification": "L1",
+            "role": "the paper that PATCHES the hole in the cosmic-ray argument (LHC black "
+                    "holes would be slow-moving, unlike cosmic-ray ones that pass through "
+                    "Earth) by extending it to white dwarfs and neutron stars",
+            "author_overlap_note": "M. L. Mangano is an author of BOTH this paper and "
+                                   "src-ellis-2008 (the LSAG review that leans on it). That is "
+                                   "an independent, author-level non-independence signal on top "
+                                   "of the shared premise.",
+        },
+        method="ingest",
+    )
+    recs["src-jaffe-2000"] = mk(
+        "src-jaffe-2000", "epi:Source",
+        {
+            "title": 'Review of speculative "disaster scenarios" at RHIC',
+            "authors": "Jaffe RL, Busza W, Sandweiss J, Wilczek F",
+            "venue": "Reviews of Modern Physics",
+            "year": 2000, "volume": "72", "pages": "1125-1140",
+            "doi": "10.1103/RevModPhys.72.1125",
+            "arxiv": "hep-ph/9910333",
+            "url": "https://arxiv.org/abs/hep-ph/9910333",
+            "excerpt_kind": "abstract (arXiv, whitespace-normalized)",
+            "excerpt": jaffe,
+            "excerpt_sha256": SOURCES["jaffe"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-13",
+                "method": "arXiv Atom API (id_list=hep-ph/9910333); whitespace-normalized; "
+                          "bibliographic record confirmed via Crossref",
+                "cross_verified": "bibliographic only — INSPIRE mirrors arXiv (see src-ellis-2008)",
+                "sources": [
+                    "https://export.arxiv.org/api/query?id_list=hep-ph/9910333",
+                    "https://api.crossref.org/works/10.1103/RevModPhys.72.1125",
+                ],
+            },
+            "verification": "L1",
+            "role": "a DIFFERENT accelerator (RHIC), a DIFFERENT author team, eight years "
+                    "earlier, a DIFFERENT catastrophe (strangelets) — and the same premise",
+        },
+        method="ingest",
+    )
+
+    cra = "ent-cosmic-ray-argument"
+
+    # --- The three "independent" safety assurances (each leans on the SAME premise) ---
+    mk_claim(
+        recs, "claim-cern-astro-stability",
+        text="The LHC safety review concludes that the collisions cannot be dangerous "
+             "because astronomical bodies subjected to higher-energy cosmic-ray collisions "
+             "are still standing.",
+        subject=cra, source_slug="src-ellis-2008", excerpt=ellis,
+        quote="The stability of astronomical bodies indicates that such collisions cannot be dangerous.",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-lhc-safety",
+        also_derived_from=[cra],
+    )
+    mk_claim(
+        recs, "claim-cern-wd-ns-bound",
+        text="Stable TeV-scale black holes that could accrete the Earth on sub-solar "
+             "timescales are ruled out, because cosmic-ray-produced black holes would "
+             "already have destroyed white dwarfs and neutron stars.",
+        subject=cra, source_slug="src-giddings-mangano-2008", excerpt=gm,
+        quote="black holes produced by cosmic rays impinging on much denser white dwarfs "
+              "and neutron stars would then catalyze their decay on timescales incompatible "
+              "with their known lifetimes",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-lhc-safety",
+        also_derived_from=[cra],
+    )
+    mk_claim(
+        recs, "claim-cern-moon-strangelet",
+        text="Dangerous strangelet production is ruled out empirically, because the Moon "
+             "has survived billions of years of cosmic-ray exposure.",
+        subject=cra, source_slug="src-jaffe-2000", excerpt=jaffe,
+        quote="the continued existence of the Moon, in the form we know it, despite billions "
+              "of years of cosmic ray exposure, provides powerful empirical evidence against "
+              "the possibility of dangerous strangelet production",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-lhc-safety",
+        also_derived_from=[cra],
+    )
+
+    # --- The contrast: a genuinely INDEPENDENT line (theory, not cosmic rays) ---
+    mk_claim(
+        recs, "claim-cern-bh-production-rate",
+        text="The theoretical production rate for black holes in heavy-ion collisions is "
+             "negligible ('absurdly small') on particle-physics grounds alone.",
+        subject=cra, source_slug="src-jaffe-2000", excerpt=jaffe,
+        quote="We estimate the parameters relevant to black hole production; we find that "
+              "they are absurdly small.",
+        label="ENTAILS", rung="L5", lr=4.0, polarity="supports-lhc-safety",
+        # NOTE: deliberately NO edge to ent-cosmic-ray-argument. This line is a rate
+        # calculation; it does not lean on the astrophysical survival bound. Attaching the
+        # premise edge at the *paper* level would over-attribute and manufacture a shared
+        # upstream that is not there — the precise sin this engine exists to catch.
+    )
+
+
+def build_eggs(recs: dict[str, dict]) -> None:
+    """Worked example #2 — "are eggs good for you" (egg consumption and CVD risk).
+
+    The laundered-corroboration structure (VERIFIED against the real literature — and
+    the verification CHANGED the hypothesis; see fixtures/PROVENANCE-eggs.md):
+
+    The hypothesis we set out to test was "the meta-analyses sloppily double-count the
+    same cohorts inside their own pooled estimates". **That is false, and we do not claim
+    it.** The careful reviews state explicit de-duplication rules (Godos: "If more than
+    one study was conducted on the same cohort, only the dataset including the larger
+    number of individuals ... "), and one 2022 review explicitly *finds and removes*
+    participant overlap. No within-review double-count is proven anywhere, and asserting
+    one would be a fabrication.
+
+    The real structure is subtler and worse. The laundering is **between** reviews, at the
+    aggregation layer:
+
+        ent-nhs-hpfs-cohorts          <-- the shared participant backbone (the root)
+              ^                    ^
+        src-hu-1999      src-drouin-chartier-2020      (same nurses/professionals,
+        (NHS+HPFS, 1999)  (NHS+NHS II+HPFS, 2020)       nested follow-up windows)
+              ^                    ^
+              |                    |
+        src-rong-2013        src-godos-2021             (two "independent" meta-analyses
+        (BMJ, 8 articles)    (Eur J Nutr, 39 studies,    that BOTH re-pool that backbone —
+                              "nearly 2 million")         each says so in its own Table 1)
+
+    Every actor is *locally* correct. Each review de-duplicates internally. The failure
+    emerges only in composition: three apparently independent reassuring findings — a 2013
+    BMJ dose-response meta-analysis, a 2021 meta-analysis of 39 studies and "nearly 2
+    million individuals", and a 2020 BMJ three-cohort study + updated meta-analysis — all
+    rest on the same nurses and health professionals. "Nearly 2 million individuals" is not
+    2 million independent people. Reading five agreeing meta-analyses as five confirmations
+    counts one cohort backbone five times.
+
+    That makes this the *sophisticated* exhibit, and a harder one than COVID: there is no
+    villain, no error to point at in any single paper, and the shared upstream is invisible
+    at the claim level — it is **two hops up**, discoverable only by walking the DAG. It is
+    the first real corpus to exercise cairn's transitive shared-ancestor detector (which
+    until now was proven only against a synthetic fixture in tests/test_provenance.py).
+
+    GROUNDING NOTE (the material limitation, recorded not hidden): the meta-analyses do NOT
+    name their constituent cohorts in their abstracts — those edges exist ONLY in Table 1.
+    So the source_doc for the two reviews is the abstract **plus the complete, unedited
+    included-studies table**, extracted deterministically from the Europe PMC open-access
+    JATS XML. A1 explicitly anticipated this extension ("a future L4 version grounded to
+    the open-access PMC full text is a clean extension"). The inclusion edges are therefore
+    evidenced by bytes (`cairn ground`), not asserted by us.
+
+    The contrast (COMBINABLE): Hu 1999 (NHS+HPFS) and Djoussé 2008 (Physicians' Health
+    Study) are two primary analyses of **disjoint participant pools**. Different people,
+    different upstream -> combining IS licensed. (Mirrors Worobey-vs-Pekar.)
+    """
+    hu = load_excerpt("hu-1999")
+    drouin = load_excerpt("drouin-chartier-2020")
+    djousse = load_excerpt("djousse-2008")
+    rong = load_excerpt("rong-2013")
+    godos = load_excerpt("godos-2021")
+
+    # --- the two participant pools (the nouns the primary studies analyse) ---
+    recs["ent-nhs-hpfs-cohorts"] = mk(
+        "ent-nhs-hpfs-cohorts", "epi:Entity",
+        {
+            "name": "The Nurses' Health Study + Health Professionals Follow-up Study cohorts",
+            "aliases": ["NHS", "HPFS", "NHS/HPFS", "the shared cohort backbone"],
+            "kind": "Cohort",
+            "note": "The shared participant backbone of the egg-CVD literature. Hu 1999, "
+                    "Bernstein 2012 and Drouin-Chartier 2020 are analyses of THE SAME PEOPLE "
+                    "over nested follow-up windows (Drouin-Chartier's NHS coronary cases "
+                    "contain Hu's). Both major meta-analyses re-pool them. This node is what "
+                    "the provenance intersection collapses to.",
+            "verification": "L1",
+        },
+    )
+    recs["ent-phs-cohort"] = mk(
+        "ent-phs-cohort", "epi:Entity",
+        {
+            "name": "The Physicians' Health Study I cohort",
+            "aliases": ["PHS", "PHS I"],
+            "kind": "Cohort",
+            "note": "A genuinely DISJOINT participant pool (21,327 male physicians) — the "
+                    "contrast referent. Independence on the provenance dimension really does "
+                    "hold between this and NHS/HPFS.",
+            "verification": "L1",
+        },
+    )
+
+    # --- the primary cohort analyses (each derives from a participant pool) ---
+    recs["src-hu-1999"] = mk(
+        "src-hu-1999", "epi:Source",
+        {
+            "title": "A prospective study of egg consumption and risk of cardiovascular "
+                     "disease in men and women",
+            "authors": "Hu FB, Stampfer MJ, Rimm EB, et al. (12 authors)",
+            "venue": "JAMA", "year": 1999, "volume": "281", "issue": "15", "pages": "1387-1394",
+            "doi": "10.1001/jama.281.15.1387", "pmid": "10217054",
+            "excerpt_kind": "abstract (structured; one labelled section per line)",
+            "excerpt": hu, "excerpt_sha256": SOURCES["hu-1999"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-13",
+                "method": "NCBI E-utilities efetch (PMID 10217054); AbstractText sections "
+                          "serialized as 'LABEL: text', one per line",
+                "sources": ["https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+                            "?db=pubmed&id=10217054&rettype=abstract&retmode=xml"],
+            },
+            "verification": "L1",
+            "role": "the canonical NHS+HPFS egg-CVD analysis — pooled as an input by BOTH "
+                    "downstream meta-analyses",
+        },
+        derived_from=[recs["ent-nhs-hpfs-cohorts"]["id"]], method="ingest",
+    )
+    recs["src-drouin-chartier-2020"] = mk(
+        "src-drouin-chartier-2020", "epi:Source",
+        {
+            "title": "Egg consumption and risk of cardiovascular disease: three large "
+                     "prospective US cohort studies, systematic review, and updated meta-analysis",
+            "authors": "Drouin-Chartier JP, Chen S, Li Y, et al. (10 authors)",
+            "venue": "BMJ", "year": 2020, "volume": "368", "pages": "m513",
+            "doi": "10.1136/bmj.m513", "pmid": "32132002", "pmcid": "PMC7190072",
+            "excerpt_kind": "abstract (structured; one labelled section per line)",
+            "excerpt": drouin, "excerpt_sha256": SOURCES["drouin-chartier-2020"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-13",
+                "method": "NCBI E-utilities efetch (PMID 32132002)",
+                "encoding_note": "the BMJ abstract uses U+2009 THIN SPACE as the digit-group "
+                                 "separator ('83 349' is '83\\u2009349'). The raw bytes are "
+                                 "pinned as retrieved; a naive re-typing of these numbers "
+                                 "would silently fail the span check.",
+                "sources": ["https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+                            "?db=pubmed&id=32132002&rettype=abstract&retmode=xml"],
+            },
+            "verification": "L1",
+            "role": "SIMULTANEOUSLY a primary NHS/NHS-II/HPFS analysis AND a meta-analysis "
+                    "pooling 33 risk estimates — it is both a node and an aggregator, which "
+                    "is exactly how the same participants re-enter the evidence base twice",
+        },
+        derived_from=[recs["ent-nhs-hpfs-cohorts"]["id"]], method="ingest",
+    )
+    recs["src-djousse-2008"] = mk(
+        "src-djousse-2008", "epi:Source",
+        {
+            "title": "Egg consumption in relation to cardiovascular disease and mortality: "
+                     "the Physicians' Health Study",
+            "authors": "Djoussé L, Gaziano JM",
+            "venue": "American Journal of Clinical Nutrition", "year": 2008,
+            "volume": "87", "issue": "4", "pages": "964-969",
+            "doi": "10.1093/ajcn/87.4.964", "pmid": "18400720", "pmcid": "PMC2386667",
+            "excerpt_kind": "abstract (structured; one labelled section per line)",
+            "excerpt": djousse, "excerpt_sha256": SOURCES["djousse-2008"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-13",
+                "method": "NCBI E-utilities efetch (PMID 18400720)",
+                "sources": ["https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+                            "?db=pubmed&id=18400720&rettype=abstract&retmode=xml"],
+            },
+            "verification": "L1",
+            "role": "a DISJOINT participant pool (PHS) — the combinable contrast",
+        },
+        derived_from=[recs["ent-phs-cohort"]["id"]], method="ingest",
+    )
+
+    # --- the two "independent" meta-analyses (each re-pools the same backbone) ---
+    # derivedFrom is not asserted: each edge is evidenced, byte-for-byte, by a
+    # claim grounded in that review's own Table 1 (see the structural claims below).
+    recs["src-rong-2013"] = mk(
+        "src-rong-2013", "epi:Source",
+        {
+            "title": "Egg consumption and risk of coronary heart disease and stroke: "
+                     "dose-response meta-analysis of prospective cohort studies",
+            "authors": "Rong Y, Chen L, Zhu T, et al. (9 authors)",
+            "venue": "BMJ", "year": 2013, "volume": "346", "pages": "e8539",
+            "doi": "10.1136/bmj.e8539", "pmid": "23295181", "pmcid": "PMC3538567",
+            "excerpt_kind": "abstract + Table 1 (included studies), complete and unedited",
+            "excerpt": rong, "excerpt_sha256": SOURCES["rong-2013"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-13",
+                "method": "abstract via NCBI E-utilities efetch (PMID 23295181); Table 1 via "
+                          "Europe PMC open-access JATS XML (PMC3538567), extracted "
+                          "deterministically: cells whitespace-normalized and joined with "
+                          "' | ', rows with newlines. The COMPLETE table ships — trimming "
+                          "rows to the convenient ones would be cherry-picking.",
+                "encoding_note": "Table 1 uses U+2019 RIGHT SINGLE QUOTATION MARK in "
+                                 "“Nurses’ Health Study”; the ASCII apostrophe "
+                                 "would not match.",
+                "sources": [
+                    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=23295181&rettype=abstract&retmode=xml",
+                    "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3538567/fullTextXML",
+                ],
+            },
+            "verification": "L1",
+            "role": "meta-analysis #1 — presents as independent evidence; its Table 1 lists "
+                    "Hu 1999 (NHS + HPFS) and Djoussé 2008 (PHS) as pooled inputs",
+        },
+        derived_from=[recs["src-hu-1999"]["id"], recs["src-djousse-2008"]["id"]],
+        method="aggregate",
+    )
+    recs["src-godos-2021"] = mk(
+        "src-godos-2021", "epi:Source",
+        {
+            "title": "Egg consumption and cardiovascular risk: a dose-response meta-analysis "
+                     "of prospective cohort studies",
+            "authors": "Godos J, Micek A, Brzostek T, et al. (10 authors)",
+            "venue": "European Journal of Nutrition", "year": 2021,
+            "volume": "60", "issue": "4", "pages": "1833-1862",
+            "doi": "10.1007/s00394-020-02345-7", "pmid": "32865658", "pmcid": "PMC8137614",
+            "excerpt_kind": "abstract + Table 1 (included studies), complete and unedited",
+            "excerpt": godos, "excerpt_sha256": SOURCES["godos-2021"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-13",
+                "method": "abstract via NCBI E-utilities efetch (PMID 32865658); Table 1 via "
+                          "Europe PMC open-access JATS XML (PMC8137614), same deterministic "
+                          "extraction as src-rong-2013",
+                "sources": [
+                    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=32865658&rettype=abstract&retmode=xml",
+                    "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8137614/fullTextXML",
+                ],
+            },
+            "verification": "L1",
+            "role": "meta-analysis #2 — 39 studies, 'nearly 2 million individuals'. Its Table 1 "
+                    "lists Hu 1999, Drouin-Chartier 2020 AND Djoussé 2008. The headline scale "
+                    "is not a headcount of independent people.",
+            "honest_note": "Godos states an explicit de-duplication rule, so we do NOT claim it "
+                           "double-counts internally. The non-independence is BETWEEN reviews, "
+                           "not inside this one.",
+        },
+        derived_from=[
+            recs["src-hu-1999"]["id"],
+            recs["src-drouin-chartier-2020"]["id"],
+            recs["src-djousse-2008"]["id"],
+        ],
+        method="aggregate",
+    )
+
+    cohorts = "ent-nhs-hpfs-cohorts"
+
+    # --- The three "independent" reassuring findings (the laundered set) ---
+    mk_claim(
+        recs, "claim-eggs-rong-no-association",
+        text="A dose-response meta-analysis of prospective cohort studies (BMJ 2013) finds "
+             "that eating up to one egg per day is not associated with increased risk of "
+             "coronary heart disease or stroke.",
+        subject=cohorts, source_slug="src-rong-2013", excerpt=rong,
+        quote="Higher consumption of eggs (up to one egg per day) is not associated with "
+              "increased risk of coronary heart disease or stroke.",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-eggs-benign",
+    )
+    mk_claim(
+        recs, "claim-eggs-godos-no-association",
+        text="A dose-response meta-analysis of 39 studies covering nearly 2 million "
+             "individuals (Eur J Nutr 2021) finds no conclusive evidence that eggs raise "
+             "cardiovascular disease risk.",
+        subject=cohorts, source_slug="src-godos-2021", excerpt=godos,
+        quote="There is no conclusive evidence on the role of egg in CVD risk",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-eggs-benign",
+    )
+    mk_claim(
+        recs, "claim-eggs-drouin-no-association",
+        text="Three large prospective US cohorts plus an updated meta-analysis of 33 risk "
+             "estimates (BMJ 2020) find that an extra egg per day is not associated with "
+             "cardiovascular disease risk.",
+        subject=cohorts, source_slug="src-drouin-chartier-2020", excerpt=drouin,
+        quote="an increase of one egg per day was not associated with cardiovascular disease risk",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-eggs-benign",
+    )
+
+    # --- The STRUCTURAL claims: they evidence the derivedFrom edges with bytes. ---
+    # No illustrative_LR: these are evidence ABOUT the DAG, not lines to be combined.
+    mk_claim(
+        recs, "claim-eggs-rong-pools-nhs-hpfs",
+        text="The BMJ 2013 meta-analysis lists Hu 1999's Nurses' Health Study and Health "
+             "Professionals Follow-up Study analyses among its pooled input studies.",
+        subject=cohorts, source_slug="src-rong-2013", excerpt=rong,
+        quote="Hu et al36 | 1999 | Nurses’ Health Study | USA | Female",
+        label="ENTAILS", rung="L5",
+    )
+    mk_claim(
+        recs, "claim-eggs-godos-pools-nhs-hpfs",
+        text="The Eur J Nutr 2021 meta-analysis lists Hu 1999 (HPFS + NHS) among its pooled "
+             "input studies — the same cohort backbone the BMJ 2013 meta-analysis pools.",
+        subject=cohorts, source_slug="src-godos-2021", excerpt=godos,
+        quote="Hu [16] | HPFS, 1986 and NHS, 1980 (US)",
+        label="ENTAILS", rung="L5",
+    )
+    mk_claim(
+        recs, "claim-eggs-godos-pools-drouin",
+        text="The Eur J Nutr 2021 meta-analysis ALSO pools Drouin-Chartier 2020, which "
+             "re-analyses the same NHS/HPFS participants over a longer follow-up window — so "
+             "the backbone enters this review by two separate paths.",
+        subject=cohorts, source_slug="src-godos-2021", excerpt=godos,
+        quote="Drouin-Chartier [48] | HPFS, 1986, NHS, 1980, NHS II, 1991 (US)",
+        label="ENTAILS", rung="L5",
+    )
+
+    # --- The contrast: two primary analyses of DISJOINT participant pools ---
+    mk_claim(
+        recs, "claim-eggs-hu-no-association",
+        text="The 1999 NHS + HPFS analysis found no significant overall association between "
+             "egg consumption and coronary heart disease or stroke.",
+        subject=cohorts, source_slug="src-hu-1999", excerpt=hu,
+        quote="we found no evidence of an overall significant association between egg "
+              "consumption and risk of CHD or stroke in either men or women",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-eggs-benign",
+    )
+    mk_claim(
+        recs, "claim-eggs-djousse-no-association",
+        text="The Physicians' Health Study I analysis (a disjoint cohort of 21,327 male "
+             "physicians) found egg consumption not associated with incident myocardial "
+             "infarction or stroke.",
+        subject="ent-phs-cohort", source_slug="src-djousse-2008", excerpt=djousse,
+        quote="Egg consumption was not associated with incident MI or stroke in a "
+              "multivariate Cox regression.",
+        label="ENTAILS", rung="L5", lr=4.0, polarity="supports-eggs-benign",
+    )
 
 
 def main() -> int:
@@ -238,27 +966,47 @@ def main() -> int:
         "ENTAILS", "L4", 4.0,
     )
 
-    # --- self-verify before writing: grounding resolves + trio refuses + contrast combines ---
+    # --- the other worked examples (floor deliverable #3, dev/cairn#9) ---
+    build_eggs(recs)
+    build_cern(recs)
+
+    # --- self-verify before writing: every case's declared structure must actually hold ---
     store = {r["id"]: r for r in recs.values()}
     report = grounding.check_store(store)
     assert report["ok"], ("grounding failed", report["failed"])
-    trio = [recs[s]["id"] for s in (
-        "claim-geographic-clustering", "claim-environmental-sampling", "claim-live-mammal-sales")]
-    assert provenance.combine_verdict(trio, store)["verdict"] == "REFUSE-TO-COMBINE"
-    contrast = [recs["claim-geographic-clustering"]["id"], recs["claim-two-lineages"]["id"]]
-    assert provenance.combine_verdict(contrast, store)["verdict"] == "COMBINABLE"
 
-    # --- write one file per record + an index ---
+    for case_id, case in CASES.items():
+        laundered = [recs[s]["id"] for s in case["laundered_set"]]
+        v = provenance.combine_verdict(laundered, store)
+        assert v["verdict"] == "REFUSE-TO-COMBINE", (case_id, "laundered set did not refuse", v)
+        # The declared upstream must be shared by EVERY line, not merely by some pair —
+        # that is the actual claim each case makes, so check the collective intersection.
+        collective = provenance.shared_upstreams(laundered, store)["collective_shared"]
+        shared = recs[case["shared_upstream"]]["id"]
+        assert shared in collective, (
+            case_id, "the declared shared upstream is not shared by ALL lines",
+            case["shared_upstream"], [r for r in collective])
+        if case.get("contrast_pair"):
+            pair = [recs[s]["id"] for s in case["contrast_pair"]]
+            cv = provenance.combine_verdict(pair, store)
+            assert cv["verdict"] == "COMBINABLE", (case_id, "contrast pair did not combine", cv)
+
+    # --- write one file per record + an index + the case manifest ---
     index = {}
     for slug, rec in recs.items():
         (OUT / f"{slug}.json").write_text(json.dumps(rec, indent=2, ensure_ascii=False) + "\n")
         index[slug] = rec["id"]
     (OUT / "INDEX.json").write_text(json.dumps(index, indent=2) + "\n")
+    (OUT / "CASES.json").write_text(json.dumps(CASES, indent=2, ensure_ascii=False) + "\n")
 
-    print(f"minted {len(recs)} vetted records -> {OUT}")
+    print(f"minted {len(recs)} vetted records across {len(CASES)} worked examples -> {OUT}")
     print(f"  grounding: {report['grounded']}/{report['checked']} claims resolve, ok={report['ok']}")
+    for case_id, case in CASES.items():
+        print(f"  [{case_id}] shared upstream = {case['shared_upstream']} "
+              f"-> REFUSE over {len(case['laundered_set'])} lines"
+              + ("" if case.get("contrast_pair") else "  (no combinable contrast — see PROVENANCE)"))
     for slug, rid in index.items():
-        print(f"  {slug:30s} {rid}")
+        print(f"  {slug:32s} {rid}")
     return 0
 
 

@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:tvY41OMg74xjK-siHQUYYzR3t0XErSyEsrn_7VW7hM4",
+  "assertion": {
+    "text": "The LHC safety review concludes that the collisions cannot be dangerous because astronomical bodies subjected to higher-energy cosmic-ray collisions are still standing.",
+    "subject": "tt:d-YAhSNoApLNm3rFdK-vVmRkyP64d0eXqIU9xSG5UhM",
+    "grounding": {
+      "source": "tt:K81eDFZjx2OryFUbKp0SwJgPJ1OdStfg3kCCQFSZc-o",
+      "char_span": [
+        758,
+        846
+      ],
+      "quote": "The stability of astronomical bodies indicates that such collisions cannot be dangerous.",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "030c49f7802c2564f5ae9115af3e65c3da314533c520b67c6ab9b3fd24c68e90"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-lhc-safety"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:K81eDFZjx2OryFUbKp0SwJgPJ1OdStfg3kCCQFSZc-o",
+      "tt:d-YAhSNoApLNm3rFdK-vVmRkyP64d0eXqIU9xSG5UhM"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "9ffe91403d33964e4115135f0a46a08d934d3f3a886b1891b0d75ecc39f88853d1dc91ea064abe8a69b4c69f49c255e5e019dd011e9f7f39b9a786e4c752590f",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

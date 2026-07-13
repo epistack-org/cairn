@@ -1,0 +1,39 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:GmQZflWUL7m3i2y9lcqBiesJMJpOYcaYF2XtnEBkt0Y",
+  "assertion": {
+    "text": "The Physicians' Health Study I analysis (a disjoint cohort of 21,327 male physicians) found egg consumption not associated with incident myocardial infarction or stroke.",
+    "subject": "tt:BFddlAPXU6ZkraOwbjs3WNgFnV7lFF-6_JvfqW8bsTs",
+    "grounding": {
+      "source": "tt:DdTqMO_UbBURTYSeFGpa8yUBuxMj4xj5UIVhuQG5m5o",
+      "char_span": [
+        738,
+        833
+      ],
+      "quote": "Egg consumption was not associated with incident MI or stroke in a multivariate Cox regression.",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "4b21e2cb029cd3779142f162fa16f6fec91c0c3e4439681182ac58569706f8ca"
+    },
+    "verification": "L5",
+    "illustrative_LR": 4.0,
+    "polarity": "supports-eggs-benign"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:DdTqMO_UbBURTYSeFGpa8yUBuxMj4xj5UIVhuQG5m5o"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "8432858d32e6542de5b4ac922b74bba7a53239931f7bd6ff5878527ac9f198845be4d31bb4ec45b389774712810abb9860af7fe79a08e86863ead5785c0ab408",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

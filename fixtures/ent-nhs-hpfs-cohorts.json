@@ -1,0 +1,31 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:1QbyJPrVKK2eKnqaxGRQToJvfVAUWtgXqhIrb3scw90",
+  "assertion": {
+    "name": "The Nurses' Health Study + Health Professionals Follow-up Study cohorts",
+    "aliases": [
+      "NHS",
+      "HPFS",
+      "NHS/HPFS",
+      "the shared cohort backbone"
+    ],
+    "kind": "Cohort",
+    "note": "The shared participant backbone of the egg-CVD literature. Hu 1999, Bernstein 2012 and Drouin-Chartier 2020 are analyses of THE SAME PEOPLE over nested follow-up windows (Drouin-Chartier's NHS coronary cases contain Hu's). Both major meta-analyses re-pool them. This node is what the provenance intersection collapses to.",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "3b9a0ce656a0657ea282ac7f4114be4d7bfd44d79117b867049cffea5df5ec31337ca066d2ec87d58fa3958b2f92e8e63af74e4f3e3c0f71f4c9e9bd70f3730e",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

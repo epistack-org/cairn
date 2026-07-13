@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:2necAxk8UpowidsvKulrcdyYL9gomuR7D3SWkfNfLFI",
+  "assertion": {
+    "text": "Stable TeV-scale black holes that could accrete the Earth on sub-solar timescales are ruled out, because cosmic-ray-produced black holes would already have destroyed white dwarfs and neutron stars.",
+    "subject": "tt:d-YAhSNoApLNm3rFdK-vVmRkyP64d0eXqIU9xSG5UhM",
+    "grounding": {
+      "source": "tt:Hw11wKEDBmPnv1Z-i6gT8zwX6mldCtceEc57qMSxBU0",
+      "char_span": [
+        682,
+        859
+      ],
+      "quote": "black holes produced by cosmic rays impinging on much denser white dwarfs and neutron stars would then catalyze their decay on timescales incompatible with their known lifetimes",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "36ed1846d1d8fccac5a8bcd37f6a0516c0ac96f0801650d45438ab2da95d2a33"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-lhc-safety"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:Hw11wKEDBmPnv1Z-i6gT8zwX6mldCtceEc57qMSxBU0",
+      "tt:d-YAhSNoApLNm3rFdK-vVmRkyP64d0eXqIU9xSG5UhM"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "b8dfc1d5fc5af64a7992be0b9273ee77260bf7eee8990a14ffe6be1637e178441422123da641575baa0a2b8de798df1e2abce21a47e83c117899a57bb6f7a305",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

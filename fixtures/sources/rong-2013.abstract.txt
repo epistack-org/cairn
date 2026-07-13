@@ -1,0 +1,21 @@
+OBJECTIVE: To investigate and quantify the potential dose-response association between egg consumption and risk of coronary heart disease and stroke.
+DESIGN: Dose-response meta-analysis of prospective cohort studies.
+DATA SOURCES: PubMed and Embase prior to June 2012 and references of relevant original papers and review articles.
+ELIGIBILITY CRITERIA FOR SELECTING STUDIES: Prospective cohort studies with relative risks and 95% confidence intervals of coronary heart disease or stroke for three or more categories of egg consumption.
+RESULTS: Eight articles with 17 reports (nine for coronary heart disease, eight for stroke) were eligible for inclusion in the meta-analysis (3,081,269 person years and 5847 incident cases for coronary heart disease, and 4,148,095 person years and 7579 incident cases for stroke). No evidence of a curve linear association was seen between egg consumption and risk of coronary heart disease or stroke (P=0.67 and P=0.27 for non-linearity, respectively). The summary relative risk of coronary heart disease for an increase of one egg consumed per day was 0.99 (95% confidence interval 0.85 to 1.15; P=0.88 for linear trend) without heterogeneity among studies (P=0.97, I(2)=0%). For stroke, the combined relative risk for an increase of one egg consumed per day was 0.91 (0.81 to 1.02; P=0.10 for linear trend) without heterogeneity among studies (P=0.46, I(2)=0%). In a subgroup analysis of diabetic populations, the relative risk of coronary heart disease comparing the highest with the lowest egg consumption was 1.54 (1.14 to 2.09; P=0.01). In addition, people with higher egg consumption had a 25% (0.57 to 0.99; P=0.04) lower risk of developing hemorrhagic stroke.
+CONCLUSIONS: Higher consumption of eggs (up to one egg per day) is not associated with increased risk of coronary heart disease or stroke. The increased risk of coronary heart disease among diabetic patients and reduced risk of hemorrhagic stroke associated with higher egg consumption in subgroup analyses warrant further studies.
+
+Table 1. Characteristics of participants and follow-up in included studies of egg consumption in relation to risk of coronary heart disease and stroke
+Author | Publication year | Study name | Country | Sex of population | Age at baseline (years) | No of participants | Mean length of follow-up (years) | Endpoints (No of cases)
+Hu et al36 | 1999 | Health Professionals Follow-up Study | USA | Male | 40-75 | 37 851 | 8 | Coronary heart disease (866)
+Hu et al36 | 1999 | Nurses’ Health Study | USA | Female | 34-59 | 80 082 | 14 | Coronary heart disease (939)
+Sauvaget et al39 | 2003 | Hiroshima/Nagasaki Life Span Study | Japan | Male and female | 34-103 | 34 807 | 16-17 | Stroke mortality (1259)
+Nakamura et al37 | 2004 | NIPPON DATA80 | Japan | Male | 30+ | 4077 | 14 | Ischemic heart disease mortality (39), stroke mortality (112)
+Nakamura et al37 | 2004 | NIPPON DATA80 | Japan | Female | 30+ | 5186 | 14 | Ischemic heart disease mortality (41), stroke mortality (107)
+Nakamura et al40 | 2006 | Japan Public Health Center-based prospective study | Japan | Male and female | 40-69 | 90 735 | 10.2 | Coronary heart disease (462)
+Qureshi et al41 | 2007 | NHANES-I | USA | Male and female | 25-74 | 9734 | 20 | Coronary artery disease (1584), stroke (655)
+Djousse et al42 | 2008 | Physicians’ Health Study I | USA | Male | 40-85 | 21 327 | 20 | Myocardial infarction (1550), stroke (1342)
+Scrafford et al34 | 2011 | NHANES III | USA | Male | 17+ | 6833 | 8.8 | Coronary heart disease mortality (198), stroke mortality (63)
+Scrafford et al34 | 2011 | NHANES III | USA | Female | 17+ | 8113 | 8.9 | Coronary heart disease mortality (168), stroke mortality (74)
+Bernstein et al38 | 2012 | Health Professionals Follow-Up Study | USA | Male | 40-75 | 43 150 | 22 | Stroke (1397)
+Bernstein et al38 | 2012 | Nurses’ Health Study | USA | Female | 30-55 | 84 010 | 26 | Stroke (2633)

@@ -119,4 +119,7 @@ def test_fixtures_corpus_is_fully_grounded_and_valid():
         assert envelope.validate(rec) == [], (slug, envelope.validate(rec))
     report = grounding.check_store(store)
     assert report["ok"], report["failed"]
-    assert report["grounded"] == report["checked"] == 4
+    # every claim in the corpus is span-grounded — across all three worked examples
+    n_claims = sum(1 for r in store.values() if r["@type"] == "epi:Claim")
+    assert report["grounded"] == report["checked"] == n_claims
+    assert n_claims >= 16, "the 3-case corpus should carry at least 16 grounded claims"

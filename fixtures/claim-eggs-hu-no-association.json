@@ -1,0 +1,39 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:Z56csQ_wJDqhPyId0IM-cOnrsAajupwOu1ndr21flqc",
+  "assertion": {
+    "text": "The 1999 NHS + HPFS analysis found no significant overall association between egg consumption and coronary heart disease or stroke.",
+    "subject": "tt:1QbyJPrVKK2eKnqaxGRQToJvfVAUWtgXqhIrb3scw90",
+    "grounding": {
+      "source": "tt:vCghXI-h4mRDAwdB_ja5ZH-fV62L9-CLSAjFfnaugoI",
+      "char_span": [
+        1130,
+        1261
+      ],
+      "quote": "we found no evidence of an overall significant association between egg consumption and risk of CHD or stroke in either men or women",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "ce74e4ba732856e977c96ddd3cba2480a85ce33eba8e16e0720ada87c1162769"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-eggs-benign"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:vCghXI-h4mRDAwdB_ja5ZH-fV62L9-CLSAjFfnaugoI"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "a5b4585529b96b05cd3b5e0cdb491da31f53d7250fcab5b773b40521ed931d688b2a467ea3e13897e22b2911eebf51b731970bb69011f443f0383271621a3d0a",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

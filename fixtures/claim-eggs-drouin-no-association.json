@@ -1,0 +1,39 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:vyHpomv2FRdZh58O7ameD2vYr_9XP2QI2u89JapuspA",
+  "assertion": {
+    "text": "Three large prospective US cohorts plus an updated meta-analysis of 33 risk estimates (BMJ 2020) find that an extra egg per day is not associated with cardiovascular disease risk.",
+    "subject": "tt:1QbyJPrVKK2eKnqaxGRQToJvfVAUWtgXqhIrb3scw90",
+    "grounding": {
+      "source": "tt:wVKoOkKGN0WBsqYJgUDNNYNndhSwvurqcSs25gG2C5M",
+      "char_span": [
+        1629,
+        1711
+      ],
+      "quote": "an increase of one egg per day was not associated with cardiovascular disease risk",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "69e0dd0797c9dd95bf70517efcaf6ad105d0c93d252e6a15df90b173cd34f786"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-eggs-benign"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:wVKoOkKGN0WBsqYJgUDNNYNndhSwvurqcSs25gG2C5M"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "f48697115baadabc00c4f6a5a0ac44d0a04d2909ef609b5039e0796feb4bc4589f945dc8ed79554f784ee117feb8b5498efe7076881b706f3108d555e32dde03",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

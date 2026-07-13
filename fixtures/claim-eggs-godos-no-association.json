@@ -1,0 +1,39 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:Y62-foYE4korb84Hj41D3Xt-m0gKXsnrQRxapqEU35E",
+  "assertion": {
+    "text": "A dose-response meta-analysis of 39 studies covering nearly 2 million individuals (Eur J Nutr 2021) finds no conclusive evidence that eggs raise cardiovascular disease risk.",
+    "subject": "tt:1QbyJPrVKK2eKnqaxGRQToJvfVAUWtgXqhIrb3scw90",
+    "grounding": {
+      "source": "tt:Pw5mj-DNntkCZfmYOLyovcxKpP1hpeBgh_doWCbGPd0",
+      "char_span": [
+        1845,
+        1907
+      ],
+      "quote": "There is no conclusive evidence on the role of egg in CVD risk",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "0cd54915d2077111969e052717153e89314a5ce3226f1849b6f4e333313a1faf"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-eggs-benign"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:Pw5mj-DNntkCZfmYOLyovcxKpP1hpeBgh_doWCbGPd0"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "0311761fd76273ee2d2b9c6cbb77cb1861bb0fad06ee481754405109b4b2e3cdd6358932c76bed7f17b435206a452ddc1453fc1ea52ce69f37dd6c71071b990e",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

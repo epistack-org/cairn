@@ -1,0 +1,45 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:wVKoOkKGN0WBsqYJgUDNNYNndhSwvurqcSs25gG2C5M",
+  "assertion": {
+    "title": "Egg consumption and risk of cardiovascular disease: three large prospective US cohort studies, systematic review, and updated meta-analysis",
+    "authors": "Drouin-Chartier JP, Chen S, Li Y, et al. (10 authors)",
+    "venue": "BMJ",
+    "year": 2020,
+    "volume": "368",
+    "pages": "m513",
+    "doi": "10.1136/bmj.m513",
+    "pmid": "32132002",
+    "pmcid": "PMC7190072",
+    "excerpt_kind": "abstract (structured; one labelled section per line)",
+    "excerpt": "OBJECTIVE: To evaluate the association between egg intake and cardiovascular disease risk among women and men in the United States, and to conduct a meta-analysis of prospective cohort studies.\nDESIGN: Prospective cohort study, and a systematic review and meta-analysis of prospective cohort studies.\nSETTING: Nurses' Health Study (NHS, 1980-2012), NHS II (1991-2013), Health Professionals' Follow-Up Study (HPFS, 1986-2012).\nPARTICIPANTS: Cohort analyses included 83 349 women from NHS, 90 214 women from NHS II, and 42 055 men from HPFS who were free of cardiovascular disease, type 2 diabetes, and cancer at baseline.\nMAIN OUTCOME MEASURES: Incident cardiovascular disease, which included non-fatal myocardial infarction, fatal coronary heart disease, and stroke.\nRESULTS: Over up to 32 years of follow-up (>5.54 million person years), 14 806 participants with incident cardiovascular disease were identified in the three cohorts. Participants with a higher egg intake had a higher body mass index, were less likely to be treated with statins, and consumed more red meats. Most people consumed between one and less than five eggs per week. In the pooled multivariable analysis, consumption of at least one egg per day was not associated with incident cardiovascular disease risk after adjustment for updated lifestyle and dietary factors associated with egg intake (hazard ratio for at least one egg per day v less than one egg per month 0.93, 95% confidence interval 0.82 to 1.05). In the updated meta-analysis of prospective cohort studies (33 risk estimates, 1 720 108 participants, 139 195 cardiovascular disease events), an increase of one egg per day was not associated with cardiovascular disease risk (pooled relative risk 0.98, 95% confidence interval 0.93 to 1.03, I2=62.3%). Results were similar for coronary heart disease (21 risk estimates, 1 411 261 participants, 59 713 coronary heart disease events; 0.96, 0.91 to 1.03, I2=38.2%), and stroke (22 risk estimates, 1 059 315 participants, 53 617 stroke events; 0.99, 0.91 to 1.07, I2=71.5%). In analyses stratified by geographical location (P for interaction=0.07), no association was found between egg consumption and cardiovascular disease risk among US cohorts (1.01, 0.96 to 1.06, I2=30.8%) or European cohorts (1.05, 0.92 to 1.19, I2=64.7%), but an inverse association was seen in Asian cohorts (0.92, 0.85 to 0.99, I2=44.8%).\nCONCLUSIONS: Results from the three cohorts and from the updated meta-analysis show that moderate egg consumption (up to one egg per day) is not associated with cardiovascular disease risk overall, and is associated with potentially lower cardiovascular disease risk in Asian populations.\nSYSTEMATIC REVIEW REGISTRATION: PROSPERO CRD42019129650.",
+    "excerpt_sha256": "69e0dd0797c9dd95bf70517efcaf6ad105d0c93d252e6a15df90b173cd34f786",
+    "retrieval": {
+      "fetched_at": "2026-07-13",
+      "method": "NCBI E-utilities efetch (PMID 32132002)",
+      "encoding_note": "the BMJ abstract uses U+2009 THIN SPACE as the digit-group separator ('83 349' is '83\\u2009349'). The raw bytes are pinned as retrieved; a naive re-typing of these numbers would silently fail the span check.",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=32132002&rettype=abstract&retmode=xml"
+      ]
+    },
+    "verification": "L1",
+    "role": "SIMULTANEOUSLY a primary NHS/NHS-II/HPFS analysis AND a meta-analysis pooling 33 risk estimates — it is both a node and an aggregator, which is exactly how the same participants re-enter the evidence base twice"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:1QbyJPrVKK2eKnqaxGRQToJvfVAUWtgXqhIrb3scw90"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "6eb6451c2a9d946e9ca39cef1ce3e31d31e826e0ee9b1ea039158d7acf70eda02054bcac86750b30138915a4b78e0f0d999f752de5941bf27e3e7ed97119ad03",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:baacmf6eGIapNxCN3EnTP1bLMVZ6kyLvp-ZmnUG3Jgk",
+  "assertion": {
+    "text": "A dose-response meta-analysis of prospective cohort studies (BMJ 2013) finds that eating up to one egg per day is not associated with increased risk of coronary heart disease or stroke.",
+    "subject": "tt:1QbyJPrVKK2eKnqaxGRQToJvfVAUWtgXqhIrb3scw90",
+    "grounding": {
+      "source": "tt:Mb5LxEcVlQzV1NZMbKaHikexGKDsNnAILcjBq-fwnU0",
+      "char_span": [
+        1720,
+        1845
+      ],
+      "quote": "Higher consumption of eggs (up to one egg per day) is not associated with increased risk of coronary heart disease or stroke.",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "c0b06aab867e54989aaabc8852bbd18814cc2f1c3bbdf59e87b9a31615f3729c"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-eggs-benign"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:Mb5LxEcVlQzV1NZMbKaHikexGKDsNnAILcjBq-fwnU0"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "fd9df065b1d771d8b2d42fbc81ebf84e1d86fe8feef5fccb36efa3aed79d2a31a6628f2bde5f1456b13427302ea0529078ea141662fc893c088d963349adec02",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

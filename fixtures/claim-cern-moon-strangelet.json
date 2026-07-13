@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:SRGO39ulLAud4emH3cnyGK7wAdwhERLKHmjDnKgP9kc",
+  "assertion": {
+    "text": "Dangerous strangelet production is ruled out empirically, because the Moon has survived billions of years of cosmic-ray exposure.",
+    "subject": "tt:d-YAhSNoApLNm3rFdK-vVmRkyP64d0eXqIU9xSG5UhM",
+    "grounding": {
+      "source": "tt:wxzUg3iEzPXs15wQpPAIe2-AqiucQqMJ54BmAtNvbGY",
+      "char_span": [
+        1090,
+        1296
+      ],
+      "quote": "the continued existence of the Moon, in the form we know it, despite billions of years of cosmic ray exposure, provides powerful empirical evidence against the possibility of dangerous strangelet production",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "4f1bf34242c2eb1c83cfbe6e756fb6e16f7b92042dc6e3393b7059ee1f14ae9c"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-lhc-safety"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:wxzUg3iEzPXs15wQpPAIe2-AqiucQqMJ54BmAtNvbGY",
+      "tt:d-YAhSNoApLNm3rFdK-vVmRkyP64d0eXqIU9xSG5UhM"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "02df2287e4899cb0712f14155b3d128a383e594c48e41a1ce93bca8a2e28f9bf4d6eeb798a393b05d8a3f8764701fe20c27932096e758121ded4ea43c0e58501",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

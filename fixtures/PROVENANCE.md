@@ -1,5 +1,11 @@
 # COVID-HSM mini-corpus — provenance & vetting record
 
+> **One of three.** Cairn ships three worked examples; this is the vetting record for the
+> COVID case. See also [`PROVENANCE-eggs.md`](PROVENANCE-eggs.md) (the shared **cohort**
+> backbone, found transitively) and [`PROVENANCE-cern.md`](PROVENANCE-cern.md) (the shared
+> **premise**). Each case's structure is declared in [`CASES.json`](CASES.json) and
+> mechanically verified at build time.
+
 _Roadmap A1 (). This corpus replaced the earlier
 `unverified-fixture` records with **real, span-grounded, entailment-labeled**
 claims. Vetting standard: **fabricated provenance is the F0 sin the project exists

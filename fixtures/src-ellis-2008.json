@@ -1,0 +1,51 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:K81eDFZjx2OryFUbKp0SwJgPJ1OdStfg3kCCQFSZc-o",
+  "assertion": {
+    "title": "Review of the Safety of LHC Collisions",
+    "authors": "Ellis J, Giudice G, Mangano ML, Tkachev I, Wiedemann U (the CERN LHC Safety Assessment Group, LSAG)",
+    "venue": "Journal of Physics G: Nuclear and Particle Physics",
+    "year": 2008,
+    "volume": "35",
+    "issue": "11",
+    "pages": "115004",
+    "doi": "10.1088/0954-3899/35/11/115004",
+    "arxiv": "0806.3414",
+    "url": "https://arxiv.org/abs/0806.3414",
+    "excerpt_kind": "abstract (arXiv v1, whitespace-normalized)",
+    "excerpt": "The safety of collisions at the Large Hadron Collider (LHC) was studied in 2003 by the LHC Safety Study Group, who concluded that they presented no danger. Here we review their 2003 analysis in light of additional experimental results and theoretical understanding, which enable us to confirm, update and extend the conclusions of the LHC Safety Study Group. The LHC reproduces in the laboratory, under controlled conditions, collisions at centre-of-mass energies less than those reached in the atmosphere by some of the cosmic rays that have been bombarding the Earth for billions of years. We recall the rates for the collisions of cosmic rays with the Earth, Sun, neutron stars, white dwarfs and other astronomical bodies at energies higher than the LHC. The stability of astronomical bodies indicates that such collisions cannot be dangerous. Specifically, we study the possible production at the LHC of hypothetical objects such as vacuum bubbles, magnetic monopoles, microscopic black holes and strangelets, and find no associated risks. Any microscopic black holes produced at the LHC are expected to decay by Hawking radiation before they reach the detector walls. If some microscopic black holes were stable, those produced by cosmic rays would be stopped inside the Earth or other astronomical bodies. The stability of astronomical bodies constrains strongly the possible rate of accretion by any such microscopic black holes, so that they present no conceivable danger. In the case of strangelets, the good agreement of measurements of particle production at RHIC with simple thermodynamic models constrains severely the production of strangelets in heavy-ion collisions at the LHC, which also present no danger.",
+    "excerpt_sha256": "030c49f7802c2564f5ae9115af3e65c3da314533c520b67c6ab9b3fd24c68e90",
+    "retrieval": {
+      "fetched_at": "2026-07-13",
+      "method": "arXiv Atom API (export.arxiv.org/api/query?id_list=0806.3414); whitespace-normalized (' '.join(text.split())); bibliographic record independently confirmed via Crossref (DOI/title/journal/pages)",
+      "cross_verified": "bibliographic only — see note",
+      "cross_verification_note": "INSPIRE-HEP serves a byte-identical abstract but declares its source as 'arXiv', so it MIRRORS the same upstream and is NOT an independent witness to the text. We record that rather than claim two agreeing services: it is the very error this engine exists to catch. Crossref confirms the bibliographic record but deposits no abstract text (IOP).",
+      "sources": [
+        "https://export.arxiv.org/api/query?id_list=0806.3414",
+        "https://api.crossref.org/works/10.1088/0954-3899/35/11/115004"
+      ]
+    },
+    "verification": "L1",
+    "role": "the LSAG safety assurance — note it is ONE document, though popular accounts sometimes cite 'the LSAG report' and 'Ellis et al. (2008)' as two independent reviews; they are the same paper by the same five authors",
+    "declares_derivation_from": {
+      "what": "the 2003 LHC Safety Study Group report",
+      "quote": "we review their 2003 analysis in light of additional experimental results and theoretical understanding, which enable us to confirm, update and extend the conclusions of the LHC Safety Study Group",
+      "note": "the source itself states it is an UPDATE of the 2003 report, not an independent re-derivation — a second, self-declared non-independence edge"
+    }
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "0539e89a27bf9224752defa60f70fdd90f95455fe642824d57448dc818191faa00bd48cb9c3cb3fd68e1a1af757aca6c03765b14d7f3a56caff0aa4ebe6db60c",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

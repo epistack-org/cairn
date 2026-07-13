@@ -1,0 +1,37 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:4xHDJO4c5WSmdlAIDhoHYEapjTfASLSRivRc7br_4Nw",
+  "assertion": {
+    "text": "The Eur J Nutr 2021 meta-analysis lists Hu 1999 (HPFS + NHS) among its pooled input studies — the same cohort backbone the BMJ 2013 meta-analysis pools.",
+    "subject": "tt:1QbyJPrVKK2eKnqaxGRQToJvfVAUWtgXqhIrb3scw90",
+    "grounding": {
+      "source": "tt:Pw5mj-DNntkCZfmYOLyovcxKpP1hpeBgh_doWCbGPd0",
+      "char_span": [
+        2466,
+        2505
+      ],
+      "quote": "Hu [16] | HPFS, 1986 and NHS, 1980 (US)",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "0cd54915d2077111969e052717153e89314a5ce3226f1849b6f4e333313a1faf"
+    },
+    "verification": "L5"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:Pw5mj-DNntkCZfmYOLyovcxKpP1hpeBgh_doWCbGPd0"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "bb343876ae36b5dad6d21956164808274f47c0b7d42856fa79cdf6450324868c33b3aad2be168d1a940e6cfc37b210705f7e8ade397776859a2ec3650e5f7e04",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

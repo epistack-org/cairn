@@ -1,0 +1,45 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:Hw11wKEDBmPnv1Z-i6gT8zwX6mldCtceEc57qMSxBU0",
+  "assertion": {
+    "title": "Astrophysical implications of hypothetical stable TeV-scale black holes",
+    "authors": "Giddings SB, Mangano MM",
+    "venue": "Physical Review D",
+    "year": 2008,
+    "volume": "78",
+    "pages": "035009",
+    "doi": "10.1103/PhysRevD.78.035009",
+    "arxiv": "0806.3381",
+    "url": "https://arxiv.org/abs/0806.3381",
+    "excerpt_kind": "abstract (arXiv v1, whitespace-normalized)",
+    "excerpt": "We analyze macroscopic effects of TeV-scale black holes, such as could possibly be produced at the LHC, in what is regarded as an extremely hypothetical scenario in which they are stable and, if trapped inside Earth, begin to accrete matter. We examine a wide variety of TeV-scale gravity scenarios, basing the resulting accretion models on first-principles, basic, and well-tested physical laws. These scenarios fall into two classes, depending on whether accretion could have any macroscopic effect on the Earth at times shorter than the Sun's natural lifetime. We argue that cases with such effect at shorter times than the solar lifetime are ruled out, since in these scenarios black holes produced by cosmic rays impinging on much denser white dwarfs and neutron stars would then catalyze their decay on timescales incompatible with their known lifetimes. We also comment on relevant lifetimes for astronomical objects that capture primordial black holes. In short, this study finds no basis for concerns that TeV-scale black holes from the LHC could pose a risk to Earth on time scales shorter than the Earth's natural lifetime. Indeed, conservative arguments based on detailed calculations and the best-available scientific knowledge, including solid astronomical data, conclude, from multiple perspectives, that there is no risk of any significance whatsoever from such black holes.",
+    "excerpt_sha256": "36ed1846d1d8fccac5a8bcd37f6a0516c0ac96f0801650d45438ab2da95d2a33",
+    "retrieval": {
+      "fetched_at": "2026-07-13",
+      "method": "arXiv Atom API (id_list=0806.3381); whitespace-normalized; bibliographic record confirmed via Crossref",
+      "cross_verified": "bibliographic only — INSPIRE mirrors arXiv (see src-ellis-2008)",
+      "sources": [
+        "https://export.arxiv.org/api/query?id_list=0806.3381",
+        "https://api.crossref.org/works/10.1103/PhysRevD.78.035009"
+      ]
+    },
+    "verification": "L1",
+    "role": "the paper that PATCHES the hole in the cosmic-ray argument (LHC black holes would be slow-moving, unlike cosmic-ray ones that pass through Earth) by extending it to white dwarfs and neutron stars",
+    "author_overlap_note": "M. L. Mangano is an author of BOTH this paper and src-ellis-2008 (the LSAG review that leans on it). That is an independent, author-level non-independence signal on top of the shared premise."
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "d09d1e23221c4a260e644d1063505b5606c22e82ba2aa66224c73881f4e1f3941ff72188c9dc3a8d45c3b2550571fbccf7251818d080b55870404b006a95a505",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}
