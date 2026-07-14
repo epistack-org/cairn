@@ -53,7 +53,10 @@ def shared_upstreams(record_ids: Iterable[str], store: Mapping[str, Mapping]) ->
         common = anc[ids[i]] & anc[ids[j]]
         if common:
             pairwise[(ids[i], ids[j])] = sorted(common)
-    collective = set.intersection(*anc.values()) if anc else set()
+    # Sharing requires at least two parties. set.intersection over a single set
+    # returns that set, which would report a lone claim as sharing every one of
+    # its own ancestors with itself -> a spurious REFUSE-TO-COMBINE.
+    collective = set.intersection(*anc.values()) if len(ids) >= 2 else set()
     return {"ancestors": anc, "pairwise_shared": pairwise, "collective_shared": sorted(collective)}
 
 
