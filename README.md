@@ -15,7 +15,7 @@ Claude-Code transcript structurally cannot produce**:
    record. One envelope carries both **claims (verbs)** and **entities (nouns)**;
    the signature block is excluded from the content hash, so many teams can
    **endorse one content-id** (the n_eff-over-endorsers promotion model).
-2. **Kish n_eff** (`cairn/neff.py`) — `n_eff = k / (1 + (k-1)·φ̄)`, the measured
+2. **Kish design-effect ESS** (`cairn/neff.py`) — `n_eff = k / (1 + (k-1)·φ̄)`, the clustering-component design-effect ESS (a redundancy diagnostic, not an estimator), measured
    effective-independence number. "9 assessors agreed" is a headline lie when they
    share errors. Now **measured on our own corpus** (roadmap A2, `cairn/assessment.py`
    + `cairn assess`): a 9-assessor panel on the COVID-HSM crux gives **n_eff = 1.06**
@@ -74,7 +74,7 @@ corpus. The eggs case is the subtlest and the most important:
 
 And the CERN case is the sharpest test of the thesis, because it is the case with the
 **strongest** expert consensus (Phase 2 measured the highest inter-assessor agreement here,
-φ̄ = 0.328, yet n_eff = 2.16). An engine that rewarded consensus would score it as
+φ̄ = 0.242, yet n_eff = 2.54). An engine that rewarded consensus would score it as
 overwhelming. **It does not say the LHC is unsafe** — it says three assurances that share a
 premise are not three votes.
 
@@ -87,7 +87,7 @@ because the literature did not support them:
 ## Run it
 
 ```bash
-uv venv .venv --python 3.12 && uv pip install --python .venv -e . pytest
+python3 -m venv .venv && .venv/bin/pip install -e . pytest
 .venv/bin/python fixtures/build_fixtures.py     # mint all 3 vetted corpora (sha-pinned)
 .venv/bin/python -m pytest -q                   # 96 tests
 .venv/bin/python demo/worked_examples.py        # all three cases, side by side
@@ -107,9 +107,11 @@ docker build -t cairn -f Containerfile . && docker run --rm cairn
 
 ### The deep demo (`demo/hsm_trio.py`)
 
-The COVID "three independent lines of proximity evidence" all derive from **one**
-early-case dataset (Worobey 2022) — and each is **span-grounded** to that paper's
-abstract (`cairn ground` → 4/4 resolve). A naive transcript multiplies their
+The COVID "three independent lines of proximity evidence" descend from **one paper,
+one author collective**; at the data layer two of the three trace to the same
+market-anchored PRC early-case investigation — the third (Xiao 2021) does not, and we
+say so. Each is **span-grounded** to its source (`cairn ground` resolves). A naive
+transcript multiplies their
 likelihood ratios (5×5×5 = 125:1). Cairn:
 
 - **REFUSE-TO-COMBINE** — the three trace to one upstream → multiplying is undefined;
@@ -172,11 +174,11 @@ cairn headtohead 'fixtures/*.json'      # A4: careful-baseline head-to-head over
 | `demo/hsm_trio.py` | the naive-vs-Cairn head-to-head — the deep view (COVID) |
 | `assessment/` | the **measured** A2 assessor pass: probe battery, evidence partitions, panel + pinned runs |
 | `assessment/ASSESSMENT.md` | the measured n_eff, the diversity levers, and the adversarial audit's honest caveats |
-| `assessment/FRECHET.md` | the A3 interval: the three nested regimes, the n_eff p-box, and the model-vs-bound honesty |
+| `assessment/FRECHET.md` | the A3 interval: the three nested regimes, the bootstrap CI on φ̄, and the model-vs-bound honesty |
 | `assessment/HEAD_TO_HEAD.md` | the A4 method: the fair careful-baseline panel, the four-delta table, and the honest concessions |
 | `assessment/baseline.json`, `build_headtohead.py` | the pinned careful-baseline panel (captured runs) + the deterministic head-to-head re-score → `head_to_head.json` |
 | `assessment/frechet.py`, `frechet_pba_check.py` | pin the A3 interval artifact; cross-check it against the `pba` library (dev-only) |
-| `tests/` | 96 pytest checks incl. the n_eff anchor, the grounding leg, the measured-assessor pass, the cross-vendor leg, the Fréchet/p-box leg, the A4 head-to-head leg + the 3-case structural leg (`test_cases.py`) |
+| `tests/` | 113 pytest checks incl. the n_eff anchor, the grounding leg, the measured-assessor pass, the cross-vendor leg, the Fréchet leg, the refusal-AUC leg, the A4 head-to-head leg + the 3-case structural leg (`test_cases.py`) |
 
 ## Disciplines / honest debts
 
