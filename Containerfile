@@ -24,6 +24,7 @@ RUN pip install --no-cache-dir -e . && pip install --no-cache-dir pytest
 # CASES.json) against what the provenance detector actually finds, and fails the build if
 # a laundered set stops refusing or its shared upstream is not the one named.
 RUN python fixtures/build_fixtures.py >/dev/null \
+ && python -m cairn cases list >/dev/null \
  && python -m cairn ground 'fixtures/*.json' >/dev/null \
  && python -m cairn assess 'assessment/runs/heterogeneous.json' 'assessment/runs/homogeneous-control.json' 'assessment/runs/clean-diverse.json' 'assessment/runs/glm-diverse.json' --battery assessment/probes.json >/dev/null \
  && ( python -m cairn frechet fixtures/claim-geographic-clustering.json fixtures/claim-environmental-sampling.json fixtures/claim-live-mammal-sales.json fixtures/src-worobey-2022.json >/dev/null ; test $? -eq 2 ) \

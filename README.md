@@ -61,10 +61,21 @@ refusal is mechanical, byte-checkable, and reproducible on a fresh machine.
 | **anversa-ckit** | 3 reports that c-kit+ cardiac stem cells regenerate the heart (Beltrami 2003 rodent, Bearzi 2007 human, Bolli 2011 SCIPIO trial) | **one lab's cell + its preps** — the Anversa characterization; SCIPIO used the lab's own cells (RETRACTED 2019) | 1 hop |
 | **poldermans-decrease** | 3 pro-benefit perioperative β-blocker findings (DECREASE-I 1999, Boersma 2001, DECREASE-IV 2009) | **one research program** — the Poldermans/Erasmus DECREASE trials, found to rest on fabricated data | 1 hop |
 
-Each case declares its structure in [`fixtures/CASES.json`](fixtures/CASES.json), and the
-build **mechanically verifies the declaration against what the detector actually finds**
-before writing a single record. "Cairn ships 7 worked examples" is a checked property of
-the corpus, not a sentence in this README (`tests/test_cases.py`).
+Each case declares its structure in its bundle's `CASE.json`, and the build **mechanically
+verifies the declaration against what the detector actually finds** before writing a single
+record. "Cairn ships 7 worked examples" is a checked property of the corpus, not a sentence
+in this README (`tests/test_cases.py`).
+
+Each case is a **self-contained bundle** under [`fixtures/cases/<case-id>/`](fixtures/cases):
+its own `build.py` (which mints the case's records through the shared
+[`fixtures/lib/mint.py`](fixtures/lib/mint.py) — one signing seed, timestamp, and JCS
+canonicalizer, so no bundle can drift the corpus' Trusty-URIs) and its `CASE.json` manifest
+slice. The build assembles the aggregate `fixtures/CASES.json`/`INDEX.json` from the bundles
+in the order pinned by [`fixtures/cases/cases.lock`](fixtures/cases/cases.lock), so **adding a
+case is a new bundle plus a reviewed `cases.lock` line, not an edit to a monolith**. The lock
+carries a content digest per bundle (silent drift fails CI), and `cairn cases verify <bundle>`
+runs a case's declared structure — laundered set REFUSES, declared shared upstream, contrast
+verdict — against any store, the same crank a fresh or external case repo is checked by.
 
 They are deliberately different *shapes* of shared upstream — a **dataset**, a **cohort**,
 a **premise**, a **foundational-result-plus-reagent**, a **fabricated primary trial**, a
@@ -174,6 +185,8 @@ cairn ground 'fixtures/*.json'          # verify claims' spans resolve to their 
 cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json  # recompute + verify measured n_eff
 cairn frechet 'fixtures/claim-*.json' 'fixtures/src-*.json'  # Fréchet/p-box interval + refuse-when-too-wide verdict
 cairn headtohead 'fixtures/*.json'      # A4: careful-baseline head-to-head over the four deltas (exit 2 = delta demonstrated)
+cairn cases verify fixtures/cases/covid-origins  # run one bundle's declared structure against the store (the reusable crank)
+cairn cases list                        # discover the case bundles and check them against cases.lock
 ```
 
 ## Layout
@@ -190,7 +203,10 @@ cairn headtohead 'fixtures/*.json'      # A4: careful-baseline head-to-head over
 | `cairn/trusty.py`, `canonical.py`, `keys.py` | content-addressing, JCS, signing primitives |
 | `schemas/cairn.schema.json` | the envelope JSON Schema (Draft 2020-12) incl. the grounding tuple + Trust-Ladder enum |
 | `fixtures/` | the **vetted** corpora for all **7 worked examples** — span-grounded claims (L4/L5) + sha-pinned sources |
-| `fixtures/CASES.json` | the case manifest: what each example claims (laundered set, shared upstream, contrast). The build verifies it against the detector; CI re-checks it |
+| `fixtures/cases/<case-id>/` | one **self-contained bundle** per case: `build.py` (mints its records) + `CASE.json` (its manifest slice). Adding a case is a new bundle here |
+| `fixtures/cases/cases.lock` | the ordered case registry + a content digest per bundle — pins the aggregate INDEX/CASES order and catches silent bundle drift |
+| `fixtures/lib/mint.py` | the shared minting library every bundle imports (seed, timestamp, `SOURCES`, `mk`/`mk_claim`) — the determinism anchor |
+| `fixtures/CASES.json`, `INDEX.json` | the aggregate manifests, **assembled from the bundles** in `cases.lock` order. The build verifies each declaration against the detector; CI re-checks it |
 | `fixtures/sources/*.abstract.txt` | the byte-exact retrieved sources (the raw `source_doc`s) |
 | `fixtures/PROVENANCE.md`, `PROVENANCE-eggs.md`, `PROVENANCE-cern.md` | per-case retrieval record, rung rationale, and the honest vetting decisions — **including the hypotheses we cut and the things we could not verify** |
 | `assessment/probes.json`, `probes-eggs.json`, `probes-cern.json` | one probe battery per case (crux + keyed faithfulness probes + inferential probes) |
