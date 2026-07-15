@@ -120,67 +120,34 @@ def test_effective_count_dial():
     assert frechet.effective_count_lr(5, 125, 3, 0) == 5.0        # m<1 clamps to floor (never below comonotone)
 
 
-# --- n_eff p-box ------------------------------------------------------------
+# --- n_eff uncertainty: the bootstrap CI on φ̄ (the removed p-box's replacement) --
 
 @needs_runs
-@pytest.mark.parametrize("name,exp_lo,exp_hi", [
-    ("homogeneous-control", 1.0, 1.0),
-    ("clean-diverse", 1.0, 1.3404255319148937),
-    ("glm-diverse", 1.0, 1.1351878526059485),   # kish(9, sqrt(3)/2), full precision (not 6-dp-rounded)
-    ("heterogeneous", 1.0, 9.0),
-])
-def test_pbox_endpoints(name, exp_lo, exp_hi):
-    d = json.loads((RUNS / f"{name}.json").read_text())
-    k = d["assertion"]["neff"]["k"]
-    box = frechet.neff_pbox(d["assertion"]["pairwise_phi"], k)
-    assert box["n_eff_lo"] == exp_lo
-    assert math.isclose(box["n_eff_hi"], exp_hi, rel_tol=1e-12)   # exact pin (all four rows)
-    # enclosure guarantee: the pinned point n_eff is inside its own box
-    pinned = d["assertion"]["neff"]["n_eff_capped"]
-    assert box["n_eff_lo"] - 1e-9 <= box["point"] <= box["n_eff_hi"] + 1e-9
-    assert math.isclose(box["point"], pinned, rel_tol=1e-6)
-
-
-@needs_runs
-def test_pbox_heterogeneous_cap_is_disclosed():
-    d = json.loads((RUNS / "heterogeneous.json").read_text())
-    box = frechet.neff_pbox(d["assertion"]["pairwise_phi"], d["assertion"]["neff"]["k"])
-    assert box["n_eff_hi"] == 9.0                     # capped at k
-    assert box["n_eff_hi_uncapped"] > 9.0             # the honest cap artifact is surfaced (~11.36)
-    assert box["width"] == pytest.approx(8.0)         # wide == untrustworthy
-
-
-@needs_runs
-def test_pbox_ordering_mechanizes_the_audit():
-    def width(name):
+def test_bootstrap_ci_encloses_point_and_is_deterministic():
+    # the min/max single-pair p-box was REMOVED (draft-entry#8/#15); the honest
+    # dependence-structure uncertainty is a bootstrap CI on φ̄ that brackets φ̄.
+    for name in ("homogeneous-control", "clean-diverse", "glm-diverse", "heterogeneous"):
         d = json.loads((RUNS / f"{name}.json").read_text())
-        return frechet.neff_pbox(d["assertion"]["pairwise_phi"], d["assertion"]["neff"]["k"])["width"]
-    # heterogeneous (partition-starved, audit-flagged) is far wider than clean-diverse
-    assert width("heterogeneous") > width("clean-diverse") > width("homogeneous-control")
-    assert width("homogeneous-control") == 0.0
+        vectors = d["assertion"]["vectors"]
+        r = neff.neff_from_matrix(vectors)
+        ci = r["bootstrap_ci"]
+        assert ci is not None
+        assert ci == neff.neff_from_matrix(vectors)["bootstrap_ci"]     # deterministic (seeded)
+        assert ci["phi_bar_lo"] <= r["phi_bar"] <= ci["phi_bar_hi"] + 1e-9
+        assert ci["n_eff_lo"] <= ci["n_eff_hi"]
 
 
-def test_pbox_k1_no_crash():
-    assert frechet.neff_pbox([], 1) == {
-        "phi_support": [1.0, 1.0], "n_eff_lo": 1.0, "n_eff_hi": 1.0,
-        "n_eff_hi_uncapped": 1.0, "width": 0.0, "point": 1.0,
-    }
+@needs_runs
+def test_homogeneous_control_ci_pins_full_redundancy():
+    d = json.loads((RUNS / "homogeneous-control.json").read_text())
+    r = neff.neff_from_matrix(d["assertion"]["vectors"])
+    # 9 byte-identical assessors -> φ̄ = 1, every resample stays at 1 -> CI includes 1
+    assert r["bootstrap_ci"]["includes_one"] is True
 
 
-def test_pbox_inversion_and_cap_hermetic():
-    # fixture-INDEPENDENT oracle for the p-box inversion + cap-at-k (the @needs_runs
-    # tests skip on a runs-less machine). kish_neff is DECREASING in phi, so the box
-    # endpoints invert (lo <- phi_MAX, hi <- phi_MIN); BOTH cap at k.
-    box = frechet.neff_pbox([0.2, 0.8], 3)                      # cap does not bite (kish(3,0.2)=2.14 < 3)
-    assert box["n_eff_lo"] == neff.kish_neff(3, 0.8)            # lo from phi_max
-    assert box["n_eff_hi"] == min(3.0, neff.kish_neff(3, 0.2))  # hi from phi_min
-    assert box["n_eff_lo"] < box["n_eff_hi"]                    # never inverted
-    capped = frechet.neff_pbox([-0.05, 1.0], 9)                 # cap bites: kish(9,-0.05)=15.0 > k
-    assert capped["n_eff_lo"] == 1.0 and capped["n_eff_hi"] == 9.0
-    assert capped["n_eff_hi_uncapped"] == neff.kish_neff(9, -0.05)   # honest cap artifact surfaced
-    assert capped["n_eff_lo"] <= capped["point"] <= capped["n_eff_hi"] and capped["width"] >= 0
-    allneg = frechet.neff_pbox([-0.5, -0.5], 2)                 # BOTH endpoints cap (the F1 fix)
-    assert allneg["n_eff_lo"] <= allneg["point"] <= allneg["n_eff_hi"] and allneg["width"] >= 0
+def test_pbox_removed():
+    # the min/max p-box is gone; the name must not resurrect
+    assert not hasattr(frechet, "neff_pbox")
 
 
 # --- the verdict ------------------------------------------------------------

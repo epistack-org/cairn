@@ -1,0 +1,449 @@
+{
+  "note": "Sensitivity curves for the refusal knob (draft-entry#18). The interval is a theorem; the threshold is a policy (Chow 1970). The [5,125] endpoints are illustrative (marginals flagged illustrative). Recompute: assessment/sensitivity.py.",
+  "verdict_vs_threshold": {
+    "trio_LR5x3": {
+      "width_decades": 1.3979400086720377,
+      "refuses_below_threshold": 1.3979400086720377,
+      "curve": [
+        {
+          "threshold": 0.0,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.1,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.2,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.3,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.4,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.5,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.6,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.7,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.8,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.9,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 1.0,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 1.1,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 1.2,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 1.3,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 1.4,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.5,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.6,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.7,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.8,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.9,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 2.0,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        }
+      ]
+    },
+    "double_count_LR5x2": {
+      "width_decades": 0.6989700043360189,
+      "refuses_below_threshold": 0.6989700043360189,
+      "curve": [
+        {
+          "threshold": 0.0,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.1,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.2,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.3,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.4,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.5,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.6,
+          "verdict": "REFUSE-TO-COMBINE-AS-POINT"
+        },
+        {
+          "threshold": 0.7,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 0.8,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 0.9,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.0,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.1,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.2,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.3,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.4,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.5,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.6,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.7,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.8,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 1.9,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        },
+        {
+          "threshold": 2.0,
+          "verdict": "COMBINABLE-WITH-INTERVAL"
+        }
+      ]
+    }
+  },
+  "verdict_vs_LR": {
+    "threshold_decades": 0.5,
+    "k": 3,
+    "combine_band_LR": [
+      0.5623413251903491,
+      1.7782794100389228
+    ],
+    "note": "Trio REFUSES for every LR outside the narrow combine band around LR=1 (where per-line evidence is ~inert). All published anchors REFUSE.",
+    "all_published_anchors_refuse": true,
+    "anchors": {
+      "stansifer_zoonosis_1e-4": {
+        "LR": 0.0001,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "width_decades": 8.0,
+        "interval_lr": [
+          1e-12,
+          0.0001
+        ],
+        "illustrative_marginals": true
+      },
+      "illustrative_corpus_LR": {
+        "LR": 5.0,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "width_decades": 1.3979400086720377,
+        "interval_lr": [
+          5.0,
+          125.0
+        ],
+        "illustrative_marginals": true
+      },
+      "rootclaim_lab_leak": {
+        "LR": 13.48,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "width_decades": 2.259379784398602,
+        "interval_lr": [
+          13.48,
+          2449.4561920000006
+        ],
+        "illustrative_marginals": true
+      }
+    },
+    "curve": [
+      {
+        "LR": 0.0001,
+        "width_decades": 8.0,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          1e-12,
+          0.0001
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.000178,
+        "width_decades": 7.499159995382212,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          5.639751999999998e-12,
+          0.000178
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.000316,
+        "width_decades": 7.000625834763192,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          3.1554495999999995e-11,
+          0.000316
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.000562,
+        "width_decades": 6.500527368861878,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          1.77504328e-10,
+          0.000562
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.001,
+        "width_decades": 6.0,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          1e-09,
+          0.001
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.001778,
+        "width_decades": 5.50013648673161,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          5.620762952e-09,
+          0.001778
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.003162,
+        "width_decades": 5.00007626880762,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          3.1614447527999994e-08,
+          0.003162
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.005623,
+        "width_decades": 4.500063832981194,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          1.7778873936700006e-07,
+          0.005623
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.01,
+        "width_decades": 4.0,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          1.0000000000000002e-06,
+          0.01
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.017783,
+        "width_decades": 3.4999899430262085,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          5.623608587687e-06,
+          0.017783
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.031623,
+        "width_decades": 2.9999938638966137,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          3.1623446801366994e-05,
+          0.031623
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.056234,
+        "width_decades": 2.5000020468833015,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          0.00017782668382090405,
+          0.056234000000000006
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.1,
+        "width_decades": 1.9999999999999998,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          0.0010000000000000005,
+          0.10000000000000002
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.177828,
+        "width_decades": 1.4999997118374127,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          0.005623418848767553,
+          0.177828
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.316228,
+        "width_decades": 0.9999993573141296,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          0.03162284679668434,
+          0.31622799999999995
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 0.562341,
+        "width_decades": 0.5000005022871651,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          0.1778276325014178,
+          0.562341
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 1.0,
+        "width_decades": 0.0,
+        "verdict": "COMBINABLE-WITH-INTERVAL",
+        "interval_lr": [
+          1.0,
+          1.0
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 1.778279,
+        "width_decades": 0.499999799719143,
+        "verdict": "COMBINABLE-WITH-INTERVAL",
+        "interval_lr": [
+          1.778279,
+          5.623409361933611
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 3.162278,
+        "width_decades": 1.0000000933422082,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          3.1622780000000006,
+          31.622786796633527
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 5.623413,
+        "width_decades": 1.4999999610911403,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          5.623413,
+          177.8279171062299
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 10.0,
+        "width_decades": 2.0,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          10.0,
+          1000.0
+        ],
+        "illustrative_marginals": true
+      },
+      {
+        "LR": 17.782794,
+        "width_decades": 2.4999999950965535,
+        "verdict": "REFUSE-TO-COMBINE-AS-POINT",
+        "interval_lr": [
+          17.782794,
+          5623.413156665907
+        ],
+        "illustrative_marginals": true
+      }
+    ]
+  }
+}

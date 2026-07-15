@@ -1,0 +1,598 @@
+{
+  "note": "Vendored affirm-vectors for the six Phase-2 corpus arms (3 cases x partition/persona), copied verbatim from the pinned, signed run-records so cairn can recompute n_eff with the fixed engine offline. Source: an internal tracker services/zrxiv/corpora/partitions/run-records/<case>/records/<arm>/ (assessment-*.json affirm_vector + cluster.json). These are the pinned live-measure run (temperature 0.3) behind material/phase2/reveals.json.",
+  "source_repo": "an internal tracker",
+  "source_path": "services/zrxiv/corpora/partitions/run-records",
+  "cases": {
+    "covid-origins": {
+      "battery": "hsm-crux-v1",
+      "arms": {
+        "partition": {
+          "probe_ids": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "I1",
+            "I2",
+            "I3",
+            "I4",
+            "I5",
+            "I6"
+          ],
+          "assessors": [
+            {
+              "assessor": "covid-origins-corpus.r1-llama",
+              "vendor": "llama",
+              "affirm_vector": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "assessor": "covid-origins-corpus.r2-deepseek",
+              "vendor": "deepseek",
+              "affirm_vector": [
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "assessor": "covid-origins-corpus.r3-gemma",
+              "vendor": "google",
+              "affirm_vector": [
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "assessor": "covid-origins-corpus.r4-qwen",
+              "vendor": "qwen",
+              "affirm_vector": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "assessor": "covid-origins-corpus.r5-mistral",
+              "vendor": "mistral",
+              "affirm_vector": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "pinned_neff_pre_fix": {
+            "k": 5,
+            "phi_bar": 0.18797900441200682,
+            "n_eff": 2.8540180862736633,
+            "n_eff_capped": 2.8540180862736633
+          }
+        },
+        "persona": {
+          "probe_ids": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "I1",
+            "I2",
+            "I3",
+            "I4",
+            "I5",
+            "I6"
+          ],
+          "assessors": [
+            {
+              "assessor": "covid-origins-corpus.a-prime",
+              "vendor": "anthropic",
+              "affirm_vector": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "assessor": "covid-origins-corpus.a",
+              "vendor": "anthropic",
+              "affirm_vector": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "pinned_neff_pre_fix": {
+            "k": 2,
+            "phi_bar": 1.0,
+            "n_eff": 1.0,
+            "n_eff_capped": 1.0
+          }
+        }
+      }
+    },
+    "eggs-good-for-you": {
+      "battery": "eggs-crux-v1",
+      "arms": {
+        "partition": {
+          "probe_ids": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7",
+            "E8",
+            "E9",
+            "E10",
+            "E11",
+            "E12",
+            "E13",
+            "E14"
+          ],
+          "assessors": [
+            {
+              "assessor": "eggs-good-for-you.r1-llama",
+              "vendor": "llama",
+              "affirm_vector": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "assessor": "eggs-good-for-you.r2-deepseek",
+              "vendor": "deepseek",
+              "affirm_vector": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "assessor": "eggs-good-for-you.r3-gemma",
+              "vendor": "google",
+              "affirm_vector": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "assessor": "eggs-good-for-you.r4-qwen",
+              "vendor": "qwen",
+              "affirm_vector": [
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                1
+              ]
+            },
+            {
+              "assessor": "eggs-good-for-you.r5-mistral",
+              "vendor": "mistral",
+              "affirm_vector": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            }
+          ],
+          "pinned_neff_pre_fix": {
+            "k": 5,
+            "phi_bar": 0.05477225575051662,
+            "n_eff": 4.1014231985185585,
+            "n_eff_capped": 4.1014231985185585
+          }
+        },
+        "persona": {
+          "probe_ids": [
+            "E1",
+            "E2",
+            "E3",
+            "E4",
+            "E5",
+            "E6",
+            "E7",
+            "E8",
+            "E9",
+            "E10",
+            "E11",
+            "E12",
+            "E13",
+            "E14"
+          ],
+          "assessors": [
+            {
+              "assessor": "eggs-good-for-you.a-prime",
+              "vendor": "anthropic",
+              "affirm_vector": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "assessor": "eggs-good-for-you.a",
+              "vendor": "anthropic",
+              "affirm_vector": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "pinned_neff_pre_fix": {
+            "k": 2,
+            "phi_bar": 0.0,
+            "n_eff": 2.0,
+            "n_eff_capped": 2.0
+          }
+        }
+      }
+    },
+    "cern-black-hole": {
+      "battery": "cern-crux-v1",
+      "arms": {
+        "partition": {
+          "probe_ids": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6",
+            "C7",
+            "C8",
+            "C9",
+            "C10",
+            "C11",
+            "C12",
+            "C13",
+            "C14"
+          ],
+          "assessors": [
+            {
+              "assessor": "cern-black-hole.r1-llama",
+              "vendor": "llama",
+              "affirm_vector": [
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "assessor": "cern-black-hole.r2-deepseek",
+              "vendor": "deepseek",
+              "affirm_vector": [
+                1,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "assessor": "cern-black-hole.r3-gemma",
+              "vendor": "google",
+              "affirm_vector": [
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            {
+              "assessor": "cern-black-hole.r4-qwen",
+              "vendor": "qwen",
+              "affirm_vector": [
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "assessor": "cern-black-hole.r5-mistral",
+              "vendor": "mistral",
+              "affirm_vector": [
+                1,
+                1,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "pinned_neff_pre_fix": {
+            "k": 5,
+            "phi_bar": 0.2422662549930681,
+            "n_eff": 2.5392762297257243,
+            "n_eff_capped": 2.5392762297257243
+          }
+        },
+        "persona": {
+          "probe_ids": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6",
+            "C7",
+            "C8",
+            "C9",
+            "C10",
+            "C11",
+            "C12",
+            "C13",
+            "C14"
+          ],
+          "assessors": [
+            {
+              "assessor": "cern-black-hole.a-prime",
+              "vendor": "anthropic",
+              "affirm_vector": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            {
+              "assessor": "cern-black-hole.a",
+              "vendor": "anthropic",
+              "affirm_vector": [
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0
+              ]
+            }
+          ],
+          "pinned_neff_pre_fix": {
+            "k": 2,
+            "phi_bar": 0.848528137423857,
+            "n_eff": 1.0819418755438783,
+            "n_eff_capped": 1.0819418755438783
+          }
+        }
+      }
+    }
+  }
+}

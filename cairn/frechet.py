@@ -187,33 +187,14 @@ def effective_count_lr(floor: float, ceiling: float, k: int, m: float) -> float:
     return floor * (ceiling / floor) ** ((m - 1) / (k - 1))
 
 
-# --- (B) n_eff p-box from a pinned pairwise-φ array --------------------------
-
-def neff_pbox(pairwise_phi: Sequence, k: int) -> dict:
-    """Turn a pinned pairwise-φ array into an n_eff *interval* (dependence-structure
-    uncertainty, not sampling error).
-
-    ``kish_neff`` is decreasing in φ̄, so the endpoints invert:
-    ``n_eff_lo = min(k, kish(k, φ_max))``, ``n_eff_hi = min(k, kish(k, φ_min))`` (both
-    capped at k — an all-negative-φ panel would otherwise push either above the real
-    panel size). Because φ̄ (a convex mean) lies in ``[φ_min, φ_max]``, the point
-    estimate ``kish(k, φ̄)`` is *guaranteed* enclosed. A wide box = the number is untrustworthy (the honest
-    reading is the ~1 floor, never the inflated ceiling); a tight box = trustworthy.
-
-    Accepts a flat list of floats or the pinned ``[{"i","j","phi"}, ...]`` shape.
-    Degenerate (``k < 2`` or no pairs) ⇒ a zero-width ``[1, 1]`` box.
-    """
-    phis = [e["phi"] if isinstance(e, dict) else float(e) for e in pairwise_phi]
-    if k < 2 or len(phis) < 1:
-        return {"phi_support": [1.0, 1.0], "n_eff_lo": 1.0, "n_eff_hi": 1.0,
-                "n_eff_hi_uncapped": 1.0, "width": 0.0, "point": 1.0}
-    phi_lo, phi_hi = min(phis), max(phis)
-    n_lo = min(float(k), neff.kish_neff(k, phi_hi))   # cap at k: phi_max<0 would push kish>k (mirror n_eff_hi)
-    n_hi_uncapped = neff.kish_neff(k, phi_lo)
-    n_hi = min(float(k), n_hi_uncapped)
-    point = min(float(k), neff.kish_neff(k, sum(phis) / len(phis)))
-    return {"phi_support": [phi_lo, phi_hi], "n_eff_lo": n_lo, "n_eff_hi": n_hi,
-            "n_eff_hi_uncapped": n_hi_uncapped, "width": n_hi - n_lo, "point": point}
+# --- (B) n_eff uncertainty ---------------------------------------------------
+# The old ``neff_pbox`` — a min/max envelope over the two most extreme *single*
+# pairwise-φ values — was REMOVED (draft-entry#8/#15): it was not a bound of any
+# kind (just the range of a plug-in estimator over its two extreme pairs) and it
+# routinely covered >85% of the attainable range, a null result. The honest
+# dependence-structure uncertainty on n_eff is now the **bootstrap CI on φ̄**
+# (``neff.bootstrap_phi_ci`` / the ``bootstrap_ci`` field of ``neff_from_matrix``),
+# which resamples probes and travels with the point estimate.
 
 
 # --- the one verdict (CLI + demo call this) ---------------------------------

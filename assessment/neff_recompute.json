@@ -1,0 +1,174 @@
+{
+  "note": "Corrected n_eff for the six Phase-2 corpus arms, recomputed with the fixed cairn engine (draft-entry#8). Degenerate assessors excluded (never coded φ=0); φ̄ reported for cross-arm comparison since k differs; Kish + eigenvalue ESS both shipped; bootstrap CI on φ̄ replaces the min/max p-box. Recompute: python assessment/recompute_neff.py.",
+  "source": {
+    "repo": "an internal tracker",
+    "path": "services/zrxiv/corpora/partitions/run-records"
+  },
+  "cases": {
+    "covid-origins": {
+      "battery": "hsm-crux-v1",
+      "arms": {
+        "partition": {
+          "k": 5,
+          "k_effective": 3,
+          "degenerate": true,
+          "excluded_assessors": [
+            "covid-origins-corpus.r4-qwen",
+            "covid-origins-corpus.r5-mistral"
+          ],
+          "inert": false,
+          "phi_bar": 0.6265966813733561,
+          "kish_ess": 1.3314436521963244,
+          "eigenvalue_ess": 1.3215819291450954,
+          "bootstrap_ci": {
+            "phi_bar_lo": 0.43681617943926837,
+            "phi_bar_hi": 1.0,
+            "n_eff_lo": 1.0,
+            "n_eff_hi": 1.6011679056373955,
+            "n_boot": 2000,
+            "n_valid": 1994,
+            "ci": 0.95,
+            "seed": 20260715,
+            "includes_one": true
+          },
+          "pre_fix": {
+            "phi_bar": 0.18797900441200682,
+            "n_eff": 2.8540180862736633
+          }
+        },
+        "persona": {
+          "k": 2,
+          "k_effective": 2,
+          "degenerate": false,
+          "excluded_assessors": [],
+          "inert": false,
+          "phi_bar": 1.0,
+          "kish_ess": 1.0,
+          "eigenvalue_ess": 0.9999999999999998,
+          "bootstrap_ci": {
+            "phi_bar_lo": 1.0,
+            "phi_bar_hi": 1.0,
+            "n_eff_lo": 1.0,
+            "n_eff_hi": 1.0,
+            "n_boot": 2000,
+            "n_valid": 1768,
+            "ci": 0.95,
+            "seed": 20260715,
+            "includes_one": true
+          },
+          "pre_fix": {
+            "phi_bar": 1.0,
+            "n_eff": 1.0
+          }
+        }
+      }
+    },
+    "eggs-good-for-you": {
+      "battery": "eggs-crux-v1",
+      "arms": {
+        "partition": {
+          "k": 5,
+          "k_effective": 2,
+          "degenerate": true,
+          "excluded_assessors": [
+            "eggs-good-for-you.r1-llama",
+            "eggs-good-for-you.r2-deepseek",
+            "eggs-good-for-you.r3-gemma"
+          ],
+          "inert": false,
+          "phi_bar": 0.5477225575051662,
+          "kish_ess": 1.2922212642709539,
+          "eigenvalue_ess": 1.292221264270954,
+          "bootstrap_ci": {
+            "phi_bar_lo": 0.3042903097250923,
+            "phi_bar_hi": 1.0,
+            "n_eff_lo": 1.0,
+            "n_eff_hi": 1.5334009499936743,
+            "n_boot": 2000,
+            "n_valid": 1766,
+            "ci": 0.95,
+            "seed": 20260715,
+            "includes_one": true
+          },
+          "pre_fix": {
+            "phi_bar": 0.05477225575051662,
+            "n_eff": 4.1014231985185585
+          }
+        },
+        "persona": {
+          "k": 2,
+          "k_effective": 0,
+          "degenerate": true,
+          "excluded_assessors": [
+            "eggs-good-for-you.a-prime",
+            "eggs-good-for-you.a"
+          ],
+          "inert": true,
+          "phi_bar": null,
+          "kish_ess": null,
+          "eigenvalue_ess": null,
+          "bootstrap_ci": null,
+          "pre_fix": {
+            "phi_bar": 0.0,
+            "n_eff": 2.0
+          }
+        }
+      }
+    },
+    "cern-black-hole": {
+      "battery": "cern-crux-v1",
+      "arms": {
+        "partition": {
+          "k": 5,
+          "k_effective": 5,
+          "degenerate": false,
+          "excluded_assessors": [],
+          "inert": false,
+          "phi_bar": 0.2422662549930681,
+          "kish_ess": 2.5392762297257243,
+          "eigenvalue_ess": 2.3609987783386943,
+          "bootstrap_ci": {
+            "phi_bar_lo": 0.055601195338267864,
+            "phi_bar_hi": 0.4579912706442705,
+            "n_eff_lo": 1.7655584917911527,
+            "n_eff_hi": 4.090298137140412,
+            "n_boot": 2000,
+            "n_valid": 2000,
+            "ci": 0.95,
+            "seed": 20260715,
+            "includes_one": false
+          },
+          "pre_fix": {
+            "phi_bar": 0.2422662549930681,
+            "n_eff": 2.5392762297257243
+          }
+        },
+        "persona": {
+          "k": 2,
+          "k_effective": 2,
+          "degenerate": false,
+          "excluded_assessors": [],
+          "inert": false,
+          "phi_bar": 0.848528137423857,
+          "kish_ess": 1.0819418755438783,
+          "eigenvalue_ess": 1.0819418755438783,
+          "bootstrap_ci": {
+            "phi_bar_lo": 0.5477225575051661,
+            "phi_bar_hi": 1.0,
+            "n_eff_lo": 1.0,
+            "n_eff_hi": 1.292221264270954,
+            "n_boot": 2000,
+            "n_valid": 1980,
+            "ci": 0.95,
+            "seed": 20260715,
+            "includes_one": true
+          },
+          "pre_fix": {
+            "phi_bar": 0.848528137423857,
+            "n_eff": 1.0819418755438783
+          }
+        }
+      }
+    }
+  }
+}

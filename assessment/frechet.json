@@ -1,5 +1,5 @@
 {
-  "note": "A3 Fréchet/p-box interval — deterministic re-derivation over the pinned fixtures + pairwise-φ arrays; recompute with assessment/build_frechet.py.",
+  "note": "A3 Fréchet interval — deterministic re-derivation over the pinned fixtures. The n_eff uncertainty is a bootstrap CI on φ̄ (resampled probes), NOT the removed single-pair min/max p-box (draft-entry#8/#15). Recompute with assessment/build_frechet.py.",
   "trio": {
     "prior": 0.5,
     "k": 3,
@@ -135,50 +135,82 @@
       "shared_upstreams": []
     }
   },
-  "neff_pbox": {
+  "neff_uncertainty": {
     "homogeneous-control": {
-      "phi_support": [
-        1.0,
-        1.0
-      ],
-      "n_eff_lo": 1.0,
-      "n_eff_hi": 1.0,
-      "n_eff_hi_uncapped": 1.0,
-      "width": 0.0,
-      "point": 1.0
+      "k": 9,
+      "k_effective": 9,
+      "degenerate": false,
+      "phi_bar": 1.0,
+      "kish_ess": 1.0,
+      "eigenvalue_ess": 1.0,
+      "bootstrap_ci": {
+        "phi_bar_lo": 1.0,
+        "phi_bar_hi": 1.0,
+        "n_eff_lo": 1.0,
+        "n_eff_hi": 1.0,
+        "n_boot": 2000,
+        "n_valid": 2000,
+        "ci": 0.95,
+        "seed": 20260715,
+        "includes_one": true
+      }
     },
     "clean-diverse": {
-      "phi_support": [
-        0.7142857142857143,
-        1.0
-      ],
-      "n_eff_lo": 1.0,
-      "n_eff_hi": 1.3404255319148937,
-      "n_eff_hi_uncapped": 1.3404255319148937,
-      "width": 0.34042553191489366,
-      "point": 1.0598130841121496
+      "k": 9,
+      "k_effective": 9,
+      "degenerate": false,
+      "phi_bar": 0.9365079365079365,
+      "kish_ess": 1.0598130841121496,
+      "eigenvalue_ess": 1.0537109888709892,
+      "bootstrap_ci": {
+        "phi_bar_lo": 0.8419278076877362,
+        "phi_bar_hi": 1.0,
+        "n_eff_lo": 1.0,
+        "n_eff_hi": 1.1634787944409934,
+        "n_boot": 2000,
+        "n_valid": 2000,
+        "ci": 0.95,
+        "seed": 20260715,
+        "includes_one": true
+      }
     },
     "glm-diverse": {
-      "phi_support": [
-        0.8660254037844387,
-        1.0
-      ],
-      "n_eff_lo": 1.0,
-      "n_eff_hi": 1.1351878526059485,
-      "n_eff_hi_uncapped": 1.1351878526059485,
-      "width": 0.13518785260594846,
-      "point": 1.048561181547453
+      "k": 9,
+      "k_effective": 9,
+      "degenerate": false,
+      "phi_bar": 0.9478987681383928,
+      "kish_ess": 1.048561181547453,
+      "eigenvalue_ess": 1.0474035790211356,
+      "bootstrap_ci": {
+        "phi_bar_lo": 0.845619934671594,
+        "phi_bar_hi": 1.0,
+        "n_eff_lo": 1.0,
+        "n_eff_hi": 1.1590530544590967,
+        "n_boot": 2000,
+        "n_valid": 2000,
+        "ci": 0.95,
+        "seed": 20260715,
+        "includes_one": true
+      }
     },
     "heterogeneous": {
-      "phi_support": [
-        -0.025949964805384102,
-        1.0
-      ],
-      "n_eff_lo": 1.0,
-      "n_eff_hi": 9.0,
-      "n_eff_hi_uncapped": 11.35789601477246,
-      "width": 8.0,
-      "point": 1.6317277582706993
+      "k": 9,
+      "k_effective": 9,
+      "degenerate": false,
+      "phi_bar": 0.5644532462892413,
+      "kish_ess": 1.6317277582706993,
+      "eigenvalue_ess": 1.5483183838279113,
+      "bootstrap_ci": {
+        "phi_bar_lo": 0.43027508857369157,
+        "phi_bar_hi": 0.9229419266686346,
+        "n_eff_lo": 1.0735327706338937,
+        "n_eff_hi": 2.026022818509171,
+        "n_boot": 2000,
+        "n_valid": 2000,
+        "ci": 0.95,
+        "seed": 20260715,
+        "includes_one": false
+      }
     }
   },
   "policy": {

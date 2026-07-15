@@ -13,7 +13,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from cairn import frechet, provenance
+from cairn import frechet, neff, provenance
 
 ROOT = Path(__file__).resolve().parents[1]
 FX = ROOT / "fixtures"
@@ -53,18 +53,25 @@ def build() -> dict:
     # and now REFUSES on the honest DAG (Worobey↔Pekar citation/calibration edges; flf-contest#5).
     contrast = ["claim-cern-hawking-evaporation", "claim-cern-wd-ns-bound"]
 
-    neff_pbox = {}
+    neff_uncertainty = {}
     for name in PANELS:
         d = json.loads((RUNS / f"{name}.json").read_text())
-        k = d["assertion"]["neff"]["k"]
-        neff_pbox[name] = frechet.neff_pbox(d["assertion"]["pairwise_phi"], k)
+        vectors = d["assertion"]["vectors"]
+        r = neff.neff_from_matrix(vectors)
+        neff_uncertainty[name] = {
+            "k": r["k"], "k_effective": r["k_effective"], "degenerate": r["degenerate"],
+            "phi_bar": r["phi_bar"], "kish_ess": r["kish_ess"],
+            "eigenvalue_ess": r["eigenvalue_ess"], "bootstrap_ci": r["bootstrap_ci"],
+        }
 
     return {
-        "note": "A3 Fréchet/p-box interval — deterministic re-derivation over the pinned "
-                "fixtures + pairwise-φ arrays; recompute with assessment/build_frechet.py.",
+        "note": "A3 Fréchet interval — deterministic re-derivation over the pinned "
+                "fixtures. The n_eff uncertainty is a bootstrap CI on φ̄ (resampled "
+                "probes), NOT the removed single-pair min/max p-box (draft-entry#8/#15). "
+                "Recompute with assessment/build_frechet.py.",
         "trio": verdict_over(index, store, trio, neff_run="homogeneous-control.json"),
         "contrast": verdict_over(index, store, contrast),
-        "neff_pbox": neff_pbox,
+        "neff_uncertainty": neff_uncertainty,
         "policy": {
             "prior": frechet.DEFAULT_PRIOR,
             "base_neg": frechet.ILLUSTRATIVE_BASE_NEG,
@@ -83,9 +90,16 @@ def main() -> int:
           f"(naive would be {tv['naive_lr']})")
     print(f"  contrast : {cv['verdict']} | point_lr={cv.get('point_lr')} "
           f"posterior={cv.get('point_posterior'):.4f}")
-    for name, box in art["neff_pbox"].items():
-        print(f"  pbox {name:20s}: n_eff in [{box['n_eff_lo']:.3f}, {box['n_eff_hi']:.3f}] "
-              f"width={box['width']:.3f} point={box['point']:.3f}")
+    for name, u in art["neff_uncertainty"].items():
+        ci = u["bootstrap_ci"]
+        kish = u["kish_ess"]
+        if ci is None:
+            print(f"  neff {name:20s}: kish_ess={kish} eig={u['eigenvalue_ess']} (no φ̄ CI)")
+        else:
+            print(f"  neff {name:20s}: kish_ess={kish:.3f} eig={u['eigenvalue_ess']:.3f} "
+                  f"φ̄∈[{ci['phi_bar_lo']:.3f},{ci['phi_bar_hi']:.3f}] "
+                  f"n_eff∈[{ci['n_eff_lo']:.3f},{ci['n_eff_hi']:.3f}]"
+                  f"{' (CI includes φ̄=1)' if ci['includes_one'] else ''}")
     return 0
 
 
