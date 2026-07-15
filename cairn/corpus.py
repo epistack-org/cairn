@@ -7,8 +7,9 @@ Nothing here knows *which* cases exist — the lock does.
 
 For each entry, in lock order:
 
-  1. resolve the bundle (local ``path`` today; ``repo``/``domain`` are declared in the schema
-     and raise a clear not-yet-wired error until W4/federation land),
+  1. resolve the bundle — a local ``path``, or (W4) clone ``repo`` at an immutable ``ref`` (a git
+     tag or a full 40-hex commit SHA; a branch name is not reproducible and is rejected).
+     ``domain`` stays reserved (it lands with subdomain-delegation infra),
   2. verify its content **digest** (``cairn.cases.bundle_digest``) against the pin,
   3. verify its declared **structure** (``cairn.cases.verify_bundle``),
   4. verify **engine compatibility** (its ``engine.pin`` vs what this engine implements),
@@ -24,6 +25,11 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
+import re
+import shutil
+import subprocess
+import tempfile
 from pathlib import Path
 
 from . import cases, canonical
@@ -50,15 +56,82 @@ def engine_satisfies_pin(pin: dict) -> tuple[bool, str]:
     return True, "ok"
 
 
-def resolve_entry(entry: dict, base_dir) -> Path:
-    """Resolve a lock entry to a bundle directory. Local (``path``) mode is wired; ``repo`` and
-    ``domain`` are accepted by the schema but not yet fetchable (W4 / federation infra)."""
+# --- repo-mode resolution (W4) -------------------------------------------------------------
+
+# `ref` is immutable iff it is a full 40-hex commit SHA or a git tag; a branch name is rejected.
+_FULL_SHA = re.compile(r"^[0-9a-f]{40}$")
+
+
+def _forge_base() -> str:
+    """The forge to clone a bare ``repo`` slug from (overridable for other forges / offline)."""
+    return os.environ.get("CAIRN_FORGE_BASE", "https://forge.example.org").rstrip("/")
+
+
+def _clone_url(repo: str) -> str:
+    """A ``repo`` that already carries a scheme (``://``) is a full clone URL, used verbatim;
+    otherwise it is a forge slug resolved against ``CAIRN_FORGE_BASE``."""
+    return repo if "://" in repo else f"{_forge_base()}/{repo}.git"
+
+
+def _git(argv: list[str], case_id: str, what: str) -> None:
+    r = subprocess.run(["git", *argv], capture_output=True, text=True)
+    if r.returncode != 0:
+        raise AssemblyError(f"{case_id}: git {what} failed — {(r.stderr or r.stdout).strip()}")
+
+
+def _resolve_repo(entry: dict, clones: dict | None, tmpdirs: list | None) -> Path:
+    """Clone ``repo`` at the immutable ``ref`` and return the clone ROOT (a case repo carries
+    CASE.json at its root — the cairns/_case-template layout).
+
+    ``ref`` is accepted iff it is a full 40-hex commit SHA **or** a tag in the clone; a
+    branch-only ref is not reproducible and is rejected (CORPUS-SPEC §1). Clones are cached by
+    ``(url, ref)`` so a repeated entry clones once, and each tempdir root is recorded in
+    ``tmpdirs`` for the caller (``assemble``) to clean up. The clone is trusted only for
+    reachability — the digest gate in ``assemble`` re-verifies the bytes (CORPUS-SPEC §8)."""
+    cid = entry["case_id"]
+    repo = entry["repo"]
+    ref = entry.get("ref")
+    if not ref:
+        raise AssemblyError(f"{cid}: repo mode requires `ref` (a tag or a full 40-hex commit SHA)")
+    url = _clone_url(repo)
+    key = (url, ref)
+    if clones is not None and key in clones:
+        return clones[key]
+
+    root = Path(tempfile.mkdtemp(prefix="cairn-corpus-clone-"))
+    if tmpdirs is not None:
+        tmpdirs.append(root)
+    dest = root / "bundle"
+    _git(["clone", "--filter=blob:none", "--quiet", url, str(dest)], cid, f"clone {repo!r}")
+
+    if not _FULL_SHA.match(ref):
+        is_tag = subprocess.run(
+            ["git", "-C", str(dest), "show-ref", "--verify", "--quiet", f"refs/tags/{ref}"]
+        ).returncode == 0
+        if not is_tag:
+            raise AssemblyError(
+                f"{cid}: ref {ref!r} is not an immutable ref — repo mode requires a git TAG or a "
+                f"full 40-hex commit SHA (a branch name is not reproducible; CORPUS-SPEC §1)")
+    _git(["-C", str(dest), "checkout", "--quiet", ref], cid, f"checkout {ref!r}")
+
+    if clones is not None:
+        clones[key] = dest
+    return dest
+
+
+def resolve_entry(entry: dict, base_dir, *, clones: dict | None = None,
+                  tmpdirs: list | None = None) -> Path:
+    """Resolve a lock entry to a bundle directory.
+
+    - **local** (``path``) — a working-tree-relative directory (unchanged).
+    - **repo** (``repo`` + ``ref``, W4) — clone the case repo at the immutable ``ref`` and return
+      the clone ROOT. ``clones``/``tmpdirs`` are the caller's clone cache + cleanup registry
+      (``assemble`` supplies them and removes the tempdirs in a ``finally``).
+    - **domain** — reserved (CORPUS-SPEC §8); no resolver yet."""
     if "path" in entry:
         return Path(base_dir) / entry["path"]
     if "repo" in entry:
-        raise AssemblyError(
-            f"{entry['case_id']}: repo-mode resolution is not wired yet (W4). "
-            "Assemble a local (path-mode) corpus.lock, or vendor the case repo first.")
+        return _resolve_repo(entry, clones, tmpdirs)
     if "domain" in entry:
         raise AssemblyError(
             f"{entry['case_id']}: domain-mode is reserved (CORPUS-SPEC §8) — no resolver yet.")
@@ -128,49 +201,64 @@ def assemble(lock: dict, base_dir=".") -> dict:
             raise AssemblyError(f"duplicate case_id in corpus.lock: {e['case_id']!r}")
         seen.add(e["case_id"])
 
-    recs: dict[str, dict] = {}
-    manifests: dict[str, dict] = {}
-    for e in entries:
-        bundle = resolve_entry(e, base_dir)
-        if not (bundle / cases.MANIFEST).is_file():
-            raise AssemblyError(f"{e['case_id']}: no {cases.MANIFEST} at {bundle}")
+    # Repo-mode clones live in tempdirs; cache by (url, ref) so a repeated entry clones once, and
+    # remove them all after assembly (shared-host filesystem hygiene). Every read below — digest,
+    # engine.pin, manifest, records — happens BEFORE the finally, so cleanup is safe.
+    clones: dict = {}
+    tmpdirs: list = []
+    try:
+        recs: dict[str, dict] = {}
+        manifests: dict[str, dict] = {}
+        for e in entries:
+            bundle = resolve_entry(e, base_dir, clones=clones, tmpdirs=tmpdirs)
+            if not (bundle / cases.MANIFEST).is_file():
+                raise AssemblyError(f"{e['case_id']}: no {cases.MANIFEST} at {bundle}")
 
-        # (2) digest gate — the bytes must be exactly what the lock pins
-        got = cases.bundle_digest(bundle)
-        if got != e["digest"]:
-            raise AssemblyError(f"{e['case_id']}: digest drift\n  pinned:  {e['digest']}\n  on disk: {got}")
+            # (2) digest gate — the bytes must be exactly what the lock pins
+            got = cases.bundle_digest(bundle)
+            if got != e["digest"]:
+                raise AssemblyError(f"{e['case_id']}: digest drift\n  pinned:  {e['digest']}\n  on disk: {got}")
 
-        # (4) engine-compat gate — engine.pin vs this engine, and the schema keys must agree.
-        # engine.pin is REQUIRED (CASE-REPO-SPEC §4) and is the SOLE compat guard here — assembly
-        # never re-derives Trusty-URIs — so its absence is a loud failure, never a skipped gate.
-        pin_path = bundle / "engine.pin"
-        if not pin_path.is_file():
-            raise AssemblyError(
-                f"{e['case_id']}: no engine.pin — cannot verify engine compatibility (CASE-REPO-SPEC §4)")
-        pin = json.loads(pin_path.read_text())
-        ok, why = engine_satisfies_pin(pin)
-        if not ok:
-            raise AssemblyError(f"{e['case_id']}: engine does not satisfy engine.pin — {why}")
-        entry_engine = e.get("engine", corpus_schema)
-        if not (pin["record_schema"] == entry_engine == corpus_schema):
-            raise AssemblyError(
-                f"{e['case_id']}: record_schema disagreement — pin={pin['record_schema']!r} "
-                f"entry.engine={entry_engine!r} corpus.record_schema={corpus_schema!r}")
+            # (4) engine-compat gate — engine.pin vs this engine, and the schema keys must agree.
+            # engine.pin is REQUIRED (CASE-REPO-SPEC §4) and is the SOLE compat guard here — assembly
+            # never re-derives Trusty-URIs — so its absence is a loud failure, never a skipped gate.
+            pin_path = bundle / "engine.pin"
+            if not pin_path.is_file():
+                raise AssemblyError(
+                    f"{e['case_id']}: no engine.pin — cannot verify engine compatibility (CASE-REPO-SPEC §4)")
+            pin = json.loads(pin_path.read_text())
+            ok, why = engine_satisfies_pin(pin)
+            if not ok:
+                raise AssemblyError(f"{e['case_id']}: engine does not satisfy engine.pin — {why}")
+            entry_engine = e.get("engine", corpus_schema)
+            if not (pin["record_schema"] == entry_engine == corpus_schema):
+                raise AssemblyError(
+                    f"{e['case_id']}: record_schema disagreement — pin={pin['record_schema']!r} "
+                    f"entry.engine={entry_engine!r} corpus.record_schema={corpus_schema!r}")
 
-        manifests[e["case_id"]] = cases.load_manifest(bundle)
-        _collect_records(bundle, manifests[e["case_id"]], recs)
+            manifest = cases.load_manifest(bundle)
+            _collect_records(bundle, manifest, recs)
+            # CASES.json carries only a case's SEMANTIC declaration. The `records` order manifest is
+            # assembly-only metadata (CORPUS-SPEC §2): once _collect_records has consumed it, drop
+            # it (shallow copy, this key only) so CASES.json is byte-identical whether a case is
+            # in-tree (no `records`) or a self-contained mirror (records/-shipping). verify_bundle
+            # does not read `records`, so the structure gate is unaffected.
+            manifests[e["case_id"]] = {k: v for k, v in manifest.items() if k != "records"}
 
-    # (3) structure gate — every case's declared structure must hold over the assembled store
-    store = {r["id"]: r for r in recs.values()}
-    alias = {slug: r["id"] for slug, r in recs.items()}
-    for cid, manifest in manifests.items():
-        result = cases.verify_bundle(manifest, store, lambda s: alias.get(s, s))
-        if not result["ok"]:
-            bad = [c for c in result["checks"] if not c["ok"]]
-            raise AssemblyError(f"{cid}: declared structure does not hold — {bad}")
+        # (3) structure gate — every case's declared structure must hold over the assembled store
+        store = {r["id"]: r for r in recs.values()}
+        alias = {slug: r["id"] for slug, r in recs.items()}
+        for cid, manifest in manifests.items():
+            result = cases.verify_bundle(manifest, store, lambda s: alias.get(s, s))
+            if not result["ok"]:
+                bad = [c for c in result["checks"] if not c["ok"]]
+                raise AssemblyError(f"{cid}: declared structure does not hold — {bad}")
 
-    index = {slug: rec["id"] for slug, rec in recs.items()}
-    return {"index": index, "cases": manifests, "records": recs}
+        index = {slug: rec["id"] for slug, rec in recs.items()}
+        return {"index": index, "cases": manifests, "records": recs}
+    finally:
+        for d in tmpdirs:
+            shutil.rmtree(d, ignore_errors=True)
 
 
 def write_assembled(assembled: dict, out_dir, *, write_records: bool = False) -> Path:

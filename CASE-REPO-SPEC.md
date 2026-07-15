@@ -78,7 +78,7 @@ Full field reference: [`schemas/case.schema.json`](schemas/case.schema.json). Su
 | `contrast_pair` | no | a two-line pair proving the engine is not a refuse-everything oracle. |
 | `contrast_expected` | no | the verdict `contrast_pair` must land on (`COMBINABLE` default). SHOULD be set when `contrast_pair` is. |
 | `battery` | no | repo-relative path to the probe battery whose `crux` must match. |
-| `records` | no | ordered list of record filenames (relative to `records/`) giving the assembly order — see *Record order* below. **Required for a self-contained bundle** to reassemble byte-identically; in-tree bundles omit it. |
+| `records` | no | ordered list of record filenames (relative to `records/`) giving the assembly order — see *Record order* below. **Required for a self-contained bundle** to reassemble byte-identically; in-tree bundles omit it. **Assembly-only**: it is consumed to order `INDEX.json` and then **omitted from the aggregate `CASES.json`**, so `CASES.json` is byte-identical whether a case is in-tree or self-contained. |
 | `exercises` / `import_note` | no | curator's notes; not read by the engine. |
 | `case_spec_version` | no | the manifest contract version; absent ⇒ `"1.0"`. It is the version component of `engine.pin.case_spec` (§4). |
 
@@ -100,8 +100,10 @@ The aggregate `INDEX.json` lists records in **insertion order**, which is **not*
 An in-tree bundle gets that order from `build.py`. A self-contained bundle has no `build.py` at
 assembly time, so it **must** pin the order in `CASE.json`'s `records` manifest — a bare
 `sorted()` over `records/` would reorder `INDEX.json` and break byte-identity. This is the one
-piece of order a self-contained case carries so the corpus can reassemble deterministically. See
-[CORPUS-SPEC.md §2](CORPUS-SPEC.md).
+piece of order a self-contained case carries so the corpus can reassemble deterministically. The
+manifest is **assembly-only**: the assembler consumes it to order `INDEX.json` and then strips it
+from the aggregate `CASES.json`, so a self-contained mirror and its in-tree twin emit an identical
+`CASES.json` entry. See [CORPUS-SPEC.md §2](CORPUS-SPEC.md).
 
 ---
 

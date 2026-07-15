@@ -59,7 +59,7 @@ Plus **exactly one resolution mode** (the schema's `oneOf` enforces this):
 
 | Mode | Fields | Meaning |
 |---|---|---|
-| **repo** | `repo` + `ref` | clone `repo` at the immutable `ref` — a **tag or full commit SHA** (a branch name is not reproducible and is rejected). The production shape (W4+). |
+| **repo** | `repo` + `ref` | clone `repo` at the immutable `ref` — a **tag or full 40-hex commit SHA** (a branch name is not reproducible and is rejected, naming the case). A bare slug clones from `${CAIRN_FORGE_BASE:-https://forge.example.org}/<repo>.git`; a `repo` carrying a `://` scheme is used verbatim as the clone URL. The production shape — **wired in W4** (`cairn.corpus`). |
 | **local** | `path` | a working-tree-relative path to the bundle. `repo`/`ref`/`domain` **must be absent**. Lets a `corpus.lock` pin the in-tree bundles so **W1 can prove byte-identical assembly before any case repo exists** — the bridge from monolith to trifurcation. |
 | **domain** | `domain` | the case's deployed-domain identity (e.g. `covid-origins.a.epistack.dev`). **Reserved** — the schema accepts it; the resolver lands with subdomain-delegation infra. See §8. |
 
@@ -74,8 +74,12 @@ First, reject a `corpus.lock` whose `cases` contains a **duplicate `case_id`** (
 cannot express cross-item uniqueness) — exit nonzero and name the collision. Then, for each
 entry **in `cases` order**:
 
-1. **Resolve** the bundle directory — `path` (working tree), clone `repo` at `ref`, or (reserved)
-   the `domain` endpoint.
+1. **Resolve** the bundle directory — a `path` (working tree); or clone `repo` at `ref` (an
+   immutable **tag or full 40-hex SHA** — a branch is rejected — via
+   `git clone --filter=blob:none` from `${CAIRN_FORGE_BASE:-…}/<repo>.git` unless `repo` is a full
+   URL, then checkout `ref`; the clone ROOT is the bundle dir); or (reserved) the `domain`
+   endpoint. A clone is trusted only for **reachability** — step 2 re-verifies the bytes — and
+   temp clones are removed after assembly.
 2. **Verify digest** — recompute `cairn.cases.bundle_digest(dir)` and require it equals
    `entry.digest`. A drifted or wrong-ref bundle **fails loudly** here; a repo/domain cannot
    silently change under a pin.
@@ -108,14 +112,23 @@ Then write the aggregate outputs **in lock order**:
 | Output | Serialization |
 |---|---|
 | `INDEX.json` | `json.dumps(index, indent=2)` + trailing `\n` (default `ensure_ascii=True`; the corpus' slugs/URIs are all ASCII, so this is byte-identical to `ensure_ascii=False` today, but the spec pins what is actually emitted). |
-| `CASES.json` | `json.dumps(cases, indent=2, ensure_ascii=False)` + trailing `\n` (case prose carries non-ASCII). |
+| `CASES.json` | `json.dumps(cases, indent=2, ensure_ascii=False)` + trailing `\n` (case prose carries non-ASCII). `cases[case_id]` is the bundle's `CASE.json` **with the `records` key removed** — see the note below. |
+
+> **`records` is assembly-only.** A self-contained bundle's `CASE.json` carries a `records` order
+> manifest (*Record order*, below), but that key is **omitted from the aggregate `CASES.json`**:
+> `cases[case_id]` is `CASE.json` minus `records`. It is pure assembly-order metadata, not part of a
+> case's semantic declaration, so dropping it keeps `CASES.json` **byte-identical whether a case is
+> in-tree (no `records`) or a self-contained mirror (ships `records`)** — which is exactly what the
+> corpus CI relocation tripwire diffs. `verify_bundle` does not read `records`, so the structure
+> gate (step 3) is unaffected.
 
 **Record order.** `INDEX.json` line order is the order records are inserted into the store —
 which is **not** alphabetical (e.g. covid-origins begins `src-worobey-2022, src-pekar-2022,
 ent-prc-early-case-investigation, …`, not a filesystem sort). For an in-tree bundle that order
 is intrinsic to `build.py`. For a self-contained bundle there is no `build.py` at assembly time,
 so the order **must** be pinned by the bundle's `CASE.json` `records` manifest; a bare `sorted()`
-over `records/` would reorder `INDEX.json` and break byte-identity. See
+over `records/` would reorder `INDEX.json` and break byte-identity. This `records` manifest is
+consumed here to order `INDEX.json` and is then **stripped from `CASES.json`** (note above). See
 [CASE-REPO-SPEC.md §2](CASE-REPO-SPEC.md).
 
 > **A wrong ref, a drifted digest, a duplicate `case_id`, or an engine mismatch fails loudly** —

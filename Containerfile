@@ -6,6 +6,12 @@
 FROM python:3.12-slim
 
 WORKDIR /app
+
+# git — required by repo-mode `cairn corpus assemble` (clone a case repo at its pinned ref,
+# CORPUS-SPEC §1) and by the repo-mode resolver tests. python:3.12-slim ships without it.
+RUN apt-get update && apt-get install -y --no-install-recommends git \
+ && rm -rf /var/lib/apt/lists/*
+
 COPY pyproject.toml requirements.txt ./
 COPY cairn ./cairn
 COPY schemas ./schemas

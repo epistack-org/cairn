@@ -17,6 +17,7 @@ unresolvable/reserved mode must each fail loudly.
 from __future__ import annotations
 
 import json
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -213,3 +214,125 @@ def test_gate_records_without_order_manifest_is_rejected(tmp_path):
     lock = _synthetic_lock("synthetic", cases.bundle_digest(b))  # re-pin so the digest gate passes first
     with pytest.raises(corpus.AssemblyError, match="no .records. order"):
         corpus.assemble(lock, base_dir=tmp_path)
+
+
+# --- (change 2) the assembly-only `records` key is stripped from CASES.json --------------------
+
+def test_self_contained_bundle_omits_records_key_from_cases_json(tmp_path):
+    """A self-contained (records/-shipping) bundle DECLARES a `records` order manifest in its
+    CASE.json, but that manifest is assembly-only metadata (CORPUS-SPEC §2) and MUST NOT leak into
+    the aggregate CASES.json — else CASES.json would not be byte-identical to an in-tree case's."""
+    _synthetic_bundle(tmp_path / "synthetic")
+    # the bundle itself ships the order manifest ...
+    assert "records" in json.loads((tmp_path / "synthetic" / "CASE.json").read_text())
+    lock = _synthetic_lock("synthetic", cases.bundle_digest(tmp_path / "synthetic"))
+    assembled = corpus.assemble(lock, base_dir=tmp_path)
+    # ... but the assembled CASES.json entry has it stripped (and nothing else lost).
+    assert "records" not in assembled["cases"]["synthetic"]
+    full = json.loads((tmp_path / "synthetic" / "CASE.json").read_text())
+    assert set(assembled["cases"]["synthetic"]) == set(full) - {"records"}
+
+
+# --- (change 1) repo-mode resolution (hermetic: a local bare repo, no network) -----------------
+
+def _bare_repo_from_bundle(tmp_path: Path, *, tag: str | None = "v1") -> tuple[Path, str]:
+    """Build a self-contained synthetic bundle, commit it as a git repo (CASE.json at the ROOT),
+    optionally tag it, and return (path-to-bare-repo, its bundle digest). No network."""
+    work = tmp_path / "work"
+    _synthetic_bundle(work)                       # CASE.json / records/ / engine.pin at work/ root
+    digest = cases.bundle_digest(work)
+    run = lambda *a: subprocess.run(["git", "-C", str(work), *a], check=True,
+                                    capture_output=True, text=True)
+    subprocess.run(["git", "init", "-q", "-b", "main", str(work)], check=True,
+                   capture_output=True, text=True)
+    run("config", "user.email", "t@example.com")
+    run("config", "user.name", "cairn-test")
+    run("add", "-A")
+    run("commit", "-q", "-m", "synthetic bundle")
+    if tag:
+        run("tag", tag)
+    bare = tmp_path / "bundle.git"
+    subprocess.run(["git", "clone", "-q", "--bare", str(work), str(bare)], check=True,
+                   capture_output=True, text=True)
+    return bare, digest
+
+
+def _repo_lock(case_id: str, url: str, ref: str, digest: str) -> dict:
+    return {
+        "corpus_lock_version": "1.0",
+        "corpus": {"name": "synthetic-repo", "record_schema": "cairn.v0", "canonicalization": "JCS/RFC-8785"},
+        "cases": [{"case_id": case_id, "repo": url, "ref": ref, "digest": digest, "engine": "cairn.v0"}],
+    }
+
+
+def test_repo_mode_resolves_verifies_and_assembles(tmp_path):
+    """A repo-mode entry (a file:// clone URL + an immutable tag) clones, re-verifies the digest,
+    and assembles byte-identically to the path-mode result — and strips `records` from CASES.json."""
+    bare, digest = _bare_repo_from_bundle(tmp_path, tag="v1")
+    lock = _repo_lock("synthetic", f"file://{bare}", "v1", digest)
+    assembled = corpus.assemble(lock)             # no base_dir needed: repo mode does not use it
+    assert list(assembled["cases"]) == ["synthetic"]
+    assert list(assembled["index"]) == _SYNTH_ORDER      # record order came from the manifest
+    assert len(assembled["records"]) == 5
+    assert "records" not in assembled["cases"]["synthetic"]
+
+
+def test_repo_mode_rejects_a_branch_ref(tmp_path):
+    """A branch name is not an immutable ref (CORPUS-SPEC §1) — repo mode must reject it, by case."""
+    bare, digest = _bare_repo_from_bundle(tmp_path, tag=None)   # `main` exists as a branch, not a tag
+    lock = _repo_lock("synthetic", f"file://{bare}", "main", digest)
+    with pytest.raises(corpus.AssemblyError, match="synthetic: ref 'main' is not an immutable ref"):
+        corpus.assemble(lock)
+
+
+def test_repo_mode_digest_drift_fails_loudly(tmp_path):
+    """The digest is the trust root in repo mode too: a wrong pin fails at the digest gate, even
+    though the tag resolved fine (assembly trusts the clone for reachability, never for bytes)."""
+    bare, _digest = _bare_repo_from_bundle(tmp_path, tag="v1")
+    lock = _repo_lock("synthetic", f"file://{bare}", "v1", "sha256:" + "0" * 64)
+    with pytest.raises(corpus.AssemblyError, match="digest drift"):
+        corpus.assemble(lock)
+
+
+def test_repo_mode_accepts_a_full_commit_sha(tmp_path):
+    """A full 40-hex commit SHA is an immutable ref and is accepted with no tag present."""
+    work = tmp_path / "work"
+    _synthetic_bundle(work)
+    digest = cases.bundle_digest(work)
+    run = lambda *a: subprocess.run(["git", "-C", str(work), *a], check=True,
+                                    capture_output=True, text=True)
+    subprocess.run(["git", "init", "-q", "-b", "main", str(work)], check=True,
+                   capture_output=True, text=True)
+    run("config", "user.email", "t@example.com")
+    run("config", "user.name", "cairn-test")
+    run("add", "-A")
+    run("commit", "-q", "-m", "synthetic bundle")
+    sha = subprocess.run(["git", "-C", str(work), "rev-parse", "HEAD"],
+                         check=True, capture_output=True, text=True).stdout.strip()
+    bare = tmp_path / "bundle.git"
+    subprocess.run(["git", "clone", "-q", "--bare", str(work), str(bare)], check=True,
+                   capture_output=True, text=True)
+    lock = _repo_lock("synthetic", f"file://{bare}", sha, digest)
+    assembled = corpus.assemble(lock)
+    assert list(assembled["cases"]) == ["synthetic"]
+    assert "records" not in assembled["cases"]["synthetic"]
+
+
+def test_repo_mode_cleans_up_its_temp_clones(tmp_path, monkeypatch):
+    """Temp clones must not be left on the shared host — after assembly, every created tempdir is gone."""
+    bare, digest = _bare_repo_from_bundle(tmp_path, tag="v1")
+    created: list[str] = []
+    real_mkdtemp = corpus.tempfile.mkdtemp
+
+    def spy_mkdtemp(*a, **k):
+        d = real_mkdtemp(*a, **k)
+        created.append(d)
+        return d
+
+    monkeypatch.setattr(corpus.tempfile, "mkdtemp", spy_mkdtemp)
+    lock = _repo_lock("synthetic", f"file://{bare}", "v1", digest)
+    corpus.assemble(lock)
+    clone_dirs = [d for d in created if "cairn-corpus-clone-" in d]
+    assert clone_dirs, "expected repo mode to create a temp clone dir"
+    for d in clone_dirs:
+        assert not Path(d).exists(), f"temp clone not cleaned up: {d}"
