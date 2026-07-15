@@ -32,9 +32,14 @@
       "additionalProperties": false,
       "properties": {
         "derivedFrom": {
-          "description": "Upstream Cairn Trusty URIs this record derives from (the non-independence edge set).",
+          "description": "Upstream references this record derives from (the non-independence edge set). Either a Cairn Trusty URI (tt:) for a record held locally, OR a foreign reference (doi:/https:/arxiv:/pmid:/pmcid:/urn:/isbn:/w3id:/orcid:) that a claim may cite WITHOUT holding the source locally -- so a foreign corpus can be ingested and its shared upstreams named by DOI. Widening is strictly additive: every existing tt: edge still validates, and no minted id or signature changes. Note: grounding.source must still be a tt: source held locally, so a foreign-only claim cannot rise above the low rung until its span is re-checked.",
           "type": "array",
-          "items": { "type": "string", "pattern": "^tt:[A-Za-z0-9_-]{43}$" },
+          "items": {
+            "anyOf": [
+              { "type": "string", "pattern": "^tt:[A-Za-z0-9_-]{43}$" },
+              { "type": "string", "pattern": "^(doi:10\\.|https?://|arxiv:|pmid:|pmcid:|urn:|isbn:|w3id:|orcid:)[^\\s]+$" }
+            ]
+          },
           "uniqueItems": true
         },
         "mintedBy": { "type": "string", "minLength": 1 },

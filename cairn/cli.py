@@ -8,10 +8,11 @@ from __future__ import annotations
 import argparse
 import glob
 import json
+import os
 import sys
 from pathlib import Path
 
-from . import assessment, envelope, frechet, grounding, headtohead, neff, provenance
+from . import assessment, envelope, frechet, grounding, headtohead, importer, neff, provenance
 from .keys import SigningKey
 
 
@@ -190,6 +191,31 @@ def cmd_intersect(args) -> int:
     return 0 if verdict["independent"] else 2  # nonzero == refused (script-detectable)
 
 
+def cmd_import(args) -> int:
+    raw = sys.stdin.read() if args.spec == "-" else open(args.spec).read()
+    spec = json.loads(raw)
+    records = importer.import_corpus(spec)
+    problems = []
+    for r in records:
+        errs = envelope.validate(r)
+        if errs:
+            problems.append((r.get("assertion", {}).get("label", r["id"]), errs))
+    if problems:
+        for name, errs in problems:
+            print(f"INVALID {name}: {errs}", file=sys.stderr)
+        return 1
+    if args.out:
+        os.makedirs(args.out, exist_ok=True)
+        for r in records:
+            slug = r["assertion"].get("label") or r["id"].replace("tt:", "")[:16]
+            with open(os.path.join(args.out, f"import-{slug}.json"), "w") as f:
+                json.dump(r, f, indent=2)
+        print(f"imported {len(records)} claims -> {args.out}")
+    else:
+        print(json.dumps(records, indent=2))
+    return 0
+
+
 def cmd_explain(args) -> int:
     store, alias = _load_store(args.store)
     ids = _resolve(args.claims, alias, store) if args.claims else list(store.keys())
@@ -239,6 +265,12 @@ def build_parser() -> argparse.ArgumentParser:
     e.add_argument("--at-risk-upstream", dest="at_risk_upstream",
                    help="the upstream whose possible failure the backstop is meant to survive")
     e.set_defaults(func=cmd_explain)
+
+    im = sub.add_parser("import", help="ingest a foreign, DOI-cited corpus into cairn records "
+                                        "(derivedFrom edges carry the DOIs directly)")
+    im.add_argument("spec", help="path to the foreign-corpus JSON, or - for stdin")
+    im.add_argument("--out", help="directory to write minted records into (default: stdout)")
+    im.set_defaults(func=cmd_import)
 
     g = sub.add_parser("ground", help="verify claims' spans resolve to their cited source excerpts")
     g.add_argument("store", nargs="+", help="glob(s) of record JSON files (the store)")

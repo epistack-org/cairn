@@ -89,7 +89,7 @@ because the literature did not support them:
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -e . pytest
 .venv/bin/python fixtures/build_fixtures.py     # mint all 3 vetted corpora (sha-pinned)
-.venv/bin/python -m pytest -q                   # 117 tests
+.venv/bin/python -m pytest -q                   # 122 tests
 .venv/bin/python demo/worked_examples.py        # all three cases, side by side
 .venv/bin/cairn ground 'fixtures/*.json'        # 16/16 claim spans resolve to their source
 .venv/bin/cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json  # recompute measured n_eff
@@ -101,6 +101,12 @@ python3 -m venv .venv && .venv/bin/pip install -e . pytest
 # the other two cases refuse the same way (exit 2 == refused):
 .venv/bin/cairn intersect 'fixtures/*.json' --claims $(python3 -c "import json;i=json.load(open('fixtures/INDEX.json'));print(' '.join(i[s] for s in ['claim-eggs-rong-no-association','claim-eggs-godos-no-association','claim-eggs-drouin-no-association']))")
 .venv/bin/cairn intersect 'fixtures/*.json' --claims $(python3 -c "import json;i=json.load(open('fixtures/INDEX.json'));print(' '.join(i[s] for s in ['claim-cern-astro-stability','claim-cern-wd-ns-bound','claim-cern-moon-strangelet']))")
+
+# generalize beyond the built-in cases: ingest a foreign, DOI-cited corpus and refuse on it.
+# Here, the public baseline's OWN natural-origin evidence, imported by DOI (no baseline clone):
+.venv/bin/python demo/import_example/verify_baseline_import.py   # names the Crits-Christoph double-count its dedup missed
+.venv/bin/cairn import demo/import_example/baseline-natorigin.json --out /tmp/imported
+.venv/bin/cairn intersect '/tmp/imported/*.json' --claims import-environmental-samples-wildlife-stall-positivity import-raccoon-dog-susceptible-species-genetic-tracing  # -> REFUSE on doi:10.1016/j.cell.2024.08.010 (exit 2)
 
 # or, fully self-contained:
 docker build -t cairn -f Containerfile . && docker run --rm cairn
