@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://epistack.dev/ns/cairn-corpus-lock.v1.schema.json",
+  "title": "Cairn corpus.lock (cairn-corpus-lock/1.0)",
+  "description": "The pinned, ordered, curated selection of case bundles that assemble into one corpus. The engine owns this schema; an instance (corpus.lock) lives in a corpus repo (e.g. cairns/corpus). `cairn corpus assemble <corpus.lock>` resolves each entry, verifies its digest + structure + engine compatibility, and assembles CASES.json/INDEX.json in `cases` order. See CORPUS-SPEC.md.",
+  "type": "object",
+  "required": ["corpus_lock_version", "corpus", "cases"],
+  "additionalProperties": false,
+  "properties": {
+    "corpus_lock_version": {
+      "description": "The cairn-corpus-lock contract version this file targets.",
+      "type": "string",
+      "const": "1.0"
+    },
+    "corpus": {
+      "description": "Corpus-level metadata + the default compatibility keys every entry inherits.",
+      "type": "object",
+      "required": ["name", "record_schema", "canonicalization"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "Stable identifier for this curated corpus (e.g. 'epistack-flf-refuse-to-combine'). A corpus TAG (name@vX.Y) is a reproducible artifact: exactly these entries assembling to one hash.",
+          "type": "string",
+          "minLength": 1
+        },
+        "description": { "type": "string" },
+        "domain": {
+          "description": "Optional deployed identity of this corpus, in the 'domain is identity' model (e.g. 'corpus.a.epistack.dev'). A locator/owner, never a trust root -- the assembled hash and the per-entry digests remain authoritative for content. Reserved; the resolver lands with subdomain-delegation infra. See CORPUS-SPEC.md §8.",
+          "type": "string",
+          "minLength": 1
+        },
+        "record_schema": {
+          "description": "The record-envelope schema line every entry's records conform to. Load-bearing: Trusty-URIs are hashes over the canonical form under this schema. Must match each entry's engine.pin `record_schema`.",
+          "type": "string",
+          "enum": ["cairn.v0"]
+        },
+        "canonicalization": {
+          "description": "The canonical byte-form the records are content-addressed and signed over. A different backend drifts every URI.",
+          "type": "string",
+          "enum": ["JCS/RFC-8785"]
+        }
+      }
+    },
+    "cases": {
+      "description": "The ordered selection. Array order IS assembly order and fixes the line order of the aggregate CASES.json/INDEX.json -- byte-identity depends on it. Case ids must be unique; JSON Schema cannot enforce cross-item uniqueness, so assembly rejects a duplicate case_id and names the collision (CORPUS-SPEC.md §2).",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "required": ["case_id", "digest"],
+      "additionalProperties": false,
+      "description": "One pinned case. Exactly one resolution mode: `repo`+`ref` (clone-and-verify at a pinned commit/tag), `path` (a local bundle in the working tree), or `domain` (the deployed-domain identity, reserved). `digest` is mandatory in every mode and is the trust root.",
+      "properties": {
+        "case_id": {
+          "description": "The bundle's case id -- its directory name and its (unique) key in CASES.json.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "repo": {
+          "description": "The case repo to clone (e.g. 'cairns/covid-origins', a slug or clone URL). Present only in repo mode.",
+          "type": "string",
+          "minLength": 1
+        },
+        "ref": {
+          "description": "The immutable git ref pinned for this entry -- a tag or full commit SHA (a branch name is NOT reproducible and is rejected by assembly). Required in repo mode; must be absent in local and domain modes.",
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "description": "A working-tree-relative path to the bundle directory. Present only in local mode (`repo`/`ref`/`domain` must be absent). Lets a corpus.lock pin the in-tree bundles so assembly is provable before any case repo is stood up.",
+          "type": "string",
+          "minLength": 1
+        },
+        "domain": {
+          "description": "The case's deployed-domain identity (e.g. 'covid-origins.a.epistack.dev'), in the 'domain is identity' model. A locator/owner; the `digest` remains the trust root. RESERVED: the schema accepts it, but the domain resolver + hosting land with subdomain-delegation infra (CORPUS-SPEC.md §8). Present only in domain mode (`repo`/`ref`/`path` must be absent).",
+          "type": "string",
+          "minLength": 1
+        },
+        "digest": {
+          "description": "The bundle content digest (cairn.cases.bundle_digest: sha256 over CASE.json/build.py/PROVENANCE.md/engine.pin + records/* + sources/*, in stable order). Assembly recomputes it after resolving the entry and fails loudly on any drift, so a repo/domain cannot silently change under a pin -- and any mirror satisfying the digest reproduces the bytes.",
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "engine": {
+          "description": "The record-schema compatibility key pinned for this entry. Defaults to corpus.record_schema when absent; when present it must equal both corpus.record_schema and the case's own engine.pin `record_schema`. Assembly refuses on disagreement.",
+          "type": "string",
+          "enum": ["cairn.v0"]
+        }
+      },
+      "oneOf": [
+        { "title": "repo mode",   "required": ["repo", "ref"], "not": { "anyOf": [ { "required": ["path"] }, { "required": ["domain"] } ] } },
+        { "title": "local mode",  "required": ["path"],        "not": { "anyOf": [ { "required": ["repo"] }, { "required": ["ref"] }, { "required": ["domain"] } ] } },
+        { "title": "domain mode", "required": ["domain"],      "not": { "anyOf": [ { "required": ["repo"] }, { "required": ["ref"] }, { "required": ["path"] } ] } }
+      ]
+    }
+  }
+}

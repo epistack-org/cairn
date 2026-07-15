@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://epistack.dev/ns/cairn-case.v1.schema.json",
+  "title": "Cairn CASE.json manifest (cairn-case/1.0)",
+  "description": "The engine-owned structural declaration a case bundle makes about itself: which apparently-independent lines actually launder one upstream (laundered_set + shared_upstream), and which pair is genuinely combinable (contrast_pair + contrast_expected). `cairn cases verify` runs these declarations against a record store; a case that stops refusing, or whose declared upstream is not the one the DAG walk collectively finds, fails. This is the case half of the versioned engine<->case interface (the record half is cairn.v0.schema.json). Version this manifest by bumping the default case_spec_version minor; the $id carries only the MAJOR (v1) and changes only on a breaking bump (v1->v2) to how the engine reads the manifest.",
+  "type": "object",
+  "required": ["title", "crux", "shared_upstream", "laundered_set", "punchline"],
+  "additionalProperties": false,
+  "properties": {
+    "case_spec_version": {
+      "description": "The cairn-case manifest contract version this file targets -- the version component of the bundle's engine.pin `case_spec` (e.g. engine.pin case_spec 'cairn-case/1.0' => case_spec_version '1.0'). Optional for backward compatibility: absent means '1.0' (the seven grounded bundles predate the field and stay byte-identical). New case repos SHOULD declare it explicitly.",
+      "type": "string",
+      "default": "1.0",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "records": {
+      "description": "Optional ordered list of this bundle's record filenames (relative to records/), giving the record-insertion order that fixes the aggregate INDEX.json line order. REQUIRED for a self-contained (records/-shipping) bundle to reassemble byte-identically WITHOUT running build.py, since a filesystem sort is alphabetical and the golden order is not. In-tree dual-homed bundles omit it (their order comes from build.py); a migrated self-contained mirror declares it. See CASE-REPO-SPEC.md §2.",
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[^/]+\\.json$" },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "title": {
+      "description": "Human-readable name of the worked example.",
+      "type": "string",
+      "minLength": 1
+    },
+    "crux": {
+      "description": "The single decision the case turns on, phrased as a question. Must match the `crux` of the declared battery (tests/test_cases.py::test_battery_declares_the_case_crux) when a battery is present.",
+      "type": "string",
+      "minLength": 1
+    },
+    "shared_upstream": {
+      "description": "The one upstream every line in laundered_set actually descends from. A record slug (resolved via the store's filename-stem alias) OR a foreign identifier (doi:/urn:/... for import-path cases). `cairn cases verify` asserts this id is in the COLLECTIVE shared-upstream set the DAG walk finds over laundered_set -- shared by ALL lines, not merely some pair. May be reached only transitively (e.g. the eggs cohort backbone is two hops up).",
+      "type": "string",
+      "minLength": 1
+    },
+    "shared_upstream_kind": {
+      "description": "Prose describing WHAT kind of thing the shared upstream is (one paper / one author collective / one dataset / one fabricated registry ...). Descriptive only; not read by the engine.",
+      "type": "string"
+    },
+    "laundered_set": {
+      "description": "The apparently-independent lines that must collectively REFUSE-TO-COMBINE because they share `shared_upstream`. Slugs (or ids). This is the trap the case exists to spring.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 2,
+      "uniqueItems": true
+    },
+    "contrast_pair": {
+      "description": "Optional genuinely-independent (or genuinely-entangled) pair, present to prove the engine is not a refuse-everything oracle. Its verdict must equal contrast_expected. Exactly two lines.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "contrast_expected": {
+      "description": "The verdict contrast_pair must land on. Defaults to COMBINABLE when contrast_pair is present and this is absent (cairn/cases.py). SHOULD be present whenever contrast_pair is.",
+      "type": "string",
+      "enum": ["COMBINABLE", "REFUSE-TO-COMBINE", "REFUSE-TO-COMBINE-AS-INDEPENDENT"]
+    },
+    "battery": {
+      "description": "Optional repo-relative path to the probe battery (assessment/probes.json shape) whose `crux` must match this manifest's. Vetted, span-grounded cases carry one; import-path cases (surgisphere shape) may omit it.",
+      "type": "string",
+      "minLength": 1
+    },
+    "exercises": {
+      "description": "Optional prose: the specific structural pattern this case exercises that others do not (curator's note; not read by the engine).",
+      "type": "string"
+    },
+    "import_note": {
+      "description": "Optional prose flagging that the case's records are minted via `cairn import` from cited identifiers (low rung, no span grounding) rather than first-party span-vetted sources.",
+      "type": "string"
+    },
+    "punchline": {
+      "description": "One-paragraph plain-English statement of what the case demonstrates -- the sentence a reader keeps.",
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

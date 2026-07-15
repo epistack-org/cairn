@@ -1,0 +1,12 @@
+{
+  "pin_schema": "cairn-engine-pin/1.0",
+  "record_schema": "cairn.v0",
+  "canonicalization": "JCS/RFC-8785",
+  "case_spec": "cairn-case/1.0",
+  "verified_with": {
+    "engine": "cairn",
+    "version": "0.0.1",
+    "interoperable": ["cairn-cr"]
+  },
+  "verified_at": "2026-07-15"
+}

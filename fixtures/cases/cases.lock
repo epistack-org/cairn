@@ -10,25 +10,25 @@
   ],
   "bundles": {
     "covid-origins": {
-      "digest": "sha256:1f2cf0b5086833778e7ea32d260bce4a62191878e19b54749315ce48199e7d61"
+      "digest": "sha256:3eaa2f057d6b5ed633bdf613e502c75fed49eabc5c3e3132b1c2d8a5ea655279"
     },
     "eggs-good-for-you": {
-      "digest": "sha256:8b9fdb1ab4851c7bd873afc0b2b1ee58f087788027c200498f824ec9c9f96a13"
+      "digest": "sha256:efb2696fc12115e5fbe6c69d61b614ed6054967bedf3bc2a9843ecca29d33d36"
     },
     "cern-black-hole": {
-      "digest": "sha256:bbcc0154cbb942f3f87d616ec592e1400d42b9e371511c9350edd3200a07ccbd"
+      "digest": "sha256:3417d3b143a53222dbf82d48c8c76c6c3e48198eff0225e26db1a7cac77db3a3"
     },
     "amyloid-abeta56": {
-      "digest": "sha256:d94541b465e9cd99a14cd9baffa8c41d17fa81573f242334e8f84ecc092896f5"
+      "digest": "sha256:2a1dd791fed5a0697e01dbd4861df28740e2baa6a271aba9512e63b7dfdaa7b8"
     },
     "ivermectin-elgazzar": {
-      "digest": "sha256:a835d6447e4256a88bd8c0b44efe06e50f988ca40a9a7e965350ef04acba49bf"
+      "digest": "sha256:195cc86f54368633bf79d13ab6cc9c1662d25d675c958dd05459a9147d80f225"
     },
     "anversa-ckit": {
-      "digest": "sha256:1502ad3aba57035b63a50c17e3522057722a67e91a574af02369a7236074f455"
+      "digest": "sha256:8c9c25f9a81b389ab89e417f9f44f0c6b304a3453f443b4214b75f348ce9c036"
     },
     "poldermans-decrease": {
-      "digest": "sha256:0b3459ec6e9be9d97c4ef7f96aefdce0b19c64a7b0631a4ef9abb7bdc59c8195"
+      "digest": "sha256:5a0550a1d9a4595e82f206c4a1254095b8a46b9d9e225b49bd6924105de337d5"
     }
   }
 }
