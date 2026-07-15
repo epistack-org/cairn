@@ -67,7 +67,8 @@
     "provenance": {
       "verdict": "REFUSE-TO-COMBINE",
       "shared_upstreams": [
-        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI"
+        "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+        "tt:gyZCttDBh1aiZrcUQLqPFfSFAWVuaxGmu7xl1HhPOz4"
       ]
     }
   },
@@ -75,13 +76,13 @@
     "prior": 0.5,
     "k": 2,
     "lrs": [
-      5.0,
-      4.0
+      4.0,
+      5.0
     ],
     "marginals": {
       "p_H": [
-        0.5,
-        0.4
+        0.4,
+        0.5
       ],
       "p_notH": [
         0.1,
@@ -126,8 +127,8 @@
     "point_posterior": 0.9523809523809523,
     "measured": null,
     "claims": [
-      "claim-geographic-clustering",
-      "claim-two-lineages"
+      "claim-cern-hawking-evaporation",
+      "claim-cern-wd-ns-bound"
     ],
     "provenance": {
       "verdict": "COMBINABLE",

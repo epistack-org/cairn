@@ -47,11 +47,15 @@ from typing import Sequence
 
 from . import frechet, provenance
 
-# The COVID-HSM corpus split the head-to-head is defined over: the three proximity
-# lines that share the one Worobey upstream (→ REFUSE), and the disjoint contrast
-# (one proximity line + the Pekar molecular line → COMBINABLE).
+# The head-to-head is defined over: the three COVID proximity lines that share the one
+# Worobey upstream (→ REFUSE), and a GENUINELY disjoint contrast that the engine must
+# combine. The old contrast (one proximity line + the Pekar molecular line) was the
+# entry's false COMBINABLE — on the honest DAG that pair REFUSES (Pekar cites/calibrates on
+# Worobey; flf-contest#5). The real discrimination demo is the CERN pair {Hawking-radiation
+# evaporation} × {white-dwarf/neutron-star survival}: upstream-disjoint by construction
+# (Giddings & Mangano premised the WD/NS bound on the Hawking premise FAILING; flf-contest#6).
 TRIO_SLUGS = ["claim-geographic-clustering", "claim-environmental-sampling", "claim-live-mammal-sales"]
-CONTRAST_SLUGS = ["claim-geographic-clustering", "claim-two-lineages"]
+CONTRAST_SLUGS = ["claim-cern-hawking-evaporation", "claim-cern-wd-ns-bound"]
 
 # The canonical four deltas, in A1→A3 pipeline order, each welded to the concrete
 # cairn artifact that closes the gap. `key` indexes cairn's live outputs; `id`

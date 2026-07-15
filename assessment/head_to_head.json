@@ -53,7 +53,7 @@
       "baseline_produced_reproducible_artifact": false,
       "baseline_structurally_cannot": "The transcript cannot emit the ARTIFACT: a DETERMINISTIC set-intersection over an explicit content-addressed derivedFrom DAG that (a) names the shared upstream as a Trusty content-id (tt:_7D7Ne_b7B1…) = SHA-256 over JCS-canonical content, re-derivable BYTE-FOR-BYTE by a third party on a fresh machine independent of any model, and (b) HARD-GATES the combine via CLI exit 2 (cli.py:127), mechanically halting a downstream pipeline. The baseline's \"Worobey 2022\" is a stochastic natural-language pointer — its recurrence (100% here) is empirical on an easy case, not guaranteed, not byte-verifiable, and not a gate a machine can enforce; a prose \"I decline to combine\" does not stop a pipeline. The residual is narrow and honest: it is DISCLOSURE + DETERMINISM + CONTENT-ADDRESSED RE-CHECKABILITY + ENFORCED GATE, layered on top of a graph whose edges are themselves human/LLM-authored (cairn's honesty there is only that it discloses the shared handle rather than mechanizing the judgment).",
       "cairn_capability": "walks the derivedFrom DAG and emits a deterministic REFUSE-TO-COMBINE that names the exact shared upstream content-id, re-checkable byte-for-byte on a fresh machine, and hard-gates the combine (exit 2)",
-      "cairn_output": "REFUSE-TO-COMBINE; shared upstream ['tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI']"
+      "cairn_output": "REFUSE-TO-COMBINE; shared upstream ['tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI', 'tt:gyZCttDBh1aiZrcUQLqPFfSFAWVuaxGmu7xl1HhPOz4']"
     },
     {
       "id": 2,

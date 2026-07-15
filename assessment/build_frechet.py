@@ -48,7 +48,10 @@ def verdict_over(index, store, slugs, *, neff_run=None) -> dict:
 def build() -> dict:
     index, store = load_store()
     trio = ["claim-geographic-clustering", "claim-environmental-sampling", "claim-live-mammal-sales"]
-    contrast = ["claim-geographic-clustering", "claim-two-lineages"]
+    # The genuine disjoint COMBINABLE (flf-contest#6): CERN {Hawking evaporation} × {WD/NS
+    # survival}. The old contrast (geographic-clustering × two-lineages) was the false COMBINABLE
+    # and now REFUSES on the honest DAG (Worobey↔Pekar citation/calibration edges; flf-contest#5).
+    contrast = ["claim-cern-hawking-evaporation", "claim-cern-wd-ns-bound"]
 
     neff_pbox = {}
     for name in PANELS:
