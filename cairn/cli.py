@@ -190,6 +190,16 @@ def cmd_intersect(args) -> int:
     return 0 if verdict["independent"] else 2  # nonzero == refused (script-detectable)
 
 
+def cmd_explain(args) -> int:
+    store, alias = _load_store(args.store)
+    ids = _resolve(args.claims, alias, store) if args.claims else list(store.keys())
+    backstop = alias.get(args.backstop, args.backstop) if args.backstop else None
+    at_risk = alias.get(args.at_risk_upstream, args.at_risk_upstream) if args.at_risk_upstream else None
+    verdict = provenance.combine_verdict(ids, store, backstop=backstop, at_risk_upstream=at_risk)
+    print(provenance.explain_verdict(verdict, store))
+    return 0 if verdict["independent"] else 2  # same exit contract as intersect
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="cairn", description=__doc__)
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -219,6 +229,16 @@ def build_parser() -> argparse.ArgumentParser:
                    help="the upstream whose possible failure is contemplated (e.g. the "
                         "Hawking-radiation premise); the backstop must be disjoint from it")
     i.set_defaults(func=cmd_intersect)
+
+    e = sub.add_parser("explain", help="one plain-English paragraph for a refuse-to-combine "
+                                        "verdict, including what would un-refuse it")
+    e.add_argument("store", nargs="+", help="glob(s) of record JSON files (the store)")
+    e.add_argument("--claims", nargs="*", help="Trusty URIs or filename-slugs to test (default: all in store)")
+    e.add_argument("--backstop", help="a claim proposed as independently sufficient even if the "
+                                      "shared premise fails")
+    e.add_argument("--at-risk-upstream", dest="at_risk_upstream",
+                   help="the upstream whose possible failure the backstop is meant to survive")
+    e.set_defaults(func=cmd_explain)
 
     g = sub.add_parser("ground", help="verify claims' spans resolve to their cited source excerpts")
     g.add_argument("store", nargs="+", help="glob(s) of record JSON files (the store)")

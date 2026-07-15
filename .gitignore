@@ -6,3 +6,6 @@ __pycache__/
 out/
 .claude/
 .DS_Store
+
+.venv-int/
+.venv-assess/

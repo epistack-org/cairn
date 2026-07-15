@@ -72,6 +72,114 @@ def shared_upstreams(record_ids: Iterable[str], store: Mapping[str, Mapping]) ->
     return {"ancestors": anc, "pairwise_shared": pairwise, "collective_shared": sorted(collective)}
 
 
+def label(record_id: str, store: Mapping[str, Mapping]) -> str:
+    """A short human-readable name for a record id, for explanations.
+
+    Falls back through the fields records actually carry (source title, claim
+    text, entity label/name), and finally the raw id — never raises.
+    """
+    rec = store.get(record_id)
+    if rec is None:
+        return record_id
+    a = rec.get("assertion", {})
+    for k in ("title", "label", "name"):
+        if a.get(k):
+            return str(a[k])
+    text = a.get("text")
+    if text:
+        return text if len(text) <= 80 else text[:77] + "..."
+    return record_id
+
+
+def _lr_inflation(record_ids: Iterable[str], store: Mapping[str, Mapping]) -> tuple | None:
+    """(product, single) illustrative LRs, if every claim carries one; else None.
+
+    ``product`` is what treating the claims as independent multiplies to; ``single``
+    is the honest cap when the shared parent is counted once (the largest single LR).
+    Both are illustrative — the values live on the claims as ``illustrative_LR``.
+    """
+    lrs = []
+    for rid in record_ids:
+        rec = store.get(rid) or {}
+        lr = rec.get("assertion", {}).get("illustrative_LR")
+        if lr is None:
+            return None
+        lrs.append(float(lr))
+    if not lrs:
+        return None
+    product = 1.0
+    for x in lrs:
+        product *= x
+    return (product, max(lrs))
+
+
+def explain_verdict(verdict: Mapping, store: Mapping[str, Mapping]) -> str:
+    """One plain-English paragraph for a ``combine_verdict`` result.
+
+    A refusal must never ship as bare JSON + an exit code: it carries the named
+    shared upstream, what the refusal means, and — the part ``intersect`` already
+    computes and throws away — *what would un-refuse it*. This is information the
+    verdict dict already holds; ``explain`` just renders it for a human. It takes no
+    new position: everything here is a restatement of the mechanical verdict.
+    """
+    ids = list(verdict.get("claims", []))
+    n = len(ids)
+    names = [label(i, store) for i in ids]
+    claim_list = "; ".join(names)
+
+    if verdict.get("independent"):
+        return (
+            f"These {n} claims share no upstream on the provenance dimension "
+            f"({claim_list}). They may be combined as independent draws, subject to the "
+            f"other dependence legs and a measured n_eff. There is nothing to un-refuse."
+        )
+
+    shared = verdict.get("shared_upstreams", [])
+    _names = [label(s, store) for s in shared]
+    if len(_names) <= 3:
+        shared_names = "; ".join(_names)
+    else:
+        shared_names = "; ".join(_names[:3]) + f" (+{len(_names) - 3} more shared upstream(s))"
+    parts = [
+        f"These {n} claims were proposed as independent ({claim_list}), but they are not: "
+        f"they descend from a shared upstream — {shared_names}. Combining them as independent "
+        f"draws is undefined; a product would count one source up to {n} times."
+    ]
+
+    infl = _lr_inflation(ids, store)
+    if infl is not None:
+        product, single = infl
+        parts.append(
+            f"Treated as independent, their illustrative likelihood ratios multiply to "
+            f"{product:g}:1; counting the shared parent once, the honest reading is at most "
+            f"{single:g}:1."
+        )
+
+    parts.append(
+        f"What would un-refuse it: contest or drop the derivedFrom edge(s) to {shared_names}. "
+        f"If a reviewer shows these claims do not in fact share that upstream, the verdict "
+        f"flips to COMBINABLE — the refusal is a claim about this DAG, not about the world."
+    )
+
+    if verdict.get("conclusion_unchanged"):
+        bs = label(verdict.get("backstop", ""), store)
+        ar = label(verdict.get("at_risk_upstream", ""), store)
+        parts.append(
+            f"The conclusion itself still stands: {bs} is upstream-disjoint from {ar} and "
+            f"independently sufficient, so what fails is only the claim that these are {n} "
+            f"independent votes."
+        )
+    elif verdict.get("backstop") is not None and verdict.get("conclusion_unchanged") is False:
+        bs = label(verdict.get("backstop", ""), store)
+        ar = label(verdict.get("at_risk_upstream", ""), store)
+        parts.append(
+            f"The proposed backstop {bs} does not survive: it shares the at-risk premise "
+            f"{ar}, so it cannot rescue the conclusion — a bare refusal stands."
+        )
+
+    return " ".join(parts)
+
+
 def combine_verdict(
     record_ids: Iterable[str],
     store: Mapping[str, Mapping],

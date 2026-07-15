@@ -107,6 +107,11 @@ def main() -> int:
         print(f"\n  CONTRAST        {{{rev[pair[0]]}, {rev[pair[1]]}}}")
         print(f"                  {cv['verdict']} — {gloss}")
 
+        # a refusal never ships bare: the same verdict, as one plain-English
+        # paragraph, including the un-refuse set (flf-contest#22)
+        print(f"\n  EXPLAIN (`cairn explain`)")
+        print(wrap(provenance.explain_verdict(v, store), indent="    "))
+
         print(f"\n  PUNCHLINE")
         print(wrap(case["punchline"], indent="    "))
 

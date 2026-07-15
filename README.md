@@ -89,11 +89,12 @@ because the literature did not support them:
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -e . pytest
 .venv/bin/python fixtures/build_fixtures.py     # mint all 3 vetted corpora (sha-pinned)
-.venv/bin/python -m pytest -q                   # 96 tests
+.venv/bin/python -m pytest -q                   # 117 tests
 .venv/bin/python demo/worked_examples.py        # all three cases, side by side
 .venv/bin/cairn ground 'fixtures/*.json'        # 16/16 claim spans resolve to their source
 .venv/bin/cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json  # recompute measured n_eff
 .venv/bin/cairn frechet fixtures/claim-geographic-clustering.json fixtures/claim-environmental-sampling.json fixtures/claim-live-mammal-sales.json fixtures/src-worobey-2022.json  # -> REFUSE-TO-COMBINE-AS-POINT (exit 2): the honest interval
+.venv/bin/cairn explain 'fixtures/*.json' --claims claim-geographic-clustering claim-environmental-sampling claim-live-mammal-sales  # -> the refusal as one plain-English paragraph, incl. what would un-refuse it
 .venv/bin/cairn headtohead 'fixtures/*.json'    # -> the four-delta head-to-head vs a careful baseline (exit 2 == delta demonstrated)
 .venv/bin/python demo/hsm_trio.py               # the head-to-head (naive + careful baseline vs Cairn)
 
