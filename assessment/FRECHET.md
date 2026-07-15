@@ -85,7 +85,15 @@ The whole discipline is to never pass a tighter regime off as a looser one.
   estimate sits at the **redundant floor** (`5^1 = 5`, posterior 0.833) — **never**
   the product 125. Sensitivity: `n_eff=1.06 → 5.5`, `1.63 → 13.8`, `3 → 125`.
 
-## 5. The n_eff p-box (dependence-structure uncertainty)
+## 5. The n_eff p-box — RETIRED (superseded by the bootstrap CI on φ̄)
+
+> **Correction (post degeneracy-guard fix, `flf-contest/draft-entry#8`).** The min/max n_eff p-box described in
+> this section is **retired**. It was single-pair-driven and low-power, and it inherited the zero-variance bug
+> (an undefined φ was coded as 0 = maximal independence). It is replaced by a **bootstrap CI on φ̄** (resampled
+> probes, deterministic seed) reported alongside the **eigenvalue ESS** — see `assessment/neff_recompute.json`
+> and `assessment/sensitivity.json`. The figures below are **pre-fix**, retained only as the audit record of what
+> was replaced; the corrected per-arm numbers (e.g. eggs partition 4.10 → 1.29, cern 2.54) live in
+> `neff_recompute.json`.
 
 A2 collapsed the 36 pairwise-φ values to their mean φ̄. A3 propagates their
 **spread** into an interval on n_eff. Since `kish` is *decreasing* in φ̄ the

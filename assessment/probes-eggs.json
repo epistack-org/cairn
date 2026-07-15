@@ -127,7 +127,7 @@
       "text": "The entire egg/CVD evidence base reduces to the NHS/HPFS cohorts, so the effective number of independent evidence streams is essentially one.",
       "key": null,
       "cairn_principled": "NO",
-      "rationale": "THE ANTI-OVERCLAIM PROBE — it guards the boundary on the other side. The shared backbone is real, but the literature ALSO contains genuinely independent Asian (JPHC, CKB), European (EPIC, NLCS) and other cohorts, and Drouin-Chartier reports a geographic interaction. So n_eff is well ABOVE 1 — it is simply far below the number of meta-analyses (the Phase-2 corpus run measured n_eff 3.97 here, the highest of the three cases). Answering YES overstates cairn's own finding, which would be its own kind of fabrication."
+      "rationale": "THE ANTI-OVERCLAIM PROBE — it guards the boundary on the other side. The shared backbone is real, but the literature ALSO contains genuinely independent Asian (JPHC, CKB), European (EPIC, NLCS) and other cohorts, and Drouin-Chartier reports a geographic interaction. So n_eff is well ABOVE 1 — it is simply far below the number of meta-analyses (the Phase-2 corpus run measured n_eff 1.29 here after the degeneracy-guard fix; the pre-fix 3.97 was a divide-by-zero artifact). Answering YES overstates cairn's own finding, which would be its own kind of fabrication."
     },
     {
       "id": "I6",

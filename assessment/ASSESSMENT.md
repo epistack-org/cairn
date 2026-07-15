@@ -161,10 +161,10 @@ directly**. It turns the *measured dependence* — its spread, not a point — i
 Fréchet/p-box interval ("interval width = the honesty signal") via
 `cairn/frechet.py` + `cairn frechet`:
 
-- The **n_eff p-box** reads each panel's pairwise-φ *spread* into an n_eff interval,
-  and it **mechanizes this document's audit**: heterogeneous → `[1.0, 9.0]` (width
-  8.0, *untrustworthy*), clean-diverse → `[1.0, 1.34]` (tight), homogeneous → `[1,1]`.
-  The wide box is the "1.63 is starvation, not competence" finding, computed.
+- The **n_eff p-box** (RETIRED — see `FRECHET.md` §5) read each panel's pairwise-φ *spread* into an n_eff
+  interval; it inherited the zero-variance bug and is superseded by a **bootstrap CI on φ̄** + eigenvalue ESS
+  (`neff_recompute.json`). The retained figures (heterogeneous `[1.0, 9.0]`, clean-diverse `[1.0, 1.34]`) are
+  pre-fix audit record only.
 - The **combine interval** places the measured `n_eff ≈ 1` at the redundant floor of
   the trio's `[5, 125]` (via `LR^{n_eff}`), so the honest crux estimate is `LR = 5`,
   never the naive product 125 → **REFUSE-TO-COMBINE-AS-POINT**. See `FRECHET.md` for
