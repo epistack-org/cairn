@@ -72,6 +72,36 @@ def test_empty_claim_set_is_vacuously_combinable():
     assert v["shared_upstreams"] == []
 
 
+def test_backstop_disjoint_from_at_risk_upgrades_to_as_independent():
+    # flf-contest#7: a shared premise + a backstop disjoint from the AT-RISK premise ->
+    # REFUSE-TO-COMBINE-AS-INDEPENDENT + conclusion_unchanged (the conclusion stands).
+    at_risk = _mk("epi:Entity", {"name": "hawking premise"})
+    shared = _mk("epi:Entity", {"name": "cosmic-ray premise"})
+    c1 = _mk("epi:Claim", {"text": "astro"}, [shared["id"]])
+    c2 = _mk("epi:Claim", {"text": "wd/ns backstop"}, [shared["id"]])   # NOT derived from at_risk
+    c3 = _mk("epi:Claim", {"text": "moon"}, [shared["id"]])
+    store = _store(at_risk, shared, c1, c2, c3)
+    v = provenance.combine_verdict(
+        [c1["id"], c2["id"], c3["id"]], store,
+        backstop=c2["id"], at_risk_upstream=at_risk["id"])
+    assert v["verdict"] == "REFUSE-TO-COMBINE-AS-INDEPENDENT"
+    assert v["conclusion_unchanged"] is True
+    assert v["backstop"] == c2["id"]
+
+
+def test_backstop_that_shares_at_risk_premise_stays_a_bare_refuse():
+    # honest check: a backstop that itself derives from the at-risk premise does NOT survive
+    # its failure, so the verdict stays a bare REFUSE-TO-COMBINE (no fake reassurance).
+    at_risk = _mk("epi:Source", {"title": "at-risk premise"})
+    c1 = _mk("epi:Claim", {"text": "a"}, [at_risk["id"]])
+    c2 = _mk("epi:Claim", {"text": "b"}, [at_risk["id"]])
+    store = _store(at_risk, c1, c2)
+    v = provenance.combine_verdict(
+        [c1["id"], c2["id"]], store, backstop=c2["id"], at_risk_upstream=at_risk["id"])
+    assert v["verdict"] == "REFUSE-TO-COMBINE"
+    assert v["conclusion_unchanged"] is False
+
+
 def test_ancestors_excludes_self_and_terminates_on_cycle_safe_input():
     a = _mk("epi:Source", {"title": "a"})
     b = _mk("epi:Claim", {"text": "b"}, [a["id"]])

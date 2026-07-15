@@ -97,16 +97,18 @@ def main() -> int:
         print(f"                  Fréchet interval: LR in [{fv['interval_lr'][0]:g}, "
               f"{fv['interval_lr'][1]:g}] -> {fv['verdict']}")
 
-        # and where independence DOES hold
+        # the contrast pair — combinable where independence really holds, refused where the
+        # engine's own former false positive lived (covid: Worobey × Pekar; flf-contest#5/#6)
         pair = [index[s] for s in case["contrast_pair"]]
         cv = provenance.combine_verdict(pair, store)
+        want = case["contrast_expected"]
+        gloss = ("combining here IS licensed (disjoint upstream)" if want == "COMBINABLE"
+                 else "the former false COMBINABLE — REFUSED on the honest DAG")
         print(f"\n  CONTRAST        {{{rev[pair[0]]}, {rev[pair[1]]}}}")
-        print(f"                  {cv['verdict']} — combining here IS licensed")
+        print(f"                  {cv['verdict']} — {gloss}")
 
         print(f"\n  PUNCHLINE")
         print(wrap(case["punchline"], indent="    "))
-        print(f"\n  (at corpus scale, Phase 2 measured n_eff = {case['n_eff_corpus_scale']} "
-              f"for this crux)")
 
     print("\n" + "=" * 78)
     print(f"  {refused}/{len(cases)} cases REFUSE-TO-COMBINE on the provenance dimension.")

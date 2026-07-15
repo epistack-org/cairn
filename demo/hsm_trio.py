@@ -79,8 +79,11 @@ def main() -> int:
     print("  layer-(a) provenance detector over the 3 claims:")
     print(f"    VERDICT: {verdict['verdict']}")
     for up in verdict["shared_upstreams"]:
-        print(f"    shared upstream: {up}  ({store[up]['assertion']['title'][:48]}...)")
-    print("    => the 3 'lines' trace to ONE dataset; multiplying is undefined.")
+        a = store[up]["assertion"] if up in store else {}
+        label = a.get("title") or a.get("name") or up
+        print(f"    shared upstream: {up}  ({label[:48]}...)")
+    print("    => the 3 'lines' trace to ONE paper (two also to the shared PRC")
+    print("       early-case investigation); multiplying them is undefined.")
 
     # MEASURED effective independence (A2): a heterogeneous assessor panel on the HSM
     # crux. Real votes, pinned in assessment/runs/ and re-checkable with `cairn assess`
@@ -122,21 +125,35 @@ def main() -> int:
           "(a cap, not a proven lower bound), emit the interval, route the crux to a human -- never the point.")
 
     line()
-    print("CONTRAST — where independence DOES hold")
+    print("CONTESTABILITY — Worobey × Pekar: the false COMBINABLE, and its correction")
     line()
     pair = [trio[0], molecular]
     vc = provenance.combine_verdict(pair, store)
-    # genuinely distinct upstreams -> orthogonal (uncorrelated) illustrative vectors
-    pair_vectors = [[1, 1, 0, 0], [1, 0, 1, 0]]
-    rp = neff.neff_from_matrix(pair_vectors)
-    print(f"  {{geographic clustering (Worobey), two lineages (Pekar)}}: ")
-    print(f"    VERDICT: {vc['verdict']}  (no shared upstream)")
-    print(f"    n_eff over genuinely-distinct lines: k={rp['k']}, "
-          f"phi_bar={rp['phi_bar']:.2f}, n_eff={rp['n_eff']:.2f}")
-    fc = frechet.frechet_verdict([lr(trio[0]), lr(molecular)], shared_upstream=not vc["independent"])
-    print(f"    Fréchet: {fc['verdict']} -> combined LR={fc['point_lr']:g} "
-          f"(posterior {fc['point_posterior']:.3f}); the one licensed cross-family product (never 125x4=500).")
-    print("    => here combining is licensed.\n")
+    rev_all = {rid: slug for slug, rid in index.items()}
+    # the SAME pair on the naive document-level DAG (fixtures/naive/) — the cautionary run
+    naive_dir = FX / "naive"
+    naive_idx = json.loads((naive_dir / "INDEX.json").read_text())
+    naive_store = {}
+    for slug in naive_idx:
+        rec = json.loads((naive_dir / f"{slug}.json").read_text())
+        naive_store[rec["id"]] = rec
+    nvc = provenance.combine_verdict(
+        [naive_idx["claim-geographic-clustering"], naive_idx["claim-two-lineages"]], naive_store)
+    print("  {geographic clustering (Worobey 2022), two lineages (Pekar 2022)}:")
+    print(f"    naive document-level DAG : {nvc['verdict']}   <- what the entry originally, WRONGLY, shipped")
+    print(f"    honest (derived) DAG     : {vc['verdict']}")
+    for s in vc["shared_upstreams"]:
+        print(f"        shared upstream: {rev_all.get(s, s)}")
+    print("    Pekar cites Worobey (ref [39], first person) and calibrates its clock on Worobey 2021;")
+    print("    both rest on the market-anchored PRC early-case investigation. Not disjoint. The two runs")
+    print("    are one command apart, both in the bundle — that contrast IS the contestability (flf-contest#5).")
+    print("\n  The genuinely licensed product lives on CERN instead: {Hawking evaporation} × {WD/NS survival}")
+    cern_pair = [index["claim-cern-hawking-evaporation"], index["claim-cern-wd-ns-bound"]]
+    cvc = provenance.combine_verdict(cern_pair, store)
+    fc = frechet.frechet_verdict(
+        [lr(cern_pair[0]), lr(cern_pair[1])], shared_upstream=not cvc["independent"])
+    print(f"    VERDICT: {cvc['verdict']} -> Fréchet {fc['verdict']} combined LR={fc['point_lr']:g} "
+          f"(upstream-disjoint by construction; flf-contest#6).\n")
 
     # A4 -- the CAREFUL baseline. The "NAIVE BASELINE" above is a strawman (math.prod).
     # This is a measured panel of 5 careful Claude-Code investigations on the same crux
@@ -172,10 +189,10 @@ def main() -> int:
         "control_neff": cm,
         "clean_diverse_neff": dm,
         "naive_combined_LR": naive,
-        "contrast_verdict": {k: vc[k] for k in ("independent", "verdict")},
-        "contrast_neff": rp,
+        "contrast_verdict": {k: vc[k] for k in ("independent", "verdict")},  # honest DAG: REFUSE (was the false COMBINABLE)
+        "contrast_naive_verdict": {k: nvc[k] for k in ("independent", "verdict")},  # naive doc-DAG: COMBINABLE
         "frechet_trio": fv,          # A3: the honest interval + refusal (delta 3 + delta 4)
-        "frechet_contrast": fc,      # A3: the one licensed cross-family product
+        "frechet_contrast": fc,      # A3: the genuine licensed product — CERN Hawking × WD/NS
         "head_to_head": {            # A4: careful-baseline panel vs the four deltas
             "baseline_consensus": h2h["baseline_consensus"],
             "deltas": h2h["deltas"],

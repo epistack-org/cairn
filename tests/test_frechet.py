@@ -244,7 +244,9 @@ def test_cli_trio_refuses_exit_2(capsys):
 
 
 @needs_fixtures
-def test_cli_contrast_combines_exit_0(capsys):
+def test_cli_contrast_refuses_on_honest_dag_exit_2(capsys):
+    # flf-contest#5: geographic-clustering × two-lineages was the false COMBINABLE. On the
+    # honest DAG (Pekar's citation + calibration edges) it REFUSES as a point → exit 2.
     code = cli.main([
         "frechet",
         str(FX / "claim-geographic-clustering.json"),
@@ -252,6 +254,28 @@ def test_cli_contrast_combines_exit_0(capsys):
         str(FX / "src-worobey-2022.json"),
         str(FX / "src-pekar-2022.json"),
     ])
+    assert code == 2
+    out = json.loads(capsys.readouterr().out)
+    assert out["verdict"] == "REFUSE-TO-COMBINE-AS-POINT"
+    assert out["provenance"]["verdict"] == "REFUSE-TO-COMBINE"
+
+
+@needs_fixtures
+def test_cli_naive_contrast_still_combines_exit_0(capsys):
+    # The cautionary run one command apart: on the document-level DAG the pair COMBINES.
+    code = cli.main(["frechet", str(FX / "naive" / "*.json"),
+                     "--claims", "claim-geographic-clustering", "claim-two-lineages"])
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["verdict"] == "COMBINABLE-WITH-INTERVAL"
+    assert out["point_lr"] == 20.0
+
+
+@needs_fixtures
+def test_cli_cern_combinable_exit_0(capsys):
+    # flf-contest#6: the genuine COMBINABLE the engine must emit — CERN Hawking × WD/NS.
+    code = cli.main(["frechet", str(FX / "*.json"),
+                     "--claims", "claim-cern-hawking-evaporation", "claim-cern-wd-ns-bound"])
     assert code == 0
     out = json.loads(capsys.readouterr().out)
     assert out["verdict"] == "COMBINABLE-WITH-INTERVAL"
