@@ -35,6 +35,7 @@ _NON_RECORD_JSON = {"INDEX.json", "CASES.json", "refusal_auc.json"}
 def _pinned_files() -> list[Path]:
     files: list[Path] = []
     files += sorted(FX.glob("*.json"))                       # 84 records + INDEX + CASES + refusal_auc
+    files += sorted((FX / "cases").glob("*/CASE.json"))       # per-bundle manifest slices
     files += sorted((FX / "sources").glob("*.abstract.txt"))  # pinned excerpts (inputs)
     files += sorted((FX / "naive").glob("*.json"))            # COVID cautionary snapshot
     files += [ROOT / "assessment" / "baseline.json"]          # cross-cutting head-to-head input

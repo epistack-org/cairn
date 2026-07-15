@@ -1,0 +1,19 @@
+{
+  "title": "Alzheimer's amyloid — the Aβ*56 corroboration cascade",
+  "crux": "Do the multiple reports of Aβ*56 — a specific 56-kDa soluble amyloid-β assembly — as a discrete, memory-impairing species constitute independent confirmations that this species exists and is pathogenic?",
+  "battery": "assessment/probes-amyloid.json",
+  "shared_upstream": "ent-abeta56",
+  "shared_upstream_kind": "a lab-defined molecular species + its detection assay whose sole originating characterization is one paper — Lesné et al. 2006 (Nature), RETRACTED in 2024 — carried forward by the same lab (Ashe/Lesné, U Minnesota). A shared foundational-result AND shared-reagent upstream at once.",
+  "laundered_set": [
+    "claim-abeta56-impairs-memory",
+    "claim-abeta56-human-brain",
+    "claim-abeta56-detection-method"
+  ],
+  "contrast_pair": [
+    "claim-abeta56-impairs-memory",
+    "claim-shankar-dimers"
+  ],
+  "contrast_expected": "COMBINABLE",
+  "punchline": "Aβ*56 became one of the most-cited soluble-oligomer results in the field. But the species was defined in exactly one paper (Lesné 2006), by one lab, using one detection assay; the human-brain measurement (Lesné 2013) and the methods paper (Sherman 2011) are the SAME lab operationalizing the SAME originating characterization — not two more independent confirmations. In 2024 Nature RETRACTED the 2006 paper over image-integrity concerns; the corroboration cascade did not un-happen when it did. cairn refuses to count three reports of Aβ*56 as three independent votes and names the shared upstream. It does NOT say Aβ oligomers are harmless — the Shankar 2008 human-brain dimer line is upstream-disjoint and COMBINES.",
+  "exercises": "a shared upstream that is simultaneously a foundational RESULT and a shared REAGENT/ASSAY, with the originating source formally RETRACTED after the fact — the sharpest real-world 'the anchor moved and the citations didn't' exhibit in the corpus"
+}

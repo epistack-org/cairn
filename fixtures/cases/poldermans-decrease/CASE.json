@@ -1,0 +1,19 @@
+{
+  "title": "Perioperative beta-blockers — the Poldermans/DECREASE cascade that flips sign",
+  "crux": "Do the trials and studies supporting perioperative beta-blockade to prevent cardiac death in non-cardiac surgery constitute independent evidence of that benefit?",
+  "battery": "assessment/probes-poldermans.json",
+  "shared_upstream": "ent-decrease-program",
+  "shared_upstream_kind": "one research program (the DECREASE family of trials + the Erasmus MC vascular-surgery database, run by the Poldermans group). A 2011-2012 Erasmus MC investigation found the DECREASE trials contained fabricated/fictitious data — an INSTITUTIONAL misconduct finding, not a per-node retraction stamp.",
+  "laundered_set": [
+    "claim-decrease-1",
+    "claim-decrease-boersma",
+    "claim-decrease-4"
+  ],
+  "contrast_pair": [
+    "claim-decrease-1",
+    "claim-poise"
+  ],
+  "contrast_expected": "COMBINABLE",
+  "punchline": "Perioperative beta-blockade to prevent cardiac death entered guidelines on a wall of apparent evidence: DECREASE-I (Poldermans 1999), the Boersma 2001 cohort, DECREASE-IV (Dunkelgrun 2009), and more. But that wall is one research program — the Poldermans/Erasmus DECREASE family — which a 2011-2012 institutional investigation found to rest on fabricated data. cairn refuses to count the program's outputs as independent votes and names the shared DECREASE upstream. The independent evidence points the other way: POISE (Devereaux 2008), an upstream-disjoint RCT, COMBINES — and Bouri 2014's DECREASE-excluded meta finds a 27% mortality INCREASE. Removing the fabricated lineage does not merely weaken the pooled result; it flips its sign from benefit to harm.",
+  "exercises": "the eggs node type (a shared research program / dataset backbone at the root, found without any single origin paper) carrying an institutional-misconduct meta-fact — and the only case where the honest counterfactual REVERSES the conclusion rather than just deflating the vote count"
+}

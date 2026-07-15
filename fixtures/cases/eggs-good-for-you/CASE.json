@@ -1,0 +1,19 @@
+{
+  "title": "Are eggs good for you — the egg/CVD meta-analyses",
+  "crux": "Do the several apparently independent meta-analyses finding no association between egg consumption and cardiovascular disease constitute independent confirmations of that null result?",
+  "battery": "assessment/probes-eggs.json",
+  "shared_upstream": "ent-nhs-hpfs-cohorts",
+  "shared_upstream_kind": "cohort (one shared participant backbone, TWO HOPS UP)",
+  "laundered_set": [
+    "claim-eggs-rong-no-association",
+    "claim-eggs-godos-no-association",
+    "claim-eggs-drouin-no-association"
+  ],
+  "contrast_pair": [
+    "claim-eggs-hu-no-association",
+    "claim-eggs-djousse-no-association"
+  ],
+  "contrast_expected": "COMBINABLE",
+  "punchline": "Three apparently independent reassuring findings — a 2013 BMJ dose-response meta-analysis, a 2021 meta-analysis of 39 studies and 'nearly 2 million individuals', and a 2020 BMJ three-cohort study plus updated meta-analysis — all re-pool the SAME nurses and health professionals (NHS/HPFS). Each review de-duplicates internally and is locally correct; the laundering happens BETWEEN them, at the aggregation layer. 'Nearly 2 million individuals' is not 2 million independent people. The shared upstream is invisible at the claim level — it is two hops up, found only by walking the DAG.",
+  "exercises": "the TRANSITIVE shared-ancestor detector — the first real corpus to do so (previously proven only against a synthetic fixture in tests)"
+}

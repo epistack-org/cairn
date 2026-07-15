@@ -1,0 +1,18 @@
+{
+  "title": "CERN black hole — the LHC/RHIC safety assurances",
+  "crux": "IF microscopic black holes produced at the LHC do not decay (i.e. conditional on the Hawking-radiation argument failing), do the collider-safety reviews constitute multiple INDEPENDENT lines of evidence that they are still harmless?",
+  "battery": "assessment/probes-cern.json",
+  "shared_upstream": "ent-cosmic-ray-argument",
+  "shared_upstream_kind": "premise (one load-bearing empirical argument)",
+  "laundered_set": [
+    "claim-cern-astro-stability",
+    "claim-cern-wd-ns-bound",
+    "claim-cern-moon-strangelet"
+  ],
+  "contrast_pair": [
+    "claim-cern-hawking-evaporation",
+    "claim-cern-wd-ns-bound"
+  ],
+  "contrast_expected": "COMBINABLE",
+  "punchline": "Three safety assurances that look maximally independent — three papers, two accelerators, three author teams, eight years apart, three different hypothetical catastrophes — all reach 'safe' through ONE premise: cosmic rays have hit astronomical bodies harder for billions of years and they are still here. Each paper says so in its own abstract. This is the case with the STRONGEST expert consensus, and cairn prices it honestly (effective independence ~1) rather than rewarding it. It does NOT say the LHC is unsafe — it says three assurances sharing a premise are not three votes."
+}

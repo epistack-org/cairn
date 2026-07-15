@@ -1,0 +1,19 @@
+{
+  "title": "Ivermectin for COVID-19 — the Elgazzar-fabricated meta-analysis cascade",
+  "crux": "Do the multiple ivermectin meta-analyses reporting a large COVID-19 mortality reduction constitute independent confirmations of that mortality benefit?",
+  "battery": "assessment/probes-ivermectin.json",
+  "shared_upstream": "src-elgazzar-2020",
+  "shared_upstream_kind": "one fabricated primary trial (the Elgazzar preprint, Research Square, WITHDRAWN 2021-07-14), TWO HOPS UP: each positive synthesis pooled it, and it carried the largest weight and the largest effect. Removing it collapses the pooled mortality signal (the published counterfactual: Hill 2021, later retracted).",
+  "laundered_set": [
+    "claim-iver-bryant",
+    "claim-iver-zein",
+    "claim-iver-kory"
+  ],
+  "contrast_pair": [
+    "claim-iver-bryant",
+    "claim-iver-together"
+  ],
+  "contrast_expected": "COMBINABLE",
+  "punchline": "Several meta-analyses reported ivermectin roughly halving COVID-19 mortality — Bryant 2021 (RR 0.38), Zein 2021 (RR 0.39), and the FLCCC review (Kory 2021) — which looks like independent replication. It is not: all three pooled the same single fabricated trial (Elgazzar, Research Square), which carried the largest weight and the largest effect; when it was WITHDRAWN on 2021-07-14 the pooled signal collapsed (Hill 2021, which had leaned on it, went null and was itself retracted). The naive reading multiplies three ~5:1 likelihoods to ~100:1; the provenance intersection collapses to one upstream, so the product is undefined. It does NOT say ivermectin is proven ineffective — TOGETHER (Reis 2022) is an upstream-disjoint RCT and COMBINES; the point is that the positive syntheses are not independent votes.",
+  "exercises": "the highest-fan-out node in the corpus — ONE fabricated primary re-pooled by many downstream syntheses (the eggs-style transitive detector, but the shared upstream is a retracted/withdrawn fraud rather than a legitimate cohort)"
+}

@@ -1,0 +1,18 @@
+{
+  "title": "COVID origins — the Huanan-market proximity trio",
+  "crux": "Did SARS-CoV-2 emerge via zoonotic spillover associated with the Huanan Seafood Wholesale Market, as opposed to a non-market or non-zoonotic introduction?",
+  "battery": "assessment/probes.json",
+  "shared_upstream": "src-worobey-2022",
+  "shared_upstream_kind": "one paper / one author collective; at the data layer two of the three (geographic clustering, environmental sampling) descend from the same market-anchored PRC early-case investigation, and the third (live-mammal sales, Xiao 2021) does not",
+  "laundered_set": [
+    "claim-geographic-clustering",
+    "claim-environmental-sampling",
+    "claim-live-mammal-sales"
+  ],
+  "contrast_pair": [
+    "claim-geographic-clustering",
+    "claim-two-lineages"
+  ],
+  "contrast_expected": "REFUSE-TO-COMBINE",
+  "punchline": "Three apparently independent lines of proximity evidence come from ONE paper by ONE author collective (Worobey 2022); at the data layer two of the three descend from the same market-anchored PRC early-case investigation, and the third (Xiao 2021) does not. The naive transcript multiplies 5x5x5 = 125:1; the provenance intersection collapses to a single upstream, so the product is undefined."
+}

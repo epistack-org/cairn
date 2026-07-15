@@ -1,0 +1,19 @@
+{
+  "title": "Cardiac stem cells — the Anversa c-kit+ regeneration cascade",
+  "crux": "Do the multiple reports that c-kit+ cardiac stem cells regenerate myocardium — from the rodent origin, to human cells, to the SCIPIO clinical trial — constitute independent confirmations that such cells regenerate the heart?",
+  "battery": "assessment/probes-anversa.json",
+  "shared_upstream": "ent-anversa-ckit-csc",
+  "shared_upstream_kind": "a lab-defined cell type + its isolation method whose originating characterization is one paper (Beltrami et al. 2003, Cell), carried forward by the same laboratory (Anversa). Harvard/Brigham recommended 31 of the lab's papers for retraction (2018) for falsified/fabricated data; the flagship human trial SCIPIO was RETRACTED (Lancet 2019) and used the lab's own cell preps — a literal shared-reagent dependency.",
+  "laundered_set": [
+    "claim-anversa-origin",
+    "claim-anversa-human",
+    "claim-anversa-scipio"
+  ],
+  "contrast_pair": [
+    "claim-anversa-origin",
+    "claim-anversa-caduceus"
+  ],
+  "contrast_expected": "COMBINABLE",
+  "punchline": "The c-kit+ cardiac stem cell — an adult heart cell claimed to regenerate myocardium — looked confirmed from rodent (Beltrami 2003) to human cells (Bearzi 2007) to a phase-1 trial in patients (SCIPIO, Bolli 2011). But all three descend from ONE laboratory's originating characterization and its isolation method; SCIPIO used that lab's own cell preps. Harvard and the Brigham later found falsified/fabricated data across the lab and pressed for 31 retractions; SCIPIO was retracted in 2019. cairn refuses to count the three as independent votes and names the shared Anversa c-kit+ characterization. It does NOT say the heart cannot be repaired — CADUCEUS (cardiosphere-derived cells, a different lab and cell type) is upstream-disjoint and COMBINES.",
+  "exercises": "the amyloid node type again (a lab-defined object + its assay, origin source at the root) but with the meta-fact carried as an INSTITUTIONAL misconduct finding plus one retracted downstream node — not a retraction stamp on the origin paper"
+}
