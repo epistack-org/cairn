@@ -1,0 +1,52 @@
+{
+  "corpus_lock_version": "1.0",
+  "corpus": {
+    "name": "epistack-flf-refuse-to-combine",
+    "record_schema": "cairn.v0",
+    "canonicalization": "JCS/RFC-8785"
+  },
+  "cases": [
+    {
+      "case_id": "covid-origins",
+      "path": "fixtures/cases/covid-origins",
+      "digest": "sha256:3eaa2f057d6b5ed633bdf613e502c75fed49eabc5c3e3132b1c2d8a5ea655279",
+      "engine": "cairn.v0"
+    },
+    {
+      "case_id": "eggs-good-for-you",
+      "path": "fixtures/cases/eggs-good-for-you",
+      "digest": "sha256:efb2696fc12115e5fbe6c69d61b614ed6054967bedf3bc2a9843ecca29d33d36",
+      "engine": "cairn.v0"
+    },
+    {
+      "case_id": "cern-black-hole",
+      "path": "fixtures/cases/cern-black-hole",
+      "digest": "sha256:3417d3b143a53222dbf82d48c8c76c6c3e48198eff0225e26db1a7cac77db3a3",
+      "engine": "cairn.v0"
+    },
+    {
+      "case_id": "amyloid-abeta56",
+      "path": "fixtures/cases/amyloid-abeta56",
+      "digest": "sha256:2a1dd791fed5a0697e01dbd4861df28740e2baa6a271aba9512e63b7dfdaa7b8",
+      "engine": "cairn.v0"
+    },
+    {
+      "case_id": "ivermectin-elgazzar",
+      "path": "fixtures/cases/ivermectin-elgazzar",
+      "digest": "sha256:195cc86f54368633bf79d13ab6cc9c1662d25d675c958dd05459a9147d80f225",
+      "engine": "cairn.v0"
+    },
+    {
+      "case_id": "anversa-ckit",
+      "path": "fixtures/cases/anversa-ckit",
+      "digest": "sha256:8c9c25f9a81b389ab89e417f9f44f0c6b304a3453f443b4214b75f348ce9c036",
+      "engine": "cairn.v0"
+    },
+    {
+      "case_id": "poldermans-decrease",
+      "path": "fixtures/cases/poldermans-decrease",
+      "digest": "sha256:5a0550a1d9a4595e82f206c4a1254095b8a46b9d9e225b49bd6924105de337d5",
+      "engine": "cairn.v0"
+    }
+  ]
+}

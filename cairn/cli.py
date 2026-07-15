@@ -12,7 +12,7 @@ import os
 import sys
 from pathlib import Path
 
-from . import assessment, cases, envelope, frechet, grounding, headtohead, importer, neff, provenance
+from . import assessment, cases, corpus, envelope, frechet, grounding, headtohead, importer, neff, provenance
 from .keys import SigningKey
 
 
@@ -239,6 +239,36 @@ def cmd_cases_verify(args) -> int:
     return 0 if result["ok"] else 1  # nonzero == a declared structural property does not hold
 
 
+def cmd_corpus_assemble(args) -> int:
+    lock = corpus.load_lock(args.lock)
+    try:
+        assembled = corpus.assemble(lock, base_dir=args.base_dir)
+    except corpus.AssemblyError as e:
+        print(f"ASSEMBLE FAILED: {e}", file=sys.stderr)
+        return 2
+    n_cases, n_recs = len(assembled["cases"]), len(assembled["records"])
+    if args.check:
+        base = Path(args.check)
+        drift = []
+        want_index = json.dumps(assembled["index"], indent=2) + "\n"
+        want_cases = json.dumps(assembled["cases"], indent=2, ensure_ascii=False) + "\n"
+        for name, want in (("INDEX.json", want_index), ("CASES.json", want_cases)):
+            committed = base / name
+            if not committed.is_file() or committed.read_text() != want:
+                drift.append(name)
+        if drift:
+            print(f"NOT byte-identical to {base}/: {drift}", file=sys.stderr)
+            return 1
+        print(f"assembled {n_cases} cases / {n_recs} records — byte-identical to {base}/")
+        return 0
+    if args.out:
+        out = corpus.write_assembled(assembled, args.out, write_records=args.write_records)
+        print(f"assembled {n_cases} cases / {n_recs} records -> {out}")
+    else:
+        print(json.dumps({"cases": list(assembled["cases"]), "records": assembled["index"]}, indent=2))
+    return 0
+
+
 def cmd_cases_list(args) -> int:
     cases_dir = Path(args.cases_dir)
     ids = cases.discover(cases_dir)
@@ -349,6 +379,19 @@ def build_parser() -> argparse.ArgumentParser:
     cl.add_argument("cases_dir", nargs="?", default="fixtures/cases",
                     help="dir of case bundles (default: fixtures/cases)")
     cl.set_defaults(func=cmd_cases_list)
+
+    co = sub.add_parser("corpus", help="assemble a corpus from a corpus.lock (resolve + verify "
+                                       "digest/structure/engine-compat, then assemble in order)")
+    cosub = co.add_subparsers(dest="corpus_cmd", required=True)
+    ca = cosub.add_parser("assemble", help="assemble INDEX.json/CASES.json from a corpus.lock")
+    ca.add_argument("lock", help="path to a corpus.lock")
+    ca.add_argument("--base-dir", default=".", help="root that local (path-mode) entries resolve "
+                                                    "against (default: cwd)")
+    ca.add_argument("--out", help="write INDEX.json/CASES.json here")
+    ca.add_argument("--write-records", action="store_true", help="also write each record file under --out")
+    ca.add_argument("--check", metavar="DIR", help="assert the assembly is byte-identical to the "
+                                                   "INDEX.json/CASES.json already in DIR (exit 1 on drift)")
+    ca.set_defaults(func=cmd_corpus_assemble)
     return p
 
 
