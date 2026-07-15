@@ -1,0 +1,44 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:76M6fpvpdVrcd1I4erCxhutOn6e3GWOJFgxffeS3MEM",
+  "assertion": {
+    "title": "Meta-analysis of secure randomised controlled trials of beta-blockade to prevent perioperative death in non-cardiac surgery",
+    "authors": "Bouri S, Shun-Shin MJ, Cole GD, Mayet J, Francis DP",
+    "venue": "Heart",
+    "year": 2014,
+    "volume": "100",
+    "issue": "6",
+    "pages": "456-464",
+    "doi": "10.1136/heartjnl-2013-304262",
+    "pmid": "23904357",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "BACKGROUND: Current European and American guidelines recommend the perioperative initiation of a course of β-blockers in those at risk of cardiac events undergoing high- or intermediate-risk surgery or vascular surgery. The Dutch Echocardiographic Cardiac Risk Evaluation Applying Stress Echocardiography (DECREASE) family of trials, the bedrock of evidence for this, are no longer secure. We therefore conducted a meta-analysis of randomised controlled trials of β-blockade on perioperative mortality, non-fatal myocardial infarction, stroke and hypotension in non-cardiac surgery using the secure data.\nMETHODS: The randomised controlled trials of initiation of β-blockers before non-cardiac surgery were examined. Primary outcome was all-cause mortality at 30 days or at discharge. The DECREASE trials were separately analysed.\nRESULTS: Nine secure trials totalling 10 529 patients, 291 of whom died, met the criteria. Initiation of a course of β-blockers before surgery caused a 27% risk increase in 30-day all-cause mortality (p=0.04). The DECREASE family of studies substantially contradict the meta-analysis of the secure trials on the effect of mortality (p=0.05 for divergence). In the secure trials, β-blockade reduced non-fatal myocardial infarction (RR 0.73, p=0.001) but increased stroke (RR 1.73, p=0.05) and hypotension (RR 1.51, p<0.00001). These results were dominated by one large trial.\nCONCLUSIONS: Guideline bodies should retract their recommendations based on fictitious data without further delay. This should not be blocked by dispute over allocation of blame. The well-conducted trials indicate a statistically significant 27% increase in mortality from the initiation of perioperative β-blockade that guidelines currently recommend. Any remaining enthusiasts might best channel their energy into a further randomised trial which should be designed carefully and conducted honestly.",
+    "excerpt_sha256": "8a502e70f5980eee457e6c6a8fa875bfbcb4f3edf1154822813a0fa46ace66ba",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 23904357); AbstractText via itertext()",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=23904357&rettype=abstract&retmode=xml"
+      ]
+    },
+    "verification": "L1",
+    "role": "the published sign-flip: the DECREASE-excluded 'secure trials' meta finds a 27% mortality INCREASE — the honest counterfactual to the DECREASE benefit lineage"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:6og_K_TvcS1mgkpGBbpr8TOoKzTtWfuE5R74BGGGoZk"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "ee00a74b0b98ee48ed7e0db3718e7dad5a88df8109cd0442aa2da94141a992df1e3a594f4a32b906b502f301d548f3e516e8e95fbdb856a949ee3459a9cddc07",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

@@ -72,5 +72,62 @@
     "contrast_expected": "COMBINABLE",
     "punchline": "Aβ*56 became one of the most-cited soluble-oligomer results in the field. But the species was defined in exactly one paper (Lesné 2006), by one lab, using one detection assay; the human-brain measurement (Lesné 2013) and the methods paper (Sherman 2011) are the SAME lab operationalizing the SAME originating characterization — not two more independent confirmations. In 2024 Nature RETRACTED the 2006 paper over image-integrity concerns; the corroboration cascade did not un-happen when it did. cairn refuses to count three reports of Aβ*56 as three independent votes and names the shared upstream. It does NOT say Aβ oligomers are harmless — the Shankar 2008 human-brain dimer line is upstream-disjoint and COMBINES.",
     "exercises": "a shared upstream that is simultaneously a foundational RESULT and a shared REAGENT/ASSAY, with the originating source formally RETRACTED after the fact — the sharpest real-world 'the anchor moved and the citations didn't' exhibit in the corpus"
+  },
+  "ivermectin-elgazzar": {
+    "title": "Ivermectin for COVID-19 — the Elgazzar-fabricated meta-analysis cascade",
+    "crux": "Do the multiple ivermectin meta-analyses reporting a large COVID-19 mortality reduction constitute independent confirmations of that mortality benefit?",
+    "battery": "assessment/probes-ivermectin.json",
+    "shared_upstream": "src-elgazzar-2020",
+    "shared_upstream_kind": "one fabricated primary trial (the Elgazzar preprint, Research Square, WITHDRAWN 2021-07-14), TWO HOPS UP: each positive synthesis pooled it, and it carried the largest weight and the largest effect. Removing it collapses the pooled mortality signal (the published counterfactual: Hill 2021, later retracted).",
+    "laundered_set": [
+      "claim-iver-bryant",
+      "claim-iver-zein",
+      "claim-iver-kory"
+    ],
+    "contrast_pair": [
+      "claim-iver-bryant",
+      "claim-iver-together"
+    ],
+    "contrast_expected": "COMBINABLE",
+    "punchline": "Several meta-analyses reported ivermectin roughly halving COVID-19 mortality — Bryant 2021 (RR 0.38), Zein 2021 (RR 0.39), and the FLCCC review (Kory 2021) — which looks like independent replication. It is not: all three pooled the same single fabricated trial (Elgazzar, Research Square), which carried the largest weight and the largest effect; when it was WITHDRAWN on 2021-07-14 the pooled signal collapsed (Hill 2021, which had leaned on it, went null and was itself retracted). The naive reading multiplies three ~5:1 likelihoods to ~100:1; the provenance intersection collapses to one upstream, so the product is undefined. It does NOT say ivermectin is proven ineffective — TOGETHER (Reis 2022) is an upstream-disjoint RCT and COMBINES; the point is that the positive syntheses are not independent votes.",
+    "exercises": "the highest-fan-out node in the corpus — ONE fabricated primary re-pooled by many downstream syntheses (the eggs-style transitive detector, but the shared upstream is a retracted/withdrawn fraud rather than a legitimate cohort)"
+  },
+  "anversa-ckit": {
+    "title": "Cardiac stem cells — the Anversa c-kit+ regeneration cascade",
+    "crux": "Do the multiple reports that c-kit+ cardiac stem cells regenerate myocardium — from the rodent origin, to human cells, to the SCIPIO clinical trial — constitute independent confirmations that such cells regenerate the heart?",
+    "battery": "assessment/probes-anversa.json",
+    "shared_upstream": "ent-anversa-ckit-csc",
+    "shared_upstream_kind": "a lab-defined cell type + its isolation method whose originating characterization is one paper (Beltrami et al. 2003, Cell), carried forward by the same laboratory (Anversa). Harvard/Brigham recommended 31 of the lab's papers for retraction (2018) for falsified/fabricated data; the flagship human trial SCIPIO was RETRACTED (Lancet 2019) and used the lab's own cell preps — a literal shared-reagent dependency.",
+    "laundered_set": [
+      "claim-anversa-origin",
+      "claim-anversa-human",
+      "claim-anversa-scipio"
+    ],
+    "contrast_pair": [
+      "claim-anversa-origin",
+      "claim-anversa-caduceus"
+    ],
+    "contrast_expected": "COMBINABLE",
+    "punchline": "The c-kit+ cardiac stem cell — an adult heart cell claimed to regenerate myocardium — looked confirmed from rodent (Beltrami 2003) to human cells (Bearzi 2007) to a phase-1 trial in patients (SCIPIO, Bolli 2011). But all three descend from ONE laboratory's originating characterization and its isolation method; SCIPIO used that lab's own cell preps. Harvard and the Brigham later found falsified/fabricated data across the lab and pressed for 31 retractions; SCIPIO was retracted in 2019. cairn refuses to count the three as independent votes and names the shared Anversa c-kit+ characterization. It does NOT say the heart cannot be repaired — CADUCEUS (cardiosphere-derived cells, a different lab and cell type) is upstream-disjoint and COMBINES.",
+    "exercises": "the amyloid node type again (a lab-defined object + its assay, origin source at the root) but with the meta-fact carried as an INSTITUTIONAL misconduct finding plus one retracted downstream node — not a retraction stamp on the origin paper"
+  },
+  "poldermans-decrease": {
+    "title": "Perioperative beta-blockers — the Poldermans/DECREASE cascade that flips sign",
+    "crux": "Do the trials and studies supporting perioperative beta-blockade to prevent cardiac death in non-cardiac surgery constitute independent evidence of that benefit?",
+    "battery": "assessment/probes-poldermans.json",
+    "shared_upstream": "ent-decrease-program",
+    "shared_upstream_kind": "one research program (the DECREASE family of trials + the Erasmus MC vascular-surgery database, run by the Poldermans group). A 2011-2012 Erasmus MC investigation found the DECREASE trials contained fabricated/fictitious data — an INSTITUTIONAL misconduct finding, not a per-node retraction stamp.",
+    "laundered_set": [
+      "claim-decrease-1",
+      "claim-decrease-boersma",
+      "claim-decrease-4"
+    ],
+    "contrast_pair": [
+      "claim-decrease-1",
+      "claim-poise"
+    ],
+    "contrast_expected": "COMBINABLE",
+    "punchline": "Perioperative beta-blockade to prevent cardiac death entered guidelines on a wall of apparent evidence: DECREASE-I (Poldermans 1999), the Boersma 2001 cohort, DECREASE-IV (Dunkelgrun 2009), and more. But that wall is one research program — the Poldermans/Erasmus DECREASE family — which a 2011-2012 institutional investigation found to rest on fabricated data. cairn refuses to count the program's outputs as independent votes and names the shared DECREASE upstream. The independent evidence points the other way: POISE (Devereaux 2008), an upstream-disjoint RCT, COMBINES — and Bouri 2014's DECREASE-excluded meta finds a 27% mortality INCREASE. Removing the fabricated lineage does not merely weaken the pooled result; it flips its sign from benefit to harm.",
+    "exercises": "the eggs node type (a shared research program / dataset backbone at the root, found without any single origin paper) carrying an institutional-misconduct meta-fact — and the only case where the honest counterfactual REVERSES the conclusion rather than just deflating the vote count"
   }
 }

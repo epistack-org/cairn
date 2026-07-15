@@ -1,0 +1,43 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:7HNu_af7HZ5BaEjXATRmoFvZHzN5yFoOuAIKjPt6oyA",
+  "assertion": {
+    "title": "Adult cardiac stem cells are multipotent and support myocardial regeneration",
+    "authors": "Beltrami AP, Barlucchi L, Torella D, Baker M, Limana F, Chimenti S, Kasahara H, Rota M, Musso E, Urbanek K, Leri A, Kajstura J, Nadal-Ginard B, Anversa P",
+    "venue": "Cell",
+    "year": 2003,
+    "volume": "114",
+    "issue": "6",
+    "pages": "763-776",
+    "doi": "10.1016/S0092-8674(03)00687-1",
+    "pmid": "14505575",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "The notion of the adult heart as terminally differentiated organ without self-renewal potential has been undermined by the existence of a subpopulation of replicating myocytes in normal and pathological states. The origin and significance of these cells has remained obscure for lack of a proper biological context. We report the existence of Lin(-) c-kit(POS) cells with the properties of cardiac stem cells. They are self-renewing, clonogenic, and multipotent, giving rise to myocytes, smooth muscle, and endothelial cells. When injected into an ischemic heart, these cells or their clonal progeny reconstitute well-differentiated myocardium, formed by blood-carrying new vessels and myocytes with the characteristics of young cells, encompassing approximately 70% of the ventricle. Thus, the adult heart, like the brain, is mainly composed of terminally differentiated cells, but is not a terminally differentiated organ because it contains stem cells supporting its regeneration. The existence of these cells opens new opportunities for myocardial repair.",
+    "excerpt_sha256": "52559bb7c0eeecb5e731b30e24b72944f16a270c8bed0e24bfa349d0bd8e0729",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 14505575); AbstractText via itertext()",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=14505575&rettype=abstract&retmode=xml"
+      ]
+    },
+    "verification": "L1",
+    "role": "the originating characterization of the Lin(-)/c-kit(POS) cardiac stem cell — the derivation root the cascade collapses to",
+    "retraction_status_note": "This origin paper is NOT individually marked retracted on PubMed (as of retrieval). The case's ground truth is INSTITUTIONAL: Harvard Medical School and Brigham and Women's Hospital found falsified/fabricated data across the Anversa lab and recommended 31 papers for retraction (2018); a $10M False Claims Act settlement resolved the NIH-grant allegations (2017). The refusal does not depend on any single retraction stamp."
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "234421989a16efbdfdd5e22489362d842db517451bf133a41780aa3a0bb42f0042140bd2b335c7d8c5eb763fc039ba631365ee4f1bee58e8a24fa3ca8f0a4c05",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

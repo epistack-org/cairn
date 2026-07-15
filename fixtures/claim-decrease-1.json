@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:ayYBsFvOrrpZf3NRTCjhkd9pKa262Xpl0_9BpeAlKLg",
+  "assertion": {
+    "text": "DECREASE-I (Poldermans et al. 1999) reported that perioperative bisoprolol reduces death from cardiac causes and nonfatal myocardial infarction in high-risk vascular-surgery patients.",
+    "subject": "tt:Hx0x-pK9Mmq26VcRSQ5DmxVR9mHAr0GPDVH0Ny-u958",
+    "grounding": {
+      "source": "tt:YwQrIC1p2yAecPenIB585L_DoW0VGhZSFzlamlJRG-M",
+      "char_span": [
+        1806,
+        1938
+      ],
+      "quote": "Bisoprolol reduces the perioperative incidence of death from cardiac causes and nonfatal myocardial infarction in high-risk patients",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "078de8baccf8bd05765227d6a94f921b7c8ea7d84c7d3c288b2786e990435450"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-perioperative-betablockade"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:YwQrIC1p2yAecPenIB585L_DoW0VGhZSFzlamlJRG-M",
+      "tt:Hx0x-pK9Mmq26VcRSQ5DmxVR9mHAr0GPDVH0Ny-u958"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "4bcec37e805fc3eb149d1b8a3f833dd8183cbf2e46c73010a3814b6aaf52f079e3ae26fa295c98276fa58c717be932417fa80d3b08bc4a18c9b0f10921170e07",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

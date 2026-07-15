@@ -1,0 +1,41 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:BU640G5mGrlf3AzhonqvH0pXr6X-iQc_dSsXfu7KSa4",
+  "assertion": {
+    "title": "Bisoprolol and fluvastatin for the reduction of perioperative cardiac mortality and myocardial infarction in intermediate-risk patients undergoing noncardiovascular surgery: a randomized controlled trial (DECREASE-IV)",
+    "authors": "Dunkelgrun M, Boersma E, Schouten O, ... Poldermans D (DECREASE-IV Study Group)",
+    "venue": "Annals of Surgery",
+    "year": 2009,
+    "doi": "10.1097/SLA.0b013e3181b4c7e8",
+    "pmid": "19474688",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "OBJECTIVE: This study evaluated the effectiveness and safety of beta-blockers and statins for the prevention of perioperative cardiovascular events in intermediate-risk patients undergoing noncardiovascular surgery.\nSUMMARY BACKGROUND DATA: Beta-blockers and statins reduce perioperative cardiac events in high-risk patients undergoing vascular surgery by restoring the myocardial oxygen supply/demand balance and/or stabilizing coronary plaques. However, their effects in intermediate-risk patients remained ill-defined.\nMETHODS: In this randomized open-label 2 x 2 factorial design trial 1066 intermediate cardiac risk patients were assigned to bisoprolol, fluvastatin, combination treatment, or control therapy before surgery (median: 34 days). Intermediate risk was defined by an estimated risk of perioperative cardiac death and myocardial infarction (MI) of 1% to 6%, using clinical data and type of surgery. Starting dose of bisoprolol was 2.5 mg daily, titrated to a perioperative heart rate of 50 to 70 beats per minute. Fluvastatin was prescribed in a fixed dose of 80 mg. The primary end point was the composite of 30-day cardiac death and MI. This study is registered in the ISRCTN registry and has the ID number ISRCTN47637497.\nRESULTS: Patients randomized to bisoprolol (N = 533) had a lower incidence of perioperative cardiac death and nonfatal MI than those randomized to bisoprolol-control (2.1% vs. 6.0% events; hazard ratios: 0.34; 95% confidence intervals: 0.17-0.67; P = 0.002). Patients randomized to fluvastatin experienced a lower incidence of the end point than those randomized to fluvastatin-control therapy (3.2% vs. 4.9% events; hazard ratios: 0.65; 95% confidence intervals: 0.35-1.10), but statistical significance was not reached (P = 0.17).\nCONCLUSION: Bisoprolol was associated with a significant reduction of 30-day cardiac death and nonfatal MI, while fluvastatin showed a trend for improved outcome.",
+    "excerpt_sha256": "d2c47de80ed89f0832d0e702e40b2ead222176f33fe211f01ab5e5f009f419b4",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 19474688); AbstractText via itertext()",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=19474688&rettype=abstract&retmode=xml"
+      ]
+    },
+    "verification": "L1",
+    "role": "DECREASE-IV — the confirmatory RCT extending the benefit claim to intermediate-risk patients"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:Hx0x-pK9Mmq26VcRSQ5DmxVR9mHAr0GPDVH0Ny-u958"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "7e80a194485bbdd6d5b0783ab781ad587f1e0d63c53fc77e177b6875f0e074149b78f44303f5a4df4bd4917011af463e6a491e9556b1f8a9fde06f6aa32ad70f",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

@@ -42,7 +42,7 @@ echo; echo "\\\$ .venv/bin/python fixtures/build_fixtures.py"; .venv/bin/python 
 echo; echo "\\\$ .venv/bin/python -m pytest -q"; .venv/bin/python -m pytest -q
 echo; echo "\\\$ .venv/bin/python demo/worked_examples.py"; .venv/bin/python demo/worked_examples.py
 set +e
-echo; echo "\\\$ .venv/bin/cairn ground 'fixtures/*.json'"; .venv/bin/cairn ground 'fixtures/*.json' >/dev/null; echo "  exit=\$?  (0 == all 16 spans resolve)"
+echo; echo "\\\$ .venv/bin/cairn ground 'fixtures/*.json'"; .venv/bin/cairn ground 'fixtures/*.json' >/dev/null; echo "  exit=\$?  (0 == all spans resolve)"
 echo; echo "\\\$ .venv/bin/cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json"; .venv/bin/cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json >/dev/null; echo "  exit=\$?"
 echo; echo "\\\$ .venv/bin/cairn frechet <covid trio + worobey>"; .venv/bin/cairn frechet fixtures/claim-geographic-clustering.json fixtures/claim-environmental-sampling.json fixtures/claim-live-mammal-sales.json fixtures/src-worobey-2022.json >/dev/null; echo "  exit=\$?  (2 == refuse-to-combine-as-point)"
 echo; echo "\\\$ .venv/bin/cairn headtohead 'fixtures/*.json'"; .venv/bin/cairn headtohead 'fixtures/*.json' >/dev/null; echo "  exit=\$?  (2 == delta demonstrated)"

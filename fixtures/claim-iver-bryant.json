@@ -1,0 +1,39 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:ZXSDKRUNAWKMaq0TjoTh6CzzgOm9cG2Ox5SyqPbqy34",
+  "assertion": {
+    "text": "A 2021 systematic review and meta-analysis (Bryant et al., Am J Ther) found that ivermectin reduced the risk of COVID-19 death, with an average risk ratio of 0.38.",
+    "subject": "tt:pLVaxW2wgxs8mVGLTy-CPvSdoduKgiPXXOc1lpY1SEw",
+    "grounding": {
+      "source": "tt:IAT_FmyFWbgu_dvEEdY3FrcissGFFgoRfTSTz97FeU0",
+      "char_span": [
+        871,
+        991
+      ],
+      "quote": "ivermectin reduced risk of death compared with no ivermectin (average risk ratio 0.38, 95% confidence interval 0.19-0.73",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "715af76955736e2628255ad57a640ec89bd82bd3e2398d8f06f32fb014083bac"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-ivermectin-mortality-benefit"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:IAT_FmyFWbgu_dvEEdY3FrcissGFFgoRfTSTz97FeU0"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "0a791b972be6cbc155eac83ecf31f51b108ac17db1e0562a82c2a59a22e13c85488e287f957ab61f4285955286801db67afc17b2aa32b183113cae47cebca605",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

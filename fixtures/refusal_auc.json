@@ -1,13 +1,13 @@
 {
   "note": "Refusal-AUC over a hand-labeled panel of known-provenance claim-sets (flf-contest#6). Abstention scored as discrimination, not as a rate. Score = shared-upstream count; AUC = P(entangled > disjoint), ties 0.5. Recompute with fixtures/refusal_auc.py.",
-  "n_positive": 6,
-  "n_negative": 4,
+  "n_positive": 9,
+  "n_negative": 7,
   "refusal_auc": 1.0,
   "confusion": {
-    "tp": 6,
+    "tp": 9,
     "fp": 0,
     "fn": 0,
-    "tn": 4
+    "tn": 7
   },
   "naive_worobey_pekar_verdict": "COMBINABLE",
   "cases": [
@@ -66,6 +66,33 @@
       "ground_truth": "two papers, one shared cosmic-ray premise"
     },
     {
+      "set": "ivermectin-elgazzar-trio",
+      "label": 1,
+      "score": 1,
+      "verdict": "REFUSE-TO-COMBINE",
+      "predicted_refuse": true,
+      "correct": true,
+      "ground_truth": "three positive syntheses all pooling the withdrawn Elgazzar trial (shared two hops up)"
+    },
+    {
+      "set": "anversa-ckit-trio",
+      "label": 1,
+      "score": 2,
+      "verdict": "REFUSE-TO-COMBINE",
+      "predicted_refuse": true,
+      "correct": true,
+      "ground_truth": "one lab's c-kit+ CSC characterization + shared cell preps (SCIPIO used the lab's own cells)"
+    },
+    {
+      "set": "poldermans-decrease-trio",
+      "label": 1,
+      "score": 1,
+      "verdict": "REFUSE-TO-COMBINE",
+      "predicted_refuse": true,
+      "correct": true,
+      "ground_truth": "one compromised research program (the Poldermans/Erasmus DECREASE family)"
+    },
+    {
       "set": "eggs-hu-x-djousse",
       "label": 0,
       "score": 0,
@@ -100,6 +127,33 @@
       "predicted_refuse": false,
       "correct": true,
       "ground_truth": "a lone claim shares no upstream with itself (singleton guard)"
+    },
+    {
+      "set": "ivermectin-bryant-x-together",
+      "label": 0,
+      "score": 0,
+      "verdict": "COMBINABLE",
+      "predicted_refuse": false,
+      "correct": true,
+      "ground_truth": "an Elgazzar-based meta vs the disjoint TOGETHER RCT (which never ingested Elgazzar)"
+    },
+    {
+      "set": "anversa-x-caduceus",
+      "label": 0,
+      "score": 0,
+      "verdict": "COMBINABLE",
+      "predicted_refuse": false,
+      "correct": true,
+      "ground_truth": "the Anversa c-kit+ line vs the disjoint Marbán cardiosphere-derived cells (CADUCEUS)"
+    },
+    {
+      "set": "poldermans-x-poise",
+      "label": 0,
+      "score": 0,
+      "verdict": "COMBINABLE",
+      "predicted_refuse": false,
+      "correct": true,
+      "ground_truth": "a DECREASE benefit claim vs the disjoint independent POISE trial"
     }
   ]
 }

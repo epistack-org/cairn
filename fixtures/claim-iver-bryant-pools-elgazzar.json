@@ -1,0 +1,37 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:C1GDXDKNOx9ylzPGGBHpdYoNzjWA4zmRX6Kg1IBve0Y",
+  "assertion": {
+    "text": "The Bryant et al. 2021 meta-analysis lists the withdrawn Elgazzar 2020 trial among its pooled input studies — the fabricated trial the other positive syntheses also pool.",
+    "subject": "tt:zn-HIfSTzYAeNckcSNmxg220MorXf7xsU9zez4Znsi0",
+    "grounding": {
+      "source": "tt:IAT_FmyFWbgu_dvEEdY3FrcissGFFgoRfTSTz97FeU0",
+      "char_span": [
+        4324,
+        4353
+      ],
+      "quote": "Elgazzar 202047 | Egypt | RCT",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "715af76955736e2628255ad57a640ec89bd82bd3e2398d8f06f32fb014083bac"
+    },
+    "verification": "L5"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:IAT_FmyFWbgu_dvEEdY3FrcissGFFgoRfTSTz97FeU0"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "6858e255399f2f34a3f788e0d7bf771a7b4fd69ab763b67ffba18fa11c10b8cdefc726af41ad3007d80fc3dc9f90bd69e29f13bdf89699ecc93c5f6ab6507c0b",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

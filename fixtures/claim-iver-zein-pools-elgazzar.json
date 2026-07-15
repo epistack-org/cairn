@@ -1,0 +1,37 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:yO5al3QmNdq6rBRI86f5P_Ze15gEYG_cgkGSEc5REgY",
+  "assertion": {
+    "text": "The Zein et al. 2021 meta-analysis lists 'Elgazzar 2020' among its included studies — the same withdrawn trial pooled by the other positive syntheses.",
+    "subject": "tt:zn-HIfSTzYAeNckcSNmxg220MorXf7xsU9zez4Znsi0",
+    "grounding": {
+      "source": "tt:S5C2pzoVgi7YzpFwIF1T1oXa10Cygq8jjtwuqFOZxjE",
+      "char_span": [
+        1667,
+        1703
+      ],
+      "quote": "Elgazzar 2020 [23] | RCT | 98 vs 176",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "a2e9e5fc5c421d8fbba3d5aaf50a089abe679eb691ea29fa661a68aba3641d60"
+    },
+    "verification": "L5"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:S5C2pzoVgi7YzpFwIF1T1oXa10Cygq8jjtwuqFOZxjE"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "37bd6136338f869d6a781d05599523d42d632775513be959f4b043cd3e685daba195d1b2af7c0727c2daf097f28d701bbe37218a944379152c5571d852553408",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

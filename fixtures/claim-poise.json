@@ -1,0 +1,39 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:ZvXC4pAhUXOYfm1jlB_EedD48pJ-0rLGLAwQVrAGCzw",
+  "assertion": {
+    "text": "The POISE trial (Devereaux et al. 2008) found that perioperative metoprolol led to more deaths than placebo in patients undergoing non-cardiac surgery.",
+    "subject": "tt:aBK_fREgfTJl0sqn2Qb3LPCi8oCn82XlVTWlq5lVwzI",
+    "grounding": {
+      "source": "tt:H3D1t-C030hJyI6dZjNd_BhBBGt-XiXoo6Q02g9xqjA",
+      "char_span": [
+        1432,
+        1504
+      ],
+      "quote": "there were more deaths in the metoprolol group than in the placebo group",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "47b8b5836b57355623771bf7f0b02bc72bb46592af1683072790bcc2a1e62d1a"
+    },
+    "verification": "L5",
+    "polarity": "refutes-perioperative-betablockade"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:H3D1t-C030hJyI6dZjNd_BhBBGt-XiXoo6Q02g9xqjA",
+      "tt:aBK_fREgfTJl0sqn2Qb3LPCi8oCn82XlVTWlq5lVwzI"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "60378c6e8f7c7603ceb2aed3af1965d4acef11a7a78f45853f308aabeff33072cfa76ab4e958873ef4e17c491315e48b071572ab96f9907ddf845145068b2801",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

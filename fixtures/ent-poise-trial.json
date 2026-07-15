@@ -1,0 +1,30 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:aBK_fREgfTJl0sqn2Qb3LPCi8oCn82XlVTWlq5lVwzI",
+  "assertion": {
+    "name": "The POISE perioperative beta-blocker trial",
+    "aliases": [
+      "POISE",
+      "PeriOperative ISchemic Evaluation"
+    ],
+    "kind": "Trial",
+    "statement": "A large (n=8351), multinational, placebo-controlled RCT of extended-release metoprolol in non-cardiac surgery (Devereaux et al. 2008), independent of the Poldermans/DECREASE program.",
+    "note": "A DISJOINT upstream from the DECREASE program: a different investigator group, a different trial, no derivation from the Erasmus database. Independence on the provenance dimension holds — which is why the contrast COMBINES. POISE found metoprolol cut myocardial infarction but INCREASED total mortality and stroke.",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "3f5fabe1f839ee27932d24afe5c625d51ba4023eb3cbabe85f9efb4b8b0c43b26cc16ff4685890cd15ac58e07c4e0eeedb47d85ae7627f23dd07b344813f9b03",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

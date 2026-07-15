@@ -1,0 +1,131 @@
+{
+  "battery_id": "poldermans-crux-v1",
+  "title": "Poldermans / DECREASE perioperative beta-blocker-crux assessor probe battery (v1)",
+  "crux": "Do the trials and studies supporting perioperative beta-blockade to prevent cardiac death in non-cardiac surgery constitute independent evidence of that benefit?",
+  "note": "The measurement instrument for the Poldermans/DECREASE worked example (the 7th case, imported in the 2026-07-15 backtest-scaling pass, dev/cairn#15). Faithfulness probes have an objective KEY pinned to an exact substring of a vetted source (fixtures/sources/*.abstract.txt); tests/test_cases.py re-checks every `grounds.quote` is a literal substring of the cited source's sha-pinned excerpt. Inferential probes have key=null; cairn's principled position is in `cairn_principled` and is NOT scored as an error.\n\nWHAT THIS CASE IS AND IS NOT. It is a claim about corroboration-COUNTING. The evidence base for perioperative beta-blockade — DECREASE-I (Poldermans 1999), the Boersma 2001 screening cohort, DECREASE-IV (Dunkelgrun 2009), and more — looks like independent replication, but it is ONE research program (the Poldermans/Erasmus DECREASE family) that a 2011-2012 Erasmus MC investigation found to rest on fabricated/fictitious data. The provenance intersection over the three lines collapses to ent-decrease-program; cairn refuses to count them as independent votes.\n\nThis is the sharpest counterfactual in the corpus: removing the fabricated lineage does not merely deflate the vote count, it REVERSES the conclusion. The independent RCT (POISE, Devereaux 2008) is upstream-disjoint and COMBINES — and it points the other way (metoprolol cut MI but increased death). Bouri et al. 2014's DECREASE-excluded 'secure trials' meta finds a 27% mortality INCREASE. Probe I3 stops an assessor from mistaking cairn's provenance refusal for the (separate, stronger) clinical finding that the intervention is net-harmful; probe I5 pins the direction of the honest counterfactual.\n\nGround truth is an INSTITUTIONAL misconduct finding, not a per-node retraction stamp — recorded honestly on ent-decrease-program.",
+  "answer_space": ["YES", "NO", "UNCERTAIN"],
+  "binarization": {
+    "affirm": "YES -> 1, else (NO | UNCERTAIN) -> 0. The primary vector fed to neff.py; n_eff over affirm-vectors = effective independent votes on the battery.",
+    "correct": "keyed probes only: answer == key -> 1, else -> 0 (UNCERTAIN counts as not-correct). Secondary reliability / error-correlation readout."
+  },
+  "probes": [
+    {
+      "id": "F1",
+      "class": "faithfulness",
+      "text": "DECREASE-I (Poldermans et al. 1999) reported that bisoprolol reduces the perioperative incidence of cardiac death and nonfatal myocardial infarction in high-risk vascular-surgery patients.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-poldermans-1999",
+          "quote": "Bisoprolol reduces the perioperative incidence of death from cardiac causes and nonfatal myocardial infarction in high-risk patients"
+        }
+      ],
+      "rationale": "Verbatim; grounds claim-decrease-1 (L5/ENTAILS). The landmark RCT and the origin of the recommendation."
+    },
+    {
+      "id": "F2",
+      "class": "faithfulness",
+      "text": "Boersma et al. (JAMA 2001) reported that patients receiving beta-blockers had a lower risk of perioperative cardiac complications.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-boersma-2001",
+          "quote": "patients receiving beta-blockers had a lower risk of cardiac complications"
+        }
+      ],
+      "rationale": "Verbatim; grounds claim-decrease-boersma (L5/ENTAILS). From the same Erasmus/Poldermans vascular-surgery screening database."
+    },
+    {
+      "id": "F3",
+      "class": "faithfulness",
+      "text": "DECREASE-IV (Dunkelgrun et al. 2009) reported that bisoprolol significantly reduced 30-day cardiac death and nonfatal MI in intermediate-risk patients.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-dunkelgrun-2009",
+          "quote": "Bisoprolol was associated with a significant reduction of 30-day cardiac death and nonfatal MI"
+        }
+      ],
+      "rationale": "Verbatim; grounds claim-decrease-4 (L5/ENTAILS). The confirmatory RCT — same research program."
+    },
+    {
+      "id": "F4",
+      "class": "faithfulness",
+      "text": "The POISE trial (Devereaux et al. 2008) reported more deaths in the metoprolol group than in the placebo group.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-devereaux-2008",
+          "quote": "there were more deaths in the metoprolol group than in the placebo group"
+        }
+      ],
+      "rationale": "Verbatim; grounds claim-poise (L5/ENTAILS). The upstream-disjoint contrast — a large independent RCT pointing the other way."
+    },
+    {
+      "id": "F5",
+      "class": "faithfulness",
+      "text": "Bouri et al. (2014), meta-analysing only the secure (non-DECREASE) trials, found that initiating perioperative beta-blockade caused a 27% increase in 30-day all-cause mortality.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-bouri-2014",
+          "quote": "caused a 27% risk increase in 30-day all-cause mortality"
+        }
+      ],
+      "rationale": "Verbatim; grounds claim-bouri-secure (L5/ENTAILS). The published sign-flip: remove the fabricated lineage and the pooled effect reverses from benefit to harm."
+    },
+    {
+      "id": "F6",
+      "class": "faithfulness",
+      "text": "Bouri et al. (2014) stated that the DECREASE family of trials — described as the bedrock of the evidence — are no longer secure.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-bouri-2014",
+          "quote": "family of trials, the bedrock of evidence for this, are no longer secure"
+        }
+      ],
+      "rationale": "Verbatim; the first-party statement of the meta-fact (the DECREASE program is compromised) from the corrective literature itself."
+    },
+    {
+      "id": "I1",
+      "class": "inferential",
+      "text": "Because perioperative beta-blockade is supported by DECREASE-I, the Boersma 2001 cohort, and DECREASE-IV, these independent studies establish that it prevents cardiac death.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The laundered inference. All three are outputs of one research program (the Poldermans/Erasmus DECREASE family) later found to rest on fabricated data. They are one compromised source, not three independent studies. cairn REFUSES and names ent-decrease-program."
+    },
+    {
+      "id": "I2",
+      "class": "inferential",
+      "text": "The POISE trial (Devereaux 2008) is not independent of the DECREASE evidence and should be refused-to-combine with it.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "POISE is a large independent RCT with no derivation from the Erasmus/DECREASE program — upstream-disjoint. cairn COMBINES a DECREASE claim with POISE; the refusal is targeted at the shared compromised program, not blanket."
+    },
+    {
+      "id": "I3",
+      "class": "inferential",
+      "text": "cairn's refusal to combine the DECREASE studies means cairn has determined that perioperative beta-blockade is harmful.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "THE ANTI-OVERCLAIM PROBE. cairn's refusal is a claim about provenance: the DECREASE outputs are not independent votes. Whether the intervention is beneficial, useless, or harmful is a separate question answered by the independent evidence (POISE; Bouri's secure-trials meta), not by the refusal itself. Those independent lines do indicate net harm — but that is their finding, not cairn's provenance verdict. Conflating the two overstates what cairn establishes."
+    },
+    {
+      "id": "I4",
+      "class": "inferential",
+      "text": "The DECREASE studies became non-independent only once the Erasmus misconduct investigation reported; before that, counting them as independent evidence was correct.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The misconduct finding is a fact ABOUT the shared upstream, not the reason for the refusal. The studies shared the DECREASE program on the day each was published; cairn walks the provenance topology and refuses regardless of when the institutional finding landed. It is an institutional-misconduct meta-fact, not a per-node retraction, and the refusal does not depend on it."
+    },
+    {
+      "id": "I5",
+      "class": "inferential",
+      "text": "Once the fabricated DECREASE lineage is removed, the remaining secure evidence still shows a net mortality benefit from perioperative beta-blockade.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The direction-of-counterfactual probe, unique to this case. Removing DECREASE does not just weaken the benefit — it reverses it: Bouri 2014's secure-trials meta finds a 27% mortality INCREASE (F5). Answering YES mistakes the fabricated signal for the honest one. This is the corpus's clearest example that a shared fabricated upstream can carry the sign of the conclusion, not merely its strength."
+    }
+  ]
+}

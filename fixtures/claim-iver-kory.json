@@ -1,0 +1,39 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:gCp9EWJJziw7TqLORBjDAmKaP_liwlIWYRotZrLxjX0",
+  "assertion": {
+    "text": "A 2021 review (Kory et al., FLCCC) concluded that meta-analyses of ivermectin treatment trials found large, statistically significant reductions in COVID-19 mortality.",
+    "subject": "tt:pLVaxW2wgxs8mVGLTy-CPvSdoduKgiPXXOc1lpY1SEw",
+    "grounding": {
+      "source": "tt:YvSXWFtPp5Vm-Gs6A3rGke8C9TpNlS1_hms91UDXB7s",
+      "char_span": [
+        1884,
+        1951
+      ],
+      "quote": "have found large, statistically significant reductions in mortality",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "bd06c3d4a16e11ce3fc472514583e42a83d9779ea8493d1ca5c5cc93f6aa2f28"
+    },
+    "verification": "L5",
+    "illustrative_LR": 4.0,
+    "polarity": "supports-ivermectin-mortality-benefit"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:YvSXWFtPp5Vm-Gs6A3rGke8C9TpNlS1_hms91UDXB7s"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "e54a4e58263acf2a2002ab9056d956ce152355f8eede1b69e77ea63e7b37d6c5c8f9764a11c7e9f5c1def378efa67a034d930d2f66679fd345b4657aec8ac60f",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

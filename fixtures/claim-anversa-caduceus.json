@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:fY1isfpG7XYf4aNb16CTGBtNrSP7bN8xv_1PyMXxYRw",
+  "assertion": {
+    "text": "In the CADUCEUS trial, intracoronary infusion of cardiosphere-derived cells increased viable heart mass after myocardial infarction (Makkar et al. 2012) — a regeneration signal characterized independently of the Anversa c-kit+ line.",
+    "subject": "tt:TlnFrPbq3mjK5RZWa4rHt6a0uolEiTLb9FEMEpF3n1g",
+    "grounding": {
+      "source": "tt:1ddhznruvACrUZxTgKmLDL1ciN7mtI_FlJPNjRHU-A0",
+      "char_span": [
+        2206,
+        2236
+      ],
+      "quote": "increases in viable heart mass",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "b6de36d79cb6846b0aa05b1b46fe544d295da422570b1c41b2019fafe433e549"
+    },
+    "verification": "L5",
+    "illustrative_LR": 4.0,
+    "polarity": "supports-cardiac-regeneration"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:1ddhznruvACrUZxTgKmLDL1ciN7mtI_FlJPNjRHU-A0",
+      "tt:TlnFrPbq3mjK5RZWa4rHt6a0uolEiTLb9FEMEpF3n1g"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "2e220cfb54505c45566589df3dbb98633249b1a1358ea2e259e1b7cc1f1cbd5fb855896e5e73b37af31f230b72db75b7052cd6a6e9edadcb103d39248b427109",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

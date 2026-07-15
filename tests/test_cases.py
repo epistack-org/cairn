@@ -44,14 +44,18 @@ STORE = _store()
 
 
 def test_worked_examples_ship():
-    """The corpus ships four worked examples. Count them from the corpus, not from prose.
+    """The corpus ships seven worked examples. Count them from the corpus, not from prose.
 
     The fourth (amyloid-abeta56) was added in the 2026-07-15 decoupling spike, from a live
-    scientific controversy the engine was NOT co-developed against, to demonstrate the
-    refusal generalizes beyond the three seed cases (flf-contest supplementary material)."""
-    assert len(CASES) == 4, f"expected 4 worked examples, corpus declares {sorted(CASES)}"
+    scientific controversy the engine was NOT co-developed against. The fifth-seventh
+    (ivermectin-elgazzar, anversa-ckit, poldermans-decrease) were imported in the
+    2026-07-15 backtest-scaling pass (dev/cairn#15) from a ranked research sweep of
+    known-answer fraud / non-independence cases — each a case whose meta-fact is settled,
+    so a naive ingest can be checked against the answer key."""
+    assert len(CASES) == 7, f"expected 7 worked examples, corpus declares {sorted(CASES)}"
     assert set(CASES) == {
-        "covid-origins", "eggs-good-for-you", "cern-black-hole", "amyloid-abeta56"
+        "covid-origins", "eggs-good-for-you", "cern-black-hole", "amyloid-abeta56",
+        "ivermectin-elgazzar", "anversa-ckit", "poldermans-decrease",
     }
 
 
@@ -215,7 +219,7 @@ def test_refusal_auc_is_perfect_over_known_structure_sets():
     pinned = json.loads((FX / "refusal_auc.json").read_text())
     assert fresh == pinned, "fixtures/refusal_auc.json is stale — run fixtures/refusal_auc.py"
     assert fresh["refusal_auc"] == 1.0
-    assert fresh["confusion"] == {"tp": 6, "fp": 0, "fn": 0, "tn": 4}
+    assert fresh["confusion"] == {"tp": 9, "fp": 0, "fn": 0, "tn": 7}
     assert fresh["naive_worobey_pekar_verdict"] == "COMBINABLE"
 
 

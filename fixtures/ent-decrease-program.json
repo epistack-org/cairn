@@ -1,0 +1,31 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:Hx0x-pK9Mmq26VcRSQ5DmxVR9mHAr0GPDVH0Ny-u958",
+  "assertion": {
+    "name": "The Poldermans/Erasmus DECREASE perioperative beta-blocker research program",
+    "aliases": [
+      "DECREASE family of trials",
+      "the DECREASE trials",
+      "Erasmus MC vascular-surgery database"
+    ],
+    "kind": "ResearchProgram",
+    "statement": "The family of DECREASE (Dutch Echocardiographic Cardiac Risk Evaluation Applying Stress Echocardiography) trials and the associated Erasmus MC vascular-surgery screening database, run by the Poldermans group (1999-2011), which reported perioperative beta-blockade sharply reduces cardiac death and myocardial infarction.",
+    "note": "The shared upstream of the perioperative beta-blocker evidence base. META-FACT: a 2011-2012 Erasmus MC investigation found the DECREASE trials contained fabricated/fictitious data (scientific misconduct); the corrective literature (Bouri et al. 2014) treats 'the DECREASE family of trials, the bedrock of evidence for this' as 'no longer secure'. This is an INSTITUTIONAL misconduct finding, not a per-node retraction stamp — cairn refuses on the shared-provenance topology regardless of which individual papers carry a retraction notice.",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "8e823a0e850fbbbc24a967b475648c08a032764008866fd6287d696fdd624cdb1645df43ce96f5811ed17b3ce40cc9a87d9f70748377c1f615dab0abcb69a909",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:aUHKM9pH46JNkne2HslTLVkKe_njjK_N2PWDkiYstuU",
+  "assertion": {
+    "name": "The Anversa-lab c-kit+ cardiac stem cell (as defined by Beltrami et al. 2003)",
+    "aliases": [
+      "c-kit+ cardiac stem cell",
+      "Lin(-) c-kit(POS) CSC",
+      "the Anversa CSC"
+    ],
+    "kind": "CellType",
+    "statement": "A resident Lin(-)/c-kit(POS) adult cardiac cell claimed to be self-renewing, clonogenic and multipotent and to regenerate myocardium, first characterized and named by the Anversa laboratory (Beltrami et al. 2003) and detected/prepared thereafter by the same lab's isolation method.",
+    "note": "The shared upstream of the c-kit+ CSC corroboration cascade: BOTH a foundational RESULT (the 2003 characterization) and a shared REAGENT/METHOD (the lab's cell isolation used downstream, including in the SCIPIO trial's cell preps). Every downstream c-kit+ CSC measurement presupposes this node. META-FACT: Harvard/Brigham recommended 31 Anversa-lab papers for retraction (2018) for falsified/fabricated data; the flagship human trial SCIPIO was retracted (Lancet 2019); a $10M FCA settlement (2017) resolved the NIH-grant allegations. The finding is INSTITUTIONAL misconduct, not a per-node retraction stamp — cairn refuses on the shared-provenance topology whether or not each paper has been individually retracted.",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:7HNu_af7HZ5BaEjXATRmoFvZHzN5yFoOuAIKjPt6oyA"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "ed4d83c85b3f523169fd50d88fd1132859356ad55c90677fff51c5e0693de11bddc6962f4fba9bc5ff48fcb4d68aa8bd248dce168f85ea7e9802db9e451dae06",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

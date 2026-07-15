@@ -1,0 +1,29 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:6og_K_TvcS1mgkpGBbpr8TOoKzTtWfuE5R74BGGGoZk",
+  "assertion": {
+    "name": "The DECREASE-excluded 'secure trials' evidence base",
+    "aliases": [
+      "Bouri 2014 secure-trials meta"
+    ],
+    "kind": "EvidenceSet",
+    "statement": "The nine secure (non-DECREASE) randomised trials of perioperative beta-blockade meta-analysed by Bouri et al. 2014, after the DECREASE family was deemed insecure.",
+    "note": "Disjoint from the DECREASE program by construction (it EXCLUDES it). Its result is the counterfactual: with the fabricated lineage removed, initiation of perioperative beta-blockade causes a 27% INCREASE in 30-day mortality — the sign flips.",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "94339beff1b4b6a56938f00cc15e23ea07e6d1b3f73ebf9052076c763fc2d13b7571f40426b51af7b18ab0e4ba54189e6dcc591d423267ef370724f3d4796203",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

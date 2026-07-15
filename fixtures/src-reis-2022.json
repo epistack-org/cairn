@@ -1,0 +1,42 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:fuBH-MR1uQ-v0WWnAI9eWj1j39KG1V2fZv-cE9jkmfQ",
+  "assertion": {
+    "title": "Effect of Early Treatment with Ivermectin among Patients with Covid-19",
+    "authors": "Reis G, Silva EASM, Silva DCM, Thabane L, ... Mills EJ (TOGETHER trial)",
+    "venue": "New England Journal of Medicine",
+    "year": 2022,
+    "volume": "386",
+    "issue": "18",
+    "pages": "1721-1731",
+    "doi": "10.1056/NEJMoa2115869",
+    "pmid": "35353979",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "BACKGROUND: The efficacy of ivermectin in preventing hospitalization or extended observation in an emergency setting among outpatients with acutely symptomatic coronavirus disease 2019 (Covid-19), the disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), is unclear.\nMETHODS: We conducted a double-blind, randomized, placebo-controlled, adaptive platform trial involving symptomatic SARS-CoV-2-positive adults recruited from 12 public health clinics in Brazil. Patients who had had symptoms of Covid-19 for up to 7 days and had at least one risk factor for disease progression were randomly assigned to receive ivermectin (400 μg per kilogram of body weight) once daily for 3 days or placebo. (The trial also involved other interventions that are not reported here.) The primary composite outcome was hospitalization due to Covid-19 within 28 days after randomization or an emergency department visit due to clinical worsening of Covid-19 (defined as the participant remaining under observation for >6 hours) within 28 days after randomization.\nRESULTS: A total of 3515 patients were randomly assigned to receive ivermectin (679 patients), placebo (679), or another intervention (2157). Overall, 100 patients (14.7%) in the ivermectin group had a primary-outcome event, as compared with 111 (16.3%) in the placebo group (relative risk, 0.90; 95% Bayesian credible interval, 0.70 to 1.16). Of the 211 primary-outcome events, 171 (81.0%) were hospital admissions. Findings were similar to the primary analysis in a modified intention-to-treat analysis that included only patients who received at least one dose of ivermectin or placebo (relative risk, 0.89; 95% Bayesian credible interval, 0.69 to 1.15) and in a per-protocol analysis that included only patients who reported 100% adherence to the assigned regimen (relative risk, 0.94; 95% Bayesian credible interval, 0.67 to 1.35). There were no significant effects of ivermectin use on secondary outcomes or adverse events.\nCONCLUSIONS: Treatment with ivermectin did not result in a lower incidence of medical admission to a hospital due to progression of Covid-19 or of prolonged emergency department observation among outpatients with an early diagnosis of Covid-19. (Funded by FastGrants and the Rainwater Charitable Foundation; TOGETHER ClinicalTrials.gov number, NCT04727424.).",
+    "excerpt_sha256": "6908794567add22f5329b21fb4382008ab52104c7877b22fd3d1bcb597b1ea3a",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 35353979); AbstractText via itertext()",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=35353979&rettype=abstract&retmode=xml"
+      ]
+    },
+    "verification": "L1",
+    "role": "the genuinely INDEPENDENT line (the combinable contrast): a large placebo-controlled RCT (n=3515) that never ingested Elgazzar; upstream-disjoint from the fabricated node"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "ad449c9ec646daceb3d2bdaf448c6b9af29e1e2853f6e7db198b0cc75feedb460da17f70415dae210f813c45f7565a8259a1264866dfa4c22705cdb89bf6620d",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

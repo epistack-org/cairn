@@ -1,0 +1,41 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:6EoBJk5LJrxzSKlvYU5SOLvON6qHUSSIipHX_KMZFo0",
+  "assertion": {
+    "title": "Predictors of cardiac events after major vascular surgery: role of clinical characteristics, dobutamine echocardiography, and beta-blocker therapy",
+    "authors": "Boersma E, Poldermans D, Bax JJ, Steyerberg EW, ... (DECREASE screening cohort)",
+    "venue": "JAMA",
+    "year": 2001,
+    "doi": "10.1001/jama.285.14.1865",
+    "pmid": "11308400",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "CONTEXT: Patients who undergo major vascular surgery are at increased risk of perioperative cardiac complications. High-risk patients can be identified by clinical factors and noninvasive cardiac testing, such as dobutamine stress echocardiography (DSE); however, such noninvasive imaging techniques carry significant disadvantages. A recent study found that perioperative beta-blocker therapy reduces complication rates in high-risk individuals.\nOBJECTIVE: To examine the relationship of clinical characteristics, DSE results, beta-blocker therapy, and cardiac events in patients undergoing major vascular surgery.\nDESIGN AND SETTING: Cohort study conducted in 1996-1999 in the following 8 centers: Erasmus Medical Centre and Sint Clara Ziekenhuis, Rotterdam, Twee Steden Ziekenhuis, Tilburg, Academisch Ziekenhuis Utrecht, Utrecht, and Medisch Centrum Alkmaar, Alkmaar, the Netherlands; Ziekenhuis Middelheim, Antwerp, Belgium; and San Gerardo Hospital, Monza, Istituto di Ricovero e Cura a Carattere Scientifico, San Giovanni Rotondo, Italy.\nPATIENTS: A total of 1351 consecutive patients scheduled for major vascular surgery; DSE was performed in 1097 patients (81%), and 360 (27%) received beta-blocker therapy.\nMAIN OUTCOME MEASURE: Cardiac death or nonfatal myocardial infarction within 30 days after surgery, compared by clinical characteristics, DSE results, and beta-blocker use.\nRESULTS: Forty-five patients (3.3%) had perioperative cardiac death or nonfatal myocardial infarction. In multivariable analysis, important clinical determinants of adverse outcome were age 70 years or older; current or prior angina pectoris; and prior myocardial infarction, heart failure, or cerebrovascular accident. Eighty-three percent of patients had less than 3 clinical risk factors. Among this subgroup, patients receiving beta-blockers had a lower risk of cardiac complications (0.8% [2/263]) than those not receiving beta-blockers (2.3% [20/855]), and DSE had minimal additional prognostic value. In patients with 3 or more risk factors (17%), DSE provided additional prognostic information, for patients without stress-induced ischemia had much lower risk of events than those with stress-induced ischemia (among those receiving beta-blockers, 2.0% [1/50] vs 10.6% [5/47]). Moreover, patients with limited stress-induced ischemia (1-4 segments) experienced fewer cardiac events (2.8% [1/36]) than those with more extensive ischemia (>/=5 segments, 36% [4/11]).\nCONCLUSION: The additional predictive value of DSE is limited in clinically low-risk patients receiving beta-blockers. In clinical practice, DSE may be avoided in a large number of patients who can proceed safely for surgery without delay. In clinically intermediate- and high-risk patients receiving beta-blockers, DSE may help identify those in whom surgery can still be performed and those in whom cardiac revascularization should be considered.",
+    "excerpt_sha256": "c8c8e0db90698dc587017e296b8be5a8f470fdfb4837fd3ee7b877aaa84996a2",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 11308400); AbstractText via itertext()",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=11308400&rettype=abstract&retmode=xml"
+      ]
+    },
+    "verification": "L1",
+    "role": "the DECREASE screening-cohort study (beta-blocker recipients had far fewer cardiac events); a hugely-cited driver of guideline adoption, from the same Erasmus/Poldermans vascular-surgery database"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:Hx0x-pK9Mmq26VcRSQ5DmxVR9mHAr0GPDVH0Ny-u958"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "9b42e24ac1d911ec93b0fd1804d245b125582d7aa0b0f9551618264539e95bef23e4d0f327cecbc9da926d7aa257b3a0f7129f91e769249f39ffefc12692bf06",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

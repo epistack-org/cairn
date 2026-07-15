@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:uzBFsjRe72v1bhmsO8MDght3ovhMEQ4Z-XJ3P4QYDDM",
+  "assertion": {
+    "text": "In the SCIPIO phase-1 trial, intracoronary infusion of autologous c-kit+ cardiac stem cells improved left-ventricular systolic function and reduced infarct size in patients (Bolli et al. 2011) — the clinical corroboration.",
+    "subject": "tt:aUHKM9pH46JNkne2HslTLVkKe_njjK_N2PWDkiYstuU",
+    "grounding": {
+      "source": "tt:G_LlQDIIDJYTTlzvVv_pmMUs8Ag0cugKu5Rhh5OkiDQ",
+      "char_span": [
+        2132,
+        2246
+      ],
+      "quote": "intracoronary infusion of autologous CSCs is effective in improving LV systolic function and reducing infarct size",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "33bab0ee2cd8b5cbe3bad66cee4206c660d53b4b2ed6ba2154d5fffe9cd635fa"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-ckit-regeneration"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:G_LlQDIIDJYTTlzvVv_pmMUs8Ag0cugKu5Rhh5OkiDQ",
+      "tt:aUHKM9pH46JNkne2HslTLVkKe_njjK_N2PWDkiYstuU"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "e99eb227249b025abb23c59112847dbcd1604ed753a398c7f0563b3423cb24772ec1cd2f637041568065e31a28aa4c24fb1c1d23a93634e1025cf7e63dba4308",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

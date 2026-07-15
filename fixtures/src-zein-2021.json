@@ -1,0 +1,41 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:S5C2pzoVgi7YzpFwIF1T1oXa10Cygq8jjtwuqFOZxjE",
+  "assertion": {
+    "title": "Ivermectin and mortality in patients with COVID-19: A systematic review, meta-analysis, and meta-regression of randomized controlled trials",
+    "authors": "Zein AFMZ, Sulistiyana CS, Raffaelo WM, Pranata R",
+    "venue": "Diabetes & Metabolic Syndrome",
+    "year": 2021,
+    "doi": "10.1016/j.dsx.2021.07.021",
+    "pmid": "34237554",
+    "excerpt_kind": "abstract (version of record) + included-study characteristics table (Europe PMC OA JATS, whitespace-normalized pipe-rows)",
+    "excerpt": "AIMS: This systematic review and meta-analysis aims to investigate the effect of ivermectin on mortality in patients with COVID-19.\nMETHODS: A comprehensive systematic literature search was performed using PubMed, Scopus, Embase, and Clinicaltrials.gov from the inception of databases up until April 9, 2021. The intervention group was ivermectin and the control group was standard of care or placebo. The primary outcome was mortality reported as risk ratio (RR).\nRESULTS: There were 9 RCTs comprising of 1788 patients included in this meta-analysis. Ivermectin was associated with decreased mortality (RR 0.39 [95% 0.20-0.74], p = 0.004; I2: 58.2%, p = 0.051). Subgroup analysis in patients with severe COVID-19 showed borderline statistical significance towards mortality reduction (RR 0.42 [95% 0.18-1.00], p = 0.052; I2: 68.3, p = 0.013). The benefit of ivermectin and mortality was reduced by hypertension (RR 1.08 [95% CI 1.03-1.13], p = 0.001); but was not influenced by age (p = 0.657), sex (p = 0.466), diabetes (p = 0.429). Sensitivity analysis using fixed-effect model showed that ivermectin decreased mortality in general (RR 0.43 [95% CI 0.29-0.62], p < 0.001) and severe COVID-19 subgroup (RR 0.48 [95% CI 0.32-0.72], p < 0.001).\nCONCLUSIONS: Ivermectin was associated with decreased mortality in COVID-19 with a low certainty of evidence. Further adequately powered double-blinded placebo-controlled RCTs are required for definite conclusion.\n\nTable (Europe PMC OA PMC8236126): Baseline characteristics.\nAuthors | Study Design | Samples | Ivermectin Dose | Control | Severe COVID-19 (%) | Age (years) | Male (%) | DM (%) | HTN (%) | CAD (%) | Funders\nElgazzar 2020 [23] | RCT | 98 vs 176 | 1400 mcg/kg maximum 4 tablets OD for 4 days | HCQ | 50 | 57 | 70 | 17 | 14 | 25 | None\nGalan 2021 [24] | RCT | 50 vs 105 | 14 mg OD on day 1 and 2 | HCQ/CQ | 100 | 53.4 | 58.2 | 28.1 | 43.4 | NA | Unclear\nGonzalez 2021 [25] | RCT | 36 vs. 70 | <80 kg: 12 mg OD single-dose>80 kg: 18 mg OD single-dose | HCQ/Placebo | 100 | 53.8 | 62.2 | 33.3 | 32.1 | NA | Unclear\nHashim 2020 [19] | RCT | 70 vs 70 | 200 mcg/kg OD on day 1 and 2 | SOC | 31.4 | 49 | 52 | NA | NA | NA | Unclear\nLopez-Medina 2021 [28] | RCT | 200 vs 198 | 300 mcg/kg OD for 5 days | Placebo | 0 | 37 | 42.5 | 5.5 | 13.3 | NA | Centro de Estudios enInfectología Pediátrica\nNiaee 2020 [20] | RCT | 90 vs 90 | 400 mcg/kg OD (single dose or per 2 days) and 200 mcg/kg OD (single dose or per 2 days) | HCQ/Placebo | 12.2 | NA | 50 | NA | NA | NA | Qazvin University of Medical Sciences and Science and Technology Park\nRavikitri 2021 [22] | RCT | 55 vs 57 | 12 mg OD on day 1 and 2 | Placebo | 0 | 52.5 | 72.3 | 35.7 | 34.8 | 8.9 | AIIMS, Sun Pharma\nNCT04523831 [27] | RCT | 183 vs 180 | 12 mg OD for 5 days | SOC | 0 | 39.6 |  |  |  |  | Dhaka Medical College\nNCT04646109 [26] | RCT | 30 vs 30 | 200 mcg/kg OD for 5 days | HCQ/Favipiravir | 100 | 62.2 | 66.7 | 31.6 | 45 | 21.7 | Afyonkarahisar Health Sciences University,NeuTec Pharma\n",
+    "excerpt_sha256": "a2e9e5fc5c421d8fbba3d5aaf50a089abe679eb691ea29fa661a68aba3641d60",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 34237554) for the abstract + Europe PMC OA fullTextXML for the study-characteristics table (rows serialized ' | '.join(cell.itertext()), whitespace-normalized)",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=34237554&rettype=abstract&retmode=xml"
+      ]
+    },
+    "verification": "L1",
+    "role": "a second meta-analysis (RR 0.39) — the SAME mortality signal, different authors; its baseline-characteristics table lists 'Elgazzar 2020 [23]'"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:zn-HIfSTzYAeNckcSNmxg220MorXf7xsU9zez4Znsi0"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "175c449c4961de7ea1ebb46156151cfdb7611154d7e704ccf8a8116b347a3eceb6fa1bf546c4f81a7911b89a27a0dad57b81d2fe1a4e0a46cfe731ffff3b5809",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

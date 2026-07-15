@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:OHEt0jwpxfK8pUtE4K4Cy-ybgMnOjU2iM68eyxulnJE",
+  "assertion": {
+    "text": "Human c-kit+ cardiac stem cells, injected into infarcted myocardium, generate a chimeric heart containing new human myocardium (Bearzi et al. 2007) — a human-tissue corroboration.",
+    "subject": "tt:aUHKM9pH46JNkne2HslTLVkKe_njjK_N2PWDkiYstuU",
+    "grounding": {
+      "source": "tt:IOQP2SUglkWXNnAd44bPR9Qd7Y-PVUgAAk2r3R7cwVc",
+      "char_span": [
+        1053,
+        1117
+      ],
+      "quote": "hCSCs generate a chimeric heart, which contains human myocardium",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "c63b7ac1e19c8dcccd4ad1b784e50ab01eae19fd8e3a1954f6df9a33a6ebac63"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-ckit-regeneration"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:IOQP2SUglkWXNnAd44bPR9Qd7Y-PVUgAAk2r3R7cwVc",
+      "tt:aUHKM9pH46JNkne2HslTLVkKe_njjK_N2PWDkiYstuU"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "955e331a325f4a257551b2214208a1f34c9819db13e7b5daabb451fc4c03cd2122325a7deb8a86b317e00ebdb1242f841ce2ebcc8585c9b26f521e8990271f04",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

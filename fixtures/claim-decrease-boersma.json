@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:MQq4KGaHpGQ_i9LUYo68vrS3hkR8WzZmUBqP9ZmjEFs",
+  "assertion": {
+    "text": "In the Erasmus DECREASE screening cohort (Boersma et al. 2001), patients receiving beta-blockers had a lower risk of perioperative cardiac complications.",
+    "subject": "tt:Hx0x-pK9Mmq26VcRSQ5DmxVR9mHAr0GPDVH0Ny-u958",
+    "grounding": {
+      "source": "tt:6EoBJk5LJrxzSKlvYU5SOLvON6qHUSSIipHX_KMZFo0",
+      "char_span": [
+        1803,
+        1877
+      ],
+      "quote": "patients receiving beta-blockers had a lower risk of cardiac complications",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "c8c8e0db90698dc587017e296b8be5a8f470fdfb4837fd3ee7b877aaa84996a2"
+    },
+    "verification": "L5",
+    "illustrative_LR": 4.0,
+    "polarity": "supports-perioperative-betablockade"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:6EoBJk5LJrxzSKlvYU5SOLvON6qHUSSIipHX_KMZFo0",
+      "tt:Hx0x-pK9Mmq26VcRSQ5DmxVR9mHAr0GPDVH0Ny-u958"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "ebaca743f76d94c7a579c297da78fbf8b22de118d4a80d6b68c02822cefc95b9a1d2e581e16f9f20cb8a32a3809c0dceccde0e918376927417a103b15463800b",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

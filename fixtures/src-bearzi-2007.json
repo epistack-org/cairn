@@ -1,0 +1,44 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:IOQP2SUglkWXNnAd44bPR9Qd7Y-PVUgAAk2r3R7cwVc",
+  "assertion": {
+    "title": "Human cardiac stem cells",
+    "authors": "Bearzi C, Rota M, Hosoda T, Tillmanns J, Nascimbene A, ... Leri A, Kajstura J, Anversa P",
+    "venue": "Proceedings of the National Academy of Sciences",
+    "year": 2007,
+    "volume": "104",
+    "issue": "35",
+    "pages": "14068-14073",
+    "doi": "10.1073/pnas.0706760104",
+    "pmid": "17709737",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "The identification of cardiac progenitor cells in mammals raises the possibility that the human heart contains a population of stem cells capable of generating cardiomyocytes and coronary vessels. The characterization of human cardiac stem cells (hCSCs) would have important clinical implications for the management of the failing heart. We have established the conditions for the isolation and expansion of c-kit-positive hCSCs from small samples of myocardium. Additionally, we have tested whether these cells have the ability to form functionally competent human myocardium after infarction in immunocompromised animals. Here, we report the identification in vitro of a class of human c-kit-positive cardiac cells that possess the fundamental properties of stem cells: they are self-renewing, clonogenic, and multipotent. hCSCs differentiate predominantly into cardiomyocytes and, to a lesser extent, into smooth muscle cells and endothelial cells. When locally injected in the infarcted myocardium of immunodeficient mice and immunosuppressed rats, hCSCs generate a chimeric heart, which contains human myocardium composed of myocytes, coronary resistance arterioles, and capillaries. The human myocardium is structurally and functionally integrated with the rodent myocardium and contributes to the performance of the infarcted heart. Differentiated human cardiac cells possess only one set of human sex chromosomes excluding cell fusion. The lack of cell fusion was confirmed by the Cre-lox strategy. Thus, hCSCs can be isolated and expanded in vitro for subsequent autologous regeneration of dead myocardium in patients affected by heart failure of ischemic and nonischemic origin.",
+    "excerpt_sha256": "c63b7ac1e19c8dcccd4ad1b784e50ab01eae19fd8e3a1954f6df9a33a6ebac63",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 17709737); AbstractText via itertext()",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=17709737&rettype=abstract&retmode=xml"
+      ]
+    },
+    "verification": "L1",
+    "role": "the human-cell extension — c-kit+ human CSCs isolated by the same lab's method; a re-measurement of the SAME characterization in human tissue, not an independent line"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:aUHKM9pH46JNkne2HslTLVkKe_njjK_N2PWDkiYstuU"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "626c78e04c5271232d2092486fb238eb8e82f8d0767d18521e2e804a65ec99e49b66bde4be9878b5687ab0c054eab6eda8a7ac96e73fe377dc303df5ce16860c",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

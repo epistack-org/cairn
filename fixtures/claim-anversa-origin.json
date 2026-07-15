@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:14Lw8LK9f_12cZaCTQ8ggJiOgv_Kude2VfEEPinBNes",
+  "assertion": {
+    "text": "Adult Lin(-)/c-kit+ cardiac stem cells, injected into an ischemic heart, reconstitute well-differentiated myocardium (Beltrami et al. 2003) — the rodent origin of the claim.",
+    "subject": "tt:aUHKM9pH46JNkne2HslTLVkKe_njjK_N2PWDkiYstuU",
+    "grounding": {
+      "source": "tt:7HNu_af7HZ5BaEjXATRmoFvZHzN5yFoOuAIKjPt6oyA",
+      "char_span": [
+        564,
+        643
+      ],
+      "quote": "these cells or their clonal progeny reconstitute well-differentiated myocardium",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "52559bb7c0eeecb5e731b30e24b72944f16a270c8bed0e24bfa349d0bd8e0729"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-ckit-regeneration"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:7HNu_af7HZ5BaEjXATRmoFvZHzN5yFoOuAIKjPt6oyA",
+      "tt:aUHKM9pH46JNkne2HslTLVkKe_njjK_N2PWDkiYstuU"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "d9db0afcaf21946d9cfc45dfd02305a4c5809762ef4f834563b9c4afab8f2105769ebb760428a2136a3fa5f0203cdca8b7de99ef521cad0fc2346ccef1672f09",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

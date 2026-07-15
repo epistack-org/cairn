@@ -43,6 +43,10 @@ EXTRACTOR = "agent:claude-opus-4-8[1m]/A1-source-vetting"
 EXTRACTOR_F3 = "agent:claude-fable-5/floor3-source-vetting"
 # the amyloid case (4th worked example) was vetted in a decoupling spike on 2026-07-15.
 EXTRACTOR_AMYLOID = "agent:claude-fable-5/amyloid-spike-source-vetting"
+# the 5th/6th/7th worked examples (ivermectin, Anversa, Poldermans) were imported in the
+# 2026-07-15 backtest-scaling pass (dev/cairn#15), from a ranked research sweep of known-answer
+# fraud/non-independence cases. Same first-party vetting standard.
+EXTRACTOR_BACKTEST = "agent:claude-fable-5/backtest-scaling-source-vetting"
 
 # Pinned abstracts (version of record). The build fails loudly if a byte drifts.
 SOURCES = {
@@ -117,6 +121,72 @@ SOURCES = {
         "file": "shankar-2008.abstract.txt",
         "sha256": "c2991a214c140703fb140e06e3187747beaaaecf94d74df9cfaea2b226f64417",
     },
+    # --- ivermectin (Elgazzar-fraud) case (dev/cairn#15). The three positive syntheses each
+    #     ship their ABSTRACT (PubMed, version of record) PLUS their COMPLETE included-study
+    #     characteristics table (Europe PMC OA JATS, whitespace-normalized pipe-rows — the same
+    #     transform the eggs meta-analyses use for Table 1). The Elgazzar-naming row is the
+    #     byte-grounded proof that each pooled the withdrawn preprint. ENCODING FOOTGUN, recorded
+    #     not hidden (see fixtures/PROVENANCE-ivermectin.md): the Zein 2021 abstract uses U+00A0
+    #     NO-BREAK SPACE inside its statistics ("p = 0.004"), so a quote hand-typed with
+    #     ASCII spaces would silently fail the span check — the eggs/amyloid footgun class again.
+    "bryant-2021": {
+        "file": "bryant-2021.abstract.txt",
+        "sha256": "715af76955736e2628255ad57a640ec89bd82bd3e2398d8f06f32fb014083bac",
+    },
+    "zein-2021": {
+        "file": "zein-2021.abstract.txt",
+        "sha256": "a2e9e5fc5c421d8fbba3d5aaf50a089abe679eb691ea29fa661a68aba3641d60",
+    },
+    "kory-2021": {
+        "file": "kory-2021.abstract.txt",
+        "sha256": "bd06c3d4a16e11ce3fc472514583e42a83d9779ea8493d1ca5c5cc93f6aa2f28",
+    },
+    "reis-2022": {  # TOGETHER — the upstream-disjoint contrast RCT
+        "file": "reis-2022.abstract.txt",
+        "sha256": "6908794567add22f5329b21fb4382008ab52104c7877b22fd3d1bcb597b1ea3a",
+    },
+    "hill-2021": {  # the published counterfactual: same meta, RETRACTED, null once Elgazzar's weight is pulled
+        "file": "hill-2021.abstract.txt",
+        "sha256": "f66ca4aea476e3dc2dd2d7d72123f2346261083557bdadcb8db0cdc04f98a02b",
+    },
+    # --- anversa (c-kit+ cardiac stem cell) case (dev/cairn#15). PubMed abstracts, version of record. ---
+    "beltrami-2003": {
+        "file": "beltrami-2003.abstract.txt",
+        "sha256": "52559bb7c0eeecb5e731b30e24b72944f16a270c8bed0e24bfa349d0bd8e0729",
+    },
+    "bearzi-2007": {
+        "file": "bearzi-2007.abstract.txt",
+        "sha256": "c63b7ac1e19c8dcccd4ad1b784e50ab01eae19fd8e3a1954f6df9a33a6ebac63",
+    },
+    "bolli-2011": {  # SCIPIO — RETRACTED (Lancet 2019); the literal shared-cell-prep clinical line
+        "file": "bolli-2011.abstract.txt",
+        "sha256": "33bab0ee2cd8b5cbe3bad66cee4206c660d53b4b2ed6ba2154d5fffe9cd635fa",
+    },
+    "makkar-2012": {  # CADUCEUS — the upstream-disjoint contrast (cardiosphere-derived cells, Marbán lab)
+        "file": "makkar-2012.abstract.txt",
+        "sha256": "b6de36d79cb6846b0aa05b1b46fe544d295da422570b1c41b2019fafe433e549",
+    },
+    # --- poldermans (DECREASE / perioperative beta-blockade) case (dev/cairn#15). PubMed abstracts. ---
+    "poldermans-1999": {  # DECREASE-I
+        "file": "poldermans-1999.abstract.txt",
+        "sha256": "078de8baccf8bd05765227d6a94f921b7c8ea7d84c7d3c288b2786e990435450",
+    },
+    "boersma-2001": {  # the DECREASE screening-cohort JAMA paper
+        "file": "boersma-2001.abstract.txt",
+        "sha256": "c8c8e0db90698dc587017e296b8be5a8f470fdfb4837fd3ee7b877aaa84996a2",
+    },
+    "dunkelgrun-2009": {  # DECREASE-IV
+        "file": "dunkelgrun-2009.abstract.txt",
+        "sha256": "d2c47de80ed89f0832d0e702e40b2ead222176f33fe211f01ab5e5f009f419b4",
+    },
+    "devereaux-2008": {  # POISE — the upstream-disjoint contrast RCT
+        "file": "devereaux-2008.abstract.txt",
+        "sha256": "47b8b5836b57355623771bf7f0b02bc72bb46592af1683072790bcc2a1e62d1a",
+    },
+    "bouri-2014": {  # the DECREASE-excluded "secure trials" meta — the published sign-flip
+        "file": "bouri-2014.abstract.txt",
+        "sha256": "8a502e70f5980eee457e6c6a8fa875bfbcb4f3edf1154822813a0fa46ace66ba",
+    },
 }
 
 # src-<record slug> -> key into SOURCES (used to bind grounding.source_sha256)
@@ -133,6 +203,21 @@ _SHA_KEYS = {
     "src-lesne-2013": "lesne-2013",
     "src-sherman-2011": "sherman-2011",
     "src-shankar-2008": "shankar-2008",
+    # ivermectin / Anversa / Poldermans backtest cases (dev/cairn#15)
+    "src-bryant-2021": "bryant-2021",
+    "src-zein-2021": "zein-2021",
+    "src-kory-2021": "kory-2021",
+    "src-reis-2022": "reis-2022",
+    "src-hill-2021": "hill-2021",
+    "src-beltrami-2003": "beltrami-2003",
+    "src-bearzi-2007": "bearzi-2007",
+    "src-bolli-2011": "bolli-2011",
+    "src-makkar-2012": "makkar-2012",
+    "src-poldermans-1999": "poldermans-1999",
+    "src-boersma-2001": "boersma-2001",
+    "src-dunkelgrun-2009": "dunkelgrun-2009",
+    "src-devereaux-2008": "devereaux-2008",
+    "src-bouri-2014": "bouri-2014",
 }
 
 
@@ -292,6 +377,125 @@ CASES = {
                      "shared REAGENT/ASSAY, with the originating source formally RETRACTED after "
                      "the fact — the sharpest real-world 'the anchor moved and the citations "
                      "didn't' exhibit in the corpus",
+    },
+    "ivermectin-elgazzar": {
+        "title": "Ivermectin for COVID-19 — the Elgazzar-fabricated meta-analysis cascade",
+        # NARROW crux. NOT "does ivermectin work" and NOT "is ivermectin fraudulent". It is about
+        # whether the several positive mortality meta-analyses are INDEPENDENT confirmations.
+        "crux": "Do the multiple ivermectin meta-analyses reporting a large COVID-19 mortality "
+                "reduction constitute independent confirmations of that mortality benefit?",
+        "battery": "assessment/probes-ivermectin.json",
+        "shared_upstream": "src-elgazzar-2020",
+        "shared_upstream_kind": "one fabricated primary trial (the Elgazzar preprint, Research "
+                                "Square, WITHDRAWN 2021-07-14), TWO HOPS UP: each positive "
+                                "synthesis pooled it, and it carried the largest weight and the "
+                                "largest effect. Removing it collapses the pooled mortality signal "
+                                "(the published counterfactual: Hill 2021, later retracted).",
+        "laundered_set": [
+            "claim-iver-bryant",   # Am J Ther 2021 meta (RR 0.38); Expression of Concern
+            "claim-iver-zein",     # Diab Metab Syndr 2021 meta (RR 0.39) — the SAME signal, different authors
+            "claim-iver-kory",     # Am J Ther 2021 FLCCC review; Expression of Concern
+        ],
+        # TOGETHER (Reis 2022, NEJM) is a large independent RCT that never ingested Elgazzar. It is
+        # upstream-disjoint from the Elgazzar node, so an Elgazzar-based meta and TOGETHER COMBINE:
+        # TOGETHER really is a distinct evidential draw. (It happens to be null — the verdict is
+        # about provenance-independence, not agreement, which is exactly the discipline to show.)
+        "contrast_pair": ["claim-iver-bryant", "claim-iver-together"],
+        "contrast_expected": "COMBINABLE",
+        "punchline": "Several meta-analyses reported ivermectin roughly halving COVID-19 mortality — "
+                     "Bryant 2021 (RR 0.38), Zein 2021 (RR 0.39), and the FLCCC review (Kory 2021) — "
+                     "which looks like independent replication. It is not: all three pooled the same "
+                     "single fabricated trial (Elgazzar, Research Square), which carried the largest "
+                     "weight and the largest effect; when it was WITHDRAWN on 2021-07-14 the pooled "
+                     "signal collapsed (Hill 2021, which had leaned on it, went null and was itself "
+                     "retracted). The naive reading multiplies three ~5:1 likelihoods to ~100:1; the "
+                     "provenance intersection collapses to one upstream, so the product is undefined. "
+                     "It does NOT say ivermectin is proven ineffective — TOGETHER (Reis 2022) is an "
+                     "upstream-disjoint RCT and COMBINES; the point is that the positive syntheses are "
+                     "not independent votes.",
+        "exercises": "the highest-fan-out node in the corpus — ONE fabricated primary re-pooled by "
+                     "many downstream syntheses (the eggs-style transitive detector, but the shared "
+                     "upstream is a retracted/withdrawn fraud rather than a legitimate cohort)",
+    },
+    "anversa-ckit": {
+        "title": "Cardiac stem cells — the Anversa c-kit+ regeneration cascade",
+        "crux": "Do the multiple reports that c-kit+ cardiac stem cells regenerate myocardium — "
+                "from the rodent origin, to human cells, to the SCIPIO clinical trial — constitute "
+                "independent confirmations that such cells regenerate the heart?",
+        "battery": "assessment/probes-anversa.json",
+        "shared_upstream": "ent-anversa-ckit-csc",
+        "shared_upstream_kind": "a lab-defined cell type + its isolation method whose originating "
+                                "characterization is one paper (Beltrami et al. 2003, Cell), carried "
+                                "forward by the same laboratory (Anversa). Harvard/Brigham "
+                                "recommended 31 of the lab's papers for retraction (2018) for "
+                                "falsified/fabricated data; the flagship human trial SCIPIO was "
+                                "RETRACTED (Lancet 2019) and used the lab's own cell preps — a "
+                                "literal shared-reagent dependency.",
+        "laundered_set": [
+            "claim-anversa-origin",    # Beltrami 2003 (Cell) — c-kit+ cells reconstitute ~70% of infarcted ventricle (rodent)
+            "claim-anversa-human",     # Bearzi 2007 (PNAS) — human c-kit+ CSCs generate human myocardium
+            "claim-anversa-scipio",    # Bolli 2011 (Lancet, RETRACTED) — SCIPIO: autologous CSCs improve LVEF in patients
+        ],
+        # CADUCEUS (Makkar 2012, Lancet) used cardiosphere-derived cells (CDCs) — a different cell
+        # type, a different laboratory (Marbán, Cedars-Sinai), a different preparation, with no
+        # derivation from the Anversa c-kit+ characterization. An Anversa line and the CADUCEUS
+        # line COMBINE: cardiac-regeneration evidence exists that does NOT route through Anversa.
+        "contrast_pair": ["claim-anversa-origin", "claim-anversa-caduceus"],
+        "contrast_expected": "COMBINABLE",
+        "punchline": "The c-kit+ cardiac stem cell — an adult heart cell claimed to regenerate "
+                     "myocardium — looked confirmed from rodent (Beltrami 2003) to human cells "
+                     "(Bearzi 2007) to a phase-1 trial in patients (SCIPIO, Bolli 2011). But all "
+                     "three descend from ONE laboratory's originating characterization and its "
+                     "isolation method; SCIPIO used that lab's own cell preps. Harvard and the "
+                     "Brigham later found falsified/fabricated data across the lab and pressed for 31 "
+                     "retractions; SCIPIO was retracted in 2019. cairn refuses to count the three as "
+                     "independent votes and names the shared Anversa c-kit+ characterization. It does "
+                     "NOT say the heart cannot be repaired — CADUCEUS (cardiosphere-derived cells, a "
+                     "different lab and cell type) is upstream-disjoint and COMBINES.",
+        "exercises": "the amyloid node type again (a lab-defined object + its assay, origin source at "
+                     "the root) but with the meta-fact carried as an INSTITUTIONAL misconduct finding "
+                     "plus one retracted downstream node — not a retraction stamp on the origin paper",
+    },
+    "poldermans-decrease": {
+        "title": "Perioperative beta-blockers — the Poldermans/DECREASE cascade that flips sign",
+        "crux": "Do the trials and studies supporting perioperative beta-blockade to prevent "
+                "cardiac death in non-cardiac surgery constitute independent evidence of that "
+                "benefit?",
+        "battery": "assessment/probes-poldermans.json",
+        "shared_upstream": "ent-decrease-program",
+        "shared_upstream_kind": "one research program (the DECREASE family of trials + the "
+                                "Erasmus MC vascular-surgery database, run by the Poldermans group). "
+                                "A 2011-2012 Erasmus MC investigation found the DECREASE trials "
+                                "contained fabricated/fictitious data — an INSTITUTIONAL misconduct "
+                                "finding, not a per-node retraction stamp.",
+        "laundered_set": [
+            "claim-decrease-1",        # DECREASE-I (Poldermans 1999, NEJM) — bisoprolol cuts cardiac death/MI
+            "claim-decrease-boersma",  # Boersma 2001 (JAMA) — the DECREASE screening cohort, beta-blocker benefit
+            "claim-decrease-4",        # DECREASE-IV (Dunkelgrun 2009, Ann Surg) — bisoprolol benefit, intermediate-risk
+        ],
+        # POISE (Devereaux 2008, Lancet; 8351 patients) is a large independent RCT, upstream-disjoint
+        # from the DECREASE program. A DECREASE benefit claim and the POISE result COMBINE: POISE is a
+        # genuinely distinct evidential draw. It happens to point the OTHER way (metoprolol cut MI but
+        # INCREASED death) — and once the fabricated DECREASE lineage is removed, the pooled effect
+        # flips sign entirely: Bouri 2014's DECREASE-excluded "secure trials" meta finds a 27% mortality
+        # INCREASE. The sharpest counterfactual in the corpus: removing the fraud does not just weaken
+        # the signal, it reverses it.
+        "contrast_pair": ["claim-decrease-1", "claim-poise"],
+        "contrast_expected": "COMBINABLE",
+        "punchline": "Perioperative beta-blockade to prevent cardiac death entered guidelines on a "
+                     "wall of apparent evidence: DECREASE-I (Poldermans 1999), the Boersma 2001 cohort, "
+                     "DECREASE-IV (Dunkelgrun 2009), and more. But that wall is one research program — "
+                     "the Poldermans/Erasmus DECREASE family — which a 2011-2012 institutional "
+                     "investigation found to rest on fabricated data. cairn refuses to count the "
+                     "program's outputs as independent votes and names the shared DECREASE upstream. "
+                     "The independent evidence points the other way: POISE (Devereaux 2008), an "
+                     "upstream-disjoint RCT, COMBINES — and Bouri 2014's DECREASE-excluded meta finds a "
+                     "27% mortality INCREASE. Removing the fabricated lineage does not merely weaken the "
+                     "pooled result; it flips its sign from benefit to harm.",
+        "exercises": "the eggs node type (a shared research program / dataset backbone at the root, "
+                     "found without any single origin paper) carrying an institutional-misconduct "
+                     "meta-fact — and the only case where the honest counterfactual REVERSES the "
+                     "conclusion rather than just deflating the vote count",
     },
 }
 
@@ -1195,6 +1399,717 @@ def build_amyloid(recs: dict[str, dict]) -> None:
     )
 
 
+def build_ivermectin(recs: dict[str, dict]) -> None:
+    """Worked example #5 — the ivermectin / Elgazzar fabricated-meta-analysis cascade (dev/cairn#15).
+
+    The highest-fan-out case in the corpus. The structure (VERIFIED against the real, retrieved
+    included-study tables of each meta-analysis, Europe PMC OA):
+
+        src-elgazzar-2020  (Research Square preprint — WITHDRAWN 2021-07-14 for fabricated data)
+              |   pooled by every positive synthesis; largest weight, largest effect
+        +-----+---------------------+---------------------+
+        v                           v                     v
+        src-bryant-2021       src-zein-2021         src-kory-2021     (three meta-analyses/reviews)
+        (RR 0.38)             (RR 0.39)             (FLCCC review)
+        v                           v                     v
+        claim-iver-bryant     claim-iver-zein       claim-iver-kory   (the "independent" positives)
+
+    Three syntheses reporting ivermectin roughly halves COVID-19 mortality — which reads as
+    independent replication. It is not: all three POOL THE SAME single fabricated trial (Elgazzar),
+    which carried the largest weight and the largest effect size in the ivermectin literature. The
+    non-independence is TWO HOPS UP (claim -> meta-analysis -> Elgazzar), exactly like the eggs
+    cohort backbone — but here the shared upstream is a withdrawn fraud, not a legitimate cohort.
+    Each meta's inclusion of Elgazzar is byte-grounded by a `pools-elgazzar` structural claim
+    (no illustrative_LR) against the study-characteristics table shipped in that meta's excerpt.
+
+    The published counterfactual is exact: when Elgazzar was withdrawn (2021-07-14), the meta that
+    had leaned on it most (Hill 2021) went null and was itself retracted. `cairn intersect` REFUSES
+    the trio and names src-elgazzar-2020.
+
+    HONEST SCOPE LIMIT (recorded, not hidden). This case does NOT say ivermectin is proven
+    ineffective, and it does NOT say ivermectin research is uniformly fraudulent. It is a claim
+    about corroboration-COUNTING: the positive mortality meta-analyses are not independent votes.
+    The contrast proves the boundary the other way: TOGETHER (Reis et al. 2022, NEJM) is a large
+    RCT that never ingested Elgazzar — upstream-disjoint — so an Elgazzar-based meta and TOGETHER
+    COMBINE. TOGETHER happens to be null, and that is the point: the verdict is about
+    provenance-independence, not agreement.
+    """
+    bryant = load_excerpt("bryant-2021")
+    zein = load_excerpt("zein-2021")
+    kory = load_excerpt("kory-2021")
+    reis = load_excerpt("reis-2022")
+    hill = load_excerpt("hill-2021")
+
+    # --- the ROOT: the withdrawn fabricated trial. No excerpt (its "version of record" is now a
+    #     withdrawal notice); it is an upstream node, not a grounding source for any claim. ---
+    recs["src-elgazzar-2020"] = mk(
+        "src-elgazzar-2020", "epi:Source",
+        {
+            "title": "WITHDRAWN: Efficacy and Safety of Ivermectin for Treatment and prophylaxis "
+                     "of COVID-19 Pandemic",
+            "authors": "Elgazzar A, Eltaweel A, Youssef SA, Hany B, Hafez M, Moussa H",
+            "venue": "Research Square (preprint)", "year": 2020,
+            "doi": "10.21203/rs.3.rs-100956/v3",
+            "verification": "L2",
+            "withdrawal": {
+                "status": "WITHDRAWN",
+                "date": "2021-07-14",
+                "by": "Research Square",
+                "notice": "Withdrawn by Research Square on 2021-07-14 following verifiable data-integrity "
+                          "concerns communicated to staff (subsequently under investigation by the "
+                          "Egyptian Ministry of Higher Education): ~79 duplicated participant records, "
+                          "deaths recorded on dates before the trial began, and plagiarism in the text.",
+                "reported_by": "J. Lawrence; Reardon, Nature 2021 (d41586-021-02081-w); Sheldrick & "
+                               "Meyerowitz-Katz, reanalyses",
+            },
+            "role": "the single fabricated primary trial the positive ivermectin syntheses pooled. It "
+                    "carried the LARGEST weight (largest study by patient number) and the LARGEST drug "
+                    "effect in the ivermectin literature; removing it collapses the pooled mortality "
+                    "signal. This is the shared upstream the cascade collapses to.",
+            "note": "Recorded as a fact about the source; the refusal does not depend on the "
+                    "withdrawal — the three syntheses share this upstream whether or not it has been "
+                    "withdrawn. The withdrawal only makes the stakes vivid (probe I4).",
+        },
+        derived_from=[], method="ingest",
+    )
+
+    # --- the three positive syntheses, each deriving (TWO HOPS to the claim) from Elgazzar. ---
+    for slug, excerpt, sha_key, title, authors, venue, year, doi, pmid, notice, role in [
+        ("src-bryant-2021", bryant, "bryant-2021",
+         "Ivermectin for Prevention and Treatment of COVID-19 Infection: A Systematic Review, "
+         "Meta-analysis, and Trial Sequential Analysis to Inform Clinical Guidelines",
+         "Bryant A, Lawrie TA, Dowswell T, Fordham EJ, Mitchell S, Hill SR, Tham TC",
+         "American Journal of Therapeutics", 2021, "10.1097/MJT.0000000000001402", "34145166",
+         "Expression of Concern: Am J Ther 2022 Feb 17;29(2):e232 (10.1097/MJT.0000000000001482), PMID 35142702",
+         "the Am J Ther 2021 meta-analysis (RR 0.38 mortality); pooled Elgazzar (its study-characteristics "
+         "table names it); Expression of Concern issued 2022"),
+        ("src-zein-2021", zein, "zein-2021",
+         "Ivermectin and mortality in patients with COVID-19: A systematic review, meta-analysis, and "
+         "meta-regression of randomized controlled trials",
+         "Zein AFMZ, Sulistiyana CS, Raffaelo WM, Pranata R",
+         "Diabetes & Metabolic Syndrome", 2021, "10.1016/j.dsx.2021.07.021", "34237554",
+         None,
+         "a second meta-analysis (RR 0.39) — the SAME mortality signal, different authors; its baseline-"
+         "characteristics table lists 'Elgazzar 2020 [23]'"),
+        ("src-kory-2021", kory, "kory-2021",
+         "Review of the Emerging Evidence Demonstrating the Efficacy of Ivermectin in the Prophylaxis "
+         "and Treatment of COVID-19",
+         "Kory P, Meduri GU, Varon J, Iglesias J, Marik PE",
+         "American Journal of Therapeutics", 2021, "10.1097/MJT.0000000000001377", "34375047",
+         "Expression of Concern: Am J Ther 2022 Feb 14;29(2):e231 (10.1097/MJT.0000000000001481), PMID 35142703",
+         "the FLCCC review asserting 'large, statistically significant reductions in mortality'; its study "
+         "table cites Elgazzar by the exact withdrawn preprint DOI (rs.3.rs-100956); Expression of Concern 2022"),
+    ]:
+        assertion = {
+            "title": title, "authors": authors, "venue": venue, "year": year,
+            "doi": doi, "pmid": pmid,
+            "excerpt_kind": "abstract (version of record) + included-study characteristics table (Europe PMC OA JATS, whitespace-normalized pipe-rows)",
+            "excerpt": excerpt, "excerpt_sha256": SOURCES[sha_key]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-15",
+                "method": f"NCBI E-utilities efetch (PMID {pmid}) for the abstract + Europe PMC OA "
+                          "fullTextXML for the study-characteristics table (rows serialized "
+                          "' | '.join(cell.itertext()), whitespace-normalized)",
+                "sources": [f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id={pmid}&rettype=abstract&retmode=xml"],
+            },
+            "verification": "L1",
+            "role": role,
+        }
+        if notice:
+            assertion["expression_of_concern"] = notice
+        recs[slug] = mk(slug, "epi:Source", assertion,
+                        derived_from=[recs["src-elgazzar-2020"]["id"]], method="ingest")
+
+    # --- TOGETHER: the upstream-disjoint contrast RCT (never ingested Elgazzar). ---
+    recs["src-reis-2022"] = mk(
+        "src-reis-2022", "epi:Source",
+        {
+            "title": "Effect of Early Treatment with Ivermectin among Patients with Covid-19",
+            "authors": "Reis G, Silva EASM, Silva DCM, Thabane L, ... Mills EJ (TOGETHER trial)",
+            "venue": "New England Journal of Medicine", "year": 2022, "volume": "386", "issue": "18",
+            "pages": "1721-1731", "doi": "10.1056/NEJMoa2115869", "pmid": "35353979",
+            "excerpt_kind": "abstract (version of record)",
+            "excerpt": reis, "excerpt_sha256": SOURCES["reis-2022"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-15",
+                "method": "NCBI E-utilities efetch (PMID 35353979); AbstractText via itertext()",
+                "sources": ["https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=35353979&rettype=abstract&retmode=xml"],
+            },
+            "verification": "L1",
+            "role": "the genuinely INDEPENDENT line (the combinable contrast): a large placebo-controlled "
+                    "RCT (n=3515) that never ingested Elgazzar; upstream-disjoint from the fabricated node",
+        },
+        derived_from=[], method="ingest",
+    )
+
+    # --- Hill 2021: the published counterfactual. Its meta had leaned on Elgazzar; on the version of
+    #     record (high-risk-of-bias studies excluded) survival is null (RR 0.90), and the paper was
+    #     RETRACTED. Kept as a source for the battery / provenance; not part of the laundered DAG. ---
+    recs["src-hill-2021"] = mk(
+        "src-hill-2021", "epi:Source",
+        {
+            "title": "Meta-analysis of Randomized Trials of Ivermectin to Treat SARS-CoV-2 Infection",
+            "authors": "Hill A, Garratt A, Levi J, Falconer J, ... (Unitaid/WHO ivermectin group)",
+            "venue": "Open Forum Infectious Diseases", "year": 2021, "doi": "10.1093/ofid/ofab358",
+            "pmid": "34796244",
+            "excerpt_kind": "abstract (version of record)",
+            "excerpt": hill, "excerpt_sha256": SOURCES["hill-2021"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-15",
+                "method": "NCBI E-utilities efetch (PMID 34796244); AbstractText via itertext()",
+                "sources": ["https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=34796244&rettype=abstract&retmode=xml"],
+            },
+            "retraction": {
+                "status": "RETRACTED",
+                "notice": "Retraction: Open Forum Infect Dis 2022 Feb 5;9(3):ofac056 (10.1093/ofid/ofac056), PMID 35146053",
+                "note": "Earlier versions of this meta-analysis leaned heavily on Elgazzar; the version of "
+                        "record, excluding high-risk-of-bias studies, is null on survival (RR 0.90). The "
+                        "COUNTERFACTUAL the case turns on: remove the fabricated node and the signal collapses.",
+            },
+            "verification": "L1",
+            "role": "the published 'remove Elgazzar -> the signal collapses' counterfactual (probe I2/I4). "
+                    "Not part of the laundered DAG.",
+        },
+        derived_from=[], method="ingest",
+    )
+
+    # --- the topic entity (subject of the positive lines + the contrast; NOT a derivedFrom edge). ---
+    recs["ent-ivermectin-covid-mortality"] = mk(
+        "ent-ivermectin-covid-mortality", "epi:Entity",
+        {
+            "name": "The claim that ivermectin reduces COVID-19 mortality",
+            "aliases": ["ivermectin mortality benefit in COVID-19"],
+            "kind": "Claimeffect",
+            "statement": "The proposition, assessed across the 2020-2022 ivermectin literature, that "
+                         "ivermectin treatment lowers mortality in COVID-19.",
+            "note": "A TOPIC node (the shared subject of the positive syntheses AND the TOGETHER "
+                    "contrast) — deliberately NOT a provenance edge. Sharing a topic is not sharing an "
+                    "upstream: TOGETHER is about the same question yet derives from disjoint evidence, "
+                    "which is why it COMBINES while the three positive syntheses REFUSE.",
+            "verification": "L1",
+        },
+        derived_from=[],
+    )
+    topic = "ent-ivermectin-covid-mortality"
+
+    # --- The three "independent" positive mortality lines (the laundered set). ---
+    mk_claim(
+        recs, "claim-iver-bryant",
+        text="A 2021 systematic review and meta-analysis (Bryant et al., Am J Ther) found that "
+             "ivermectin reduced the risk of COVID-19 death, with an average risk ratio of 0.38.",
+        subject=topic, source_slug="src-bryant-2021", excerpt=bryant,
+        quote="ivermectin reduced risk of death compared with no ivermectin (average risk ratio 0.38, "
+              "95% confidence interval 0.19-0.73",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-ivermectin-mortality-benefit",
+        extractor=EXTRACTOR_BACKTEST,
+    )
+    mk_claim(
+        recs, "claim-iver-zein",
+        text="A 2021 meta-analysis (Zein et al.) found ivermectin was associated with decreased "
+             "COVID-19 mortality, with a risk ratio of 0.39 — the same signal as Bryant, different authors.",
+        subject=topic, source_slug="src-zein-2021", excerpt=zein,
+        quote="Ivermectin was associated with decreased mortality (RR 0.39 [95% 0.20-0.74]",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-ivermectin-mortality-benefit",
+        extractor=EXTRACTOR_BACKTEST,
+    )
+    mk_claim(
+        recs, "claim-iver-kory",
+        text="A 2021 review (Kory et al., FLCCC) concluded that meta-analyses of ivermectin treatment "
+             "trials found large, statistically significant reductions in COVID-19 mortality.",
+        subject=topic, source_slug="src-kory-2021", excerpt=kory,
+        quote="have found large, statistically significant reductions in mortality",
+        label="ENTAILS", rung="L5", lr=4.0, polarity="supports-ivermectin-mortality-benefit",
+        extractor=EXTRACTOR_BACKTEST,
+    )
+
+    # --- The byte-grounded inclusion edges: each positive synthesis POOLS the withdrawn Elgazzar
+    #     trial. Structural claims (no illustrative_LR) grounded in each meta's included-study table. ---
+    mk_claim(
+        recs, "claim-iver-bryant-pools-elgazzar",
+        text="The Bryant et al. 2021 meta-analysis lists the withdrawn Elgazzar 2020 trial among its "
+             "pooled input studies — the fabricated trial the other positive syntheses also pool.",
+        subject="src-elgazzar-2020", source_slug="src-bryant-2021", excerpt=bryant,
+        quote="Elgazzar 202047 | Egypt | RCT",
+        label="ENTAILS", rung="L5", extractor=EXTRACTOR_BACKTEST,
+    )
+    mk_claim(
+        recs, "claim-iver-zein-pools-elgazzar",
+        text="The Zein et al. 2021 meta-analysis lists 'Elgazzar 2020' among its included studies — "
+             "the same withdrawn trial pooled by the other positive syntheses.",
+        subject="src-elgazzar-2020", source_slug="src-zein-2021", excerpt=zein,
+        quote="Elgazzar 2020 [23] | RCT | 98 vs 176",
+        label="ENTAILS", rung="L5", extractor=EXTRACTOR_BACKTEST,
+    )
+    mk_claim(
+        recs, "claim-iver-kory-pools-elgazzar",
+        text="The Kory et al. 2021 review lists Elgazzar's Research Square preprint among the clinical "
+             "studies it assesses — citing the exact withdrawn-preprint identifier.",
+        subject="src-elgazzar-2020", source_slug="src-kory-2021", excerpt=kory,
+        quote="Elgazzar A, Egypt",
+        label="ENTAILS", rung="L5", extractor=EXTRACTOR_BACKTEST,
+    )
+
+    # --- The contrast: a genuinely INDEPENDENT ivermectin RCT (disjoint upstream). ---
+    mk_claim(
+        recs, "claim-iver-together",
+        text="The TOGETHER randomized controlled trial (Reis et al. 2022, NEJM) found that early "
+             "ivermectin treatment did not reduce COVID-19 hospitalization — independent evidence that "
+             "does not route through the Elgazzar trial.",
+        subject=topic, source_slug="src-reis-2022", excerpt=reis,
+        quote="Treatment with ivermectin did not result in a lower incidence of medical admission to a "
+              "hospital due to progression of Covid-19",
+        label="ENTAILS", rung="L5", polarity="no-ivermectin-benefit", extractor=EXTRACTOR_BACKTEST,
+    )
+
+
+def build_anversa(recs: dict[str, dict]) -> None:
+    """Worked example #6 — the Anversa c-kit+ cardiac stem cell regeneration cascade (dev/cairn#15).
+
+    The amyloid node type (a lab-defined object + its isolation assay, origin source at the root)
+    but with the meta-fact carried as an INSTITUTIONAL misconduct finding plus one retracted
+    downstream node, rather than a retraction stamp on the origin paper.
+
+        src-beltrami-2003  (Cell 2003 — "adult c-kit+ cardiac stem cells regenerate myocardium")
+              |   the originating characterization of the cell type
+              v
+        ent-anversa-ckit-csc   <-- the shared upstream: the Anversa c-kit+ CSC + its isolation method
+              ^                          ^                            ^
+              |                          |                            |
+        claim-anversa-        claim-anversa-             claim-anversa-
+        origin (Beltrami      human (Bearzi 2007,        scipio (Bolli 2011,
+        2003, rodent)         human cells)               Lancet, RETRACTED — SCIPIO)
+
+    Three "confirmations" that c-kit+ cells regenerate the heart — a rodent origin, a human-cell
+    paper, and a phase-1 clinical trial — that all descend from ONE laboratory's originating
+    characterization and its isolation method. SCIPIO used the lab's own cell preps: a literal
+    shared-reagent dependency on top of the shared characterization. Harvard and the Brigham found
+    falsified/fabricated data across the lab and recommended 31 papers for retraction (2018);
+    SCIPIO was retracted (Lancet 2019); a $10M False Claims Act settlement resolved the NIH-grant
+    allegations (2017). `cairn intersect` REFUSES the trio and names ent-anversa-ckit-csc.
+
+    HONEST SCOPE LIMIT. The case does NOT say the heart cannot be repaired and does NOT adjudicate
+    every cell-therapy approach. The contrast proves the boundary: CADUCEUS (Makkar et al. 2012,
+    Lancet) used cardiosphere-derived cells — a different cell type, a different lab (Marbán,
+    Cedars-Sinai), a different preparation, upstream-disjoint from the Anversa c-kit+ line — so an
+    Anversa line and the CADUCEUS line COMBINE.
+    """
+    beltrami = load_excerpt("beltrami-2003")
+    bearzi = load_excerpt("bearzi-2007")
+    bolli = load_excerpt("bolli-2011")
+    makkar = load_excerpt("makkar-2012")
+
+    # --- the ROOT: the origin paper (the c-kit+ CSC was characterized here first). NOT itself
+    #     retracted — recorded honestly; the meta-fact is institutional + one retracted downstream. ---
+    recs["src-beltrami-2003"] = mk(
+        "src-beltrami-2003", "epi:Source",
+        {
+            "title": "Adult cardiac stem cells are multipotent and support myocardial regeneration",
+            "authors": "Beltrami AP, Barlucchi L, Torella D, Baker M, Limana F, Chimenti S, "
+                       "Kasahara H, Rota M, Musso E, Urbanek K, Leri A, Kajstura J, Nadal-Ginard B, Anversa P",
+            "venue": "Cell", "year": 2003, "volume": "114", "issue": "6", "pages": "763-776",
+            "doi": "10.1016/S0092-8674(03)00687-1", "pmid": "14505575",
+            "excerpt_kind": "abstract (version of record)",
+            "excerpt": beltrami, "excerpt_sha256": SOURCES["beltrami-2003"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-15",
+                "method": "NCBI E-utilities efetch (PMID 14505575); AbstractText via itertext()",
+                "sources": ["https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=14505575&rettype=abstract&retmode=xml"],
+            },
+            "verification": "L1",
+            "role": "the originating characterization of the Lin(-)/c-kit(POS) cardiac stem cell — the "
+                    "derivation root the cascade collapses to",
+            "retraction_status_note": "This origin paper is NOT individually marked retracted on PubMed "
+                                      "(as of retrieval). The case's ground truth is INSTITUTIONAL: "
+                                      "Harvard Medical School and Brigham and Women's Hospital found "
+                                      "falsified/fabricated data across the Anversa lab and recommended "
+                                      "31 papers for retraction (2018); a $10M False Claims Act "
+                                      "settlement resolved the NIH-grant allegations (2017). The refusal "
+                                      "does not depend on any single retraction stamp.",
+        },
+        derived_from=[], method="ingest",
+    )
+
+    recs["ent-anversa-ckit-csc"] = mk(
+        "ent-anversa-ckit-csc", "epi:Entity",
+        {
+            "name": "The Anversa-lab c-kit+ cardiac stem cell (as defined by Beltrami et al. 2003)",
+            "aliases": ["c-kit+ cardiac stem cell", "Lin(-) c-kit(POS) CSC", "the Anversa CSC"],
+            "kind": "CellType",
+            "statement": "A resident Lin(-)/c-kit(POS) adult cardiac cell claimed to be self-renewing, "
+                         "clonogenic and multipotent and to regenerate myocardium, first characterized "
+                         "and named by the Anversa laboratory (Beltrami et al. 2003) and detected/"
+                         "prepared thereafter by the same lab's isolation method.",
+            "note": "The shared upstream of the c-kit+ CSC corroboration cascade: BOTH a foundational "
+                    "RESULT (the 2003 characterization) and a shared REAGENT/METHOD (the lab's cell "
+                    "isolation used downstream, including in the SCIPIO trial's cell preps). Every "
+                    "downstream c-kit+ CSC measurement presupposes this node. META-FACT: Harvard/Brigham "
+                    "recommended 31 Anversa-lab papers for retraction (2018) for falsified/fabricated "
+                    "data; the flagship human trial SCIPIO was retracted (Lancet 2019); a $10M FCA "
+                    "settlement (2017) resolved the NIH-grant allegations. The finding is INSTITUTIONAL "
+                    "misconduct, not a per-node retraction stamp — cairn refuses on the shared-provenance "
+                    "topology whether or not each paper has been individually retracted.",
+            "verification": "L1",
+        },
+        derived_from=[recs["src-beltrami-2003"]["id"]],
+    )
+
+    recs["src-bearzi-2007"] = mk(
+        "src-bearzi-2007", "epi:Source",
+        {
+            "title": "Human cardiac stem cells",
+            "authors": "Bearzi C, Rota M, Hosoda T, Tillmanns J, Nascimbene A, ... Leri A, Kajstura J, Anversa P",
+            "venue": "Proceedings of the National Academy of Sciences", "year": 2007, "volume": "104",
+            "issue": "35", "pages": "14068-14073", "doi": "10.1073/pnas.0706760104", "pmid": "17709737",
+            "excerpt_kind": "abstract (version of record)",
+            "excerpt": bearzi, "excerpt_sha256": SOURCES["bearzi-2007"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-15",
+                "method": "NCBI E-utilities efetch (PMID 17709737); AbstractText via itertext()",
+                "sources": ["https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=17709737&rettype=abstract&retmode=xml"],
+            },
+            "verification": "L1",
+            "role": "the human-cell extension — c-kit+ human CSCs isolated by the same lab's method; a "
+                    "re-measurement of the SAME characterization in human tissue, not an independent line",
+        },
+        derived_from=[recs["ent-anversa-ckit-csc"]["id"]], method="ingest",
+    )
+
+    recs["src-bolli-2011"] = mk(
+        "src-bolli-2011", "epi:Source",
+        {
+            "title": "Cardiac stem cells in patients with ischaemic cardiomyopathy (SCIPIO): initial "
+                     "results of a randomised phase 1 trial",
+            "authors": "Bolli R, Chugh AR, D'Amario D, ... Leri A, Kajstura J, Anversa P",
+            "venue": "Lancet", "year": 2011, "volume": "378", "issue": "9806", "pages": "1847-1857",
+            "doi": "10.1016/S0140-6736(11)61590-0", "pmid": "22088800",
+            "excerpt_kind": "abstract (version of record)",
+            "excerpt": bolli, "excerpt_sha256": SOURCES["bolli-2011"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-15",
+                "method": "NCBI E-utilities efetch (PMID 22088800); AbstractText via itertext()",
+                "sources": ["https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=22088800&rettype=abstract&retmode=xml"],
+            },
+            "retraction": {
+                "status": "RETRACTED",
+                "notice": "Retraction: Lancet 2019 Mar 16;393(10176):1084 (10.1016/S0140-6736(19)30542-2), PMID 30894259",
+                "expression_of_concern": "Expression of Concern: Lancet 2014 Apr 12;383(9925):1279 (10.1016/S0140-6736(14)60608-5), PMID 24725564",
+                "note": "SCIPIO used autologous c-kit+ CSCs prepared per the Anversa-lab method — a literal "
+                        "shared-cell-prep dependency on ent-anversa-ckit-csc. Recorded as a fact about the "
+                        "source; the refusal does not depend on it — the trial shares this upstream regardless.",
+            },
+            "verification": "L1",
+            "role": "the clinical line — the phase-1 SCIPIO trial (RETRACTED 2019). Its cells were the "
+                    "lab's own c-kit+ CSC preps: the literal shared reagent, not an independent confirmation",
+        },
+        derived_from=[recs["ent-anversa-ckit-csc"]["id"]], method="ingest",
+    )
+
+    # --- the disjoint contrast lineage: cardiosphere-derived cells (Marbán), a different root. ---
+    recs["ent-cdc-marban"] = mk(
+        "ent-cdc-marban", "epi:Entity",
+        {
+            "name": "Cardiosphere-derived cells (CDCs)",
+            "aliases": ["CDCs", "the Marbán cardiosphere cells"],
+            "kind": "CellType",
+            "statement": "A distinct heart-derived cell population grown from endomyocardial biopsy "
+                         "specimens as cardiospheres (Marbán laboratory), tested in the CADUCEUS trial "
+                         "for regeneration after myocardial infarction.",
+            "note": "A genuinely DISJOINT upstream from the Anversa c-kit+ CSC: a different cell type "
+                    "(cardiosphere-derived, not sorted Lin(-)/c-kit(POS)), a different laboratory "
+                    "(Marbán, Cedars-Sinai), a different preparation, and no derivation from the Beltrami "
+                    "2003 characterization. Independence on the provenance dimension holds — which is why "
+                    "the contrast COMBINES.",
+            "verification": "L1",
+        },
+        derived_from=[],
+    )
+    recs["src-makkar-2012"] = mk(
+        "src-makkar-2012", "epi:Source",
+        {
+            "title": "Intracoronary cardiosphere-derived cells for heart regeneration after myocardial "
+                     "infarction (CADUCEUS): a prospective, randomised phase 1 trial",
+            "authors": "Makkar RR, Smith RR, Cheng K, Malliaras K, ... Marbán E",
+            "venue": "Lancet", "year": 2012, "volume": "379", "issue": "9819", "pages": "895-904",
+            "doi": "10.1016/S0140-6736(12)60195-0", "pmid": "22336189",
+            "excerpt_kind": "abstract (version of record)",
+            "excerpt": makkar, "excerpt_sha256": SOURCES["makkar-2012"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-15",
+                "method": "NCBI E-utilities efetch (PMID 22336189); AbstractText via itertext()",
+                "sources": ["https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=22336189&rettype=abstract&retmode=xml"],
+            },
+            "verification": "L1",
+            "role": "the genuinely INDEPENDENT line (the combinable contrast) — cardiosphere-derived cells "
+                    "from a different lab, cell type, and preparation; disjoint upstream from the Anversa CSC",
+        },
+        derived_from=[recs["ent-cdc-marban"]["id"]], method="ingest",
+    )
+
+    csc = "ent-anversa-ckit-csc"
+    mk_claim(
+        recs, "claim-anversa-origin",
+        text="Adult Lin(-)/c-kit+ cardiac stem cells, injected into an ischemic heart, reconstitute "
+             "well-differentiated myocardium (Beltrami et al. 2003) — the rodent origin of the claim.",
+        subject=csc, source_slug="src-beltrami-2003", excerpt=beltrami,
+        quote="these cells or their clonal progeny reconstitute well-differentiated myocardium",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-ckit-regeneration",
+        extractor=EXTRACTOR_BACKTEST, also_derived_from=[csc],
+    )
+    mk_claim(
+        recs, "claim-anversa-human",
+        text="Human c-kit+ cardiac stem cells, injected into infarcted myocardium, generate a chimeric "
+             "heart containing new human myocardium (Bearzi et al. 2007) — a human-tissue corroboration.",
+        subject=csc, source_slug="src-bearzi-2007", excerpt=bearzi,
+        quote="hCSCs generate a chimeric heart, which contains human myocardium",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-ckit-regeneration",
+        extractor=EXTRACTOR_BACKTEST, also_derived_from=[csc],
+    )
+    mk_claim(
+        recs, "claim-anversa-scipio",
+        text="In the SCIPIO phase-1 trial, intracoronary infusion of autologous c-kit+ cardiac stem "
+             "cells improved left-ventricular systolic function and reduced infarct size in patients "
+             "(Bolli et al. 2011) — the clinical corroboration.",
+        subject=csc, source_slug="src-bolli-2011", excerpt=bolli,
+        quote="intracoronary infusion of autologous CSCs is effective in improving LV systolic function "
+              "and reducing infarct size",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-ckit-regeneration",
+        extractor=EXTRACTOR_BACKTEST, also_derived_from=[csc],
+    )
+    mk_claim(
+        recs, "claim-anversa-caduceus",
+        text="In the CADUCEUS trial, intracoronary infusion of cardiosphere-derived cells increased "
+             "viable heart mass after myocardial infarction (Makkar et al. 2012) — a regeneration signal "
+             "characterized independently of the Anversa c-kit+ line.",
+        subject="ent-cdc-marban", source_slug="src-makkar-2012", excerpt=makkar,
+        quote="increases in viable heart mass",
+        label="ENTAILS", rung="L5", lr=4.0, polarity="supports-cardiac-regeneration",
+        extractor=EXTRACTOR_BACKTEST, also_derived_from=["ent-cdc-marban"],
+    )
+
+
+def build_poldermans(recs: dict[str, dict]) -> None:
+    """Worked example #7 — the Poldermans/DECREASE perioperative beta-blocker cascade (dev/cairn#15).
+
+    The eggs node type (a shared research program / database at the root, found without any single
+    origin paper) carrying an institutional-misconduct meta-fact — and the only case in the corpus
+    where the honest counterfactual REVERSES the conclusion rather than just deflating the votes.
+
+        ent-decrease-program   (the Poldermans/Erasmus DECREASE trials + vascular-surgery database;
+              ^     ^     ^      a 2011-2012 Erasmus MC investigation found FABRICATED/FICTITIOUS data)
+              |     |     |
+        claim-decrease-1   claim-decrease-boersma   claim-decrease-4
+        (DECREASE-I,       (Boersma 2001 JAMA,      (DECREASE-IV,
+        Poldermans 1999)   the screening cohort)    Dunkelgrun 2009)
+
+    Three pro-benefit findings for perioperative beta-blockade — a landmark RCT, a large cohort, and
+    a second RCT — that look like an evidence base but are ONE research program subsequently found to
+    rest on fabricated data. `cairn intersect` REFUSES the trio and names ent-decrease-program.
+
+    HONEST SCOPE LIMIT. The refusal is about corroboration-COUNTING. The contrast is the sharpest in
+    the corpus: POISE (Devereaux et al. 2008, Lancet; n=8351) is a large independent RCT,
+    upstream-disjoint from DECREASE — so a DECREASE benefit claim and the POISE result COMBINE. And
+    once the fabricated lineage is removed, the pooled effect FLIPS SIGN: Bouri et al. 2014's
+    DECREASE-excluded "secure trials" meta finds a 27% mortality INCREASE. Removing the fraud does not
+    merely weaken the signal — it reverses benefit to harm.
+    """
+    poldermans = load_excerpt("poldermans-1999")
+    boersma = load_excerpt("boersma-2001")
+    dunkelgrun = load_excerpt("dunkelgrun-2009")
+    devereaux = load_excerpt("devereaux-2008")
+    bouri = load_excerpt("bouri-2014")
+
+    # --- the ROOT: the compromised research program (no single origin paper; the shared apparatus). ---
+    recs["ent-decrease-program"] = mk(
+        "ent-decrease-program", "epi:Entity",
+        {
+            "name": "The Poldermans/Erasmus DECREASE perioperative beta-blocker research program",
+            "aliases": ["DECREASE family of trials", "the DECREASE trials", "Erasmus MC vascular-surgery database"],
+            "kind": "ResearchProgram",
+            "statement": "The family of DECREASE (Dutch Echocardiographic Cardiac Risk Evaluation Applying "
+                         "Stress Echocardiography) trials and the associated Erasmus MC vascular-surgery "
+                         "screening database, run by the Poldermans group (1999-2011), which reported "
+                         "perioperative beta-blockade sharply reduces cardiac death and myocardial infarction.",
+            "note": "The shared upstream of the perioperative beta-blocker evidence base. META-FACT: a "
+                    "2011-2012 Erasmus MC investigation found the DECREASE trials contained "
+                    "fabricated/fictitious data (scientific misconduct); the corrective literature "
+                    "(Bouri et al. 2014) treats 'the DECREASE family of trials, the bedrock of evidence "
+                    "for this' as 'no longer secure'. This is an INSTITUTIONAL misconduct finding, not a "
+                    "per-node retraction stamp — cairn refuses on the shared-provenance topology "
+                    "regardless of which individual papers carry a retraction notice.",
+            "verification": "L1",
+        },
+        derived_from=[],
+    )
+    prog = recs["ent-decrease-program"]["id"]
+
+    for slug, excerpt, sha_key, title, authors, venue, year, doi, pmid, role in [
+        ("src-poldermans-1999", poldermans, "poldermans-1999",
+         "The effect of bisoprolol on perioperative mortality and myocardial infarction in high-risk "
+         "patients undergoing vascular surgery",
+         "Poldermans D, Boersma E, Bax JJ, Thomson IR, van de Ven LL, ... (DECREASE Study Group)",
+         "New England Journal of Medicine", 1999, "10.1056/NEJM199912093412402", "10588963",
+         "DECREASE-I — the landmark RCT (bisoprolol cut cardiac death/MI from 34% to 3.4%); the origin of "
+         "the perioperative beta-blocker recommendation"),
+        ("src-boersma-2001", boersma, "boersma-2001",
+         "Predictors of cardiac events after major vascular surgery: role of clinical characteristics, "
+         "dobutamine echocardiography, and beta-blocker therapy",
+         "Boersma E, Poldermans D, Bax JJ, Steyerberg EW, ... (DECREASE screening cohort)",
+         "JAMA", 2001, "10.1001/jama.285.14.1865", "11308400",
+         "the DECREASE screening-cohort study (beta-blocker recipients had far fewer cardiac events); a "
+         "hugely-cited driver of guideline adoption, from the same Erasmus/Poldermans vascular-surgery database"),
+        ("src-dunkelgrun-2009", dunkelgrun, "dunkelgrun-2009",
+         "Bisoprolol and fluvastatin for the reduction of perioperative cardiac mortality and myocardial "
+         "infarction in intermediate-risk patients undergoing noncardiovascular surgery: a randomized "
+         "controlled trial (DECREASE-IV)",
+         "Dunkelgrun M, Boersma E, Schouten O, ... Poldermans D (DECREASE-IV Study Group)",
+         "Annals of Surgery", 2009, "10.1097/SLA.0b013e3181b4c7e8", "19474688",
+         "DECREASE-IV — the confirmatory RCT extending the benefit claim to intermediate-risk patients"),
+    ]:
+        recs[slug] = mk(
+            slug, "epi:Source",
+            {
+                "title": title, "authors": authors, "venue": venue, "year": year, "doi": doi, "pmid": pmid,
+                "excerpt_kind": "abstract (version of record)",
+                "excerpt": excerpt, "excerpt_sha256": SOURCES[sha_key]["sha256"],
+                "retrieval": {
+                    "fetched_at": "2026-07-15",
+                    "method": f"NCBI E-utilities efetch (PMID {pmid}); AbstractText via itertext()",
+                    "sources": [f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id={pmid}&rettype=abstract&retmode=xml"],
+                },
+                "verification": "L1",
+                "role": role,
+            },
+            derived_from=[prog], method="ingest",
+        )
+
+    # --- the disjoint contrast lineage: POISE, a large independent RCT. ---
+    recs["ent-poise-trial"] = mk(
+        "ent-poise-trial", "epi:Entity",
+        {
+            "name": "The POISE perioperative beta-blocker trial",
+            "aliases": ["POISE", "PeriOperative ISchemic Evaluation"],
+            "kind": "Trial",
+            "statement": "A large (n=8351), multinational, placebo-controlled RCT of extended-release "
+                         "metoprolol in non-cardiac surgery (Devereaux et al. 2008), independent of the "
+                         "Poldermans/DECREASE program.",
+            "note": "A DISJOINT upstream from the DECREASE program: a different investigator group, a "
+                    "different trial, no derivation from the Erasmus database. Independence on the "
+                    "provenance dimension holds — which is why the contrast COMBINES. POISE found metoprolol "
+                    "cut myocardial infarction but INCREASED total mortality and stroke.",
+            "verification": "L1",
+        },
+        derived_from=[],
+    )
+    recs["src-devereaux-2008"] = mk(
+        "src-devereaux-2008", "epi:Source",
+        {
+            "title": "Effects of extended-release metoprolol succinate in patients undergoing non-cardiac "
+                     "surgery (POISE trial): a randomised controlled trial",
+            "authors": "Devereaux PJ, Yang H, Yusuf S, ... (POISE Study Group)",
+            "venue": "Lancet", "year": 2008, "volume": "371", "issue": "9627", "pages": "1839-1847",
+            "doi": "10.1016/S0140-6736(08)60601-7", "pmid": "18479744",
+            "excerpt_kind": "abstract (version of record)",
+            "excerpt": devereaux, "excerpt_sha256": SOURCES["devereaux-2008"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-15",
+                "method": "NCBI E-utilities efetch (PMID 18479744); AbstractText via itertext()",
+                "sources": ["https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=18479744&rettype=abstract&retmode=xml"],
+            },
+            "verification": "L1",
+            "role": "the genuinely INDEPENDENT line (the combinable contrast) — a large RCT disjoint from "
+                    "the DECREASE program; it points the OTHER way (metoprolol increased mortality)",
+        },
+        derived_from=[recs["ent-poise-trial"]["id"]], method="ingest",
+    )
+
+    # --- the DECREASE-excluded "secure trials" meta: the published SIGN-FLIP. ---
+    recs["ent-secure-trials"] = mk(
+        "ent-secure-trials", "epi:Entity",
+        {
+            "name": "The DECREASE-excluded 'secure trials' evidence base",
+            "aliases": ["Bouri 2014 secure-trials meta"],
+            "kind": "EvidenceSet",
+            "statement": "The nine secure (non-DECREASE) randomised trials of perioperative beta-blockade "
+                         "meta-analysed by Bouri et al. 2014, after the DECREASE family was deemed insecure.",
+            "note": "Disjoint from the DECREASE program by construction (it EXCLUDES it). Its result is the "
+                    "counterfactual: with the fabricated lineage removed, initiation of perioperative "
+                    "beta-blockade causes a 27% INCREASE in 30-day mortality — the sign flips.",
+            "verification": "L1",
+        },
+        derived_from=[],
+    )
+    recs["src-bouri-2014"] = mk(
+        "src-bouri-2014", "epi:Source",
+        {
+            "title": "Meta-analysis of secure randomised controlled trials of beta-blockade to prevent "
+                     "perioperative death in non-cardiac surgery",
+            "authors": "Bouri S, Shun-Shin MJ, Cole GD, Mayet J, Francis DP",
+            "venue": "Heart", "year": 2014, "volume": "100", "issue": "6", "pages": "456-464",
+            "doi": "10.1136/heartjnl-2013-304262", "pmid": "23904357",
+            "excerpt_kind": "abstract (version of record)",
+            "excerpt": bouri, "excerpt_sha256": SOURCES["bouri-2014"]["sha256"],
+            "retrieval": {
+                "fetched_at": "2026-07-15",
+                "method": "NCBI E-utilities efetch (PMID 23904357); AbstractText via itertext()",
+                "sources": ["https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=23904357&rettype=abstract&retmode=xml"],
+            },
+            "verification": "L1",
+            "role": "the published sign-flip: the DECREASE-excluded 'secure trials' meta finds a 27% "
+                    "mortality INCREASE — the honest counterfactual to the DECREASE benefit lineage",
+        },
+        derived_from=[recs["ent-secure-trials"]["id"]], method="ingest",
+    )
+
+    mk_claim(
+        recs, "claim-decrease-1",
+        text="DECREASE-I (Poldermans et al. 1999) reported that perioperative bisoprolol reduces death "
+             "from cardiac causes and nonfatal myocardial infarction in high-risk vascular-surgery patients.",
+        subject="ent-decrease-program", source_slug="src-poldermans-1999", excerpt=poldermans,
+        quote="Bisoprolol reduces the perioperative incidence of death from cardiac causes and nonfatal "
+              "myocardial infarction in high-risk patients",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-perioperative-betablockade",
+        extractor=EXTRACTOR_BACKTEST, also_derived_from=["ent-decrease-program"],
+    )
+    mk_claim(
+        recs, "claim-decrease-boersma",
+        text="In the Erasmus DECREASE screening cohort (Boersma et al. 2001), patients receiving "
+             "beta-blockers had a lower risk of perioperative cardiac complications.",
+        subject="ent-decrease-program", source_slug="src-boersma-2001", excerpt=boersma,
+        quote="patients receiving beta-blockers had a lower risk of cardiac complications",
+        label="ENTAILS", rung="L5", lr=4.0, polarity="supports-perioperative-betablockade",
+        extractor=EXTRACTOR_BACKTEST, also_derived_from=["ent-decrease-program"],
+    )
+    mk_claim(
+        recs, "claim-decrease-4",
+        text="DECREASE-IV (Dunkelgrun et al. 2009) reported that perioperative bisoprolol significantly "
+             "reduced 30-day cardiac death and nonfatal myocardial infarction in intermediate-risk patients.",
+        subject="ent-decrease-program", source_slug="src-dunkelgrun-2009", excerpt=dunkelgrun,
+        quote="Bisoprolol was associated with a significant reduction of 30-day cardiac death and nonfatal MI",
+        label="ENTAILS", rung="L5", lr=5.0, polarity="supports-perioperative-betablockade",
+        extractor=EXTRACTOR_BACKTEST, also_derived_from=["ent-decrease-program"],
+    )
+    # the contrast: a genuinely independent RCT (disjoint upstream), pointing the other way
+    mk_claim(
+        recs, "claim-poise",
+        text="The POISE trial (Devereaux et al. 2008) found that perioperative metoprolol led to more "
+             "deaths than placebo in patients undergoing non-cardiac surgery.",
+        subject="ent-poise-trial", source_slug="src-devereaux-2008", excerpt=devereaux,
+        quote="there were more deaths in the metoprolol group than in the placebo group",
+        label="ENTAILS", rung="L5", polarity="refutes-perioperative-betablockade",
+        extractor=EXTRACTOR_BACKTEST, also_derived_from=["ent-poise-trial"],
+    )
+    # the sign-flip counterfactual (documented; not part of the laundered/contrast verdicts)
+    mk_claim(
+        recs, "claim-bouri-secure",
+        text="Meta-analysing only the secure (non-DECREASE) trials, Bouri et al. 2014 found that "
+             "initiating perioperative beta-blockade caused a 27% increase in 30-day all-cause mortality.",
+        subject="ent-secure-trials", source_slug="src-bouri-2014", excerpt=bouri,
+        quote="caused a 27% risk increase in 30-day all-cause mortality",
+        label="ENTAILS", rung="L5", polarity="refutes-perioperative-betablockade",
+        extractor=EXTRACTOR_BACKTEST, also_derived_from=["ent-secure-trials"],
+    )
+
+
 def main() -> int:
     worobey_abstract = load_excerpt("worobey")
     pekar_abstract = load_excerpt("pekar")
@@ -1469,6 +2384,10 @@ def main() -> int:
     build_cern(recs)
     # --- the 4th worked example: the decoupling spike (Alzheimer's Aβ*56 cascade) ---
     build_amyloid(recs)
+    # --- the backtest-scaling imports (dev/cairn#15): three more known-answer cases ---
+    build_ivermectin(recs)   # #5 — one fabricated primary, highest fan-out
+    build_anversa(recs)      # #6 — single-lab collapse + literal shared cell-prep (SCIPIO)
+    build_poldermans(recs)   # #7 — institutional-misconduct program; the counterfactual flips sign
 
     # --- self-verify before writing: every case's declared structure must actually hold ---
     store = {r["id"]: r for r in recs.values()}

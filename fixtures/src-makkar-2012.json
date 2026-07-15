@@ -1,0 +1,44 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:1ddhznruvACrUZxTgKmLDL1ciN7mtI_FlJPNjRHU-A0",
+  "assertion": {
+    "title": "Intracoronary cardiosphere-derived cells for heart regeneration after myocardial infarction (CADUCEUS): a prospective, randomised phase 1 trial",
+    "authors": "Makkar RR, Smith RR, Cheng K, Malliaras K, ... Marbán E",
+    "venue": "Lancet",
+    "year": 2012,
+    "volume": "379",
+    "issue": "9819",
+    "pages": "895-904",
+    "doi": "10.1016/S0140-6736(12)60195-0",
+    "pmid": "22336189",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "BACKGROUND: Cardiosphere-derived cells (CDCs) reduce scarring after myocardial infarction, increase viable myocardium, and boost cardiac function in preclinical models. We aimed to assess safety of such an approach in patients with left ventricular dysfunction after myocardial infarction.\nMETHODS: In the prospective, randomised CArdiosphere-Derived aUtologous stem CElls to reverse ventricUlar dySfunction (CADUCEUS) trial, we enrolled patients 2-4 weeks after myocardial infarction (with left ventricular ejection fraction of 25-45%) at two medical centres in the USA. An independent data coordinating centre randomly allocated patients in a 2:1 ratio to receive CDCs or standard care. For patients assigned to receive CDCs, autologous cells grown from endomyocardial biopsy specimens were infused into the infarct-related artery 1·5-3 months after myocardial infarction. The primary endpoint was proportion of patients at 6 months who died due to ventricular tachycardia, ventricular fibrillation, or sudden unexpected death, or had myocardial infarction after cell infusion, new cardiac tumour formation on MRI, or a major adverse cardiac event (MACE; composite of death and hospital admission for heart failure or non-fatal recurrent myocardial infarction). We also assessed preliminary efficacy endpoints on MRI by 6 months. Data analysers were masked to group assignment. This study is registered with ClinicalTrials.gov, NCT00893360.\nFINDINGS: Between May 5, 2009, and Dec 16, 2010, we randomly allocated 31 eligible participants of whom 25 were included in a per-protocol analysis (17 to CDC group and eight to standard of care). Mean baseline left ventricular ejection fraction (LVEF) was 39% (SD 12) and scar occupied 24% (10) of left ventricular mass. Biopsy samples yielded prescribed cell doses within 36 days (SD 6). No complications were reported within 24 h of CDC infusion. By 6 months, no patients had died, developed cardiac tumours, or MACE in either group. Four patients (24%) in the CDC group had serious adverse events compared with one control (13%; p=1·00). Compared with controls at 6 months, MRI analysis of patients treated with CDCs showed reductions in scar mass (p=0·001), increases in viable heart mass (p=0·01) and regional contractility (p=0·02), and regional systolic wall thickening (p=0·015). However, changes in end-diastolic volume, end-systolic volume, and LVEF did not differ between groups by 6 months.\nINTERPRETATION: We show intracoronary infusion of autologous CDCs after myocardial infarction is safe, warranting the expansion of such therapy to phase 2 study. The unprecedented increases we noted in viable myocardium, which are consistent with therapeutic regeneration, merit further assessment of clinical outcomes.\nFUNDING: US National Heart, Lung and Blood Institute and Cedars-Sinai Board of Governors Heart Stem Cell Center.",
+    "excerpt_sha256": "b6de36d79cb6846b0aa05b1b46fe544d295da422570b1c41b2019fafe433e549",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 22336189); AbstractText via itertext()",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=22336189&rettype=abstract&retmode=xml"
+      ]
+    },
+    "verification": "L1",
+    "role": "the genuinely INDEPENDENT line (the combinable contrast) — cardiosphere-derived cells from a different lab, cell type, and preparation; disjoint upstream from the Anversa CSC"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:TlnFrPbq3mjK5RZWa4rHt6a0uolEiTLb9FEMEpF3n1g"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "d1a8fe003fc26776111089e73cfa726dd95dca31ba9a3bb20b67e694d7baf91e61c9b6e1cb7308413748d033a02772057c094144abd8f9ba201e085ff3828d0a",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

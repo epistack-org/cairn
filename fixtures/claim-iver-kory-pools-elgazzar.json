@@ -1,0 +1,37 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:iVY__sYu9j018dd_nQRqBVBwUrgIcDcIZNFxAX6YRcw",
+  "assertion": {
+    "text": "The Kory et al. 2021 review lists Elgazzar's Research Square preprint among the clinical studies it assesses — citing the exact withdrawn-preprint identifier.",
+    "subject": "tt:zn-HIfSTzYAeNckcSNmxg220MorXf7xsU9zez4Znsi0",
+    "grounding": {
+      "source": "tt:YvSXWFtPp5Vm-Gs6A3rGke8C9TpNlS1_hms91UDXB7s",
+      "char_span": [
+        2958,
+        2975
+      ],
+      "quote": "Elgazzar A, Egypt",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "bd06c3d4a16e11ce3fc472514583e42a83d9779ea8493d1ca5c5cc93f6aa2f28"
+    },
+    "verification": "L5"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:YvSXWFtPp5Vm-Gs6A3rGke8C9TpNlS1_hms91UDXB7s"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "36e655c9e9090e74d4c8abb4700d28afa579f9f29a80bdec816d4fee9386cf4113b215e51d1c6ef58e9191ee67f33b40007259aec9cf4bd00ebe80b38eaa5b01",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

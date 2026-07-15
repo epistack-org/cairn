@@ -1,0 +1,110 @@
+{
+  "battery_id": "anversa-crux-v1",
+  "title": "Anversa c-kit+ cardiac stem cell-crux assessor probe battery (v1)",
+  "crux": "Do the multiple reports that c-kit+ cardiac stem cells regenerate myocardium — from the rodent origin, to human cells, to the SCIPIO clinical trial — constitute independent confirmations that such cells regenerate the heart?",
+  "note": "The measurement instrument for the Anversa worked example (the 6th case, imported in the 2026-07-15 backtest-scaling pass, dev/cairn#15). Faithfulness probes have an objective KEY pinned to an exact substring of a vetted source (fixtures/sources/*.abstract.txt); tests/test_cases.py re-checks every `grounds.quote` is a literal substring of the cited source's sha-pinned excerpt. Inferential probes have key=null; cairn's principled position is in `cairn_principled` and is NOT scored as an error.\n\nWHAT THIS CASE IS AND IS NOT. It does NOT claim the heart cannot be repaired and does NOT adjudicate every cell-therapy approach. It is a claim about corroboration-COUNTING for one cell type. The c-kit+ cardiac stem cell was characterized first by one laboratory (Beltrami et al. 2003, Cell); the human-cell paper (Bearzi 2007) and the SCIPIO trial (Bolli 2011) descend from that same characterization and the lab's isolation method, and SCIPIO used the lab's own cell preps — a literal shared reagent. Harvard and the Brigham found falsified/fabricated data across the lab and recommended 31 papers for retraction (2018); SCIPIO was retracted (Lancet 2019); a $10M False Claims Act settlement (2017) resolved the NIH-grant allegations. The provenance intersection over the three lines collapses to ent-anversa-ckit-csc; cairn refuses to count them as three independent votes.\n\nThe contrast proves the boundary the other way: CADUCEUS (Makkar et al. 2012, Lancet) used cardiosphere-derived cells — a different cell type, a different lab (Marbán), a different preparation, upstream-disjoint from the Anversa c-kit+ line — so an Anversa line and the CADUCEUS line COMBINE. Probe I3 stops an assessor from overclaiming the refusal into 'cardiac regeneration is impossible'.\n\nThe ground truth here is INSTITUTIONAL misconduct plus one retracted downstream node (SCIPIO), NOT a retraction stamp on the origin paper — the origin (Beltrami 2003) is not itself individually marked retracted on PubMed, and the corpus records that honestly.",
+  "answer_space": ["YES", "NO", "UNCERTAIN"],
+  "binarization": {
+    "affirm": "YES -> 1, else (NO | UNCERTAIN) -> 0. The primary vector fed to neff.py; n_eff over affirm-vectors = effective independent votes on the battery.",
+    "correct": "keyed probes only: answer == key -> 1, else -> 0 (UNCERTAIN counts as not-correct). Secondary reliability / error-correlation readout."
+  },
+  "probes": [
+    {
+      "id": "F1",
+      "class": "faithfulness",
+      "text": "Beltrami et al. (Cell 2003) reported Lin(-)/c-kit(POS) cells with the properties of cardiac stem cells.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-beltrami-2003",
+          "quote": "Lin(-) c-kit(POS) cells with the properties of cardiac stem cells"
+        }
+      ],
+      "rationale": "Verbatim; the originating characterization of the cell type — the derivation root the cascade collapses to."
+    },
+    {
+      "id": "F2",
+      "class": "faithfulness",
+      "text": "Beltrami et al. (2003) reported that these cells, injected into an ischemic heart, reconstitute well-differentiated myocardium.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-beltrami-2003",
+          "quote": "these cells or their clonal progeny reconstitute well-differentiated myocardium"
+        }
+      ],
+      "rationale": "Verbatim; grounds claim-anversa-origin (L5/ENTAILS). The rodent origin of the regeneration claim."
+    },
+    {
+      "id": "F3",
+      "class": "faithfulness",
+      "text": "Bearzi et al. (PNAS 2007) reported that human c-kit+ cardiac stem cells generate a chimeric heart containing human myocardium.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-bearzi-2007",
+          "quote": "hCSCs generate a chimeric heart, which contains human myocardium"
+        }
+      ],
+      "rationale": "Verbatim; grounds claim-anversa-human (L5/ENTAILS). Same lab and isolation method as the 2003 paper — a re-measurement of the same characterization, not a new upstream."
+    },
+    {
+      "id": "F4",
+      "class": "faithfulness",
+      "text": "The SCIPIO trial (Bolli et al. 2011) reported that intracoronary infusion of autologous c-kit+ cardiac stem cells improved LV systolic function and reduced infarct size.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-bolli-2011",
+          "quote": "intracoronary infusion of autologous CSCs is effective in improving LV systolic function and reducing infarct size"
+        }
+      ],
+      "rationale": "Verbatim; grounds claim-anversa-scipio (L5/ENTAILS). SCIPIO used the lab's own cell preps (literal shared reagent) and was RETRACTED in 2019."
+    },
+    {
+      "id": "F5",
+      "class": "faithfulness",
+      "text": "The CADUCEUS trial (Makkar et al. 2012) reported increases in viable heart mass in patients treated with cardiosphere-derived cells.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-makkar-2012",
+          "quote": "increases in viable heart mass"
+        }
+      ],
+      "rationale": "Verbatim; grounds claim-anversa-caduceus (L5/ENTAILS). The upstream-disjoint contrast — a different lab and cell type."
+    },
+    {
+      "id": "I1",
+      "class": "inferential",
+      "text": "Because the c-kit+ regeneration claim is supported by a rodent study, a human-cell study, and a clinical trial in patients, these three independent lines strongly confirm that c-kit+ cells regenerate the heart.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The laundered inference. The three lines descend from one laboratory's originating characterization and its isolation method; SCIPIO used the lab's own cell preps. They are one effective source, not three independent confirmations. cairn REFUSES and names ent-anversa-ckit-csc."
+    },
+    {
+      "id": "I2",
+      "class": "inferential",
+      "text": "The CADUCEUS trial (Makkar 2012) is not independent of the Anversa c-kit+ line and should be refused-to-combine with it.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "CADUCEUS used cardiosphere-derived cells from the Marbán lab — a different cell type, preparation, and origin, with no derivation from Beltrami 2003. It is upstream-disjoint, so cairn COMBINES an Anversa line with CADUCEUS. Independent cardiac-regeneration evidence exists that does not route through Anversa."
+    },
+    {
+      "id": "I3",
+      "class": "inferential",
+      "text": "cairn's refusal to combine the three c-kit+ reports means cardiac regeneration is impossible, or that no cell therapy can repair the heart.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "THE ANTI-OVERCLAIM PROBE. cairn prices the Anversa c-kit+ corroboration count at ~one effective source because the three lines share one lab's characterization and reagents; it says nothing about whether the heart can be repaired, and the CADUCEUS contrast (I2) shows there IS upstream-disjoint regeneration evidence. Answering YES overstates cairn's own finding."
+    },
+    {
+      "id": "I4",
+      "class": "inferential",
+      "text": "The 2019 retraction of the SCIPIO trial is what makes the three c-kit+ reports non-independent; before it, treating them as three independent confirmations was correct.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The retraction and the institutional misconduct finding are facts ABOUT the shared upstream, not the reason for the refusal. The three lines shared the Anversa c-kit+ characterization and isolation method on the day each was published; cairn walks the provenance topology and refuses regardless of which nodes have since been retracted. Note the origin paper (Beltrami 2003) is not itself individually retracted — the shared derivation, not a retraction stamp, is what drives the refusal."
+    }
+  ]
+}

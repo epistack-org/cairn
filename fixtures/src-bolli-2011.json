@@ -1,0 +1,50 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:G_LlQDIIDJYTTlzvVv_pmMUs8Ag0cugKu5Rhh5OkiDQ",
+  "assertion": {
+    "title": "Cardiac stem cells in patients with ischaemic cardiomyopathy (SCIPIO): initial results of a randomised phase 1 trial",
+    "authors": "Bolli R, Chugh AR, D'Amario D, ... Leri A, Kajstura J, Anversa P",
+    "venue": "Lancet",
+    "year": 2011,
+    "volume": "378",
+    "issue": "9806",
+    "pages": "1847-1857",
+    "doi": "10.1016/S0140-6736(11)61590-0",
+    "pmid": "22088800",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "BACKGROUND: c-kit-positive, lineage-negative cardiac stem cells (CSCs) improve post-infarction left ventricular (LV) dysfunction when administered to animals. We undertook a phase 1 trial (Stem Cell Infusion in Patients with Ischemic cardiOmyopathy [SCIPIO]) of autologous CSCs for the treatment of heart failure resulting from ischaemic heart disease.\nMETHODS: In stage A of the SCIPIO trial, patients with post-infarction LV dysfunction (ejection fraction [EF] ≤40%) before coronary artery bypass grafting were consecutively enrolled in the treatment and control groups. In stage B, patients were randomly assigned to the treatment or control group in a 2:3 ratio by use of a computer-generated block randomisation scheme. 1 million autologous CSCs were administered by intracoronary infusion at a mean of 113 days (SE 4) after surgery; controls were not given any treatment. Although the study was open label, the echocardiographic analyses were masked to group assignment. The primary endpoint was short-term safety of CSCs and the secondary endpoint was efficacy. A per-protocol analysis was used. This study is registered with ClinicalTrials.gov, number NCT00474461.\nFINDINGS: This study is still in progress. 16 patients were assigned to the treatment group and seven to the control group; no CSC-related adverse effects were reported. In 14 CSC-treated patients who were analysed, LVEF increased from 30·3% (SE 1·9) before CSC infusion to 38·5% (2·8) at 4 months after infusion (p=0·001). By contrast, in seven control patients, during the corresponding time interval, LVEF did not change (30·1% [2·4] at 4 months after CABG vs 30·2% [2·5] at 8 months after CABG). Importantly, the salubrious effects of CSCs were even more pronounced at 1 year in eight patients (eg, LVEF increased by 12·3 ejection fraction units [2·1] vs baseline, p=0·0007). In the seven treated patients in whom cardiac MRI could be done, infarct size decreased from 32·6 g (6·3) by 7·8 g (1·7; 24%) at 4 months (p=0·004) and 9·8 g (3·5; 30%) at 1 year (p=0·04).\nINTERPRETATION: These initial results in patients are very encouraging. They suggest that intracoronary infusion of autologous CSCs is effective in improving LV systolic function and reducing infarct size in patients with heart failure after myocardial infarction, and warrant further, larger, phase 2 studies.\nFUNDING: University of Louisville Research Foundation and National Institutes of Health.",
+    "excerpt_sha256": "33bab0ee2cd8b5cbe3bad66cee4206c660d53b4b2ed6ba2154d5fffe9cd635fa",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 22088800); AbstractText via itertext()",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=22088800&rettype=abstract&retmode=xml"
+      ]
+    },
+    "retraction": {
+      "status": "RETRACTED",
+      "notice": "Retraction: Lancet 2019 Mar 16;393(10176):1084 (10.1016/S0140-6736(19)30542-2), PMID 30894259",
+      "expression_of_concern": "Expression of Concern: Lancet 2014 Apr 12;383(9925):1279 (10.1016/S0140-6736(14)60608-5), PMID 24725564",
+      "note": "SCIPIO used autologous c-kit+ CSCs prepared per the Anversa-lab method — a literal shared-cell-prep dependency on ent-anversa-ckit-csc. Recorded as a fact about the source; the refusal does not depend on it — the trial shares this upstream regardless."
+    },
+    "verification": "L1",
+    "role": "the clinical line — the phase-1 SCIPIO trial (RETRACTED 2019). Its cells were the lab's own c-kit+ CSC preps: the literal shared reagent, not an independent confirmation"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:aUHKM9pH46JNkne2HslTLVkKe_njjK_N2PWDkiYstuU"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "26bf9b30b60bb8eb28898be90a6c17d78a53d3126d8eb8a318352bd61967fc5d1b1b9e84101375a32095651076054170ec12c039ceb1c0027f3451d0bb47220a",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

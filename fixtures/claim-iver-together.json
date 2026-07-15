@@ -1,0 +1,38 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:2hhgOW7mUJNbbZrh5hzfTMe_nyp5Lp3busn1ceZV_3w",
+  "assertion": {
+    "text": "The TOGETHER randomized controlled trial (Reis et al. 2022, NEJM) found that early ivermectin treatment did not reduce COVID-19 hospitalization — independent evidence that does not route through the Elgazzar trial.",
+    "subject": "tt:pLVaxW2wgxs8mVGLTy-CPvSdoduKgiPXXOc1lpY1SEw",
+    "grounding": {
+      "source": "tt:fuBH-MR1uQ-v0WWnAI9eWj1j39KG1V2fZv-cE9jkmfQ",
+      "char_span": [
+        2014,
+        2141
+      ],
+      "quote": "Treatment with ivermectin did not result in a lower incidence of medical admission to a hospital due to progression of Covid-19",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "6908794567add22f5329b21fb4382008ab52104c7877b22fd3d1bcb597b1ea3a"
+    },
+    "verification": "L5",
+    "polarity": "no-ivermectin-benefit"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:fuBH-MR1uQ-v0WWnAI9eWj1j39KG1V2fZv-cE9jkmfQ"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "78c065b42ddc95f067d5e2dd696efea635e5bcf0d035fbab28cffe82348d7e10eb8ffe3e5aa95a3c8dd3ca4ea1eb8f700829024f266317b0a24895effba9cb05",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

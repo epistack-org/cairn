@@ -1,0 +1,39 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:GbDcgu_xzfhNszHzk441awfo0ZeyA2lPb_qyHsQUWEU",
+  "assertion": {
+    "text": "Meta-analysing only the secure (non-DECREASE) trials, Bouri et al. 2014 found that initiating perioperative beta-blockade caused a 27% increase in 30-day all-cause mortality.",
+    "subject": "tt:6og_K_TvcS1mgkpGBbpr8TOoKzTtWfuE5R74BGGGoZk",
+    "grounding": {
+      "source": "tt:76M6fpvpdVrcd1I4erCxhutOn6e3GWOJFgxffeS3MEM",
+      "char_span": [
+        974,
+        1030
+      ],
+      "quote": "caused a 27% risk increase in 30-day all-cause mortality",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "8a502e70f5980eee457e6c6a8fa875bfbcb4f3edf1154822813a0fa46ace66ba"
+    },
+    "verification": "L5",
+    "polarity": "refutes-perioperative-betablockade"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:76M6fpvpdVrcd1I4erCxhutOn6e3GWOJFgxffeS3MEM",
+      "tt:6og_K_TvcS1mgkpGBbpr8TOoKzTtWfuE5R74BGGGoZk"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "d74f6ca5937ff1bd288f119af52f791ee00c4203ffdb7375a2521ee94ce0a5bf840af3ee75032173bd424006614ed1eafa1462d8895e4cd3d0532e1063184f05",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

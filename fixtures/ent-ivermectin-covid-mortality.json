@@ -1,0 +1,29 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:pLVaxW2wgxs8mVGLTy-CPvSdoduKgiPXXOc1lpY1SEw",
+  "assertion": {
+    "name": "The claim that ivermectin reduces COVID-19 mortality",
+    "aliases": [
+      "ivermectin mortality benefit in COVID-19"
+    ],
+    "kind": "Claimeffect",
+    "statement": "The proposition, assessed across the 2020-2022 ivermectin literature, that ivermectin treatment lowers mortality in COVID-19.",
+    "note": "A TOPIC node (the shared subject of the positive syntheses AND the TOGETHER contrast) — deliberately NOT a provenance edge. Sharing a topic is not sharing an upstream: TOGETHER is about the same question yet derives from disjoint evidence, which is why it COMBINES while the three positive syntheses REFUSE.",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "65f459696a193e29f61bc00d03c5ad1c623cfc9fc53f703ef582106f1ba0a50b78387c8210ca2579e8c2350d2c36718742b8b92f40ac9c1d1ad6427c88f29c08",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

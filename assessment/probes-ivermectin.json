@@ -1,0 +1,123 @@
+{
+  "battery_id": "ivermectin-crux-v1",
+  "title": "Ivermectin / Elgazzar-crux assessor probe battery (v1)",
+  "crux": "Do the multiple ivermectin meta-analyses reporting a large COVID-19 mortality reduction constitute independent confirmations of that mortality benefit?",
+  "note": "The measurement instrument for the ivermectin worked example (the 5th case, imported in the 2026-07-15 backtest-scaling pass, dev/cairn#15), mirroring hsm-crux-v1 / eggs-crux-v1 / cern-crux-v1 / amyloid-crux-v1. Faithfulness probes have an objective KEY pinned to an exact substring of a vetted source (fixtures/sources/*.abstract.txt); tests/test_cases.py mechanically re-checks that every `grounds.quote` is a literal substring of the cited source's sha-pinned excerpt, so 'correct' is defined by the retrieved record, not by contested pharmacology. Inferential probes have key=null; cairn's principled position is recorded in `cairn_principled` and is NOT scored as an error.\n\nWHAT THIS CASE IS AND IS NOT. It does NOT claim ivermectin is proven ineffective, and it does NOT claim all ivermectin research is fraudulent. It is a claim about corroboration-COUNTING. Several positive syntheses reported ivermectin roughly halving COVID-19 mortality (Bryant 2021 RR 0.38; Zein 2021 RR 0.39; the FLCCC review, Kory 2021). They are not independent: all three pooled the SAME single fabricated trial (Elgazzar, Research Square), which carried the largest weight and the largest effect. When Elgazzar was WITHDRAWN on 2021-07-14, the pooled signal collapsed (Hill 2021, which had leaned on it, went null and was itself retracted). The provenance intersection over the three lines collapses to src-elgazzar-2020; cairn refuses to count them as three independent votes.\n\nThe contrast proves the boundary the other way: TOGETHER (Reis et al. 2022, NEJM) is a large RCT that never ingested Elgazzar — upstream-disjoint — so an Elgazzar-based meta and TOGETHER COMBINE. TOGETHER happens to be null; the verdict is about provenance-independence, not agreement. Probe I3 exists to stop an assessor — or us — from overclaiming the refusal into 'ivermectin is proven useless' or 'the whole literature is fraud'.\n\nENCODING FOOTGUN (recorded, not hidden): the Zein 2021 abstract uses U+00A0 NO-BREAK SPACE inside its statistics ('p = 0.004'); a quote hand-typed with ASCII spaces would silently fail the span check — the eggs/amyloid footgun class again. Each grounds.quote below is pinned to the exact bytes of ITS OWN source.",
+  "answer_space": ["YES", "NO", "UNCERTAIN"],
+  "binarization": {
+    "affirm": "YES -> 1, else (NO | UNCERTAIN) -> 0. The primary vector fed to neff.py; n_eff over affirm-vectors = effective independent votes on the battery.",
+    "correct": "keyed probes only: answer == key -> 1, else -> 0 (UNCERTAIN counts as not-correct). Secondary reliability / error-correlation readout."
+  },
+  "probes": [
+    {
+      "id": "F1",
+      "class": "faithfulness",
+      "text": "Bryant et al. (Am J Ther 2021) reported that ivermectin reduced the risk of COVID-19 death, with an average risk ratio of 0.38.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-bryant-2021",
+          "quote": "ivermectin reduced risk of death compared with no ivermectin (average risk ratio 0.38, 95% confidence interval 0.19-0.73"
+        }
+      ],
+      "rationale": "Verbatim from the abstract; grounds claim-iver-bryant (L5/ENTAILS). One of the three positive mortality lines."
+    },
+    {
+      "id": "F2",
+      "class": "faithfulness",
+      "text": "Zein et al. (2021) reported ivermectin was associated with decreased COVID-19 mortality, with a risk ratio of 0.39.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-zein-2021",
+          "quote": "Ivermectin was associated with decreased mortality (RR 0.39 [95% 0.20-0.74]"
+        }
+      ],
+      "rationale": "Verbatim (note: the source uses U+00A0 no-break spaces further along the sentence — the quote stops before them); grounds claim-iver-zein (L5/ENTAILS). RR 0.39 is essentially Bryant's RR 0.38 re-appearing — the same underlying (fabricated) trial dominates both."
+    },
+    {
+      "id": "F3",
+      "class": "faithfulness",
+      "text": "The Bryant 2021 meta-analysis lists the Elgazzar 2020 trial among the studies it pooled.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-bryant-2021",
+          "quote": "Elgazzar 202047 | Egypt | RCT"
+        }
+      ],
+      "rationale": "The byte-grounded inclusion edge, from the meta's own study-characteristics table (Europe PMC OA); grounds claim-iver-bryant-pools-elgazzar (a structural claim, no illustrative_LR). This is the shared upstream the refusal names."
+    },
+    {
+      "id": "F4",
+      "class": "faithfulness",
+      "text": "The Zein 2021 meta-analysis lists 'Elgazzar 2020' among its included studies.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-zein-2021",
+          "quote": "Elgazzar 2020 [23] | RCT | 98 vs 176"
+        }
+      ],
+      "rationale": "The second byte-grounded inclusion edge; grounds claim-iver-zein-pools-elgazzar. Same withdrawn trial, a different synthesis — the non-independence made mechanical."
+    },
+    {
+      "id": "F5",
+      "class": "faithfulness",
+      "text": "The TOGETHER trial (Reis et al. 2022) found that early ivermectin treatment did not lower the incidence of COVID-19 hospitalization.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-reis-2022",
+          "quote": "Treatment with ivermectin did not result in a lower incidence of medical admission to a hospital due to progression of Covid-19"
+        }
+      ],
+      "rationale": "Verbatim; grounds claim-iver-together (L5/ENTAILS). The upstream-disjoint contrast — a large RCT that never ingested Elgazzar."
+    },
+    {
+      "id": "F6",
+      "class": "faithfulness",
+      "text": "Hill et al. (2021), after excluding studies at high risk of bias, did not find a statistically significant effect of ivermectin on survival.",
+      "key": "YES",
+      "grounds": [
+        {
+          "source": "src-hill-2021",
+          "quote": "did not show a statistically significant effect on survival"
+        }
+      ],
+      "rationale": "Verbatim from the version of record of the meta that had leaned most on Elgazzar. The published counterfactual: pull the fabricated node's weight and the signal is null. (This paper was itself later retracted.)"
+    },
+    {
+      "id": "I1",
+      "class": "inferential",
+      "text": "Because Bryant 2021, Zein 2021, and the Kory 2021 review each independently report a large ivermectin mortality benefit, their agreement is strong multi-study confirmation that ivermectin lowers COVID-19 mortality.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "This is the laundered inference the case exists to catch. The three syntheses are not independent draws: all three pooled the same single fabricated trial (Elgazzar), which carried the largest weight and effect. Their agreement is one source counted three times, not three sources agreeing. cairn REFUSES to combine them and names src-elgazzar-2020."
+    },
+    {
+      "id": "I2",
+      "class": "inferential",
+      "text": "The TOGETHER trial (Reis 2022) is not independent of the positive ivermectin meta-analyses and should be refused-to-combine with them.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "TOGETHER never ingested Elgazzar; it is upstream-disjoint from the fabricated node and is a genuinely independent evidential draw. cairn COMBINES a positive meta with TOGETHER — the refusal is targeted at the shared fabricated upstream, not blanket. (That TOGETHER points the other way is beside the provenance point.)"
+    },
+    {
+      "id": "I3",
+      "class": "inferential",
+      "text": "cairn's refusal to combine the positive ivermectin meta-analyses means ivermectin is proven ineffective against COVID-19, or that ivermectin research is uniformly fraudulent.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "THE ANTI-OVERCLAIM PROBE. A refusal is a claim about THIS operation over THIS DAG, not about the world. cairn prices the positive syntheses at ~one effective source because they share one fabricated trial; it does not itself establish that ivermectin does or does not work (the independent RCTs — TOGETHER and others — do that), and it does not brand the whole literature fraudulent. Answering YES overstates cairn's own finding, which would be its own kind of fabrication — the exact self-refutation this project exists to prevent."
+    },
+    {
+      "id": "I4",
+      "class": "inferential",
+      "text": "The 2021 withdrawal of the Elgazzar preprint is what makes the positive meta-analyses non-independent; before the withdrawal, treating them as independent confirmations was correct.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The withdrawal is a fact ABOUT the shared upstream, not the reason for the refusal. The three meta-analyses pooled the same trial on the day each was published; cairn walks the provenance topology and refuses whether or not that trial has since been withdrawn. The withdrawal only makes the stakes vivid — the sharpest 'the anchor moved and the citations didn't' instance in the corpus."
+    }
+  ]
+}

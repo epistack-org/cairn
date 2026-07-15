@@ -47,7 +47,7 @@ Claude-Code transcript structurally cannot produce**:
 
 ## The worked examples
 
-Cairn ships **four** vetted, span-grounded cases. In each one, several lines of evidence
+Cairn ships **seven** vetted, span-grounded cases. In each one, several lines of evidence
 look independent, are treated as independent, and **are not** — and in each one the
 refusal is mechanical, byte-checkable, and reproducible on a fresh machine.
 
@@ -57,17 +57,27 @@ refusal is mechanical, byte-checkable, and reproducible on a fresh machine.
 | **eggs-good-for-you** | 3 reassuring meta-analyses (*BMJ* 2013, *Eur J Nutr* 2021 "nearly 2 million individuals", *BMJ* 2020) | **one cohort backbone** — the same nurses & health professionals (NHS/HPFS) | **2 hops (transitive)** |
 | **cern-black-hole** | 3 collider-safety assurances (LSAG 2008, Giddings & Mangano 2008, Jaffe 2000 — *two accelerators, three author teams, eight years apart*) | **one premise** — "cosmic rays have hit astronomical bodies harder for billions of years and they're still here" | 1 hop |
 | **amyloid-abeta56** | 3 reports of Aβ*56 as a memory-impairing species (Lesné 2006 mice, Lesné 2013 human brain, Sherman 2011 the assay) | **one foundational result + one assay** — the Lesné 2006 characterization (RETRACTED 2024), carried by one lab | 1 hop |
+| **ivermectin-elgazzar** | 3 positive COVID mortality syntheses (Bryant 2021 RR 0.38, Zein 2021 RR 0.39, Kory 2021 review) | **one fabricated primary trial** — the Elgazzar preprint (WITHDRAWN 2021-07-14), pooled by all three | **2 hops (transitive)** |
+| **anversa-ckit** | 3 reports that c-kit+ cardiac stem cells regenerate the heart (Beltrami 2003 rodent, Bearzi 2007 human, Bolli 2011 SCIPIO trial) | **one lab's cell + its preps** — the Anversa characterization; SCIPIO used the lab's own cells (RETRACTED 2019) | 1 hop |
+| **poldermans-decrease** | 3 pro-benefit perioperative β-blocker findings (DECREASE-I 1999, Boersma 2001, DECREASE-IV 2009) | **one research program** — the Poldermans/Erasmus DECREASE trials, found to rest on fabricated data | 1 hop |
 
 Each case declares its structure in [`fixtures/CASES.json`](fixtures/CASES.json), and the
 build **mechanically verifies the declaration against what the detector actually finds**
-before writing a single record. "Cairn ships 4 worked examples" is a checked property of
+before writing a single record. "Cairn ships 7 worked examples" is a checked property of
 the corpus, not a sentence in this README (`tests/test_cases.py`).
 
 They are deliberately different *shapes* of shared upstream — a **dataset**, a **cohort**,
-a **premise**, and a **foundational-result-plus-reagent** — because layer-(a)
-non-independence is not only about sharing a corpus. The amyloid case (added in the
-2026-07-15 decoupling spike, from a controversy the engine was *not* co-developed against)
-is the generalization test; the eggs case is the subtlest and the most important:
+a **premise**, a **foundational-result-plus-reagent**, a **fabricated primary trial**, a
+**single lab's reagent**, and a whole **compromised research program** — because layer-(a)
+non-independence is not only about sharing a corpus. The last three were added in the
+2026-07-15 **backtest-scaling** pass (dev/cairn#15) from a ranked sweep of *known-answer*
+fraud / non-independence cases: each has a settled meta-fact (a withdrawal, an
+institutional misconduct finding), so a naive ingest can be checked against the answer key —
+and **poldermans-decrease** is the sharpest of all, the one case where removing the
+fabricated lineage does not just deflate the vote count but **flips the pooled result's sign
+from benefit to harm**. The amyloid case (added in the 2026-07-15 decoupling spike, from a
+controversy the engine was *not* co-developed against) is the generalization test; the eggs
+case is the subtlest of the originals:
 
 > Every egg review is **individually correct**. They each de-duplicate properly; there is
 > no villain and no error to point at in any single paper. The non-independence is a
@@ -86,13 +96,16 @@ because the literature did not support them:
 [`fixtures/PROVENANCE.md`](fixtures/PROVENANCE.md) (covid) ·
 [`fixtures/PROVENANCE-eggs.md`](fixtures/PROVENANCE-eggs.md) ·
 [`fixtures/PROVENANCE-cern.md`](fixtures/PROVENANCE-cern.md) ·
-[`fixtures/PROVENANCE-amyloid.md`](fixtures/PROVENANCE-amyloid.md).
+[`fixtures/PROVENANCE-amyloid.md`](fixtures/PROVENANCE-amyloid.md) ·
+[`fixtures/PROVENANCE-ivermectin.md`](fixtures/PROVENANCE-ivermectin.md) ·
+[`fixtures/PROVENANCE-anversa.md`](fixtures/PROVENANCE-anversa.md) ·
+[`fixtures/PROVENANCE-poldermans.md`](fixtures/PROVENANCE-poldermans.md).
 
 ## Run it
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -e . pytest
-.venv/bin/python fixtures/build_fixtures.py     # mint all 4 vetted corpora (sha-pinned)
+.venv/bin/python fixtures/build_fixtures.py     # mint all 7 vetted corpora (sha-pinned)
 .venv/bin/python -m pytest -q                   # 127 tests
 .venv/bin/python demo/worked_examples.py        # all four cases, side by side
 .venv/bin/cairn ground 'fixtures/*.json'        # 21/21 claim spans resolve to their source
@@ -176,7 +189,7 @@ cairn headtohead 'fixtures/*.json'      # A4: careful-baseline head-to-head over
 | `cairn/assessment.py` | recompute + verify the measured n_eff from a pinned assessor run (`cairn assess`) |
 | `cairn/trusty.py`, `canonical.py`, `keys.py` | content-addressing, JCS, signing primitives |
 | `schemas/cairn.schema.json` | the envelope JSON Schema (Draft 2020-12) incl. the grounding tuple + Trust-Ladder enum |
-| `fixtures/` | the **vetted** corpora for all **4 worked examples** — span-grounded claims (L4/L5) + sha-pinned sources |
+| `fixtures/` | the **vetted** corpora for all **7 worked examples** — span-grounded claims (L4/L5) + sha-pinned sources |
 | `fixtures/CASES.json` | the case manifest: what each example claims (laundered set, shared upstream, contrast). The build verifies it against the detector; CI re-checks it |
 | `fixtures/sources/*.abstract.txt` | the byte-exact retrieved sources (the raw `source_doc`s) |
 | `fixtures/PROVENANCE.md`, `PROVENANCE-eggs.md`, `PROVENANCE-cern.md` | per-case retrieval record, rung rationale, and the honest vetting decisions — **including the hypotheses we cut and the things we could not verify** |

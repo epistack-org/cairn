@@ -2,9 +2,10 @@
 
 `demo/hsm_trio.py` goes DEEP on one case (COVID: the naive baseline, the careful
 baseline, the Fréchet interval, the measured n_eff). This goes WIDE: it runs the same
-mechanical checks over every case (COVID, eggs, CERN, and the amyloid Aβ*56 cascade added
-in the 2026-07-15 decoupling spike) and shows that the refusal is not a property of one
-hand-picked example.
+mechanical checks over every case (COVID, eggs, CERN, the amyloid Aβ*56 cascade added in
+the 2026-07-15 decoupling spike, and the three backtest-scaling imports of 2026-07-15 —
+ivermectin/Elgazzar, Anversa c-kit, Poldermans/DECREASE) and shows that the refusal is not
+a property of one hand-picked example.
 
 Everything printed here is read off the minted fixtures — no substrate, no network, no
 model calls. `fixtures/CASES.json` declares each case's structure; the build already

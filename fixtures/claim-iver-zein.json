@@ -1,0 +1,39 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:7WmXnG_eXGs9-trZgbLsielHiX7ejtI8vOEngZFqWRA",
+  "assertion": {
+    "text": "A 2021 meta-analysis (Zein et al.) found ivermectin was associated with decreased COVID-19 mortality, with a risk ratio of 0.39 — the same signal as Bryant, different authors.",
+    "subject": "tt:pLVaxW2wgxs8mVGLTy-CPvSdoduKgiPXXOc1lpY1SEw",
+    "grounding": {
+      "source": "tt:S5C2pzoVgi7YzpFwIF1T1oXa10Cygq8jjtwuqFOZxjE",
+      "char_span": [
+        552,
+        627
+      ],
+      "quote": "Ivermectin was associated with decreased mortality (RR 0.39 [95% 0.20-0.74]",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "a2e9e5fc5c421d8fbba3d5aaf50a089abe679eb691ea29fa661a68aba3641d60"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-ivermectin-mortality-benefit"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:S5C2pzoVgi7YzpFwIF1T1oXa10Cygq8jjtwuqFOZxjE"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "8d2f0fdafb8b7018d572095817a3cf4d1932d599de2054bb78ff21ddf6bf69d0fe044bcaaa435e16bc680623fa7220b5aa6c55bb233a037ab3ab7f4a0b6bda0a",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

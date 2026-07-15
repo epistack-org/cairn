@@ -1,0 +1,30 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:TlnFrPbq3mjK5RZWa4rHt6a0uolEiTLb9FEMEpF3n1g",
+  "assertion": {
+    "name": "Cardiosphere-derived cells (CDCs)",
+    "aliases": [
+      "CDCs",
+      "the Marbán cardiosphere cells"
+    ],
+    "kind": "CellType",
+    "statement": "A distinct heart-derived cell population grown from endomyocardial biopsy specimens as cardiospheres (Marbán laboratory), tested in the CADUCEUS trial for regeneration after myocardial infarction.",
+    "note": "A genuinely DISJOINT upstream from the Anversa c-kit+ CSC: a different cell type (cardiosphere-derived, not sorted Lin(-)/c-kit(POS)), a different laboratory (Marbán, Cedars-Sinai), a different preparation, and no derivation from the Beltrami 2003 characterization. Independence on the provenance dimension holds — which is why the contrast COMBINES.",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "434a863d1600b82e18c833f02dfee145cd17c5298879dc5a05bcaef5fdcbc9b88d5478bb9a3a2217e5d869f81326642dd62b659979dff2435406bdb5cc6b8f04",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

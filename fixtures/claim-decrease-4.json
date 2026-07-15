@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:9524uJ2GIExdSHMYCx-Y2RqKr7pGFm0Qm_Zjlb1hU14",
+  "assertion": {
+    "text": "DECREASE-IV (Dunkelgrun et al. 2009) reported that perioperative bisoprolol significantly reduced 30-day cardiac death and nonfatal myocardial infarction in intermediate-risk patients.",
+    "subject": "tt:Hx0x-pK9Mmq26VcRSQ5DmxVR9mHAr0GPDVH0Ny-u958",
+    "grounding": {
+      "source": "tt:BU640G5mGrlf3AzhonqvH0pXr6X-iQc_dSsXfu7KSa4",
+      "char_span": [
+        1786,
+        1880
+      ],
+      "quote": "Bisoprolol was associated with a significant reduction of 30-day cardiac death and nonfatal MI",
+      "extractor": "agent:claude-fable-5/backtest-scaling-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "d2c47de80ed89f0832d0e702e40b2ead222176f33fe211f01ab5e5f009f419b4"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-perioperative-betablockade"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:BU640G5mGrlf3AzhonqvH0pXr6X-iQc_dSsXfu7KSa4",
+      "tt:Hx0x-pK9Mmq26VcRSQ5DmxVR9mHAr0GPDVH0Ny-u958"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "7a251aeb4c950c5f8d1e22fbd83fc098bed70b07ea5f179638851dde2307cb367acf64dbe810d261e446e05c1a1b0ad84d6058a8d164f91bc9d3c8cfecd3c70f",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

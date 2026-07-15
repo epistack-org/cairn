@@ -64,6 +64,13 @@ CASES = [
      "two meta-analyses re-pooling the same cohort backbone"),
     (1, "cern-astro-x-moon", ["claim-cern-astro-stability", "claim-cern-moon-strangelet"],
      "two papers, one shared cosmic-ray premise"),
+    # ---- backtest-scaling imports (dev/cairn#15): known-answer fraud / non-independence sets ----
+    (1, "ivermectin-elgazzar-trio", ["claim-iver-bryant", "claim-iver-zein", "claim-iver-kory"],
+     "three positive syntheses all pooling the withdrawn Elgazzar trial (shared two hops up)"),
+    (1, "anversa-ckit-trio", ["claim-anversa-origin", "claim-anversa-human", "claim-anversa-scipio"],
+     "one lab's c-kit+ CSC characterization + shared cell preps (SCIPIO used the lab's own cells)"),
+    (1, "poldermans-decrease-trio", ["claim-decrease-1", "claim-decrease-boersma", "claim-decrease-4"],
+     "one compromised research program (the Poldermans/Erasmus DECREASE family)"),
     # ---- known-DISJOINT (negatives) ----
     (0, "eggs-hu-x-djousse", ["claim-eggs-hu-no-association", "claim-eggs-djousse-no-association"],
      "NHS/HPFS vs the disjoint Physicians' Health Study cohort"),
@@ -73,6 +80,12 @@ CASES = [
      "a particle-physics rate calc vs the cosmic-ray argument — disjoint upstreams"),
     (0, "covid-single-line", ["claim-geographic-clustering"],
      "a lone claim shares no upstream with itself (singleton guard)"),
+    (0, "ivermectin-bryant-x-together", ["claim-iver-bryant", "claim-iver-together"],
+     "an Elgazzar-based meta vs the disjoint TOGETHER RCT (which never ingested Elgazzar)"),
+    (0, "anversa-x-caduceus", ["claim-anversa-origin", "claim-anversa-caduceus"],
+     "the Anversa c-kit+ line vs the disjoint Marbán cardiosphere-derived cells (CADUCEUS)"),
+    (0, "poldermans-x-poise", ["claim-decrease-1", "claim-poise"],
+     "a DECREASE benefit claim vs the disjoint independent POISE trial"),
 ]
 
 

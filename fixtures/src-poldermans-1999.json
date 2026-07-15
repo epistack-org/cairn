@@ -1,0 +1,41 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:YwQrIC1p2yAecPenIB585L_DoW0VGhZSFzlamlJRG-M",
+  "assertion": {
+    "title": "The effect of bisoprolol on perioperative mortality and myocardial infarction in high-risk patients undergoing vascular surgery",
+    "authors": "Poldermans D, Boersma E, Bax JJ, Thomson IR, van de Ven LL, ... (DECREASE Study Group)",
+    "venue": "New England Journal of Medicine",
+    "year": 1999,
+    "doi": "10.1056/NEJM199912093412402",
+    "pmid": "10588963",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "BACKGROUND: Cardiovascular complications are the most important causes of perioperative morbidity and mortality among patients undergoing major vascular surgery.\nMETHODS: We performed a randomized, multicenter trial to assess the effect of perioperative blockade of beta-adrenergic receptors on the incidence of death from cardiac causes and nonfatal myocardial infarction within 30 days after major vascular surgery in patients at high risk for these events. High-risk patients were identified by the presence of both clinical risk factors and positive results on dobutamine echocardiography. Eligible patients were randomly assigned to receive standard perioperative care or standard care plus perioperative beta-blockade with bisoprolol.\nRESULTS: A total of 1351 patients were screened, and 846 were found to have one or more cardiac risk factors. Of these 846 patients, 173 had positive results on dobutamine echocardiography. Fifty-nine patients were randomly assigned to receive bisoprolol, and 53 to receive standard care. Fifty-three patients were excluded from randomization because they were already taking a beta-blocker, and eight were excluded because they had extensive wall-motion abnormalities either at rest or during stress testing. Two patients in the bisoprolol group died of cardiac causes (3.4 percent), as compared with nine patients in the standard-care group (17 percent, P=0.02). Nonfatal myocardial infarction occurred in nine patients given standard care only (17 percent) and in none of those given standard care plus bisoprolol (P<0.001). Thus, the primary study end point of death from cardiac causes or nonfatal myocardial infarction occurred in 2 patients in the bisoprolol group (3.4 percent) and 18 patients in the standard-care group (34 percent, P<0.001).\nCONCLUSIONS: Bisoprolol reduces the perioperative incidence of death from cardiac causes and nonfatal myocardial infarction in high-risk patients who are undergoing major vascular surgery.",
+    "excerpt_sha256": "078de8baccf8bd05765227d6a94f921b7c8ea7d84c7d3c288b2786e990435450",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 10588963); AbstractText via itertext()",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=10588963&rettype=abstract&retmode=xml"
+      ]
+    },
+    "verification": "L1",
+    "role": "DECREASE-I — the landmark RCT (bisoprolol cut cardiac death/MI from 34% to 3.4%); the origin of the perioperative beta-blocker recommendation"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:Hx0x-pK9Mmq26VcRSQ5DmxVR9mHAr0GPDVH0Ny-u958"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "bc135ffc8493e6537907f6e196537bc5eda252cb8f11051c2a52b5cfbd68253c1b9dfc4dca5efe2473eb419ae0825c060860b89bf23333ef5a297efa9453dd0b",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

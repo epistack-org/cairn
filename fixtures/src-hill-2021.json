@@ -1,0 +1,44 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:crhaX2iKkDfe6raCsXxafOmzJtEgihBwLYi2ga-gT9s",
+  "assertion": {
+    "title": "Meta-analysis of Randomized Trials of Ivermectin to Treat SARS-CoV-2 Infection",
+    "authors": "Hill A, Garratt A, Levi J, Falconer J, ... (Unitaid/WHO ivermectin group)",
+    "venue": "Open Forum Infectious Diseases",
+    "year": 2021,
+    "doi": "10.1093/ofid/ofab358",
+    "pmid": "34796244",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "Ivermectin is an antiparasitic drug being investigated for repurposing against severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2). Ivermectin showed in vitro activity against SARS-COV-2, but only at high concentrations. This meta-analysis investigated ivermectin in 23 randomized clinical trials (3349 patients) identified through systematic searches of PUBMED, EMBASE, MedRxiv, and trial registries. The primary meta-analysis was carried out by excluding studies at a high risk of bias. Ivermectin did not show a statistically significant effect on survival (risk ratio [RR], 0.90; 95% CI, 0.57 to 1.42; P = .66) or hospitalizations (RR, 0.63; 95% CI, 0.36 to 1.11; P = .11). Ivermectin displayed a borderline significant effect on duration of hospitalization in comparison with standard of care (mean difference, -1.14 days; 95% CI, -2.27 to -0.00; P = .05). There was no significant effect of ivermectin on time to clinical recovery (mean difference, -0.57 days; 95% CI, -1.31 to 0.17; P = .13) or binary clinical recovery (RR, 1.19; 95% CI, 0.94 to 1.50; P = .15). Currently, the World Health Organization recommends the use of ivermectin only inside clinical trials. A network of large clinical trials is in progress to validate the results seen to date.",
+    "excerpt_sha256": "f66ca4aea476e3dc2dd2d7d72123f2346261083557bdadcb8db0cdc04f98a02b",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 34796244); AbstractText via itertext()",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=34796244&rettype=abstract&retmode=xml"
+      ]
+    },
+    "retraction": {
+      "status": "RETRACTED",
+      "notice": "Retraction: Open Forum Infect Dis 2022 Feb 5;9(3):ofac056 (10.1093/ofid/ofac056), PMID 35146053",
+      "note": "Earlier versions of this meta-analysis leaned heavily on Elgazzar; the version of record, excluding high-risk-of-bias studies, is null on survival (RR 0.90). The COUNTERFACTUAL the case turns on: remove the fabricated node and the signal collapses."
+    },
+    "verification": "L1",
+    "role": "the published 'remove Elgazzar -> the signal collapses' counterfactual (probe I2/I4). Not part of the laundered DAG."
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "396c093034fade6c1a72457b03ce4b995df0ea90305320e516c433ad8e44782462d327d8066d2b7e00bca6d38f130f37742c116773ae30767edad5a52153dd05",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

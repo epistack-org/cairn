@@ -1,0 +1,36 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:zn-HIfSTzYAeNckcSNmxg220MorXf7xsU9zez4Znsi0",
+  "assertion": {
+    "title": "WITHDRAWN: Efficacy and Safety of Ivermectin for Treatment and prophylaxis of COVID-19 Pandemic",
+    "authors": "Elgazzar A, Eltaweel A, Youssef SA, Hany B, Hafez M, Moussa H",
+    "venue": "Research Square (preprint)",
+    "year": 2020,
+    "doi": "10.21203/rs.3.rs-100956/v3",
+    "verification": "L2",
+    "withdrawal": {
+      "status": "WITHDRAWN",
+      "date": "2021-07-14",
+      "by": "Research Square",
+      "notice": "Withdrawn by Research Square on 2021-07-14 following verifiable data-integrity concerns communicated to staff (subsequently under investigation by the Egyptian Ministry of Higher Education): ~79 duplicated participant records, deaths recorded on dates before the trial began, and plagiarism in the text.",
+      "reported_by": "J. Lawrence; Reardon, Nature 2021 (d41586-021-02081-w); Sheldrick & Meyerowitz-Katz, reanalyses"
+    },
+    "role": "the single fabricated primary trial the positive ivermectin syntheses pooled. It carried the LARGEST weight (largest study by patient number) and the LARGEST drug effect in the ivermectin literature; removing it collapses the pooled mortality signal. This is the shared upstream the cascade collapses to.",
+    "note": "Recorded as a fact about the source; the refusal does not depend on the withdrawal — the three syntheses share this upstream whether or not it has been withdrawn. The withdrawal only makes the stakes vivid (probe I4)."
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "e1ae3d48120c015e1cdd58a4f1bab2d848a4424342c54c22b58d8901e76655de179637d4b579a1eb79544da697b8cc3d104dc9e1cd34362c83923619987bec01",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}
