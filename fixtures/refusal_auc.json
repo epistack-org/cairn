@@ -1,0 +1,105 @@
+{
+  "note": "Refusal-AUC over a hand-labeled panel of known-provenance claim-sets (flf-contest#6). Abstention scored as discrimination, not as a rate. Score = shared-upstream count; AUC = P(entangled > disjoint), ties 0.5. Recompute with fixtures/refusal_auc.py.",
+  "n_positive": 6,
+  "n_negative": 4,
+  "refusal_auc": 1.0,
+  "confusion": {
+    "tp": 6,
+    "fp": 0,
+    "fn": 0,
+    "tn": 4
+  },
+  "naive_worobey_pekar_verdict": "COMBINABLE",
+  "cases": [
+    {
+      "set": "covid-proximity-trio",
+      "label": 1,
+      "score": 2,
+      "verdict": "REFUSE-TO-COMBINE",
+      "predicted_refuse": true,
+      "correct": true,
+      "ground_truth": "one paper (Worobey 2022); two of three also share the PRC early-case investigation"
+    },
+    {
+      "set": "covid-worobey-x-pekar",
+      "label": 1,
+      "score": 2,
+      "verdict": "REFUSE-TO-COMBINE",
+      "predicted_refuse": true,
+      "correct": true,
+      "ground_truth": "Pekar cites Worobey (ref [39]) and calibrates its clock on Worobey 2021 — the former false COMBINABLE"
+    },
+    {
+      "set": "eggs-meta-analysis-trio",
+      "label": 1,
+      "score": 5,
+      "verdict": "REFUSE-TO-COMBINE",
+      "predicted_refuse": true,
+      "correct": true,
+      "ground_truth": "all re-pool the NHS/HPFS cohort backbone (shared two hops up)"
+    },
+    {
+      "set": "cern-cosmic-ray-trio",
+      "label": 1,
+      "score": 1,
+      "verdict": "REFUSE-TO-COMBINE",
+      "predicted_refuse": true,
+      "correct": true,
+      "ground_truth": "three assurances leaning on the one cosmic-ray/astrophysical-survival premise"
+    },
+    {
+      "set": "eggs-two-meta-analyses",
+      "label": 1,
+      "score": 4,
+      "verdict": "REFUSE-TO-COMBINE",
+      "predicted_refuse": true,
+      "correct": true,
+      "ground_truth": "two meta-analyses re-pooling the same cohort backbone"
+    },
+    {
+      "set": "cern-astro-x-moon",
+      "label": 1,
+      "score": 1,
+      "verdict": "REFUSE-TO-COMBINE",
+      "predicted_refuse": true,
+      "correct": true,
+      "ground_truth": "two papers, one shared cosmic-ray premise"
+    },
+    {
+      "set": "eggs-hu-x-djousse",
+      "label": 0,
+      "score": 0,
+      "verdict": "COMBINABLE",
+      "predicted_refuse": false,
+      "correct": true,
+      "ground_truth": "NHS/HPFS vs the disjoint Physicians' Health Study cohort"
+    },
+    {
+      "set": "cern-hawking-x-wd-ns",
+      "label": 0,
+      "score": 0,
+      "verdict": "COMBINABLE",
+      "predicted_refuse": false,
+      "correct": true,
+      "ground_truth": "theoretical Hawking evaporation vs the empirical WD/NS bound — disjoint premises by construction"
+    },
+    {
+      "set": "cern-production-rate-x-astro",
+      "label": 0,
+      "score": 0,
+      "verdict": "COMBINABLE",
+      "predicted_refuse": false,
+      "correct": true,
+      "ground_truth": "a particle-physics rate calc vs the cosmic-ray argument — disjoint upstreams"
+    },
+    {
+      "set": "covid-single-line",
+      "label": 0,
+      "score": 0,
+      "verdict": "COMBINABLE",
+      "predicted_refuse": false,
+      "correct": true,
+      "ground_truth": "a lone claim shares no upstream with itself (singleton guard)"
+    }
+  ]
+}
