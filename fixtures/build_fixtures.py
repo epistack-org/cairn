@@ -26,13 +26,18 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 from pathlib import Path
 
 from cairn import envelope, grounding, provenance
 from cairn.keys import SigningKey
 
-OUT = Path(__file__).resolve().parent
-SRC = OUT / "sources"
+# Records/INDEX/CASES/naive are written under OUT; excerpts are read from the real
+# sources dir. CAIRN_FIXTURES_OUT redirects only the write target (used by the
+# determinism gate to regenerate into a temp dir) — default is byte-identical.
+_HERE = Path(__file__).resolve().parent
+OUT = Path(os.environ.get("CAIRN_FIXTURES_OUT") or _HERE)
+SRC = _HERE / "sources"
 AT = "2026-06-28T00:00:00Z"
 # throwaway deterministic demo identity (NOT a real keystone key)
 KEY = SigningKey.from_seed_hex("c0" * 32, label="keystone:epistack-corpus")
