@@ -20,16 +20,36 @@ def _read_json(path: str):
     return json.loads(text)
 
 
-def _load_store(patterns: list[str]) -> dict[str, dict]:
-    """Load every record JSON matching the glob(s) into a {id: record} store."""
+def _load_store(patterns: list[str]) -> tuple[dict[str, dict], dict[str, str]]:
+    """Load every record JSON matching the glob(s) into a {id: record} store.
+
+    Returns ``(store, alias)`` where ``alias`` maps each record's filename stem
+    (its human-readable slug, e.g. ``claim-two-lineages``) to its Trusty URI, so a
+    reader can pass slugs on the command line instead of 43-char hashes.
+    """
     store: dict[str, dict] = {}
+    alias: dict[str, str] = {}
     for pat in patterns:
         for fn in sorted(glob.glob(pat)):
             data = json.loads(Path(fn).read_text())
             for r in data if isinstance(data, list) else [data]:
                 if isinstance(r, dict) and "id" in r and "@type" in r:  # skip non-records (e.g. INDEX.json)
                     store[r["id"]] = r
-    return store
+                    alias.setdefault(Path(fn).stem, r["id"])
+    return store, alias
+
+
+def _resolve(ids, alias: dict[str, str], store: dict[str, dict]) -> list[str]:
+    """Map slugs -> Trusty URIs; warn (fail loud, not silently COMBINABLE) on an id
+    that resolves to nothing in the loaded store."""
+    out = []
+    for c in ids or []:
+        rid = alias.get(c, c)
+        if rid not in store:
+            print(f"INTERSECT: warning: '{c}' matched no record in the store "
+                  "(treated as an opaque upstream root)", file=sys.stderr)
+        out.append(rid)
+    return out
 
 
 def cmd_mint(args) -> int:
@@ -69,8 +89,9 @@ def cmd_neff(args) -> int:
 
 
 def cmd_ground(args) -> int:
-    store = _load_store(args.store)
-    report = grounding.check_store(store, args.claims)
+    store, alias = _load_store(args.store)
+    claims = _resolve(args.claims, alias, store) if args.claims else None
+    report = grounding.check_store(store, claims)
     print(json.dumps(report, indent=2, ensure_ascii=False))
     return 0 if report["ok"] else 1  # nonzero == a span failed to resolve (script-detectable)
 
@@ -93,8 +114,9 @@ def cmd_assess(args) -> int:
 
 
 def cmd_frechet(args) -> int:
-    store = _load_store(args.store)
-    ids = args.claims or [rid for rid, r in store.items() if r.get("@type") == "epi:Claim"]
+    store, alias = _load_store(args.store)
+    ids = _resolve(args.claims, alias, store) if args.claims else \
+        [rid for rid, r in store.items() if r.get("@type") == "epi:Claim"]
     ids = [i for i in ids if i in store and "illustrative_LR" in store[i].get("assertion", {})]
     if not ids:
         print("FRECHET: no combinable epi:Claim records (need assertion.illustrative_LR)", file=sys.stderr)
@@ -141,7 +163,7 @@ def _print_headtohead(art: dict) -> None:
 def cmd_headtohead(args) -> int:
     baseline = _read_json(args.baseline)
     index = json.loads(Path(args.index).read_text())
-    store = _load_store(args.store)
+    store, _alias = _load_store(args.store)
     neff_summary, trio_neff = headtohead.load_neff(args.runs_dir)
     cairn = headtohead.cairn_outputs(index, store, neff_summary, trio_neff=trio_neff)
     art = headtohead.build(baseline, cairn)
@@ -155,9 +177,11 @@ def cmd_headtohead(args) -> int:
 
 
 def cmd_intersect(args) -> int:
-    store = _load_store(args.store)
-    ids = args.claims or list(store.keys())
-    verdict = provenance.combine_verdict(ids, store)
+    store, alias = _load_store(args.store)
+    ids = _resolve(args.claims, alias, store) if args.claims else list(store.keys())
+    backstop = alias.get(args.backstop, args.backstop) if args.backstop else None
+    at_risk = alias.get(args.at_risk_upstream, args.at_risk_upstream) if args.at_risk_upstream else None
+    verdict = provenance.combine_verdict(ids, store, backstop=backstop, at_risk_upstream=at_risk)
     # JSON keys must be strings; flatten the pairwise tuple keys
     verdict["pairwise_shared"] = [
         {"a": a, "b": b, "shared": shared} for (a, b), shared in verdict["pairwise_shared"].items()
@@ -187,7 +211,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     i = sub.add_parser("intersect", help="refuse-to-combine verdict over a claim set")
     i.add_argument("store", nargs="+", help="glob(s) of record JSON files (the store)")
-    i.add_argument("--claims", nargs="*", help="Trusty URIs to test (default: all in store)")
+    i.add_argument("--claims", nargs="*", help="Trusty URIs or filename-slugs to test (default: all in store)")
+    i.add_argument("--backstop", help="a claim proposed as independently sufficient even if the "
+                                      "at-risk premise fails (upgrades a refusal to "
+                                      "REFUSE-TO-COMBINE-AS-INDEPENDENT if the disjointness checks out)")
+    i.add_argument("--at-risk-upstream", dest="at_risk_upstream",
+                   help="the upstream whose possible failure is contemplated (e.g. the "
+                        "Hawking-radiation premise); the backstop must be disjoint from it")
     i.set_defaults(func=cmd_intersect)
 
     g = sub.add_parser("ground", help="verify claims' spans resolve to their cited source excerpts")

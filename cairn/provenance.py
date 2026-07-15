@@ -21,6 +21,18 @@ from __future__ import annotations
 import itertools
 from typing import Iterable, Mapping
 
+# The verdict vocabulary the CLI + tests speak. A refusal is never a claim about
+# the world's truth; it is a claim about *this operation over this DAG*.
+#   * COMBINABLE                       — no shared upstream on the provenance dim.
+#   * REFUSE-TO-COMBINE                — shared upstream; combining as independent
+#                                        is undefined. Bare (no surviving backstop).
+#   * REFUSE-TO-COMBINE-AS-INDEPENDENT — shared upstream, AND a named leg that is
+#                                        upstream-disjoint from the at-risk premise
+#                                        and independently sufficient survives, so
+#                                        the *conclusion* is unchanged (only the
+#                                        "these are N independent votes" claim fails).
+VERDICTS = ("COMBINABLE", "REFUSE-TO-COMBINE", "REFUSE-TO-COMBINE-AS-INDEPENDENT")
+
 
 def upstreams(record: Mapping) -> set[str]:
     """Direct ``derivedFrom`` Trusty URIs of one record."""
@@ -60,8 +72,26 @@ def shared_upstreams(record_ids: Iterable[str], store: Mapping[str, Mapping]) ->
     return {"ancestors": anc, "pairwise_shared": pairwise, "collective_shared": sorted(collective)}
 
 
-def combine_verdict(record_ids: Iterable[str], store: Mapping[str, Mapping]) -> dict:
-    """Refuse-to-combine verdict for a set of claims proposed as independent."""
+def combine_verdict(
+    record_ids: Iterable[str],
+    store: Mapping[str, Mapping],
+    *,
+    backstop: str | None = None,
+    at_risk_upstream: str | None = None,
+) -> dict:
+    """Refuse-to-combine verdict for a set of claims proposed as independent.
+
+    ``backstop`` names a claim proposed as *independently sufficient* even if the
+    shared premise fails; ``at_risk_upstream`` names the upstream whose possible
+    failure is contemplated (e.g. the Hawking-radiation premise on the CERN case).
+    When a set shares an upstream (would refuse) BUT the backstop is *mechanically*
+    verified to be upstream-disjoint from ``at_risk_upstream``, the verdict is
+    upgraded to ``REFUSE-TO-COMBINE-AS-INDEPENDENT`` with ``conclusion_unchanged``:
+    the safety conclusion stands; what fails is only the claim that these are N
+    independent votes. The disjointness is *checked*, never asserted — a backstop
+    that turns out to share the at-risk premise leaves a bare REFUSE-TO-COMBINE and
+    a note saying so.
+    """
     ids = list(record_ids)
     s = shared_upstreams(ids, store)
     # the union of all shared upstreams across any pair (the laundered dependence)
@@ -69,17 +99,51 @@ def combine_verdict(record_ids: Iterable[str], store: Mapping[str, Mapping]) -> 
     for common in s["pairwise_shared"].values():
         shared_any.update(common)
     independent = not shared_any
-    return {
+
+    if independent:
+        return {
+            "claims": ids,
+            "independent": True,
+            "verdict": "COMBINABLE",
+            "shared_upstreams": [],
+            "pairwise_shared": s["pairwise_shared"],
+            "reason": (
+                "no shared upstream on the provenance dimension; independence holds "
+                "(subject to legs (b)/(c) and a measured n_eff)"
+            ),
+        }
+
+    out = {
         "claims": ids,
-        "independent": independent,
-        "verdict": "COMBINABLE" if independent else "REFUSE-TO-COMBINE",
+        "independent": False,
+        "verdict": "REFUSE-TO-COMBINE",
         "shared_upstreams": sorted(shared_any),
         "pairwise_shared": s["pairwise_shared"],
         "reason": (
-            "no shared upstream on the provenance dimension; independence holds "
-            "(subject to legs (b)/(c) and a measured n_eff)"
-            if independent
-            else f"claims share upstream(s) {sorted(shared_any)} -> not independent; "
+            f"claims share upstream(s) {sorted(shared_any)} -> not independent; "
             "combining as independent is undefined"
         ),
     }
+
+    if backstop is not None:
+        backstop_closure = ancestors(backstop, store) | {backstop}
+        disjoint = at_risk_upstream is None or at_risk_upstream not in backstop_closure
+        if disjoint:
+            out["verdict"] = "REFUSE-TO-COMBINE-AS-INDEPENDENT"
+            out["conclusion_unchanged"] = True
+            out["backstop"] = backstop
+            out["at_risk_upstream"] = at_risk_upstream
+            out["note"] = (
+                f"the safety conclusion stands; what fails is the claim that these are "
+                f"{len(ids)} independent votes. The backstop {backstop} is upstream-disjoint "
+                f"from the at-risk premise {at_risk_upstream} and is on its own sufficient."
+            )
+        else:
+            out["conclusion_unchanged"] = False
+            out["backstop"] = backstop
+            out["note"] = (
+                f"the proposed backstop {backstop} is NOT upstream-disjoint from the at-risk "
+                f"premise {at_risk_upstream} (it shares it) -> it does not survive that premise's "
+                f"failure; bare REFUSE-TO-COMBINE stands."
+            )
+    return out
