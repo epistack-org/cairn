@@ -75,18 +75,12 @@ from lib.mint import (  # noqa: E402
 
 import importlib.util
 
-# Per-case builders now live in fixtures/cases/<id>/build.py, loaded by path (case-ids
-# contain hyphens) in the pinned insertion order that fixes the aggregate INDEX/CASES
-# line order. Never derive this order from a filesystem glob.
-CASE_ORDER = [
-    "covid-origins",
-    "eggs-good-for-you",
-    "cern-black-hole",
-    "amyloid-abeta56",
-    "ivermectin-elgazzar",
-    "anversa-ckit",
-    "poldermans-decrease",
-]
+# Per-case builders live in fixtures/cases/<id>/build.py, loaded by path (case-ids contain
+# hyphens) in the pinned insertion order that fixes the aggregate INDEX/CASES line order.
+# The order is the registry in fixtures/cases/cases.lock — NEVER a filesystem glob (a glob
+# is alphabetical, which is not the historical order). Adding a case is a new bundle dir
+# plus a reviewed cases.lock edit, not a change here.
+CASE_ORDER = json.loads((_HERE / "cases" / "cases.lock").read_text())["order"]
 
 
 def _load_bundle(case_id):

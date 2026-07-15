@@ -1,0 +1,34 @@
+{
+  "order": [
+    "covid-origins",
+    "eggs-good-for-you",
+    "cern-black-hole",
+    "amyloid-abeta56",
+    "ivermectin-elgazzar",
+    "anversa-ckit",
+    "poldermans-decrease"
+  ],
+  "bundles": {
+    "covid-origins": {
+      "digest": "sha256:1f2cf0b5086833778e7ea32d260bce4a62191878e19b54749315ce48199e7d61"
+    },
+    "eggs-good-for-you": {
+      "digest": "sha256:8b9fdb1ab4851c7bd873afc0b2b1ee58f087788027c200498f824ec9c9f96a13"
+    },
+    "cern-black-hole": {
+      "digest": "sha256:bbcc0154cbb942f3f87d616ec592e1400d42b9e371511c9350edd3200a07ccbd"
+    },
+    "amyloid-abeta56": {
+      "digest": "sha256:d94541b465e9cd99a14cd9baffa8c41d17fa81573f242334e8f84ecc092896f5"
+    },
+    "ivermectin-elgazzar": {
+      "digest": "sha256:a835d6447e4256a88bd8c0b44efe06e50f988ca40a9a7e965350ef04acba49bf"
+    },
+    "anversa-ckit": {
+      "digest": "sha256:1502ad3aba57035b63a50c17e3522057722a67e91a574af02369a7236074f455"
+    },
+    "poldermans-decrease": {
+      "digest": "sha256:0b3459ec6e9be9d97c4ef7f96aefdce0b19c64a7b0631a4ef9abb7bdc59c8195"
+    }
+  }
+}

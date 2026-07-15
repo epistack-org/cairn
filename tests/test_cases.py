@@ -22,10 +22,11 @@ from pathlib import Path
 
 import pytest
 
-from cairn import envelope, grounding, provenance
+from cairn import cases, envelope, grounding, provenance
 
 ROOT = Path(__file__).resolve().parents[1]
 FX = ROOT / "fixtures"
+CASES_DIR = FX / "cases"
 
 CASES = json.loads((FX / "CASES.json").read_text())
 INDEX = json.loads((FX / "INDEX.json").read_text())
@@ -44,19 +45,37 @@ STORE = _store()
 
 
 def test_worked_examples_ship():
-    """The corpus ships seven worked examples. Count them from the corpus, not from prose.
+    """The corpus ships exactly the bundles cases.lock pins — a mechanically checked property,
+    not a hardcoded count. Adding or removing a case is a new/removed bundle dir plus a reviewed
+    cases.lock edit; a bundle on disk that is not in the lock (or vice versa), or an aggregate
+    CASES.json that disagrees with the bundles, fails here.
 
-    The fourth (amyloid-abeta56) was added in the 2026-07-15 decoupling spike, from a live
-    scientific controversy the engine was NOT co-developed against. The fifth-seventh
-    (ivermectin-elgazzar, anversa-ckit, poldermans-decrease) were imported in the
-    2026-07-15 backtest-scaling pass (dev/cairn#15) from a ranked research sweep of
-    known-answer fraud / non-independence cases — each a case whose meta-fact is settled,
-    so a naive ingest can be checked against the answer key."""
-    assert len(CASES) == 7, f"expected 7 worked examples, corpus declares {sorted(CASES)}"
-    assert set(CASES) == {
-        "covid-origins", "eggs-good-for-you", "cern-black-hole", "amyloid-abeta56",
-        "ivermectin-elgazzar", "anversa-ckit", "poldermans-decrease",
-    }
+    The set has grown as the method was decoupled from its co-developed seed: the fourth
+    (amyloid-abeta56) came from the 2026-07-15 decoupling spike, the fifth-seventh
+    (ivermectin-elgazzar, anversa-ckit, poldermans-decrease) from the backtest-scaling pass
+    (dev/cairn#15). The point of the lock is that the NEXT case is a bundle, not a monolith edit."""
+    on_disk = set(cases.discover(CASES_DIR))
+    lock = cases.load_lock(CASES_DIR)
+    assert set(lock["order"]) == on_disk, (sorted(lock["order"]), sorted(on_disk))
+    assert set(CASES) == on_disk, "aggregate CASES.json disagrees with the bundles on disk"
+
+
+def test_cases_lock_has_no_undetected_drift():
+    """The lock pins a content digest per bundle; recomputing must reproduce it, so a silent
+    edit to any bundle (CASE.json, build.py, records/sources when present) flips a digest and
+    fails CI until the lock is regenerated and reviewed."""
+    lock = cases.load_lock(CASES_DIR)
+    fresh = cases.build_lock(CASES_DIR, lock["order"])
+    assert fresh == lock, "cases.lock is stale — a bundle changed; regenerate and review the diff"
+
+
+@pytest.mark.parametrize("case_id", CASE_IDS)
+def test_cairn_cases_verify_passes(case_id):
+    """The reusable per-bundle verifier (`cairn cases verify`) must agree with the corpus on
+    every built-in case — the same crank an external case repo would be checked by."""
+    manifest = cases.load_manifest(CASES_DIR / case_id)
+    result = cases.verify_bundle(manifest, STORE, lambda s: INDEX.get(s, s))
+    assert result["ok"], (case_id, [c for c in result["checks"] if not c["ok"]])
 
 
 @pytest.mark.parametrize("case_id", CASE_IDS)

@@ -12,7 +12,7 @@ import os
 import sys
 from pathlib import Path
 
-from . import assessment, envelope, frechet, grounding, headtohead, importer, neff, provenance
+from . import assessment, cases, envelope, frechet, grounding, headtohead, importer, neff, provenance
 from .keys import SigningKey
 
 
@@ -226,6 +226,36 @@ def cmd_explain(args) -> int:
     return 0 if verdict["independent"] else 2  # same exit contract as intersect
 
 
+def cmd_cases_verify(args) -> int:
+    bundle = Path(args.bundle)
+    manifest = cases.load_manifest(bundle)
+    patterns = args.store
+    if not patterns:  # prefer the bundle's own records if it is self-contained, else the corpus
+        recs = bundle / "records"
+        patterns = [str(recs / "*.json")] if recs.is_dir() else ["fixtures/*.json"]
+    store, alias = _load_store(patterns)
+    result = cases.verify_bundle(manifest, store, lambda s: alias.get(s, s))
+    print(json.dumps(result, indent=2, ensure_ascii=False))
+    return 0 if result["ok"] else 1  # nonzero == a declared structural property does not hold
+
+
+def cmd_cases_list(args) -> int:
+    cases_dir = Path(args.cases_dir)
+    ids = cases.discover(cases_dir)
+    lock = cases.load_lock(cases_dir) if (cases_dir / cases.LOCK).is_file() else None
+    rows = []
+    for cid in (lock["order"] if lock else ids):
+        pinned = (lock or {}).get("bundles", {}).get(cid, {}).get("digest")
+        current = cases.bundle_digest(cases_dir / cid)
+        rows.append({"case": cid, "digest": current,
+                     "locked": pinned is None or pinned == current})
+    drift = [r["case"] for r in rows if not r["locked"]]
+    extra = sorted(set(ids) - set(r["case"] for r in rows))
+    print(json.dumps({"cases_dir": str(cases_dir), "count": len(ids), "cases": rows,
+                      "unlocked_or_drifted": drift, "not_in_lock": extra}, indent=2))
+    return 0 if not drift and not extra else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="cairn", description=__doc__)
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -306,6 +336,19 @@ def build_parser() -> argparse.ArgumentParser:
                    help="A2 pinned assessment runs dir (default: assessment/runs)")
     h.add_argument("--json", action="store_true", help="emit the machine-readable artifact instead of the table")
     h.set_defaults(func=cmd_headtohead)
+
+    c = sub.add_parser("cases", help="per-case bundle tools (verify a bundle; list/lock the corpus)")
+    csub = c.add_subparsers(dest="cases_cmd", required=True)
+    cv = csub.add_parser("verify", help="run a bundle's declared structural assertions "
+                                        "(laundered set REFUSES; shared upstream; contrast verdict)")
+    cv.add_argument("bundle", help="path to a case bundle dir (contains CASE.json)")
+    cv.add_argument("--store", nargs="*", help="glob(s) of record JSON (default: the bundle's "
+                                               "records/ if present, else fixtures/*.json)")
+    cv.set_defaults(func=cmd_cases_verify)
+    cl = csub.add_parser("list", help="discover bundles and check them against cases.lock")
+    cl.add_argument("cases_dir", nargs="?", default="fixtures/cases",
+                    help="dir of case bundles (default: fixtures/cases)")
+    cl.set_defaults(func=cmd_cases_list)
     return p
 
 
