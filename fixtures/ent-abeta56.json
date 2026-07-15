@@ -1,0 +1,34 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:jzuBh3nimSwis18Fi6JHHWEUMDT5rkY67T_BOY6sAkw",
+  "assertion": {
+    "name": "Aβ*56 — the 56-kDa soluble amyloid-β assembly (as defined by Lesné 2006)",
+    "aliases": [
+      "Abeta*56",
+      "Aβ*56",
+      "Aβ star 56",
+      "the 56-kDa Aβ oligomer"
+    ],
+    "kind": "MolecularSpecies",
+    "statement": "A specific 56-kilodalton soluble amyloid-β oligomer, first isolated and named 'Aβ*56' by Lesné et al. 2006, and detected thereafter by the same laboratory's multistep-fractionation assay. Its originating characterization is a single paper, now retracted.",
+    "note": "The shared upstream of the Aβ*56 corroboration cascade, and an unusual one: it is BOTH a foundational RESULT (the 2006 isolation) and a shared REAGENT/ASSAY (the same lab's detection method). Every downstream Aβ*56 measurement presupposes this node, so every derivedFrom edge into it is span-grounded by the citing abstract naming 'Aβ*56'/'Abeta*56'. It is the generalization of the CERN premise node: a shared upstream can be a shared measurement apparatus, not only a shared dataset or argument. NOTE the retraction (2024) is a fact ABOUT this node's originating source, not an input to the refusal — cairn refuses on the shared-provenance topology whether or not the paper is retracted.",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:E-pcpZ5Ob90CozL7CrTYyv_gvzCl73uOnuwiJ8a8p_k"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "7482df699f18bbaa7fbd784ed1b45154ad4b5503e353bf0bebd99da545613a8ea96fc3e6f8c8f9bba2cd2d03dde9ead2c31ac8ec0ccc4e126d35b7791cdff60f",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

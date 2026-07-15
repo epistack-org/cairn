@@ -1,0 +1,48 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:E-pcpZ5Ob90CozL7CrTYyv_gvzCl73uOnuwiJ8a8p_k",
+  "assertion": {
+    "title": "A specific amyloid-beta protein assembly in the brain impairs memory",
+    "authors": "Lesné S, Koh MT, Kotilinek L, Kayed R, Glabe CG, Yang A, Gallagher M, Ashe KH",
+    "venue": "Nature",
+    "year": 2006,
+    "volume": "440",
+    "issue": "7082",
+    "pages": "352-357",
+    "doi": "10.1038/nature04533",
+    "pmid": "16541076",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "Memory function often declines with age, and is believed to deteriorate initially because of changes in synaptic function rather than loss of neurons. Some individuals then go on to develop Alzheimer's disease with neurodegeneration. Here we use Tg2576 mice, which express a human amyloid-beta precursor protein (APP) variant linked to Alzheimer's disease, to investigate the cause of memory decline in the absence of neurodegeneration or amyloid-beta protein amyloidosis. Young Tg2576 mice (< 6 months old) have normal memory and lack neuropathology, middle-aged mice (6-14 months old) develop memory deficits without neuronal loss, and old mice (> 14 months old) form abundant neuritic plaques containing amyloid-beta (refs 3-6). We found that memory deficits in middle-aged Tg2576 mice are caused by the extracellular accumulation of a 56-kDa soluble amyloid-beta assembly, which we term Abeta*56 (Abeta star 56). Abeta*56 purified from the brains of impaired Tg2576 mice disrupts memory when administered to young rats. We propose that Abeta*56 impairs memory independently of plaques or neuronal loss, and may contribute to cognitive deficits associated with Alzheimer's disease.",
+    "excerpt_sha256": "d34840d0a0b49e317ade116e888ff5fc8a309e2fa3a79bde7a40d13682c54b86",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 16541076); AbstractText via itertext()",
+      "encoding_note": "This 2006 record spells the species 'Abeta*56' (ASCII) — the Greek beta is NOT used here. The 2011/2013 records DO use U+03B2 ('Aβ*56'). Quotes are pinned to each record's own bytes.",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=16541076&rettype=abstract&retmode=xml"
+      ]
+    },
+    "retraction": {
+      "status": "RETRACTED",
+      "notice": "Retraction: Nature 2024 Jul;631(8019):240 (10.1038/s41586-024-07691-8), PMID 38914864",
+      "note": "Retracted in 2024 over image-integrity concerns first raised publicly in 2022 (Schrag/Piller, Science). Recorded as a fact about the source; the refusal does not depend on it — the trio shares this upstream regardless."
+    },
+    "verification": "L1",
+    "role": "the sole originating characterization of Aβ*56 — the derivation root the cascade collapses to"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "d4f300af1c07d6210adec19d9ee2e359e027cbb0a54141db40f46d16365ce234abd495d5815c70af52a75fa1e0f26eaa9703e5ac87d38b489245d60215946701",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

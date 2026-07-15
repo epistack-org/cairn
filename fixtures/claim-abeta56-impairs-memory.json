@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:STlf_juzMTkLGxkfT64o0N3fTkLDJLypvTuV3nQEbh8",
+  "assertion": {
+    "text": "Aβ*56, a 56-kDa soluble amyloid-β assembly purified from the brains of memory-impaired Tg2576 mice, disrupts memory when administered to young rats.",
+    "subject": "tt:jzuBh3nimSwis18Fi6JHHWEUMDT5rkY67T_BOY6sAkw",
+    "grounding": {
+      "source": "tt:E-pcpZ5Ob90CozL7CrTYyv_gvzCl73uOnuwiJ8a8p_k",
+      "char_span": [
+        917,
+        1022
+      ],
+      "quote": "Abeta*56 purified from the brains of impaired Tg2576 mice disrupts memory when administered to young rats",
+      "extractor": "agent:claude-fable-5/amyloid-spike-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "d34840d0a0b49e317ade116e888ff5fc8a309e2fa3a79bde7a40d13682c54b86"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-abeta56-pathogenic"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:E-pcpZ5Ob90CozL7CrTYyv_gvzCl73uOnuwiJ8a8p_k",
+      "tt:jzuBh3nimSwis18Fi6JHHWEUMDT5rkY67T_BOY6sAkw"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "066900f8ab23ef2938a884fec5f79465c9c4602ef894a3f6cacc67865994f3464ecc382bdb1cff2b2eca6ce47c5f7572858df710c3d7b5b1c5a7f91926adad08",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "battery_id": "amyloid-crux-v1",
+  "title": "Alzheimer's Aβ*56-crux assessor probe battery (v1)",
+  "crux": "Do the multiple reports of Aβ*56 — a specific 56-kDa soluble amyloid-β assembly — as a discrete, memory-impairing species constitute independent confirmations that this species exists and is pathogenic?",
+  "note": "The measurement instrument for the amyloid worked example (the 4th case, added in the 2026-07-15 decoupling spike), mirroring hsm-crux-v1 / eggs-crux-v1 / cern-crux-v1. Faithfulness probes have an objective KEY pinned to an exact substring of a vetted source (fixtures/sources/*.abstract.txt); tests/test_cases.py mechanically re-checks that every `grounds.quote` is a literal substring of the cited source's sha-pinned excerpt, so 'correct' is defined by the retrieved record, not by contested neuroscience. Inferential probes have key=null; cairn's principled position is recorded in `cairn_principled` and is NOT scored as an error.\n\nWHAT THIS CASE IS AND IS NOT. It does NOT claim the amyloid hypothesis is false, and it does NOT claim soluble Aβ oligomers are harmless. It is a claim about corroboration-COUNTING for ONE species. Aβ*56 was isolated and named in exactly one paper (Lesné et al. 2006, Nature) by one laboratory (Ashe/Lesné, U Minnesota), and measured thereafter by the same lab's detection assay. The human-brain measurement (Lesné 2013) and the methods paper (Sherman & Lesné 2011) are the same characterization re-measured with the same reagent — not two more independent confirmations. In July 2024 Nature RETRACTED the 2006 paper over image-integrity concerns. The provenance intersection over the three Aβ*56 lines collapses to ent-abeta56 (and, transitively, the retracted src-lesne-2006); cairn refuses to count them as three independent votes.\n\nThe contrast proves the boundary in the other direction: Shankar et al. 2008 (Nat Med, Selkoe/Walsh) isolated soluble Aβ DIMERS directly from human Alzheimer's brain — a different species, lab, and preparation, upstream-disjoint from Aβ*56 — so an Aβ*56 line and the Shankar dimer line COMBINE. The general 'soluble Aβ oligomers are synaptotoxic' claim has support that does not route through Lesné 2006. Probe I3 exists to stop an assessor — or us — from overclaiming the refusal into 'the amyloid hypothesis collapses'.\n\nENCODING FOOTGUN (recorded, not hidden): the SAME concept is spelled 'Abeta*56' (ASCII) in the 2006/2008 PubMed records but 'Aβ*56' (U+03B2) in the 2011/2013 records. Each grounds.quote below is pinned to the exact bytes of ITS OWN source; a quote copied across records would silently fail the span check.",
+  "answer_space": ["YES", "NO", "UNCERTAIN"],
+  "binarization": {
+    "affirm": "YES -> 1, else (NO | UNCERTAIN) -> 0. The primary vector fed to neff.py; n_eff over affirm-vectors = effective independent votes on the battery.",
+    "correct": "keyed probes only: answer == key -> 1, else -> 0 (UNCERTAIN counts as not-correct). Secondary reliability / error-correlation readout."
+  },
+  "probes": [
+    {
+      "id": "F1",
+      "class": "faithfulness",
+      "text": "Lesné et al. (Nature 2006) report that Aβ*56 purified from the brains of impaired Tg2576 mice disrupts memory when administered to young rats.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-lesne-2006", "quote": "Abeta*56 purified from the brains of impaired Tg2576 mice disrupts memory when administered to young rats"}
+      ],
+      "rationale": "Verbatim (ASCII 'Abeta*56'); grounds claim-abeta56-impairs-memory (L5/ENTAILS). This is the origin — a mouse causal experiment. NOTE it is the ONLY causal experiment in the trio; the other two lines are a correlation and a method."
+    },
+    {
+      "id": "F2",
+      "class": "faithfulness",
+      "text": "Lesné et al. (Brain 2013) report strong positive correlations between Aβ*56 and two pathological forms of soluble tau in human brain tissue.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-lesne-2013", "quote": "we found strong positive correlations between Aβ*56 and two pathological forms of soluble tau"}
+      ],
+      "rationale": "Verbatim (Greek 'Aβ*56'); grounds claim-abeta56-human-brain (L5/ENTAILS). Same senior author (Ashe) and same species as the 2006 paper — a re-measurement of the SAME characterization in human tissue, not a new upstream."
+    },
+    {
+      "id": "F3",
+      "class": "faithfulness",
+      "text": "Sherman & Lesné (2011) describe a laboratory assay that identifies a 56-kDa Aβ oligomer, termed Aβ*56, whose amount correlates with cognitive impairment.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-sherman-2011", "quote": "we identified a 56 kDa oligomer of Aβ, termed Aβ*56, the amount of which correlates with cognitive impairment"}
+      ],
+      "rationale": "Verbatim (Greek 'Aβ*56'); grounds claim-abeta56-detection-method (L5/ENTAILS). This line is the shared REAGENT: a methods paper describing 'our biochemical approach' to isolate Aβ*56 is not an independent confirmation the species exists — it is the instrument by which the other two lines were measured. A cue-driven assessor reads it as a third vote."
+    },
+    {
+      "id": "F4",
+      "class": "faithfulness",
+      "text": "Shankar et al. (Nat Med 2008) conclude that soluble Aβ oligomers extracted from Alzheimer's disease brains impair synapse structure and function, with dimers the smallest synaptotoxic species.",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-shankar-2008", "quote": "soluble Abeta oligomers extracted from Alzheimer's disease brains potently impair synapse structure and function and that dimers are the smallest synaptotoxic species"}
+      ],
+      "rationale": "Verbatim (ASCII 'Abeta'); grounds claim-shankar-dimers (L5/ENTAILS). The COMBINABLE contrast — a different species (dimers), lab (Selkoe/Walsh), and preparation (direct human-brain extraction), upstream-disjoint from Aβ*56."
+    },
+    {
+      "id": "F5",
+      "class": "faithfulness",
+      "text": "The Shankar 2008 synaptotoxic species were isolated directly from the cerebral cortex of human subjects with Alzheimer's disease (not from the Tg2576 mouse model that Aβ*56 comes from).",
+      "key": "YES",
+      "grounds": [
+        {"source": "src-shankar-2008", "quote": "We extracted soluble amyloid-beta protein (Abeta) oligomers directly from the cerebral cortex of subjects with Alzheimer's disease"}
+      ],
+      "rationale": "THE DISJOINTNESS GUARD. It pins, by bytes, that the contrast line has a genuinely different preparation and source population from the Aβ*56 lineage. An assessor (or a careless DAG author) who collapsed Shankar into the Aβ*56 laundered set would be contradicted by this quote — it is why the contrast legitimately COMBINES rather than being a fourth entangled vote."
+    },
+    {
+      "id": "I1",
+      "class": "inferential",
+      "text": "The three Aβ*56 reports (Lesné 2006, Lesné 2013, Sherman & Lesné 2011) are INDEPENDENT confirmations that Aβ*56 exists and is pathogenic, whose agreement may be treated as three separate votes.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The refuse-to-combine core of this case. All three descend from one originating characterization (Lesné 2006) operationalized by one lab's assay; the provenance intersection collapses to ent-abeta56 (and, transitively, the retracted src-lesne-2006). An assessor answering YES commits the error cairn exists to catch — and every surface cue (three papers, a mouse experiment + a human correlation + a biochemical method, a decade apart, one of them in Nature) pushes toward YES."
+    },
+    {
+      "id": "I2",
+      "class": "inferential",
+      "text": "The Shankar 2008 dimer line provides evidence for soluble-oligomer synaptotoxicity that is independent of the Aβ*56 lineage, so an Aβ*56 line and the Shankar line may legitimately be combined.",
+      "key": null,
+      "cairn_principled": "YES",
+      "rationale": "The COMBINABLE contrast. Shankar's dimers are a different species, from a different lab, isolated by a different preparation directly from human brain — no derivation from Lesné 2006. cairn returns COMBINABLE for {claim-abeta56-impairs-memory, claim-shankar-dimers}. An engine that refused this too would be useless: it would deny that the field has any independent oligomer evidence."
+    },
+    {
+      "id": "I3",
+      "class": "inferential",
+      "text": "cairn's refusal to combine the three Aβ*56 reports means the amyloid hypothesis is false, or that soluble Aβ oligomers do not impair memory.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "THE ANTI-OVERCLAIM PROBE — it guards the boundary on the other side. A refusal is never a claim about the world's truth; it is a claim about THIS operation over THIS DAG. cairn prices the Aβ*56-specific corroboration count at ~one effective source; it says nothing about whether oligomers are harmful, and the Shankar contrast (I2) shows there IS independent support for oligomer synaptotoxicity. Answering YES overstates cairn's own finding, which would be its own kind of fabrication — the exact self-refutation this entry exists to prevent."
+    },
+    {
+      "id": "I4",
+      "class": "inferential",
+      "text": "The 2024 retraction of Lesné et al. 2006 is what makes the three Aβ*56 reports non-independent; before the retraction, treating them as three independent votes was correct.",
+      "key": null,
+      "cairn_principled": "NO",
+      "rationale": "The retraction is a fact ABOUT the shared upstream, not the reason for the refusal. The three lines shared ent-abeta56 / src-lesne-2006 on the day each was published; cairn walks the provenance topology and refuses whether or not the origin has been retracted. The retraction only makes the stakes vivid — it is the sharpest real-world instance of 'the anchor moved and the citations didn't'. An assessor answering YES has mistaken a downstream event (retraction) for the structural property (shared derivation) that was always there."
+    }
+  ]
+}

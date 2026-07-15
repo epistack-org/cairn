@@ -1,0 +1,48 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:KoXPpLa-VPA8GVvehJQEEPk5Fd570I4xFN04M0h-IGw",
+  "assertion": {
+    "title": "Brain amyloid-β oligomers in ageing and Alzheimer's disease",
+    "authors": "Lesné SE, Sherman MA, Grant M, Kuskowski M, Schneider JA, Bennett DA, Ashe KH",
+    "venue": "Brain",
+    "year": 2013,
+    "volume": "136",
+    "issue": "Pt 5",
+    "pages": "1383-1398",
+    "doi": "10.1093/brain/awt062",
+    "pmid": "23576130",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "Alzheimer's disease begins about two decades before the onset of symptoms or neuron death, and is believed to be caused by pathogenic amyloid-β aggregates that initiate a cascade of molecular events culminating in widespread neurodegeneration. The microtubule binding protein tau may mediate the effects of amyloid-β in this cascade. Amyloid plaques comprised of insoluble, fibrillar amyloid-β aggregates are the most characteristic feature of Alzheimer's disease. However, the correspondence between the distribution of plaques and the pattern of neurodegeneration is tenuous. This discrepancy has stimulated the investigation of other amyloid-β aggregates, including soluble amyloid-β oligomers. Different soluble amyloid-β oligomers have been studied in several mouse models, but not systematically in humans. Here, we measured three amyloid-β oligomers previously described in mouse models-amyloid-β trimers, Aβ*56 and amyloid-β dimers-in brain tissue from 75 cognitively intact individuals, ranging from young children to the elderly, and 58 impaired subjects with mild cognitive impairment or probable Alzheimer's disease. As in mouse models, where amyloid-β trimers appear to be the fundamental amyloid-β assembly unit of Aβ*56 and are present in young mice prior to memory decline, amyloid-β trimers in humans were present in children and adolescents; their levels rose gradually with age and were significantly above baseline in subjects in their 70s. Aβ*56 levels were negligible in children and young adults, rose significantly above baseline in subjects in their 40s and increased steadily thereafter. Amyloid-β dimers were undetectable until subjects were in their 60s; their levels then increased sharply and correlated with plaque load. Remarkably, in cognitively intact individuals we found strong positive correlations between Aβ*56 and two pathological forms of soluble tau (tau-CP13 and tau-Alz50), and negative correlations between Aβ*56 and two postsynaptic proteins (drebrin and fyn kinase), but none between amyloid-β dimers or amyloid-β trimers and tau or synaptic proteins. Comparing impaired with age-matched unimpaired subjects, we found the highest levels of amyloid-β dimers, but the lowest levels of Aβ*56 and amyloid-β trimers, in subjects with probable Alzheimer's disease. In conclusion, in cognitively normal adults Aβ*56 increased ahead of amyloid-β dimers or amyloid-β trimers, and pathological tau proteins and postsynaptic proteins correlated with Aβ*56, but not amyloid-β dimers or amyloid-β trimers. We propose that Aβ*56 may play a pathogenic role very early in the pathogenesis of Alzheimer's disease.",
+    "excerpt_sha256": "f795a135a8297c2036875c19f1ac7815cdf2d3e8a9e8d0194e64c79429c6b8af",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 23576130); AbstractText via itertext() (U+03B2 rendered as the literal Greek beta)",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=23576130&rettype=abstract&retmode=xml"
+      ]
+    },
+    "errata": [
+      "Erratum: Brain 2022 Aug 27;145(8):e72-e76 (10.1093/brain/awac143) — image corrections"
+    ],
+    "verification": "L1",
+    "role": "the human-brain Aβ*56 measurement — same senior author (Ashe) and same species as Lesné 2006; a re-measurement of the SAME characterization, not an independent line",
+    "author_overlap_note": "Kathleen H. Ashe (senior) and Sarah/Stéphane Lesné are authors of BOTH this and src-lesne-2006; Michael A. Sherman is shared with src-sherman-2011 — a lab-level non-independence on top of the shared species."
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:jzuBh3nimSwis18Fi6JHHWEUMDT5rkY67T_BOY6sAkw"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "e11051aefedac5d0a551cd138b06d3ba66ec2ba2dcf891ff46605a38966ce43ff10ae26b1d1bbd12100a776ce9a729191fb23071871cac17c55d56a9a629a705",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

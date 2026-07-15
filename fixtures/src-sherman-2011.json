@@ -1,0 +1,43 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:E1fFOAYffLypQdLx3nakPlLBc3pM2_fC1Awcr4kgeGI",
+  "assertion": {
+    "title": "Detecting Aβ*56 oligomers in brain tissues",
+    "authors": "Sherman MA, Lesné SE",
+    "venue": "Methods in Molecular Biology",
+    "year": 2011,
+    "volume": "670",
+    "pages": "45-56",
+    "doi": "10.1007/978-1-60761-744-0_4",
+    "pmid": "20967582",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "Since its original description in 1906 by Dr Alois Alzheimer, amyloid plaques and neurofibrillary tangles have remained the hypothetical cause of Alzheimer's disease. However, plaque burden poorly predicts cognitive status in humans, which led several groups to investigate the possibility that soluble species of amyloid-beta (Aβ) peptides could be playing an important pathological function in the aging brain. Through a multistep fractionation protocol, we identified a 56 kDa oligomer of Aβ, termed Aβ*56, the amount of which correlates with cognitive impairment. Here, we describe our biochemical approach to isolate this oligomeric Aβ species in brain tissue of transgenic mouse models of AD.",
+    "excerpt_sha256": "2365ef5e7845e0a2a676b16fb974f930cd71e0cc7e24647bb409fb29670833c5",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 20967582); AbstractText via itertext()",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20967582&rettype=abstract&retmode=xml"
+      ]
+    },
+    "verification": "L1",
+    "role": "the Aβ*56 detection ASSAY itself — this is the shared reagent. A methods paper describing 'our biochemical approach' to isolate Aβ*56 is not an independent confirmation that Aβ*56 is real; it is the instrument by which the other two lines were measured."
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:jzuBh3nimSwis18Fi6JHHWEUMDT5rkY67T_BOY6sAkw"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "0f12c8cbdc94ce8e8b92306f07bb15ff573eb5dfb856c0a81ce05e59ebc25ea9d2bb94ce84001a8cac49639d32684b95d1329b21f91ee5a87245d7484232730d",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

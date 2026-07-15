@@ -43,10 +43,16 @@ def _store() -> dict[str, dict]:
 STORE = _store()
 
 
-def test_three_worked_examples_ship():
-    """The floor promises three. Count them from the corpus, not from prose."""
-    assert len(CASES) == 3, f"expected 3 worked examples, corpus declares {sorted(CASES)}"
-    assert set(CASES) == {"covid-origins", "eggs-good-for-you", "cern-black-hole"}
+def test_worked_examples_ship():
+    """The corpus ships four worked examples. Count them from the corpus, not from prose.
+
+    The fourth (amyloid-abeta56) was added in the 2026-07-15 decoupling spike, from a live
+    scientific controversy the engine was NOT co-developed against, to demonstrate the
+    refusal generalizes beyond the three seed cases (flf-contest supplementary material)."""
+    assert len(CASES) == 4, f"expected 4 worked examples, corpus declares {sorted(CASES)}"
+    assert set(CASES) == {
+        "covid-origins", "eggs-good-for-you", "cern-black-hole", "amyloid-abeta56"
+    }
 
 
 @pytest.mark.parametrize("case_id", CASE_IDS)

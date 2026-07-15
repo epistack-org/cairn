@@ -1,0 +1,44 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:cNw2ymwsfkwYR6P9X7GfWQzt4I01irCXGAmnpF1sxag",
+  "assertion": {
+    "title": "Amyloid-beta protein dimers isolated directly from Alzheimer's brains impair synaptic plasticity and memory",
+    "authors": "Shankar GM, Li S, Mehta TH, Garcia-Munoz A, Shepardson NE, Smith I, Brett FM, Farrell MA, Rowan MJ, Lemere CA, Regan CM, Walsh DM, Sabatini BL, Selkoe DJ",
+    "venue": "Nature Medicine",
+    "year": 2008,
+    "volume": "14",
+    "issue": "8",
+    "pages": "837-842",
+    "doi": "10.1038/nm1782",
+    "pmid": "18568035",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "Alzheimer's disease constitutes a rising threat to public health. Despite extensive research in cellular and animal models, identifying the pathogenic agent present in the human brain and showing that it confers key features of Alzheimer's disease has not been achieved. We extracted soluble amyloid-beta protein (Abeta) oligomers directly from the cerebral cortex of subjects with Alzheimer's disease. The oligomers potently inhibited long-term potentiation (LTP), enhanced long-term depression (LTD) and reduced dendritic spine density in normal rodent hippocampus. Soluble Abeta from Alzheimer's disease brain also disrupted the memory of a learned behavior in normal rats. These various effects were specifically attributable to Abeta dimers. Mechanistically, metabotropic glutamate receptors were required for the LTD enhancement, and N-methyl D-aspartate receptors were required for the spine loss. Co-administering antibodies to the Abeta N-terminus prevented the LTP and LTD deficits, whereas antibodies to the midregion or C-terminus were less effective. Insoluble amyloid plaque cores from Alzheimer's disease cortex did not impair LTP unless they were first solubilized to release Abeta dimers, suggesting that plaque cores are largely inactive but sequester Abeta dimers that are synaptotoxic. We conclude that soluble Abeta oligomers extracted from Alzheimer's disease brains potently impair synapse structure and function and that dimers are the smallest synaptotoxic species.",
+    "excerpt_sha256": "c2991a214c140703fb140e06e3187747beaaaecf94d74df9cfaea2b226f64417",
+    "retrieval": {
+      "fetched_at": "2026-07-15",
+      "method": "NCBI E-utilities efetch (PMID 18568035); AbstractText via itertext() (this record spells the peptide 'Abeta', ASCII)",
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=18568035&rettype=abstract&retmode=xml"
+      ]
+    },
+    "verification": "L1",
+    "role": "the genuinely INDEPENDENT line (the combinable contrast) — human-brain Aβ dimers from a different lab, species, and preparation; disjoint upstream from Aβ*56"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:R2pcfdNGBkLuJpbbDyfnEGHZznED3YrT-F4VydMEXDQ"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "3b5b94a72599edf551495bfc29520d232cf0b50382afa48eb7e20b02f92a845373982cbc90502fede9a385ccfb8e04c71f6f20a9fbf49c219033932f07de2507",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

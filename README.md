@@ -45,9 +45,9 @@ Claude-Code transcript structurally cannot produce**:
    correctly labelled, so a model is never mistaken for a bound. See
    [`assessment/FRECHET.md`](assessment/FRECHET.md).
 
-## The three worked examples
+## The worked examples
 
-Cairn ships **three** vetted, span-grounded cases. In each one, several lines of evidence
+Cairn ships **four** vetted, span-grounded cases. In each one, several lines of evidence
 look independent, are treated as independent, and **are not** — and in each one the
 refusal is mechanical, byte-checkable, and reproducible on a fresh machine.
 
@@ -56,15 +56,18 @@ refusal is mechanical, byte-checkable, and reproducible on a fresh machine.
 | **covid-origins** | 3 proximity lines (geographic clustering, live-mammal sales, environmental sampling) | **one dataset** — Worobey 2022's early-case data | 1 hop |
 | **eggs-good-for-you** | 3 reassuring meta-analyses (*BMJ* 2013, *Eur J Nutr* 2021 "nearly 2 million individuals", *BMJ* 2020) | **one cohort backbone** — the same nurses & health professionals (NHS/HPFS) | **2 hops (transitive)** |
 | **cern-black-hole** | 3 collider-safety assurances (LSAG 2008, Giddings & Mangano 2008, Jaffe 2000 — *two accelerators, three author teams, eight years apart*) | **one premise** — "cosmic rays have hit astronomical bodies harder for billions of years and they're still here" | 1 hop |
+| **amyloid-abeta56** | 3 reports of Aβ*56 as a memory-impairing species (Lesné 2006 mice, Lesné 2013 human brain, Sherman 2011 the assay) | **one foundational result + one assay** — the Lesné 2006 characterization (RETRACTED 2024), carried by one lab | 1 hop |
 
 Each case declares its structure in [`fixtures/CASES.json`](fixtures/CASES.json), and the
 build **mechanically verifies the declaration against what the detector actually finds**
-before writing a single record. "Cairn ships 3 worked examples" is a checked property of
+before writing a single record. "Cairn ships 4 worked examples" is a checked property of
 the corpus, not a sentence in this README (`tests/test_cases.py`).
 
-The three are deliberately different *shapes* of shared upstream — a **dataset**, a
-**cohort**, a **premise** — because layer-(a) non-independence is not only about sharing a
-corpus. The eggs case is the subtlest and the most important:
+They are deliberately different *shapes* of shared upstream — a **dataset**, a **cohort**,
+a **premise**, and a **foundational-result-plus-reagent** — because layer-(a)
+non-independence is not only about sharing a corpus. The amyloid case (added in the
+2026-07-15 decoupling spike, from a controversy the engine was *not* co-developed against)
+is the generalization test; the eggs case is the subtlest and the most important:
 
 > Every egg review is **individually correct**. They each de-duplicate properly; there is
 > no villain and no error to point at in any single paper. The non-independence is a
@@ -82,16 +85,17 @@ Full vetting records, including what we *could not* verify and the hypotheses we
 because the literature did not support them:
 [`fixtures/PROVENANCE.md`](fixtures/PROVENANCE.md) (covid) ·
 [`fixtures/PROVENANCE-eggs.md`](fixtures/PROVENANCE-eggs.md) ·
-[`fixtures/PROVENANCE-cern.md`](fixtures/PROVENANCE-cern.md).
+[`fixtures/PROVENANCE-cern.md`](fixtures/PROVENANCE-cern.md) ·
+[`fixtures/PROVENANCE-amyloid.md`](fixtures/PROVENANCE-amyloid.md).
 
 ## Run it
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -e . pytest
-.venv/bin/python fixtures/build_fixtures.py     # mint all 3 vetted corpora (sha-pinned)
-.venv/bin/python -m pytest -q                   # 122 tests
-.venv/bin/python demo/worked_examples.py        # all three cases, side by side
-.venv/bin/cairn ground 'fixtures/*.json'        # 16/16 claim spans resolve to their source
+.venv/bin/python fixtures/build_fixtures.py     # mint all 4 vetted corpora (sha-pinned)
+.venv/bin/python -m pytest -q                   # 127 tests
+.venv/bin/python demo/worked_examples.py        # all four cases, side by side
+.venv/bin/cairn ground 'fixtures/*.json'        # 21/21 claim spans resolve to their source
 .venv/bin/cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json  # recompute measured n_eff
 .venv/bin/cairn frechet fixtures/claim-geographic-clustering.json fixtures/claim-environmental-sampling.json fixtures/claim-live-mammal-sales.json fixtures/src-worobey-2022.json  # -> REFUSE-TO-COMBINE-AS-POINT (exit 2): the honest interval
 .venv/bin/cairn explain 'fixtures/*.json' --claims claim-geographic-clustering claim-environmental-sampling claim-live-mammal-sales  # -> the refusal as one plain-English paragraph, incl. what would un-refuse it
@@ -172,12 +176,12 @@ cairn headtohead 'fixtures/*.json'      # A4: careful-baseline head-to-head over
 | `cairn/assessment.py` | recompute + verify the measured n_eff from a pinned assessor run (`cairn assess`) |
 | `cairn/trusty.py`, `canonical.py`, `keys.py` | content-addressing, JCS, signing primitives |
 | `schemas/cairn.schema.json` | the envelope JSON Schema (Draft 2020-12) incl. the grounding tuple + Trust-Ladder enum |
-| `fixtures/` | the **vetted** corpora for all **3 worked examples** — span-grounded claims (L4/L5) + sha-pinned sources |
+| `fixtures/` | the **vetted** corpora for all **4 worked examples** — span-grounded claims (L4/L5) + sha-pinned sources |
 | `fixtures/CASES.json` | the case manifest: what each example claims (laundered set, shared upstream, contrast). The build verifies it against the detector; CI re-checks it |
 | `fixtures/sources/*.abstract.txt` | the byte-exact retrieved sources (the raw `source_doc`s) |
 | `fixtures/PROVENANCE.md`, `PROVENANCE-eggs.md`, `PROVENANCE-cern.md` | per-case retrieval record, rung rationale, and the honest vetting decisions — **including the hypotheses we cut and the things we could not verify** |
 | `assessment/probes.json`, `probes-eggs.json`, `probes-cern.json` | one probe battery per case (crux + keyed faithfulness probes + inferential probes) |
-| `demo/worked_examples.py` | all three cases side by side — the wide view |
+| `demo/worked_examples.py` | all four cases side by side — the wide view |
 | `demo/hsm_trio.py` | the naive-vs-Cairn head-to-head — the deep view (COVID) |
 | `assessment/` | the **measured** A2 assessor pass: probe battery, evidence partitions, panel + pinned runs |
 | `assessment/ASSESSMENT.md` | the measured n_eff, the diversity levers, and the adversarial audit's honest caveats |
@@ -191,7 +195,7 @@ cairn headtohead 'fixtures/*.json'      # A4: careful-baseline head-to-head over
 
 - **JCS for v0** (git-native); RDFC-1.0 (RDF-canonical) is the documented migration —
   switching changes the URI scheme (one-way door).
-- **Fixtures are vetted (roadmap A1; all 3 cases).** Every claim is span-grounded to a
+- **Fixtures are vetted (roadmap A1; all 4 cases).** Every claim is span-grounded to a
   first-party, byte-verified source and carries a Trust-Ladder rung (L1 sources;
   L4/L5 claims) — no record sits at `unverified-fixture` (the value is no longer
   admissible; any record still carrying it fails `cairn validate`). Judgment calls that

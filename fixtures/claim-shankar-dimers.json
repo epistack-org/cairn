@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:uKELOXPBSd8GvBiXji4R9aZownbTZwZyxacjx5S2X1Y",
+  "assertion": {
+    "text": "Soluble amyloid-β dimers isolated directly from human Alzheimer's brain potently impair synapse structure and function — a synaptotoxic species characterized independently of Aβ*56.",
+    "subject": "tt:R2pcfdNGBkLuJpbbDyfnEGHZznED3YrT-F4VydMEXDQ",
+    "grounding": {
+      "source": "tt:cNw2ymwsfkwYR6P9X7GfWQzt4I01irCXGAmnpF1sxag",
+      "char_span": [
+        1323,
+        1489
+      ],
+      "quote": "soluble Abeta oligomers extracted from Alzheimer's disease brains potently impair synapse structure and function and that dimers are the smallest synaptotoxic species",
+      "extractor": "agent:claude-fable-5/amyloid-spike-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "c2991a214c140703fb140e06e3187747beaaaecf94d74df9cfaea2b226f64417"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-oligomer-toxicity"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:cNw2ymwsfkwYR6P9X7GfWQzt4I01irCXGAmnpF1sxag",
+      "tt:R2pcfdNGBkLuJpbbDyfnEGHZznED3YrT-F4VydMEXDQ"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "78cb1e21061071c54461a29a8d44d4cfdf251370267beea4e15780281322fed23c003e379dbc5a97588f69ad66846998e54781b935bc17601a1018e1021e0206",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

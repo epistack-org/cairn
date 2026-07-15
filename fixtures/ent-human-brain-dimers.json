@@ -1,0 +1,30 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:R2pcfdNGBkLuJpbbDyfnEGHZznED3YrT-F4VydMEXDQ",
+  "assertion": {
+    "name": "Soluble Aβ dimers isolated directly from human Alzheimer's brain",
+    "aliases": [
+      "human-brain Aβ dimers",
+      "the Selkoe/Walsh dimers"
+    ],
+    "kind": "MolecularSpecies",
+    "statement": "Soluble amyloid-β dimers extracted directly from the cerebral cortex of human subjects with Alzheimer's disease (Shankar et al. 2008), shown to impair synaptic plasticity and memory.",
+    "note": "A genuinely DISJOINT upstream from Aβ*56: a different species (dimers, not the 56-kDa assembly), a different laboratory (Selkoe/Walsh, Harvard/Dublin), a different preparation (direct human-brain extraction, not Tg2576 mice), and no derivation from the Lesné 2006 characterization. Independence on the provenance dimension really does hold between this and ent-abeta56 — which is why the contrast COMBINES.",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "8e945cc0be8c21ad8071a982695375dd62d2f097feb9f33ead34ac803bd4bd3f52a474cf476dffdfec73dad1ef88dcfe2f5af7e76f9b1cf3da2a43472203e80f",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

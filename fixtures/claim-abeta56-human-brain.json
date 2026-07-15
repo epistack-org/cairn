@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:mLO3ffReyf18str8Ok3CyUXpyVVViFFeRDWO5qrLzhk",
+  "assertion": {
+    "text": "In cognitively intact human brain tissue, Aβ*56 levels correlate positively with two pathological forms of soluble tau — a human-tissue corroboration that Aβ*56 is a pathogenically relevant species.",
+    "subject": "tt:jzuBh3nimSwis18Fi6JHHWEUMDT5rkY67T_BOY6sAkw",
+    "grounding": {
+      "source": "tt:KoXPpLa-VPA8GVvehJQEEPk5Fd570I4xFN04M0h-IGw",
+      "char_span": [
+        1798,
+        1891
+      ],
+      "quote": "we found strong positive correlations between Aβ*56 and two pathological forms of soluble tau",
+      "extractor": "agent:claude-fable-5/amyloid-spike-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "f795a135a8297c2036875c19f1ac7815cdf2d3e8a9e8d0194e64c79429c6b8af"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-abeta56-pathogenic"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:KoXPpLa-VPA8GVvehJQEEPk5Fd570I4xFN04M0h-IGw",
+      "tt:jzuBh3nimSwis18Fi6JHHWEUMDT5rkY67T_BOY6sAkw"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "9ec211506f30e31dc54b760010e27c96f282f0deadc4519013343fe2a7b2f50fe0d3aeb0c6178452cfe548afb94a4a6dde9a90f15b1b2ead2ac6927ae756e401",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

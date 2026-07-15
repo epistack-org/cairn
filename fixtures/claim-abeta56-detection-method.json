@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:mjXlKE3QoV43PAe7u-9r7w1f63kz3xzVGXaIWT9EpdU",
+  "assertion": {
+    "text": "A 56-kDa Aβ oligomer, termed Aβ*56, is identified by the laboratory's multistep-fractionation assay and its abundance correlates with cognitive impairment — the shared method by which Aβ*56 is measured.",
+    "subject": "tt:jzuBh3nimSwis18Fi6JHHWEUMDT5rkY67T_BOY6sAkw",
+    "grounding": {
+      "source": "tt:E1fFOAYffLypQdLx3nakPlLBc3pM2_fC1Awcr4kgeGI",
+      "char_span": [
+        457,
+        566
+      ],
+      "quote": "we identified a 56 kDa oligomer of Aβ, termed Aβ*56, the amount of which correlates with cognitive impairment",
+      "extractor": "agent:claude-fable-5/amyloid-spike-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "2365ef5e7845e0a2a676b16fb974f930cd71e0cc7e24647bb409fb29670833c5"
+    },
+    "verification": "L5",
+    "illustrative_LR": 5.0,
+    "polarity": "supports-abeta56-pathogenic"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:E1fFOAYffLypQdLx3nakPlLBc3pM2_fC1Awcr4kgeGI",
+      "tt:jzuBh3nimSwis18Fi6JHHWEUMDT5rkY67T_BOY6sAkw"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "3eb5dbd7bf4ee83977b59abf1449612e506219bad871671d18d1ed11250784dd212ad6939580851c03cd8c622d3fb03cd2943989788e09e1beaf5ad660689a0c",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

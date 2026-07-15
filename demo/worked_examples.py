@@ -1,9 +1,10 @@
-"""The three worked examples, side by side (floor deliverable #3, dev/cairn#9).
+"""The worked examples, side by side (floor deliverable #3, dev/cairn#9).
 
 `demo/hsm_trio.py` goes DEEP on one case (COVID: the naive baseline, the careful
 baseline, the Fréchet interval, the measured n_eff). This goes WIDE: it runs the same
-mechanical checks over all three cases and shows that the refusal is not a property of
-one hand-picked example.
+mechanical checks over every case (COVID, eggs, CERN, and the amyloid Aβ*56 cascade added
+in the 2026-07-15 decoupling spike) and shows that the refusal is not a property of one
+hand-picked example.
 
 Everything printed here is read off the minted fixtures — no substrate, no network, no
 model calls. `fixtures/CASES.json` declares each case's structure; the build already
@@ -117,7 +118,7 @@ def main() -> int:
 
     print("\n" + "=" * 78)
     print(f"  {refused}/{len(cases)} cases REFUSE-TO-COMBINE on the provenance dimension.")
-    print("  In all three, the lines look independent and are not. The refusal is")
+    print("  In every one, the lines look independent and are not. The refusal is")
     print("  mechanical, span-grounded, and re-checkable on a fresh machine —")
     print("  that is the delta, not the cognition.")
     print("=" * 78 + "\n")
