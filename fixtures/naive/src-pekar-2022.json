@@ -1,0 +1,51 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc",
+  "assertion": {
+    "title": "The molecular epidemiology of multiple zoonotic origins of SARS-CoV-2",
+    "authors": "Pekar JE, et al. (29 authors)",
+    "venue": "Science",
+    "year": 2022,
+    "volume": "377",
+    "issue": "6609",
+    "pages": "960-966",
+    "doi": "10.1126/science.abp8337",
+    "pmid": "35881005",
+    "pmcid": "PMC9348752",
+    "published": "2022-08-26",
+    "online_first": "2022-07-26",
+    "url": "https://www.science.org/doi/10.1126/science.abp8337",
+    "excerpt_kind": "abstract (version of record)",
+    "excerpt": "Understanding the circumstances that lead to pandemics is important for their prevention. We analyzed the genomic diversity of severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) early in the coronavirus disease 2019 (COVID-19) pandemic. We show that SARS-CoV-2 genomic diversity before February 2020 likely comprised only two distinct viral lineages, denoted \"A\" and \"B.\" Phylodynamic rooting methods, coupled with epidemic simulations, reveal that these lineages were the result of at least two separate cross-species transmission events into humans. The first zoonotic transmission likely involved lineage B viruses around 18 November 2019 (23 October to 8 December), and the separate introduction of lineage A likely occurred within weeks of this event. These findings indicate that it is unlikely that SARS-CoV-2 circulated widely in humans before November 2019 and define the narrow window between when SARS-CoV-2 first jumped into humans and when the first cases of COVID-19 were reported. As with other coronaviruses, SARS-CoV-2 emergence likely resulted from multiple zoonotic events.",
+    "excerpt_sha256": "c046d96297900e9d067e47ab0e17d2dedf317037c19d09d9593689c17f5adbfe",
+    "retrieval": {
+      "fetched_at": "2026-07-04",
+      "method": "NCBI E-utilities efetch (PMID 35881005) + Europe PMC REST; byte-identical cross-check; publisher HTML was paywalled (403)",
+      "cross_verified": true,
+      "sources": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=35881005&rettype=abstract&retmode=xml",
+        "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1126/science.abp8337&resultType=core&format=json"
+      ]
+    },
+    "errata": [
+      "Erratum (10.1126/science.adl0585) corrects overestimated Bayes factors from a coding error; the two-introductions conclusion stands"
+    ],
+    "verification": "L1",
+    "role": "a genuinely distinct (molecular) upstream"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "fed392599ca29585a8feede92e1545dddd72040c4da1eec59956b7397518c95d97e1c32a9237ab66531c991be684fe53321b309deadcedb4c5b055f57c07640e",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

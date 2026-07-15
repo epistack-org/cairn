@@ -4,7 +4,7 @@
     "crux": "Did SARS-CoV-2 emerge via zoonotic spillover associated with the Huanan Seafood Wholesale Market, as opposed to a non-market or non-zoonotic introduction?",
     "battery": "assessment/probes.json",
     "shared_upstream": "src-worobey-2022",
-    "shared_upstream_kind": "dataset (one paper's early-case data)",
+    "shared_upstream_kind": "one paper / one author collective; at the data layer two of the three (geographic clustering, environmental sampling) descend from the same market-anchored PRC early-case investigation, and the third (live-mammal sales, Xiao 2021) does not",
     "laundered_set": [
       "claim-geographic-clustering",
       "claim-environmental-sampling",
@@ -14,8 +14,8 @@
       "claim-geographic-clustering",
       "claim-two-lineages"
     ],
-    "punchline": "Three apparently independent lines of proximity evidence all derive from ONE early-case dataset (Worobey 2022). The naive transcript multiplies 5x5x5 = 125:1; the provenance intersection collapses to a single upstream, so the product is undefined.",
-    "n_eff_corpus_scale": 2.85
+    "contrast_expected": "REFUSE-TO-COMBINE",
+    "punchline": "Three apparently independent lines of proximity evidence come from ONE paper by ONE author collective (Worobey 2022); at the data layer two of the three descend from the same market-anchored PRC early-case investigation, and the third (Xiao 2021) does not. The naive transcript multiplies 5x5x5 = 125:1; the provenance intersection collapses to a single upstream, so the product is undefined."
   },
   "eggs-good-for-you": {
     "title": "Are eggs good for you — the egg/CVD meta-analyses",
@@ -32,8 +32,8 @@
       "claim-eggs-hu-no-association",
       "claim-eggs-djousse-no-association"
     ],
+    "contrast_expected": "COMBINABLE",
     "punchline": "Three apparently independent reassuring findings — a 2013 BMJ dose-response meta-analysis, a 2021 meta-analysis of 39 studies and 'nearly 2 million individuals', and a 2020 BMJ three-cohort study plus updated meta-analysis — all re-pool the SAME nurses and health professionals (NHS/HPFS). Each review de-duplicates internally and is locally correct; the laundering happens BETWEEN them, at the aggregation layer. 'Nearly 2 million individuals' is not 2 million independent people. The shared upstream is invisible at the claim level — it is two hops up, found only by walking the DAG.",
-    "n_eff_corpus_scale": 3.97,
     "exercises": "the TRANSITIVE shared-ancestor detector — the first real corpus to do so (previously proven only against a synthetic fixture in tests)"
   },
   "cern-black-hole": {
@@ -48,10 +48,10 @@
       "claim-cern-moon-strangelet"
     ],
     "contrast_pair": [
-      "claim-cern-bh-production-rate",
-      "claim-cern-astro-stability"
+      "claim-cern-hawking-evaporation",
+      "claim-cern-wd-ns-bound"
     ],
-    "punchline": "Three safety assurances that look maximally independent — three papers, two accelerators, three author teams, eight years apart, three different hypothetical catastrophes — all reach 'safe' through ONE premise: cosmic rays have hit astronomical bodies harder for billions of years and they are still here. Each paper says so in its own abstract. This is the case with the STRONGEST expert consensus, and cairn prices it honestly (effective independence ~1) rather than rewarding it. It does NOT say the LHC is unsafe — it says three assurances sharing a premise are not three votes.",
-    "n_eff_corpus_scale": 2.16
+    "contrast_expected": "COMBINABLE",
+    "punchline": "Three safety assurances that look maximally independent — three papers, two accelerators, three author teams, eight years apart, three different hypothetical catastrophes — all reach 'safe' through ONE premise: cosmic rays have hit astronomical bodies harder for billions of years and they are still here. Each paper says so in its own abstract. This is the case with the STRONGEST expert consensus, and cairn prices it honestly (effective independence ~1) rather than rewarding it. It does NOT say the LHC is unsafe — it says three assurances sharing a premise are not three votes."
   }
 }

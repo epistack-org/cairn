@@ -1,0 +1,26 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:A5gulaXw4s5OBwbj67VYhAkIuUzU1ME0emxrMQ656eM",
+  "assertion": {
+    "name": "Chris Newman",
+    "kind": "Person",
+    "statement": "Chris Newman is a co-author of both Xiao et al. 2021 (the animal-sales survey) and Worobey et al. 2022 (author 9 of 18).",
+    "note": "The single genuinely author-specific finding in the COVID case: the one proximity leg that is data-independent of Worobey 2022 (live-mammal sales, via Xiao 2021) still shares a human with it. One sentence, not a case study — a shared author is a defeasible prior on shared pipeline, NOT a refusal gate (it would wrongly refuse ATLAS/CMS, and we ship a CERN case). Recorded as an identity node, not a derivedFrom edge, so provenance is not conflated with attribution.",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "370596c0e9cdd7a3cc7fd7de24fa230d2788023b5e21617b7646a6e5f1796cfb78ec4225af098509a37225b10d91d8386484f481c817a354b4e53e7c7028f600",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

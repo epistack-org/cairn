@@ -1,0 +1,31 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:2LfPzTKL5R-QxJsHWhXxX83gywc6oBaLbp3t91VZWoA",
+  "assertion": {
+    "title": "Animal sales from Wuhan wet markets immediately prior to the COVID-19 pandemic",
+    "authors": "Xiao X, Newman C, Buesching CD, Macdonald DW, Zhou ZM",
+    "venue": "Scientific Reports",
+    "year": 2021,
+    "volume": "11",
+    "pages": "11898",
+    "doi": "10.1038/s41598-021-91470-2",
+    "verification": "L1",
+    "role": "the 2017-2019 monthly animal-sales survey (collected to trace SFTS, before the outbreak) that Worobey 2022's live-mammal-sales line rests on — the one proximity leg that is data-INDEPENDENT of the PRC early-case investigation",
+    "author_overlap_note": "Co-author Chris Newman (ent-author-chris-newman) is also author 9 of 18 on Worobey et al. 2022: data-independent, not author-independent."
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "d9a200a04cdf75d1edb283c4c112654cce9bf498fb6fb0f91a633e00e819b8ff47a3f461a2cfaab885d77b7c0ef0607c628cfbd09616899de3f04a8c09d7580c",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

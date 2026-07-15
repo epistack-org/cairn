@@ -1,0 +1,31 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Entity",
+  "id": "tt:gyZCttDBh1aiZrcUQLqPFfSFAWVuaxGmu7xl1HhPOz4",
+  "assertion": {
+    "name": "The market-anchored PRC early-case investigation (Dec 2019 - Feb 2021)",
+    "aliases": [
+      "WHO-China joint report Dec-2019 line list",
+      "China-CDC Huanan market sampling",
+      "the early-case record"
+    ],
+    "kind": "Investigation",
+    "statement": "The retrospective early-case record assembled by China CDC / Wuhan CDC and the WHO-China joint mission: the December-2019 Hubei line list (174 cases -> 164 Wuhan -> 155 map-extracted coordinates) and the 22-Jan-2020 China-CDC Huanan-market environmental sampling campaign.",
+    "note": "A single-team, non-replicable investigation and the shared data-layer upstream of the geographic-clustering and environmental-sampling lines. NOT an upstream of the live-mammal-sales line, which descends from Xiao 2021 (a 2017-2019 pre-outbreak animal survey). Judge Stansifer, independently: it 'cannot be independently verified or duplicated.'",
+    "verification": "L1"
+  },
+  "provenance": {
+    "derivedFrom": [],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "assert",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "9aef26001dd1b815931f1c1c3eeccdb12472498ec61538a4018d2924c36738e51f7317903a3e8b90cb906a20cf4a86be51fd5324be380caebf042740fc0b650e",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

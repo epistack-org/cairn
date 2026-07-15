@@ -1,0 +1,35 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Source",
+  "id": "tt:ivXxm3LL-a-eMHv2YmPozCCLdVqkhLW2aix1Be3u3oU",
+  "assertion": {
+    "title": "Dissecting the early COVID-19 cases in Wuhan",
+    "authors": "Worobey M",
+    "venue": "Science",
+    "year": 2021,
+    "volume": "374",
+    "issue": "6572",
+    "pages": "1202-1204",
+    "doi": "10.1126/science.abm4454",
+    "pmid": "34793199",
+    "verification": "L1",
+    "role": "the earliest-case re-analysis (the 10-Dec-2019 market-vendor index case) that Pekar 2022's molecular-clock calibration rests on — a calibration edge coupling Pekar to the Worobey line",
+    "note": "Bibliographic record confirmed via NCBI E-utilities (PMID 34793199 -> DOI 10.1126/science.abm4454). Itself a re-analysis of the same early-case record."
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:gyZCttDBh1aiZrcUQLqPFfSFAWVuaxGmu7xl1HhPOz4"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "ingest",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "d2c851423f9dd2470a7ec071cfcad4e4629268b735d3a6902bacb60d997dffba6367edf964721e3d333667b6117b0707d0e0318c6005fb94025c5f0c347aaa06",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

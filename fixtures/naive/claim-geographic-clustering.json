@@ -1,30 +1,28 @@
 {
   "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
   "@type": "epi:Claim",
-  "id": "tt:tIPnn3RK2_Y58_Bg_h_3MkwtX5rm5k2ZUdURqQfp5NI",
+  "id": "tt:LvhPCfZOuZLzUm3-lIRxcFbHGG15zRO8ApWaSH1JpHI",
   "assertion": {
-    "text": "Within the Huanan market, SARS-CoV-2-positive environmental samples were spatially associated with stalls selling live mammals.",
+    "text": "The earliest known December-2019 COVID-19 cases were geographically centered on the Huanan market, including cases with no reported direct market link.",
     "subject": "tt:GvYuWTVm_R7W8Wm4SlIkCPi6s4HzgoHdezfuHTlISd4",
     "polarity": "supports-zoonosis",
     "illustrative_LR": 5.0,
     "grounding": {
       "source": "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
       "char_span": [
-        608,
-        728
+        365,
+        509
       ],
-      "quote": "within the market, SARS-CoV-2-positive environmental samples were spatially associated with vendors selling live mammals",
+      "quote": "the earliest known COVID-19 cases from December 2019, including those without reported direct links, were geographically centered on this market",
       "extractor": "agent:claude-opus-4-8[1m]/A1-source-vetting",
-      "entailment_label": "SUPPORTS",
+      "entailment_label": "ENTAILS",
       "source_sha256": "93f3dc1858bf1dba8891cc8413568244915ca66c4908d690066ad3e12f1caba4"
     },
-    "verification": "L4",
-    "provenance_note": "the environmental line rests on the China-CDC 22-Jan-2020 Huanan-market sampling — the same PRC early-case investigation."
+    "verification": "L5"
   },
   "provenance": {
     "derivedFrom": [
-      "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
-      "tt:gyZCttDBh1aiZrcUQLqPFfSFAWVuaxGmu7xl1HhPOz4"
+      "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI"
     ],
     "mintedBy": "keystone:epistack-corpus",
     "method": "extract",
@@ -34,7 +32,7 @@
     "sig": {
       "alg": "ed25519",
       "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
-      "value": "0b100e9ccb7cdf7d31afac5aad4e8057b1459d2177f07c8e112835d4946fd1f9dc4d98f9cd634efd2974b5379a0dc76a6f1a2a1c1bd9110abd2aa03a5819f100",
+      "value": "12947f99e1560f92a61285c24bc0160b80069bf144bcbdd28bb321de9ac2e4a52ace6a27e21f5b896172ba37c4e60bf6ecfc7403854471448e55594b747fcf00",
       "by": "keystone:epistack-corpus"
     }
   }

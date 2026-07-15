@@ -1,7 +1,7 @@
 {
   "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
   "@type": "epi:Claim",
-  "id": "tt:k-XCi9ovkXLfQjg9KbzuBDe4o9SvzDyAB_mVHgfKcbw",
+  "id": "tt:oIHj4hXwTT5HdyPM_p9NZw_DZVqAcSU50kU4KO2GMcw",
   "assertion": {
     "text": "Live SARS-CoV-2-susceptible mammals were sold at the Huanan market in late 2019.",
     "subject": "tt:GvYuWTVm_R7W8Wm4SlIkCPi6s4HzgoHdezfuHTlISd4",
@@ -18,11 +18,13 @@
       "entailment_label": "ENTAILS",
       "source_sha256": "93f3dc1858bf1dba8891cc8413568244915ca66c4908d690066ad3e12f1caba4"
     },
-    "verification": "L5"
+    "verification": "L5",
+    "provenance_note": "the honest exception: this line descends from Xiao 2021 (a 2017-2019 pre-outbreak animal survey), which is data-INDEPENDENT of the PRC early-case investigation. It is not author-independent, though (ent-author-chris-newman)."
   },
   "provenance": {
     "derivedFrom": [
-      "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI"
+      "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
+      "tt:2LfPzTKL5R-QxJsHWhXxX83gywc6oBaLbp3t91VZWoA"
     ],
     "mintedBy": "keystone:epistack-corpus",
     "method": "extract",
@@ -32,7 +34,7 @@
     "sig": {
       "alg": "ed25519",
       "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
-      "value": "6bd5672745d2677162ee99bd2d247bb42bbfb7f5487d251dd346c1051c12d44edf11053ef416f3de7c932e82c465117ebfc158623ae0a268b29d6b59540b8a0b",
+      "value": "1cf471e28357b5260c54a2b622f34e8fe93482c2eb8dbb20469bf4db98ae039ad73444789d1879538f1e92a8d2cae15723b27441ec5e77d92cc9e9b4f9bbd70b",
       "by": "keystone:epistack-corpus"
     }
   }

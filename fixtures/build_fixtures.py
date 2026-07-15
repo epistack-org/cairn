@@ -23,6 +23,7 @@ Self-verifying: asserts grounding resolves + trio refuses + contrast combines.
 """
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 from pathlib import Path
@@ -131,18 +132,26 @@ CASES = {
                 "introduction?",
         "battery": "assessment/probes.json",
         "shared_upstream": "src-worobey-2022",
-        "shared_upstream_kind": "dataset (one paper's early-case data)",
+        "shared_upstream_kind": "one paper / one author collective; at the data layer two of the "
+                                "three (geographic clustering, environmental sampling) descend from "
+                                "the same market-anchored PRC early-case investigation, and the third "
+                                "(live-mammal sales, Xiao 2021) does not",
         "laundered_set": [
             "claim-geographic-clustering",
             "claim-environmental-sampling",
             "claim-live-mammal-sales",
         ],
+        # Worobey 2022 x Pekar 2022 was the entry's false COMBINABLE. On the honest DAG the
+        # pair REFUSES: Pekar cites Worobey (ref [39], first-person) and calibrates its clock
+        # on Worobey 2021, and both rest on the PRC early-case investigation. The naive
+        # document-level DAG (fixtures/naive/) still COMBINES them — that contrast IS the demo.
         "contrast_pair": ["claim-geographic-clustering", "claim-two-lineages"],
-        "punchline": "Three apparently independent lines of proximity evidence all derive "
-                     "from ONE early-case dataset (Worobey 2022). The naive transcript "
-                     "multiplies 5x5x5 = 125:1; the provenance intersection collapses to a "
-                     "single upstream, so the product is undefined.",
-        "n_eff_corpus_scale": 2.85,
+        "contrast_expected": "REFUSE-TO-COMBINE",
+        "punchline": "Three apparently independent lines of proximity evidence come from ONE paper "
+                     "by ONE author collective (Worobey 2022); at the data layer two of the three "
+                     "descend from the same market-anchored PRC early-case investigation, and the "
+                     "third (Xiao 2021) does not. The naive transcript multiplies 5x5x5 = 125:1; the "
+                     "provenance intersection collapses to a single upstream, so the product is undefined.",
     },
     "eggs-good-for-you": {
         "title": "Are eggs good for you — the egg/CVD meta-analyses",
@@ -158,6 +167,7 @@ CASES = {
             "claim-eggs-drouin-no-association",   # BMJ 2020 cohorts + updated meta-analysis
         ],
         "contrast_pair": ["claim-eggs-hu-no-association", "claim-eggs-djousse-no-association"],
+        "contrast_expected": "COMBINABLE",
         "punchline": "Three apparently independent reassuring findings — a 2013 BMJ "
                      "dose-response meta-analysis, a 2021 meta-analysis of 39 studies and "
                      "'nearly 2 million individuals', and a 2020 BMJ three-cohort study plus "
@@ -167,7 +177,6 @@ CASES = {
                      "layer. 'Nearly 2 million individuals' is not 2 million independent people. "
                      "The shared upstream is invisible at the claim level — it is two hops up, "
                      "found only by walking the DAG.",
-        "n_eff_corpus_scale": 3.97,
         "exercises": "the TRANSITIVE shared-ancestor detector — the first real corpus to do so "
                      "(previously proven only against a synthetic fixture in tests)",
     },
@@ -194,7 +203,13 @@ CASES = {
             "claim-cern-wd-ns-bound",         # Giddings & Mangano 2008 — LHC
             "claim-cern-moon-strangelet",     # Jaffe et al. 2000 — RHIC
         ],
-        "contrast_pair": ["claim-cern-bh-production-rate", "claim-cern-astro-stability"],
+        # The genuine COMBINABLE (#6): the Hawking-radiation evaporation line (QFT premise) and
+        # the white-dwarf/neutron-star survival bound (Giddings & Mangano, premised on stable
+        # black holes — i.e. on Hawking FAILING) are upstream-disjoint by construction. A hostile
+        # reader cannot break it: the papers themselves build the WD/NS argument to survive the
+        # failure of the Hawking premise.
+        "contrast_pair": ["claim-cern-hawking-evaporation", "claim-cern-wd-ns-bound"],
+        "contrast_expected": "COMBINABLE",
         "punchline": "Three safety assurances that look maximally independent — three papers, "
                      "two accelerators, three author teams, eight years apart, three different "
                      "hypothetical catastrophes — all reach 'safe' through ONE premise: cosmic "
@@ -203,7 +218,6 @@ CASES = {
                      "with the STRONGEST expert consensus, and cairn prices it honestly "
                      "(effective independence ~1) rather than rewarding it. It does NOT say the "
                      "LHC is unsafe — it says three assurances sharing a premise are not three votes.",
-        "n_eff_corpus_scale": 2.16,
     },
 }
 
@@ -437,6 +451,33 @@ def build_cern(recs: dict[str, dict]) -> None:
 
     cra = "ent-cosmic-ray-argument"
 
+    # --- The OTHER safety argument family: theoretical black-hole evaporation (Hawking
+    #     radiation). This is a genuinely SEPARATE premise from the cosmic-ray/astrophysical
+    #     survival argument — QFT in curved spacetime, not an astronomical observation. It is
+    #     the premise the 2008 reviews were commissioned to interrogate ("what if it does NOT
+    #     decay?"), and the WD/NS bound (Giddings & Mangano) is the backstop built to survive
+    #     its failure. So {Hawking evaporation} and {WD/NS survival} are upstream-disjoint by
+    #     construction — the genuine COMBINABLE (dev/cairn / GATE #6). ---
+    recs["ent-hawking-radiation-premise"] = mk(
+        "ent-hawking-radiation-premise", "epi:Entity",
+        {
+            "name": "The Hawking-radiation black-hole-evaporation premise",
+            "aliases": ["Hawking radiation", "the black-hole evaporation argument", "the theoretical safety leg"],
+            "kind": "Premise",
+            "statement": "Any microscopic black hole produced at the LHC evaporates via Hawking "
+                         "radiation (trans-horizon particle creation; QFT in curved spacetime) "
+                         "before it can accrete, so it poses no danger.",
+            "note": "This is the THEORETICAL safety leg (LHC Safety Study Group 2003 rests its "
+                    "black-hole conclusion on it). It is upstream-DISJOINT from the "
+                    "cosmic-ray/astrophysical-survival premise (ent-cosmic-ray-argument): one is "
+                    "quantum field theory, the other is an astronomical observation. Giddings & "
+                    "Mangano 2008 deliberately assume THIS premise fails (stable black holes) and "
+                    "derive safety anyway from the white-dwarf/neutron-star bound — which is why "
+                    "the two legs are genuinely combinable rather than redundant.",
+            "verification": "L1",
+        },
+    )
+
     # --- The three "independent" safety assurances (each leans on the SAME premise) ---
     mk_claim(
         recs, "claim-cern-astro-stability",
@@ -470,6 +511,20 @@ def build_cern(recs: dict[str, dict]) -> None:
               "the possibility of dangerous strangelet production",
         label="ENTAILS", rung="L5", lr=5.0, polarity="supports-lhc-safety",
         also_derived_from=[cra],
+    )
+
+    # --- The genuine COMBINABLE partner (#6): the Hawking-radiation evaporation line.
+    #     Grounded byte-for-byte in the LSAG abstract; derives from the Hawking premise, NOT
+    #     from the cosmic-ray argument. {this} x {claim-cern-wd-ns-bound} share no upstream. ---
+    mk_claim(
+        recs, "claim-cern-hawking-evaporation",
+        text="Microscopic black holes produced at the LHC are expected to evaporate via Hawking "
+             "radiation before they reach the detector walls, so they never accrete.",
+        subject="ent-hawking-radiation-premise", source_slug="src-ellis-2008", excerpt=ellis,
+        quote="Any microscopic black holes produced at the LHC are expected to decay by Hawking "
+              "radiation before they reach the detector walls.",
+        label="ENTAILS", rung="L5", lr=4.0, polarity="supports-lhc-safety",
+        also_derived_from=["ent-hawking-radiation-premise"],
     )
 
     # --- The contrast: a genuinely INDEPENDENT line (theory, not cosmic rays) ---
@@ -878,6 +933,83 @@ def main() -> int:
         method="ingest",
     )
 
+    # --- The shared DATASET root: the market-anchored PRC early-case investigation. ---
+    # Worobey 2022's spatial line rests on the WHO-China joint report's Dec-2019 line list
+    # (174 Hubei cases -> 164 Wuhan -> 155 coordinates re-digitised from maps in the report);
+    # its environmental line rests on the China-CDC 22-Jan-2020 market sampling. Both are one
+    # non-replicable, single-team investigation. Stansifer certifies its non-replicability in
+    # his own decision: "cannot be independently verified or duplicated." (COVID-DOSSIER.md
+    # Appendix B / §2.2). It is the data-layer upstream two of the three proximity lines share.
+    recs["ent-prc-early-case-investigation"] = mk(
+        "ent-prc-early-case-investigation", "epi:Entity",
+        {
+            "name": "The market-anchored PRC early-case investigation (Dec 2019 - Feb 2021)",
+            "aliases": ["WHO-China joint report Dec-2019 line list", "China-CDC Huanan market sampling",
+                        "the early-case record"],
+            "kind": "Investigation",
+            "statement": "The retrospective early-case record assembled by China CDC / Wuhan CDC and "
+                         "the WHO-China joint mission: the December-2019 Hubei line list (174 cases -> "
+                         "164 Wuhan -> 155 map-extracted coordinates) and the 22-Jan-2020 China-CDC "
+                         "Huanan-market environmental sampling campaign.",
+            "note": "A single-team, non-replicable investigation and the shared data-layer upstream of "
+                    "the geographic-clustering and environmental-sampling lines. NOT an upstream of the "
+                    "live-mammal-sales line, which descends from Xiao 2021 (a 2017-2019 pre-outbreak "
+                    "animal survey). Judge Stansifer, independently: it 'cannot be independently verified "
+                    "or duplicated.'",
+            "verification": "L1",
+        },
+    )
+    # --- Worobey 2021: the index-case re-analysis Pekar's molecular clock calibrates on. ---
+    recs["src-worobey-2021"] = mk(
+        "src-worobey-2021", "epi:Source",
+        {
+            "title": "Dissecting the early COVID-19 cases in Wuhan",
+            "authors": "Worobey M",
+            "venue": "Science", "year": 2021, "volume": "374", "issue": "6572", "pages": "1202-1204",
+            "doi": "10.1126/science.abm4454", "pmid": "34793199",
+            "verification": "L1",
+            "role": "the earliest-case re-analysis (the 10-Dec-2019 market-vendor index case) that "
+                    "Pekar 2022's molecular-clock calibration rests on — a calibration edge coupling "
+                    "Pekar to the Worobey line",
+            "note": "Bibliographic record confirmed via NCBI E-utilities (PMID 34793199 -> DOI "
+                    "10.1126/science.abm4454). Itself a re-analysis of the same early-case record.",
+        },
+        derived_from=[recs["ent-prc-early-case-investigation"]["id"]], method="ingest",
+    )
+    # --- The one AUTHOR node (kept deliberately to one sentence; see AUTHOR-OVERLAP-SPIKE). ---
+    recs["ent-author-chris-newman"] = mk(
+        "ent-author-chris-newman", "epi:Entity",
+        {
+            "name": "Chris Newman",
+            "kind": "Person",
+            "statement": "Chris Newman is a co-author of both Xiao et al. 2021 (the animal-sales survey) "
+                         "and Worobey et al. 2022 (author 9 of 18).",
+            "note": "The single genuinely author-specific finding in the COVID case: the one proximity "
+                    "leg that is data-independent of Worobey 2022 (live-mammal sales, via Xiao 2021) "
+                    "still shares a human with it. One sentence, not a case study — a shared author is a "
+                    "defeasible prior on shared pipeline, NOT a refusal gate (it would wrongly refuse "
+                    "ATLAS/CMS, and we ship a CERN case). Recorded as an identity node, not a "
+                    "derivedFrom edge, so provenance is not conflated with attribution.",
+            "verification": "L1",
+        },
+    )
+    # --- Xiao 2021: the pre-outbreak animal survey the live-mammal line actually descends from. ---
+    recs["src-xiao-2021"] = mk(
+        "src-xiao-2021", "epi:Source",
+        {
+            "title": "Animal sales from Wuhan wet markets immediately prior to the COVID-19 pandemic",
+            "authors": "Xiao X, Newman C, Buesching CD, Macdonald DW, Zhou ZM",
+            "venue": "Scientific Reports", "year": 2021, "volume": "11", "pages": "11898",
+            "doi": "10.1038/s41598-021-91470-2",
+            "verification": "L1",
+            "role": "the 2017-2019 monthly animal-sales survey (collected to trace SFTS, before the "
+                    "outbreak) that Worobey 2022's live-mammal-sales line rests on — the one proximity "
+                    "leg that is data-INDEPENDENT of the PRC early-case investigation",
+            "author_overlap_note": "Co-author Chris Newman (ent-author-chris-newman) is also author 9 of "
+                                   "18 on Worobey et al. 2022: data-independent, not author-independent.",
+        },
+    )
+
     # --- Entities (nouns, referenced by claims via Trusty URI; identity records) ---
     recs["ent-hsm-cluster"] = mk(
         "ent-hsm-cluster", "epi:Cluster",
@@ -903,29 +1035,39 @@ def main() -> int:
     worobey_sha = SOURCES["worobey"]["sha256"]
     pekar_sha = SOURCES["pekar"]["sha256"]
 
-    def claim(slug, text, source_id, source_text, source_sha, quote, label, rung, lr):
+    def claim(slug, text, source_id, source_text, source_sha, quote, label, rung, lr,
+              extra_derived=(), note=None):
         span = span_of(source_text, quote)
-        recs[slug] = mk(
-            slug, "epi:Claim",
-            {
-                "text": text,
-                "subject": hsm,
-                "polarity": "supports-zoonosis",
-                "illustrative_LR": lr,  # demo-only naive-baseline input (not a vetted quantity)
-                "grounding": {
-                    "source": source_id,
-                    "char_span": span,
-                    "quote": quote,
-                    "extractor": EXTRACTOR,
-                    "entailment_label": label,
-                    "source_sha256": source_sha,
-                },
-                "verification": rung,
+        assertion = {
+            "text": text,
+            "subject": hsm,
+            "polarity": "supports-zoonosis",
+            "illustrative_LR": lr,  # demo-only naive-baseline input (not a vetted quantity)
+            "grounding": {
+                "source": source_id,
+                "char_span": span,
+                "quote": quote,
+                "extractor": EXTRACTOR,
+                "entailment_label": label,
+                "source_sha256": source_sha,
             },
-            derived_from=[source_id], method="extract",
+            "verification": rung,
+        }
+        if note:
+            assertion["provenance_note"] = note
+        # grounding.source stays first (the grounding invariant needs it in derivedFrom);
+        # extra_derived carries the honest data/citation/calibration edges beyond it.
+        recs[slug] = mk(
+            slug, "epi:Claim", assertion,
+            derived_from=[source_id] + list(extra_derived), method="extract",
         )
 
-    # --- The proximity trio (ALL derive from + are grounded in Worobey 2022) ---
+    prc = recs["ent-prc-early-case-investigation"]["id"]   # shared data-layer root
+    worobey_2021 = recs["src-worobey-2021"]["id"]           # Pekar's clock calibration source
+    xiao = recs["src-xiao-2021"]["id"]                      # the data-independent leg's real upstream
+
+    # --- The proximity trio (all extracted from Worobey 2022; two of three ALSO descend, at
+    #     the data layer, from the market-anchored PRC early-case investigation). ---
     claim(
         "claim-geographic-clustering",
         "The earliest known December-2019 COVID-19 cases were geographically centered "
@@ -934,6 +1076,9 @@ def main() -> int:
         "the earliest known COVID-19 cases from December 2019, including those without "
         "reported direct links, were geographically centered on this market",
         "ENTAILS", "L5", 5.0,
+        extra_derived=[prc],
+        note="the spatial line rests on the WHO-China Dec-2019 line list (155 map-extracted "
+             "coordinates) — the market-anchored PRC early-case investigation.",
     )
     claim(
         "claim-environmental-sampling",
@@ -943,6 +1088,9 @@ def main() -> int:
         "within the market, SARS-CoV-2-positive environmental samples were spatially "
         "associated with vendors selling live mammals",
         "SUPPORTS", "L4", 5.0,
+        extra_derived=[prc],
+        note="the environmental line rests on the China-CDC 22-Jan-2020 Huanan-market sampling "
+             "— the same PRC early-case investigation.",
     )
     claim(
         "claim-live-mammal-sales",
@@ -950,9 +1098,17 @@ def main() -> int:
         worobey, worobey_abstract, worobey_sha,
         "live SARS-CoV-2-susceptible mammals were sold at the market in late 2019",
         "ENTAILS", "L5", 5.0,
+        extra_derived=[xiao],
+        note="the honest exception: this line descends from Xiao 2021 (a 2017-2019 pre-outbreak "
+             "animal survey), which is data-INDEPENDENT of the PRC early-case investigation. "
+             "It is not author-independent, though (ent-author-chris-newman).",
     )
 
-    # --- The molecular contrast claim (different upstream: Pekar 2022) ---
+    # --- The molecular line (Pekar 2022) — NOT disjoint from the Worobey line on the honest DAG.
+    #     Pekar cites Worobey 2022 (ref [39], first-person: "In a related study, we show...") and
+    #     calibrates its molecular clock on Worobey 2021's market-vendor index case. Those are
+    #     real citation + calibration edges (COVID-DOSSIER.md §2.4). Modeled on the claim because
+    #     the source records are frozen (their Trusty URIs are pinned by the assessment layer). ---
     claim(
         "claim-two-lineages",
         "SARS-CoV-2's early genomic diversity comprised two distinct lineages (A and B) "
@@ -964,6 +1120,11 @@ def main() -> int:
         'methods, coupled with epidemic simulations, reveal that these lineages were the '
         'result of at least two separate cross-species transmission events into humans.',
         "ENTAILS", "L4", 4.0,
+        extra_derived=[worobey, worobey_2021],
+        note="inherits Pekar 2022's dependence on Worobey 2022 (citation ref [39], the market-link "
+             "result imported as a premise) and on Worobey 2021 (the index case the molecular clock "
+             "is calibrated on). This is why {geographic-clustering, two-lineages} REFUSES on the "
+             "honest DAG though the naive document-level DAG (fixtures/naive/) COMBINES it.",
     )
 
     # --- the other worked examples (floor deliverable #3, dev/cairn#9) ---
@@ -989,7 +1150,34 @@ def main() -> int:
         if case.get("contrast_pair"):
             pair = [recs[s]["id"] for s in case["contrast_pair"]]
             cv = provenance.combine_verdict(pair, store)
-            assert cv["verdict"] == "COMBINABLE", (case_id, "contrast pair did not combine", cv)
+            want = case.get("contrast_expected", "COMBINABLE")
+            assert cv["verdict"] == want, (case_id, f"contrast pair verdict != {want}", cv)
+
+    # --- the GATE assertion, inverted (dev/cairn / flf-contest#5): Worobey 2022 x Pekar 2022
+    #     was the entry's false COMBINABLE. On the honest (derived) DAG it MUST refuse, and the
+    #     shared upstream it names must include Worobey 2022 (the citation edge) and the PRC
+    #     early-case investigation (the shared dataset). This is the heart of the fix. ---
+    wxp = provenance.combine_verdict(
+        [recs["claim-geographic-clustering"]["id"], recs["claim-two-lineages"]["id"]], store)
+    assert wxp["verdict"] == "REFUSE-TO-COMBINE", ("Worobey x Pekar must REFUSE on the honest DAG", wxp)
+    for s in ("src-worobey-2022", "ent-prc-early-case-investigation"):
+        assert recs[s]["id"] in wxp["shared_upstreams"], (
+            "the honest Worobey x Pekar refusal must name the citation + dataset upstreams", s)
+
+    # --- the genuine COMBINABLE (#6): CERN {Hawking evaporation} x {WD/NS survival}. ---
+    cern_combine = provenance.combine_verdict(
+        [recs["claim-cern-hawking-evaporation"]["id"], recs["claim-cern-wd-ns-bound"]["id"]], store)
+    assert cern_combine["verdict"] == "COMBINABLE", ("CERN Hawking x WD/NS must COMBINE", cern_combine)
+
+    # --- the CERN CONCLUSION-UNCHANGED refusal (#7): the trio shares the cosmic-ray premise, but
+    #     the WD/NS bound is upstream-disjoint from the Hawking premise and independently sufficient. ---
+    cern_trio = [recs[s]["id"] for s in CASES["cern-black-hole"]["laundered_set"]]
+    cern_as_indep = provenance.combine_verdict(
+        cern_trio, store,
+        backstop=recs["claim-cern-wd-ns-bound"]["id"],
+        at_risk_upstream=recs["ent-hawking-radiation-premise"]["id"])
+    assert cern_as_indep["verdict"] == "REFUSE-TO-COMBINE-AS-INDEPENDENT", cern_as_indep
+    assert cern_as_indep["conclusion_unchanged"] is True, cern_as_indep
 
     # --- write one file per record + an index + the case manifest ---
     index = {}
@@ -998,6 +1186,35 @@ def main() -> int:
         index[slug] = rec["id"]
     (OUT / "INDEX.json").write_text(json.dumps(index, indent=2) + "\n")
     (OUT / "CASES.json").write_text(json.dumps(CASES, indent=2, ensure_ascii=False) + "\n")
+
+    # --- the NAIVE document-level snapshot: the SAME two claims and sources, but with the
+    #     dataset/citation/calibration edges REMOVED (each claim derives only from the paper it
+    #     was extracted from). This is the cautionary run: on this DAG Worobey x Pekar COMBINES,
+    #     exactly as the entry originally (wrongly) shipped. `cairn intersect` on it vs on the
+    #     honest corpus above IS the contestability demo (flf-contest#5). Reproducible:
+    #        cairn intersect "fixtures/naive/*.json" --claims claim-geographic-clustering claim-two-lineages   # COMBINABLE
+    #        cairn intersect "fixtures/*.json"       --claims claim-geographic-clustering claim-two-lineages   # REFUSE
+    naive_dir = OUT / "naive"
+    naive_dir.mkdir(exist_ok=True)
+    naive = {}
+    # the two sources, document-level (byte-identical to the honest corpus — sources never carried
+    # cross-edges; only the claims did)
+    for s in ("src-worobey-2022", "src-pekar-2022"):
+        naive[s] = recs[s]
+    # the two claims, stripped back to derivedFrom == [grounding.source] (no dataset/citation edge)
+    for s in ("claim-geographic-clustering", "claim-two-lineages"):
+        a = copy.deepcopy(recs[s]["assertion"])
+        a.pop("provenance_note", None)
+        naive[s] = mk(s, "epi:Claim", a, derived_from=[a["grounding"]["source"]], method="extract")
+    naive_store = {r["id"]: r for r in naive.values()}
+    nv = provenance.combine_verdict(
+        [naive["claim-geographic-clustering"]["id"], naive["claim-two-lineages"]["id"]], naive_store)
+    assert nv["verdict"] == "COMBINABLE", ("naive document-level DAG must still COMBINE Worobey x Pekar", nv)
+    naive_index = {}
+    for slug, rec in naive.items():
+        (naive_dir / f"{slug}.json").write_text(json.dumps(rec, indent=2, ensure_ascii=False) + "\n")
+        naive_index[slug] = rec["id"]
+    (naive_dir / "INDEX.json").write_text(json.dumps(naive_index, indent=2) + "\n")
 
     print(f"minted {len(recs)} vetted records across {len(CASES)} worked examples -> {OUT}")
     print(f"  grounding: {report['grounded']}/{report['checked']} claims resolve, ok={report['ok']}")

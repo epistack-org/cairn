@@ -1,0 +1,40 @@
+{
+  "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
+  "@type": "epi:Claim",
+  "id": "tt:pTd_Kj98DOV0ctvoDGb_DG3ExMqEpr-XI2_DYXE8N70",
+  "assertion": {
+    "text": "Microscopic black holes produced at the LHC are expected to evaporate via Hawking radiation before they reach the detector walls, so they never accrete.",
+    "subject": "tt:72TUcWoIyxcqT356QwsYtd1JM_8oOlWO7JGxHxYZfGU",
+    "grounding": {
+      "source": "tt:K81eDFZjx2OryFUbKp0SwJgPJ1OdStfg3kCCQFSZc-o",
+      "char_span": [
+        1044,
+        1172
+      ],
+      "quote": "Any microscopic black holes produced at the LHC are expected to decay by Hawking radiation before they reach the detector walls.",
+      "extractor": "agent:claude-fable-5/floor3-source-vetting",
+      "entailment_label": "ENTAILS",
+      "source_sha256": "030c49f7802c2564f5ae9115af3e65c3da314533c520b67c6ab9b3fd24c68e90"
+    },
+    "verification": "L5",
+    "illustrative_LR": 4.0,
+    "polarity": "supports-lhc-safety"
+  },
+  "provenance": {
+    "derivedFrom": [
+      "tt:K81eDFZjx2OryFUbKp0SwJgPJ1OdStfg3kCCQFSZc-o",
+      "tt:72TUcWoIyxcqT356QwsYtd1JM_8oOlWO7JGxHxYZfGU"
+    ],
+    "mintedBy": "keystone:epistack-corpus",
+    "method": "extract",
+    "at": "2026-06-28T00:00:00Z"
+  },
+  "pubinfo": {
+    "sig": {
+      "alg": "ed25519",
+      "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
+      "value": "3621326dc044d0ff0c0e2f74dcc9ba8ff5a54128a7fac26737cfb8b18c609650706f9138c8c02cba3ef006caa0ec77b6e1bb590f9f3548df1d9c1a6895ceb707",
+      "by": "keystone:epistack-corpus"
+    }
+  }
+}

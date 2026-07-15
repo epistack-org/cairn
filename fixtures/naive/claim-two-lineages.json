@@ -1,7 +1,7 @@
 {
   "@context": "https://epistack.dev/ns/cairn.v0.jsonld",
   "@type": "epi:Claim",
-  "id": "tt:IoJNHDAz0KT86ps-tdhmcVupyZDvzlIZ2DLToGH6h0M",
+  "id": "tt:yXi-om_bzhaup0C-Y8sKyX48X1Z-6lIlaryvFDWnYHI",
   "assertion": {
     "text": "SARS-CoV-2's early genomic diversity comprised two distinct lineages (A and B) that resulted from at least two separate zoonotic (cross-species) transmission events into humans.",
     "subject": "tt:GvYuWTVm_R7W8Wm4SlIkCPi6s4HzgoHdezfuHTlISd4",
@@ -18,14 +18,11 @@
       "entailment_label": "ENTAILS",
       "source_sha256": "c046d96297900e9d067e47ab0e17d2dedf317037c19d09d9593689c17f5adbfe"
     },
-    "verification": "L4",
-    "provenance_note": "inherits Pekar 2022's dependence on Worobey 2022 (citation ref [39], the market-link result imported as a premise) and on Worobey 2021 (the index case the molecular clock is calibrated on). This is why {geographic-clustering, two-lineages} REFUSES on the honest DAG though the naive document-level DAG (fixtures/naive/) COMBINES it."
+    "verification": "L4"
   },
   "provenance": {
     "derivedFrom": [
-      "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc",
-      "tt:_7D7Ne_b7B1-v_v3A6MVGi8a5nPQD_BGmRkWGtqYIYI",
-      "tt:ivXxm3LL-a-eMHv2YmPozCCLdVqkhLW2aix1Be3u3oU"
+      "tt:PKF_WKiUMw7cVvSsHex8EL8SGXtRLiQLrOIvnLPNhNc"
     ],
     "mintedBy": "keystone:epistack-corpus",
     "method": "extract",
@@ -35,7 +32,7 @@
     "sig": {
       "alg": "ed25519",
       "key": "5b9437adeaffbe8f41b13d96ed49d2f51cd6c266cd8ecc284b0552ec4912b8dd",
-      "value": "54b34480f36fc87679d88fccb8acba3d37e921d6ff6e325d6fbcd061cc11efb8495dad391d42f6d2bc1adc5bdac3273dab48a95f659fb27529f810e7d3bb010b",
+      "value": "55eff61661ed344872a1caa509bcdf89f51b60b10e01a962b6417cf436e8295378d9fe4603bd4ac739fbdcb00f78075a0205870964e5f2446305a91c12810c07",
       "by": "keystone:epistack-corpus"
     }
   }
