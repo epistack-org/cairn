@@ -50,6 +50,7 @@ def new_record(
     minted_by: str,
     method: str = "assert",
     derived_from: Optional[list[str]] = None,
+    funded_by: Optional[list[str]] = None,
     at: Optional[str] = None,
     conforms_to: Optional[str] = None,
 ) -> dict:
@@ -71,6 +72,11 @@ def new_record(
             "sig": {"alg": "ed25519", "key": "", "value": "", "by": ""},
         },
     }
+    # Omitted entirely when empty, never written as []. The content id is a hash over
+    # this dict, so emitting an empty fundedBy on every record would re-mint every id
+    # in every corpus and break the pinned goldens. Absent means "not stated".
+    if funded_by:
+        rec["provenance"]["fundedBy"] = list(funded_by)
     if conforms_to is not None:
         rec["pubinfo"]["conformsTo"] = conforms_to
     return rec

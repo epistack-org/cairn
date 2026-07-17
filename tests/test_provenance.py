@@ -154,3 +154,110 @@ def test_explain_conclusion_unchanged_says_the_conclusion_stands():
 
 def test_explain_label_falls_back_to_id_for_unknown():
     assert provenance.label("tt:unknown", {}) == "tt:unknown"
+
+
+# ---------------------------------------------------------------------------
+# fundedBy — the disclosure channel (a funder is not an evidence source)
+# ---------------------------------------------------------------------------
+
+def _mk_funded(type_, assertion, derived_from=None, funded_by=None):
+    return envelope.mint(
+        envelope.new_record(
+            type_, assertion, minted_by="team:test", method="extract",
+            derived_from=derived_from or [], funded_by=funded_by or [], at=AT,
+        )
+    )
+
+
+def test_shared_funder_alone_does_not_refuse():
+    """The whole point of the channel: a common paymaster is NOT a common source.
+
+    Two studies bankrolled by one funder can still be two genuinely independent
+    measurements. If this refused, every NIH-funded pair in any corpus would
+    collapse and the engine would become the refuse-everything oracle.
+    """
+    s1 = _mk_funded("epi:Source", {"title": "Enstrom 2003"})
+    s2 = _mk_funded("epi:Source", {"title": "Jenkins 1996"})
+    c1 = _mk_funded("epi:Claim", {"text": "ETS effect null (Enstrom)"},
+                    [s1["id"]], ["urn:funder:ciar"])
+    c2 = _mk_funded("epi:Claim", {"text": "ETS exposure low (Jenkins)"},
+                    [s2["id"]], ["urn:funder:ciar"])
+    store = _store(s1, s2, c1, c2)
+    v = provenance.combine_verdict([c1["id"], c2["id"]], store)
+    assert v["independent"] is True
+    assert v["verdict"] == "COMBINABLE"
+    assert v["shared_upstreams"] == []
+    # ...but the funder is named, not silently dropped
+    assert v["shared_funders"] == ["urn:funder:ciar"]
+    assert "urn:funder:ciar" in v["reason"]
+
+
+def test_funder_edge_is_not_walked_as_an_ancestor():
+    """fundedBy must never leak into the derivation closure."""
+    c = _mk_funded("epi:Claim", {"text": "x"}, [], ["urn:funder:ciar"])
+    store = _store(c)
+    assert provenance.ancestors(c["id"], store) == set()
+    assert provenance.funders(c) == {"urn:funder:ciar"}
+
+
+def test_shared_funder_is_disclosed_but_refusal_rests_on_derivedfrom():
+    """When a real shared upstream exists, the refusal stands on IT — funder is colour."""
+    src = _mk_funded("epi:Source", {"title": "Kaiser 2003"})
+    c1 = _mk_funded("epi:Claim", {"text": "line A"}, [src["id"]], ["urn:funder:roche"])
+    c2 = _mk_funded("epi:Claim", {"text": "line B"}, [src["id"]], ["urn:funder:roche"])
+    store = _store(src, c1, c2)
+    v = provenance.combine_verdict([c1["id"], c2["id"]], store)
+    assert v["verdict"] == "REFUSE-TO-COMBINE"
+    assert v["shared_upstreams"] == [src["id"]]      # the refusal's actual basis
+    assert v["shared_funders"] == ["urn:funder:roche"]
+    assert "urn:funder:roche" not in v["reason"]     # funder carries no refusal weight
+
+
+def test_distinct_funders_share_nothing():
+    c1 = _mk_funded("epi:Claim", {"text": "a"}, [], ["urn:funder:nih"])
+    c2 = _mk_funded("epi:Claim", {"text": "b"}, [], ["urn:funder:erc"])
+    store = _store(c1, c2)
+    v = provenance.combine_verdict([c1["id"], c2["id"]], store)
+    assert v["verdict"] == "COMBINABLE"
+    assert v["shared_funders"] == []
+
+
+def test_lone_claim_does_not_share_a_funder_with_itself():
+    """The same two-party rule shared_upstreams learned the hard way (dev/cairn#9)."""
+    c = _mk_funded("epi:Claim", {"text": "solo"}, [], ["urn:funder:ciar"])
+    store = _store(c)
+    v = provenance.combine_verdict([c["id"]], store)
+    assert v["shared_funders"] == []
+    assert v["verdict"] == "COMBINABLE"
+
+
+def test_explain_names_the_funder_and_says_it_is_not_a_refusal():
+    s1 = _mk_funded("epi:Source", {"title": "Enstrom 2003"})
+    s2 = _mk_funded("epi:Source", {"title": "Jenkins 1996"})
+    c1 = _mk_funded("epi:Claim", {"text": "a"}, [s1["id"]], ["urn:funder:ciar"])
+    c2 = _mk_funded("epi:Claim", {"text": "b"}, [s2["id"]], ["urn:funder:ciar"])
+    store = _store(s1, s2, c1, c2)
+    v = provenance.combine_verdict([c1["id"], c2["id"]], store)
+    text = provenance.explain_verdict(v, store)
+    assert "share a funder" in text
+    assert "urn:funder:ciar" in text
+    assert "not a reason to refuse" in text
+
+
+def test_empty_fundedby_is_omitted_so_existing_ids_never_move():
+    """The additivity guarantee: no fundedBy => byte-identical to the pre-change record.
+
+    This is what keeps every pinned corpus golden and the cairn-cr parity vectors valid.
+    """
+    plain = envelope.new_record("epi:Claim", {"text": "x"}, minted_by="team:test",
+                                method="extract", derived_from=[], at=AT)
+    assert "fundedBy" not in plain["provenance"]
+    explicit_empty = envelope.new_record("epi:Claim", {"text": "x"}, minted_by="team:test",
+                                         method="extract", derived_from=[], funded_by=[], at=AT)
+    assert "fundedBy" not in explicit_empty["provenance"]
+    assert envelope.content_uri(plain) == envelope.content_uri(explicit_empty)
+
+
+def test_funded_record_still_validates_against_the_schema():
+    c = _mk_funded("epi:Claim", {"text": "x"}, [], ["urn:funder:ciar"])
+    assert envelope.validate(c) == []

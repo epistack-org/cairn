@@ -42,6 +42,17 @@
           },
           "uniqueItems": true
         },
+        "fundedBy": {
+          "description": "Money-source references: who PAID for the work this record reports. Deliberately a SEPARATE channel from derivedFrom, and deliberately NOT part of the derivation DAG. A funder is not an evidence source: two studies sharing a funder may still be two genuinely independent measurements, so collapsing them onto the funder node would emit false REFUSEs and turn the engine into a refuse-everything oracle. `cairn intersect` therefore DISCLOSES a shared funder (naming it) but never refuses on it alone -- the refusal stays with derivedFrom, where a shared upstream makes the independent product undefined. Note the cut this draws: a SPONSOR who also custodies the trial data (e.g. a sponsor-controlled pool whose trials were never published, so the shared node IS the evidence) is dataset-class and belongs in derivedFrom; only the money relation belongs here. Optional and strictly additive: every existing record validates unchanged, and no minted id or signature changes.",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "type": "string", "pattern": "^tt:[A-Za-z0-9_-]{43}$" },
+              { "type": "string", "pattern": "^(doi:10\\.|https?://|arxiv:|pmid:|pmcid:|urn:|isbn:|w3id:|orcid:)[^\\s]+$" }
+            ]
+          },
+          "uniqueItems": true
+        },
         "mintedBy": { "type": "string", "minLength": 1 },
         "method": { "type": "string", "minLength": 1 },
         "at": { "type": "string", "format": "date-time" }

@@ -39,6 +39,35 @@ def upstreams(record: Mapping) -> set[str]:
     return set(record.get("provenance", {}).get("derivedFrom", []))
 
 
+def funders(record: Mapping) -> set[str]:
+    """Direct ``fundedBy`` references of one record — who *paid for* the work.
+
+    Deliberately NOT read by :func:`ancestors`: a funder is not an evidence source,
+    so it is not part of the derivation DAG and never reaches the binary refusal.
+    """
+    return set(record.get("provenance", {}).get("fundedBy", []))
+
+
+def shared_funders(record_ids: Iterable[str], store: Mapping[str, Mapping]) -> dict:
+    """Funders shared across a set — the *disclosure* channel, not a refusal channel.
+
+    Mirrors :func:`shared_upstreams` in shape (pairwise + collective) so a reader can
+    read the two side by side, but the funder relation is **flat, not transitive**:
+    being paid by X does not make you derive from everything else X paid for. There
+    is no closure to walk, so we intersect the direct edge sets.
+    """
+    ids = list(record_ids)
+    f = {rid: funders(store.get(rid) or {}) for rid in ids}
+    pairwise = {}
+    for i, j in itertools.combinations(range(len(ids)), 2):
+        common = f[ids[i]] & f[ids[j]]
+        if common:
+            pairwise[(ids[i], ids[j])] = sorted(common)
+    # Same two-party rule as shared_upstreams: a lone record does not share with itself.
+    collective = set.intersection(*f.values()) if len(ids) >= 2 else set()
+    return {"funders": f, "pairwise_shared": pairwise, "collective_shared": sorted(collective)}
+
+
 def ancestors(record_id: str, store: Mapping[str, Mapping], *, _seen: set | None = None) -> set[str]:
     """Transitive closure of ``derivedFrom`` for ``record_id`` (excludes itself).
 
@@ -127,11 +156,27 @@ def explain_verdict(verdict: Mapping, store: Mapping[str, Mapping]) -> str:
     names = [label(i, store) for i in ids]
     claim_list = "; ".join(names)
 
+    def _funder_note() -> str:
+        """The disclosure sentence — named, but explicitly not a refusal."""
+        shared_f = verdict.get("shared_funders", [])
+        if not shared_f:
+            return ""
+        fnames = [label(f, store) for f in shared_f]
+        listed = "; ".join(fnames if len(fnames) <= 3 else fnames[:3] + [f"(+{len(fnames) - 3} more)"])
+        return (
+            f" Disclosed: these claims share a funder — {listed}. That is recorded, not "
+            f"charged: a funder pays for work, it does not supply the evidence, so two "
+            f"studies with one paymaster can still be two independent measurements. "
+            f"Shared funding is a reason to look, not a reason to refuse — if it did "
+            f"refuse, every NIH-funded pair in the corpus would collapse."
+        )
+
     if verdict.get("independent"):
         return (
             f"These {n} claims share no upstream on the provenance dimension "
             f"({claim_list}). They may be combined as independent draws, subject to the "
             f"other dependence legs and a measured n_eff. There is nothing to un-refuse."
+            + _funder_note()
         )
 
     shared = verdict.get("shared_upstreams", [])
@@ -160,6 +205,13 @@ def explain_verdict(verdict: Mapping, store: Mapping[str, Mapping]) -> str:
         f"If a reviewer shows these claims do not in fact share that upstream, the verdict "
         f"flips to COMBINABLE — the refusal is a claim about this DAG, not about the world."
     )
+
+    fnote = _funder_note()
+    if fnote:
+        parts.append(
+            fnote.strip() + " It is named here for the reader; it carries none of the "
+            "weight of this refusal, which rests entirely on the derivedFrom edge(s) above."
+        )
 
     if verdict.get("conclusion_unchanged"):
         bs = label(verdict.get("backstop", ""), store)
@@ -208,6 +260,13 @@ def combine_verdict(
         shared_any.update(common)
     independent = not shared_any
 
+    # The funder channel is computed for DISCLOSURE only and is deliberately kept out
+    # of `independent`: sharing a paymaster is not sharing evidence.
+    fu = shared_funders(ids, store)
+    funder_any: set[str] = set(fu["collective_shared"])
+    for common in fu["pairwise_shared"].values():
+        funder_any.update(common)
+
     if independent:
         return {
             "claims": ids,
@@ -215,9 +274,14 @@ def combine_verdict(
             "verdict": "COMBINABLE",
             "shared_upstreams": [],
             "pairwise_shared": s["pairwise_shared"],
+            "shared_funders": sorted(funder_any),
             "reason": (
                 "no shared upstream on the provenance dimension; independence holds "
                 "(subject to legs (b)/(c) and a measured n_eff)"
+            ) + (
+                f"; disclosed: these claims share funder(s) {sorted(funder_any)}, which is "
+                "recorded but is NOT a derivation edge and does not refuse the combine"
+                if funder_any else ""
             ),
         }
 
@@ -227,6 +291,7 @@ def combine_verdict(
         "verdict": "REFUSE-TO-COMBINE",
         "shared_upstreams": sorted(shared_any),
         "pairwise_shared": s["pairwise_shared"],
+        "shared_funders": sorted(funder_any),
         "reason": (
             f"claims share upstream(s) {sorted(shared_any)} -> not independent; "
             "combining as independent is undefined"
