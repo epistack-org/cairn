@@ -117,9 +117,9 @@ because the literature did not support them:
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -e . pytest
 .venv/bin/python fixtures/build_fixtures.py     # mint all 7 vetted corpora (sha-pinned)
-.venv/bin/python -m pytest -q                   # 127 tests
-.venv/bin/python demo/worked_examples.py        # all four cases, side by side
-.venv/bin/cairn ground 'fixtures/*.json'        # 21/21 claim spans resolve to their source
+.venv/bin/python -m pytest -q                   # 195 tests
+.venv/bin/python demo/worked_examples.py        # all seven cases, side by side
+.venv/bin/cairn ground 'fixtures/*.json'        # 37/37 claim spans resolve to their source
 .venv/bin/cairn assess assessment/runs/heterogeneous.json --battery assessment/probes.json  # recompute measured n_eff
 .venv/bin/cairn frechet fixtures/claim-geographic-clustering.json fixtures/claim-environmental-sampling.json fixtures/claim-live-mammal-sales.json fixtures/src-worobey-2022.json  # -> REFUSE-TO-COMBINE-AS-POINT (exit 2): the honest interval
 .venv/bin/cairn explain 'fixtures/*.json' --claims claim-geographic-clustering claim-environmental-sampling claim-live-mammal-sales  # -> the refusal as one plain-English paragraph, incl. what would un-refuse it
@@ -210,7 +210,7 @@ cairn cases list                        # discover the case bundles and check th
 | `fixtures/sources/*.abstract.txt` | the byte-exact retrieved sources (the raw `source_doc`s) |
 | `fixtures/PROVENANCE.md`, `PROVENANCE-eggs.md`, `PROVENANCE-cern.md` | per-case retrieval record, rung rationale, and the honest vetting decisions — **including the hypotheses we cut and the things we could not verify** |
 | `assessment/probes.json`, `probes-eggs.json`, `probes-cern.json` | one probe battery per case (crux + keyed faithfulness probes + inferential probes) |
-| `demo/worked_examples.py` | all four cases side by side — the wide view |
+| `demo/worked_examples.py` | all seven cases side by side — the wide view |
 | `demo/hsm_trio.py` | the naive-vs-Cairn head-to-head — the deep view (COVID) |
 | `assessment/` | the **measured** A2 assessor pass: probe battery, evidence partitions, panel + pinned runs |
 | `assessment/ASSESSMENT.md` | the measured n_eff, the diversity levers, and the adversarial audit's honest caveats |
@@ -218,7 +218,7 @@ cairn cases list                        # discover the case bundles and check th
 | `assessment/HEAD_TO_HEAD.md` | the A4 method: the fair careful-baseline panel, the four-delta table, and the honest concessions |
 | `assessment/baseline.json`, `build_headtohead.py` | the pinned careful-baseline panel (captured runs) + the deterministic head-to-head re-score → `head_to_head.json` |
 | `assessment/frechet.py`, `frechet_pba_check.py` | pin the A3 interval artifact; cross-check it against the `pba` library (dev-only) |
-| `tests/` | 113 pytest checks incl. the n_eff anchor, the grounding leg, the measured-assessor pass, the cross-vendor leg, the Fréchet leg, the refusal-AUC leg, the A4 head-to-head leg + the 3-case structural leg (`test_cases.py`) |
+| `tests/` | 195 pytest checks incl. the n_eff anchor, the grounding leg, the measured-assessor pass, the cross-vendor leg, the Fréchet leg, the refusal-AUC leg, the A4 head-to-head leg + the 7-case structural leg (`test_cases.py`) |
 
 ## Disciplines / honest debts
 

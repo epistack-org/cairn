@@ -15,8 +15,16 @@ Trust-Ladder rung rationale, and two honest vetting decisions (an ungrounded
 what the abstract entails).
 
 Structural point (REPORT section 7): the proximity trio all derive from ONE
-paper (Worobey) -> not three independent votes -> REFUSE-TO-COMBINE; the molecular
-two-lineages line (Pekar) is a genuinely different upstream -> COMBINABLE.
+paper (Worobey) -> not three independent votes -> REFUSE-TO-COMBINE.
+
+The molecular two-lineages line (Pekar) was ORIGINALLY shipped as a genuinely
+different upstream -> COMBINABLE. That was this entry's own false positive
+(flf-contest#5): Pekar CITES Worobey and both rest on the shared PRC early-case
+investigation, so on the honest DAG the pair shares a citation edge AND a dataset
+edge and must REFUSE. `main()` asserts that refusal — and that it names both
+upstreams — before writing a single byte. The old, wrong COMBINABLE is preserved
+deliberately under ``fixtures/naive/``: the same claims with the cross-edges
+stripped, so `cairn intersect` on naive-vs-honest is the contestability demo.
 
 Deterministic: fixed signing seed + fixed timestamps => stable Trusty URIs.
 Self-verifying: asserts grounding resolves + trio refuses + contrast combines.

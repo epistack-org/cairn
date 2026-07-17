@@ -21,6 +21,35 @@ from cairn import frechet, grounding, provenance
 
 FX = Path(__file__).resolve().parents[1] / "fixtures"
 
+# The mechanically-verified backstops (flf-contest#7).
+#
+# A refusal on a *settled* safety question must never ship bare: on CERN the honest
+# verdict is not "the LHC might be unsafe", it is "these three assurances are not three
+# independent votes FOR a conclusion that still stands". The engine already computes that
+# upgrade (`cairn.provenance.combine_verdict`), but only when a caller names a backstop and
+# the at-risk premise — the CLI exposes them as `--backstop` / `--at-risk-upstream`. This
+# demo drove every case generically off `CASES.json`, passed neither, and so printed the
+# bare refusal SPEC.md §4b says we no longer emit.
+#
+# The pair lives here rather than in `CASES.json` because that file is digest-covered by two
+# shipped corpora (`cairns/corpus`@v2, `cairns/backtest-corpus`@v1) and by Track λ's
+# `corpus.lambda.lock`; declaring a `backstop` field there would move a pinned digest. This
+# override changes no minted byte — it only supplies the two slugs the engine already
+# accepts, and the engine still *checks* the disjointness itself (a backstop that shares the
+# at-risk premise falls back to a bare refusal + a note saying so). Same pair asserted in
+# `fixtures/build_fixtures.py` (the build gate) and `tests/test_cases.py`.
+BACKSTOPS = {
+    # Giddings & Mangano premised the white-dwarf/neutron-star bound on the Hawking premise
+    # FAILING, so it is upstream-disjoint from it and independently sufficient. Note the
+    # at-risk premise is the Hawking one, NOT the cosmic-ray argument the trio shares: the
+    # backstop descends from the cosmic-ray argument too, so naming that as at-risk would
+    # (correctly) collapse back to a bare refusal.
+    "cern-black-hole": {
+        "backstop": "claim-cern-wd-ns-bound",
+        "at_risk_upstream": "ent-hawking-radiation-premise",
+    },
+}
+
 
 def load():
     index = json.loads((FX / "INDEX.json").read_text())
@@ -51,13 +80,20 @@ def main() -> int:
     refused = 0
 
     print("\n" + "=" * 78)
-    print("  CAIRN — THE THREE WORKED EXAMPLES")
+    # Counted off the manifest, not typed: this header said "THREE" while the footer counted
+    # 7/7 two screens below.
+    print(f"  CAIRN — THE {len(cases)} WORKED EXAMPLES")
     print("  apparent corroboration whose provenance intersection collapses")
     print("=" * 78)
 
     for case_id, case in cases.items():
         laundered = [index[s] for s in case["laundered_set"]]
-        v = provenance.combine_verdict(laundered, store)
+        bs = BACKSTOPS.get(case_id)
+        v = provenance.combine_verdict(
+            laundered, store,
+            backstop=index[bs["backstop"]] if bs else None,
+            at_risk_upstream=index[bs["at_risk_upstream"]] if bs else None,
+        )
         shared = provenance.shared_upstreams(laundered, store)["collective_shared"]
         lrs = [store[i]["assertion"]["illustrative_LR"] for i in laundered]
 
@@ -91,6 +127,20 @@ def main() -> int:
             hops = "direct" if any(
                 s in store[c]["provenance"]["derivedFrom"] for c in laundered) else "TRANSITIVE"
             print(f"                  shared upstream: {rev[s]}   [{hops}]")
+        # The refusal and the conclusion-stands note, in the same breath — never a bare
+        # REFUSE on a settled question (flf-contest#7, SPEC.md §4b). Mechanically verified:
+        # the engine, not this demo, decided the backstop survives.
+        if v.get("conclusion_unchanged"):
+            # The engine's own `note` carries the same finding but names the parties by raw
+            # tt: URI; re-render it against the slug map for a human reader. `cairn explain`
+            # below prints the engine's full sentence with resolved labels.
+            print("\n                  CONCLUSION UNCHANGED — the conclusion itself stands;")
+            print(wrap(f"what fails is only the claim that these are {len(laundered)} "
+                       f"independent votes for it. The backstop {rev[v['backstop']]} is "
+                       f"upstream-disjoint from the at-risk premise "
+                       f"{rev[v['at_risk_upstream']]} and is on its own sufficient.",
+                       width=58, indent=" " * 18))
+            print()
         if v["verdict"] != "COMBINABLE":
             refused += 1
 

@@ -33,9 +33,14 @@ affirm-vectors; `n_eff = k / (1 + (k-1)·φ̄)`.
 assessors returned **byte-identical** answers (Hamming 0 → φ̄ = 1.00 → n_eff = 1.00).
 Giving them genuinely different model tiers (Opus/Sonnet/Haiku/Fable) *and* different
 reasoning protocols, but the **same** full evidence, moved n_eff to only **1.06** —
-within-vendor assessor diversity buys ≈ 0 independence. This is exactly the
-"Nine Judges, Two Effective Votes" (arXiv:2605.29800) deflation, measured on our own
-corpus, and it is the **conservative** direction for a refuse-to-combine engine.
+within-vendor assessor diversity buys ≈ 0 independence. This is the *same shape* of
+deflation Kohli reports in "Nine Judges, Two Effective Votes" (arXiv:2605.29800) — same
+`n_eff` formula, published two months before this entry — but it is not the same
+measurement, and we do not claim it is: Kohli computes `n_eff` over **error** vectors
+(agreement against a ground-truth label), where ours is over **affirm** vectors
+(agreement on the answer itself, no oracle required). Ours is the weaker, cheaper
+signal — two assessors can affirm alike and err differently. The direction it points is
+the **conservative** one for a refuse-to-combine engine, which is why we report it.
 
 The heterogeneous panel reaches n_eff = 1.63 — but see the audit: that gain is not
 competence.
