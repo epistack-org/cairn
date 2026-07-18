@@ -59,10 +59,15 @@ def load_key() -> str:
 
 
 def _raw_call(key):
+    # Redact-left: attribution reaches OpenRouter AND is written into the warcprox
+    # capture record, so it carries only our public identity — never the private forge or the internal
+    # (P4) codename. This mirrors the internal stack's llm.openrouter.headers_for; it is duplicated rather than
+    # imported because this off-7-19 assessor is a separate repo with no dependency on that seam.
     headers = {
         "Authorization": f"Bearer {key}",
-        "HTTP-Referer": "https://forge.example.org/dev/cairn",
-        "X-Title": "cairn cross-family assessor (P4)",
+        "HTTP-Referer": "https://epistack.org",
+        "X-Title": "epistack",
+        "User-Agent": "epistack-research/1.0",
     }
     return lambda spec, json_mode: oai.call_chat(
         ENDPOINT, spec["model"], oai.prompt_for(spec),
