@@ -132,9 +132,19 @@ def check_run(run: dict, battery: dict, *, tol: float = 1e-9) -> dict:
 
     fresh = neff.neff_from_matrix(recomputed) if recomputed else {k: 0.0 for k in _NEFF_KEYS}
     pinned = a.get("neff", {})
-    neff_ok = all(
-        k in pinned and abs(float(fresh[k]) - float(pinned[k])) <= tol for k in _NEFF_KEYS
-    )
+
+    def _neff_key_ok(k: str) -> bool:
+        if k not in pinned:
+            return False
+        fv, pv = fresh.get(k), pinned.get(k)
+        # An inert (all-degenerate) cluster records None for phi_bar/n_eff/n_eff_capped — a valid
+        # recorded result (nobody affirmed anything; the instrument is inert), not drift. Match
+        # None==None; only float-compare when both endpoints are real numbers.
+        if fv is None or pv is None:
+            return fv is None and pv is None
+        return abs(float(fv) - float(pv)) <= tol
+
+    neff_ok = all(_neff_key_ok(k) for k in _NEFF_KEYS)
     ok = ok and neff_ok
 
     return {

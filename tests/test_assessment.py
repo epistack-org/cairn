@@ -75,6 +75,27 @@ def test_cairn_assess_recomputes_pinned_neff():
         assert rep["order_ok"] and rep["matrix_ok"] and rep["neff_ok"]
 
 
+def test_check_run_verifies_inert_cluster():
+    """An all-degenerate (constant-answer) panel is INERT — neff.phi_bar/n_eff/n_eff_capped are None,
+    a valid recorded result (nobody affirmed anything), not drift. check_run must verify it, never
+    crash on float(None). Regression for a fully-collapsed control arm (do-nothing assessors)."""
+    from cairn import neff as _neff
+    bat = {"battery_id": "t", "probes": [{"id": "P1", "key": None}, {"id": "P2", "key": None},
+                                         {"id": "P3", "key": None}]}
+    ans = {"P1": "UNCERTAIN", "P2": "UNCERTAIN", "P3": "UNCERTAIN"}  # constant -> degenerate
+    vecs = [assessment.affirm_vector(ans, bat), assessment.affirm_vector(ans, bat)]
+    nf = _neff.neff_from_matrix(vecs)
+    assert nf["inert"] and nf["n_eff"] is None and nf["phi_bar"] is None  # precondition
+    run = {"assertion": {
+        "panel": "control", "probeSet": "t", "probe_ids": ["P1", "P2", "P3"],
+        "assessors": [{"assessor": "a", "answers": ans, "affirm_vector": vecs[0]},
+                      {"assessor": "b", "answers": ans, "affirm_vector": vecs[1]}],
+        "vectors": vecs, "neff": nf,
+    }}
+    rep = assessment.check_run(run, bat)
+    assert rep["ok"] and rep["neff_ok"] and rep["matrix_ok"] and rep["order_ok"], rep
+
+
 def test_affirm_vectors_match_recomputation():
     bat = battery()
     for run in clusters():
