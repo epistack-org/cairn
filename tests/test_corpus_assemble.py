@@ -17,6 +17,7 @@ unresolvable/reserved mode must each fail loudly.
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -235,11 +236,13 @@ def test_self_contained_bundle_omits_records_key_from_cases_json(tmp_path):
 
 # --- (change 1) repo-mode resolution (hermetic: a local bare repo, no network) -----------------
 
-def _bare_repo_from_bundle(tmp_path: Path, *, tag: str | None = "v1") -> tuple[Path, str]:
-    """Build a self-contained synthetic bundle, commit it as a git repo (CASE.json at the ROOT),
-    optionally tag it, and return (path-to-bare-repo, its bundle digest). No network."""
+def _bare_repo_from_bundle(tmp_path: Path, *, tag: str | None = "v1",
+                           builder=None) -> tuple[Path, str]:
+    """Build a synthetic bundle (``builder``, default self-contained), commit it as a git repo
+    (CASE.json at the ROOT), optionally tag it, and return (path-to-bare-repo, its bundle
+    digest). No network."""
     work = tmp_path / "work"
-    _synthetic_bundle(work)                       # CASE.json / records/ / engine.pin at work/ root
+    (builder or _synthetic_bundle)(work)          # CASE.json / records/ / engine.pin at work/ root
     digest = cases.bundle_digest(work)
     run = lambda *a: subprocess.run(["git", "-C", str(work), *a], check=True,
                                     capture_output=True, text=True)
@@ -316,6 +319,67 @@ def test_repo_mode_accepts_a_full_commit_sha(tmp_path):
     assembled = corpus.assemble(lock)
     assert list(assembled["cases"]) == ["synthetic"]
     assert "records" not in assembled["cases"]["synthetic"]
+
+
+def _dual_homed_bundle(dir_: Path, sentinel: Path) -> None:
+    """The in-tree dual-homed shape (CASE.json + build.py, NO records/), derived from the
+    self-contained synthetic bundle: build.py embeds the same records and proves it was
+    EXECUTED by writing ``sentinel`` at import time."""
+    _synthetic_bundle(dir_)
+    manifest = json.loads((dir_ / "CASE.json").read_text())
+    order = [Path(n).stem for n in manifest.pop("records")]   # dual-homed: no `records` manifest
+    (dir_ / "CASE.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
+    recs = {slug: json.loads((dir_ / "records" / f"{slug}.json").read_text()) for slug in order}
+    shutil.rmtree(dir_ / "records")
+    (dir_ / "build.py").write_text(
+        "import json\n"
+        "from pathlib import Path\n"
+        f"Path({str(sentinel)!r}).write_text('build.py was executed')\n"
+        f"_RECS = json.loads({json.dumps(json.dumps(recs))})\n"
+        "def build(recs):\n"
+        "    recs.update(_RECS)\n")
+
+
+def test_repo_mode_build_only_bundle_is_rejected_not_executed(tmp_path):
+    """THE #38 acceptance: a repo-mode entry whose bundle ships build.py but no records/ fails
+    at a named verify-only gate — the assembler must never execute cloned code, even though the
+    digest gate would have authenticated exactly those bytes (a corpus.lock is not a
+    code-execution manifest)."""
+    sentinel = tmp_path / "executed.txt"
+    bare, digest = _bare_repo_from_bundle(
+        tmp_path, tag="v1", builder=lambda d: _dual_homed_bundle(d, sentinel))
+    lock = _repo_lock("hostile", f"file://{bare}", "v1", digest)
+    with pytest.raises(corpus.AssemblyError, match="verify-only"):
+        corpus.assemble(lock)
+    assert not sentinel.exists(), "repo-mode assembly EXECUTED the cloned build.py"
+    # (repo-mode + records/ => success is test_repo_mode_resolves_verifies_and_assembles above)
+
+
+def test_path_mode_escaping_base_dir_cannot_run_build(tmp_path):
+    """The build bridge's trust root is base_dir: even a path-mode entry may not run build.py
+    if it resolves OUTSIDE base_dir (`../` escape) — records/-shipping stays verify-only fine,
+    code execution does not follow the lock's pointer out of the tree."""
+    sentinel = tmp_path / "executed.txt"
+    _dual_homed_bundle(tmp_path / "outside" / "bundle", sentinel)
+    base = tmp_path / "trusted"
+    base.mkdir()
+    lock = _synthetic_lock("escapee", cases.bundle_digest(tmp_path / "outside" / "bundle"))
+    lock["cases"][0]["path"] = "../outside/bundle"
+    with pytest.raises(corpus.AssemblyError, match="verify-only"):
+        corpus.assemble(lock, base_dir=base)
+    assert not sentinel.exists(), "path-mode assembly EXECUTED a build.py outside base_dir"
+
+
+def test_path_mode_inside_base_dir_still_runs_the_bridge(tmp_path):
+    """Positive control for the gate: a TRUSTED LOCAL dual-homed bundle (path-mode, inside
+    base_dir) still assembles via its build.py — the monolith->trifurcation bridge survives."""
+    sentinel = tmp_path / "executed.txt"
+    _dual_homed_bundle(tmp_path / "synthetic", sentinel)
+    lock = _synthetic_lock("synthetic", cases.bundle_digest(tmp_path / "synthetic"))
+    assembled = corpus.assemble(lock, base_dir=tmp_path)
+    assert sentinel.exists(), "trusted local bridge did not run build.py"
+    assert list(assembled["index"]) == _SYNTH_ORDER
+    assert len(assembled["records"]) == 5
 
 
 def test_repo_mode_cleans_up_its_temp_clones(tmp_path, monkeypatch):

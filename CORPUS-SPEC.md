@@ -101,6 +101,12 @@ entry **in `cases` order**:
      signing seed from `fixtures/lib/mint.py`). This bridge is **explicitly outside** the
      verify-only invariant (§3) and is retired when W4 exports each of the seven as a
      self-contained mirror shipping `records/`.
+   - **The bridge is local-only** (dev/cairn#38). Only a **local** (`path`-mode) entry whose
+     bundle resolves *inside* the assembler's base directory may run `build.py`. A
+     **repo/domain-resolved bundle is verify-only**: it must ship pre-minted `records/`, and one
+     that ships only `build.py` is rejected at a named gate, never executed. The digest gate
+     (step 2) authenticates *which* bytes were fetched; it cannot make executing them safe — a
+     `corpus.lock` must never function as a code-execution manifest.
 
 Then write the aggregate outputs **in lock order**:
 
@@ -131,8 +137,9 @@ over `records/` would reorder `INDEX.json` and break byte-identity. This `record
 consumed here to order `INDEX.json` and is then **stripped from `CASES.json`** (note above). See
 [CASE-REPO-SPEC.md §2](CASE-REPO-SPEC.md).
 
-> **A wrong ref, a drifted digest, a duplicate `case_id`, or an engine mismatch fails loudly** —
-> steps are gates, not warnings. Exit nonzero and name the offending entry.
+> **A wrong ref, a drifted digest, a duplicate `case_id`, an engine mismatch, or a
+> repo/domain-resolved bundle shipping only `build.py` fails loudly** — steps are gates, not
+> warnings. Exit nonzero and name the offending entry.
 
 ---
 

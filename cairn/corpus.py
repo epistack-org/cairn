@@ -16,7 +16,12 @@ For each entry, in lock order:
   5. collect its records — from a self-contained bundle's ``records/`` (in the CASE.json
      ``records`` order), or, for an in-tree dual-homed bundle (the seven today: CASE.json +
      build.py, no records/), by running its authoring ``build.py`` (the monolith->trifurcation
-     bridge; re-mints deterministically — CORPUS-SPEC.md §2/§3).
+     bridge; re-mints deterministically — CORPUS-SPEC.md §2/§3). The bridge is restricted to
+     TRUSTED LOCAL bundles — a path-mode entry resolving inside ``base_dir``. Repo/domain-mode
+     assembly is VERIFY-ONLY: those bundles must ship pre-minted ``records/``, and a bundle
+     that ships only ``build.py`` is rejected at a named gate, never executed. The digest gate
+     authenticates *which* bytes we have; it cannot make executing them safe — a corpus.lock
+     must never be a code-execution manifest (#38).
 
 Then it emits ``INDEX.json``/``CASES.json`` in lock order, byte-identical to what the reference
 builder emits (INDEX: ``json.dumps(index, indent=2)``; CASES: ``ensure_ascii=False``).
@@ -139,7 +144,10 @@ def resolve_entry(entry: dict, base_dir, *, clones: dict | None = None,
 
 
 def _load_build(bundle_dir: Path):
-    """Load a bundle's authoring build.py by path (case-ids contain hyphens)."""
+    """Load a bundle's authoring build.py by path (case-ids contain hyphens).
+
+    Executes the module in-process — callers must only reach this through the trusted-local
+    gate in ``_collect_records`` (``allow_build``), never for a repo/domain-resolved bundle."""
     path = bundle_dir / "build.py"
     modname = "cairn_corpus_build_" + bundle_dir.name.replace("-", "_")
     spec = importlib.util.spec_from_file_location(modname, path)
@@ -148,12 +156,29 @@ def _load_build(bundle_dir: Path):
     return mod
 
 
-def _collect_records(bundle_dir: Path, manifest: dict, recs: dict) -> None:
+def _build_bridge_allowed(entry: dict, bundle: Path, base_dir) -> bool:
+    """May this entry's bundle run its build.py? Only a TRUSTED LOCAL bundle: a path-mode
+    entry that resolves inside ``base_dir`` (the operator's declared trust root). Repo/domain
+    modes are never build-eligible — the digest gate authenticates which code we cloned, it
+    does not make executing it safe (#38)."""
+    if "path" not in entry:
+        return False
+    try:
+        bundle.resolve().relative_to(Path(base_dir).resolve())
+    except ValueError:
+        return False
+    return True
+
+
+def _collect_records(bundle_dir: Path, manifest: dict, recs: dict, *,
+                     allow_build: bool = False) -> None:
     """Add a bundle's records to ``recs`` (keyed by slug), preserving insertion order.
 
     Self-contained bundle -> read records/ in the CASE.json ``records`` order (which MUST be
     declared and MUST match records/ on disk — a sort would break byte-identity, CORPUS-SPEC §2).
-    In-tree dual-homed bundle -> run its build.py (the monolith->trifurcation bridge).
+    In-tree dual-homed bundle -> run its build.py (the monolith->trifurcation bridge), but ONLY
+    when ``allow_build`` (trusted local, ``_build_bridge_allowed``) — everything else is
+    verify-only and must ship pre-minted records/ (#38).
     """
     records_dir = bundle_dir / "records"
     if records_dir.is_dir():
@@ -173,6 +198,12 @@ def _collect_records(bundle_dir: Path, manifest: dict, recs: dict) -> None:
             rec = json.loads(f.read_text())
             _insert(recs, f.stem, rec, bundle_dir.name)
     elif (bundle_dir / "build.py").is_file():
+        if not allow_build:
+            raise AssemblyError(
+                f"{bundle_dir.name}: bundle ships build.py but no records/ — assembly here is "
+                "verify-only and will not execute it. Only a trusted local bundle (path-mode, "
+                "inside base_dir) may run its build.py; repo/domain-mode bundles must ship "
+                "pre-minted records/ (a corpus.lock is not a code-execution manifest; #38)")
         _load_build(bundle_dir).build(recs)      # bridge: deterministic re-mint (seed via lib.mint)
     else:
         raise AssemblyError(f"{bundle_dir.name}: neither records/ nor build.py — cannot collect records")
@@ -237,7 +268,8 @@ def assemble(lock: dict, base_dir=".") -> dict:
                     f"entry.engine={entry_engine!r} corpus.record_schema={corpus_schema!r}")
 
             manifest = cases.load_manifest(bundle)
-            _collect_records(bundle, manifest, recs)
+            _collect_records(bundle, manifest, recs,
+                             allow_build=_build_bridge_allowed(e, bundle, base_dir))
             # CASES.json carries only a case's SEMANTIC declaration. The `records` order manifest is
             # assembly-only metadata (CORPUS-SPEC §2): once _collect_records has consumed it, drop
             # it (shallow copy, this key only) so CASES.json is byte-identical whether a case is
