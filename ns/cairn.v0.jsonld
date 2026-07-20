@@ -1,0 +1,20 @@
+{
+  "note": "The Cairn v0 JSON-LD context — the vocabulary behind every signed Cairn record. This IRI (https://epistack.dev/ns/cairn.v0.jsonld) is bound INSIDE each record's content hash (id = tt:<base64url sha256 of JCS(content)>), so this document is FROZEN once published: semantic changes mint /ns/cairn.v1.jsonld and a new envelope version — v0 is never edited in place. Terms map 1:1 onto the JSON keys the envelope emits (cairn/envelope.py); the machine-checkable shape lives in the JSON Schema below.",
+  "schema": "https://epistack.dev/ns/cairn.v0.schema.json",
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://epistack.dev/ns/cairn.v0#",
+    "epi": "https://epistack.dev/ns/cairn.v0#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "id": "@id",
+
+    "derivedFrom": { "@id": "epi:derivedFrom", "@type": "@id", "@container": "@set" },
+    "fundedBy": { "@id": "epi:fundedBy", "@type": "@id", "@container": "@set" },
+    "at": { "@id": "epi:at", "@type": "xsd:dateTime" },
+    "conformsTo": { "@id": "epi:conformsTo", "@type": "@id" },
+
+    "source": { "@id": "epi:source", "@type": "@id" },
+    "char_span": { "@id": "epi:char_span", "@container": "@list" }
+  }
+}

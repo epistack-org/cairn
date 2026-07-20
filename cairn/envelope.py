@@ -31,7 +31,7 @@ from . import trusty
 from .canonical import jcs
 from .keys import SigningKey, verify as _verify_sig
 
-CONTEXT = "https://epistack.dev/ns/cairn.v0.jsonld"  # v0 context IRI (not yet dereferenceable)
+CONTEXT = "https://epistack.dev/ns/cairn.v0.jsonld"  # v0 context IRI (dereferenceable; ns/cairn.v0.jsonld)
 
 # @type vocabulary (spike C: ~5 core types, extend bottom-up)
 TYPES = ("epi:Claim", "epi:Entity", "epi:Source", "epi:Schema", "epi:Cluster", "epi:Assessment")
