@@ -1,7 +1,6 @@
 """Mechanical grounding check — does a claim's evidence actually resolve?
 
-The faithfulness invariant (internal research notes ``toolchest/02-claim-argument-mining.md``
-:95-98, echoed ``internal notes``:122): *every emitted claim node MUST carry*
+The faithfulness invariant: *every emitted claim node MUST carry*
 ``(source_doc, char_span, extractor, entailment_label)``; *reject/quarantine any
 claim whose stated source span does not entail it.* This module makes that
 invariant **mechanical** for the decoupled engine. For a claim it checks:

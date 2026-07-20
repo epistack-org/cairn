@@ -126,5 +126,5 @@
   "fixtures/naive/claim-two-lineages.json": "f8063b9d42c191ec1a9c3ab769471976830aa94e693e5ee22985ed25e0ea533c",
   "fixtures/naive/src-pekar-2022.json": "24a21c708ecd6cfc90adcfa821d4d624903499fd554d3579fe69f70a464c6a81",
   "fixtures/naive/src-worobey-2022.json": "6b202083f0ec70d5d8da7f67aecb4052e27108c912c807e03d8d598c7c413062",
-  "assessment/baseline.json": "9071b26ebfb7d98ec94f7a44c51bad04ecd5c9a67d7b04e0921abb65603da147"
+  "assessment/baseline.json": "65618cef007e340950d436caa0edd9d1f031ba1d8be73bf78518e35ec7003ef7"
 }

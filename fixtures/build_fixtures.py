@@ -2,8 +2,8 @@
 
 VETTED corpus (roadmap A1). Unlike the earlier illustrative fixtures, every claim
 is **span-grounded to a real, retrieved source** and carries the faithfulness
-tuple ``(source_doc, char_span, extractor, entailment_label)`` (internal research notes
-toolchest/02; internal notes:122). No record sits at ``unverified-fixture``.
+tuple ``(source_doc, char_span, extractor, entailment_label)``. No record sits at
+``unverified-fixture``.
 
 Sources: the byte-exact **abstracts** (version of record) of Worobey 2022 and
 Pekar 2022 ship as raw artifacts under ``fixtures/sources/*.abstract.txt`` and are

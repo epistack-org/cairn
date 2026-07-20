@@ -1,11 +1,9 @@
 # Cairn — the decoupled epistack scoring engine
 
-> Working name **"Cairn"** for the artifact/protocol (REPORT ).
-
-This is the **schema-once weld** between the two epistack tracks: the small, plain
-`git + one container` engine that (a) produces the July-5 FLF deliverable and
-(b) is the seed of the an internal track internal follow-on layer. It has **no
-substrate dependency** — no orchestrator, no private network, no forge — by design the moat is non-portable; the *scoring* must run on a fresh machine).
+Cairn is the small, plain `git + one container` engine behind epistack's
+refuse-to-combine thesis. It has **no substrate dependency** —
+no orchestrator, no private network, no forge — by design: the *scoring* must run, and be
+re-checkable on a fresh machine.
 
 It is the **one artifact schema + the mechanical checks a single careful
 Claude-Code transcript structurally cannot produce**:
@@ -255,4 +253,3 @@ cairn cases list                        # discover the case bundles and check th
   interval** (A3, `cairn/frechet.py`) — the honest interval + principled refusal.
   Legs **(b)** shared derivation (ProvSQL) and **(c)** hidden confounder (causal
   tooling) are the next slices, not yet here.
-

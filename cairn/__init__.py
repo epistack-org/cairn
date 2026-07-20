@@ -3,7 +3,7 @@
 The one artifact schema + the two mechanical checks a single transcript cannot
 produce: a content-addressed/signed knowledge record (envelope), a measured
 effective-independence number (neff), and a shared-upstream refuse-to-combine
-detector (provenance). Working name "Cairn" (REPORT ).
+detector (provenance).
 """
 from __future__ import annotations
 

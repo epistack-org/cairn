@@ -51,7 +51,7 @@ The three Worobey-grounded proximity lines share the `src-worobey-2022` upstream
 returns **REFUSE-TO-COMBINE**; `{geographic-clustering, two-lineages}` span disjoint
 upstreams (Worobey vs Pekar) and return **COMBINABLE**.
 
-## Trust-Ladder rungs (internal research notes `toolchest/01`; `internal notes`)
+## Trust-Ladder rungs
 
 `L1` Observed artifact · `L2` Parsed · `L3` Attributed · `L4` Entailment-checked ·
 `L5` Accepted (no open blocking objection) · `L6` Analysis conclusion.

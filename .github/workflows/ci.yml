@@ -3,8 +3,8 @@
 # The Containerfile mints the fixtures, proves the claim spans resolve (cairn
 # ground), and runs the pytest suite AT BUILD TIME, so a green `docker build` *is*
 # the test pass. No registry push, no secrets:
-# the scoring engine stays plain git + one container by design the
-# moat is non-portable; the *scoring* must run on a fresh machine).
+# the scoring engine stays plain git + one container by design: the scoring must
+# run on a fresh machine.
 name: ci
 
 on:
