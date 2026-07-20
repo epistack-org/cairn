@@ -196,3 +196,11 @@ def test_cross_vendor_decomposition_present_and_wellformed():
     for k in ("within_anthropic_phi", "within_glm_phi", "cross_vendor_phi"):
         assert -1.0 <= cv[k] <= 1.0
     assert cv["combined_neff"] >= 1.0
+
+
+def test_hamming_rejects_unequal_length_vectors():
+    # dev/cairn#37 finding 8: zip() silently truncated to the shorter vector, undercounting
+    # the distance. Mismatched lengths must fail loudly instead.
+    import pytest as _pytest
+    with _pytest.raises(ValueError):
+        assessment.hamming([1, 0, 1], [1, 0])

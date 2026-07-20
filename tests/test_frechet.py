@@ -192,6 +192,46 @@ def test_verdict_boundary_is_strict_inequality():
     assert tighter["verdict"] == "REFUSE-TO-COMBINE-AS-POINT"    # a hair tighter -> refuse
 
 
+# --- dev/cairn#37 finding 4: NaN/Inf fail closed at the boundary ------------
+
+def test_nan_width_knob_does_not_launder_a_refusal():
+    # `width > nan` is False, so a NaN threshold used to flip a trio that must refuse
+    # (width 1.4 > 0.5) into a vacuous COMBINABLE. Now the input is rejected outright.
+    with pytest.raises(ValueError):
+        frechet.frechet_verdict([5, 5, 5], shared_upstream=True, max_width_decades=float("nan"))
+
+
+def test_nan_or_inf_lr_is_rejected():
+    for bad in (float("nan"), float("inf")):
+        with pytest.raises(ValueError):
+            frechet.frechet_verdict([5, bad, 5], shared_upstream=True)
+
+
+def test_nonpositive_lr_is_rejected():
+    # a likelihood ratio must be strictly positive
+    with pytest.raises(ValueError):
+        frechet.frechet_verdict([5, 0.0, 5], shared_upstream=True)
+
+
+def test_out_of_domain_prior_and_base_neg_rejected():
+    with pytest.raises(ValueError):
+        frechet.frechet_verdict([5, 5], shared_upstream=True, prior=1.5)
+    with pytest.raises(ValueError):
+        frechet.frechet_verdict([5, 5], shared_upstream=True, base_neg=0.0)     # base_neg in (0,1)
+    with pytest.raises(ValueError):
+        frechet.frechet_verdict([5, 5], shared_upstream=True, n_eff=float("nan"))
+
+
+@needs_fixtures
+def test_cli_nan_width_fails_closed_exit_2(capsys):
+    # the same NaN attack through the CLI: exit non-zero, no vacuous point emitted.
+    code = cli.main(["frechet", str(FX / "*.json"),
+                     "--claims", "claim-geographic-clustering", "claim-environmental-sampling",
+                     "claim-live-mammal-sales", "--max-width-decades", "nan"])
+    assert code == 2
+    assert "rejected input" in capsys.readouterr().err
+
+
 # --- CLI exit-code contract (mirrors intersect: 0 combine / 2 refuse) -------
 
 @needs_fixtures

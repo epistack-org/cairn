@@ -75,3 +75,23 @@ def test_schema_rejects_bad_type_and_missing_fields():
 def test_unknown_type_raises():
     with pytest.raises(ValueError):
         envelope.new_record("epi:Bogus", {"a": 1}, minted_by="t")
+
+
+def test_malformed_date_time_is_a_schema_violation():
+    # dev/cairn#37 finding 7: `format: date-time` was annotation-only (no FormatChecker),
+    # so a garbage `at` validated clean. It must now be a violation.
+    r = envelope.mint(_rec())
+    r["provenance"]["at"] = "not-a-date"
+    errs = envelope.validate(r)
+    assert any("date-time" in e for e in errs), errs
+
+
+def test_bare_date_without_time_is_rejected():
+    r = envelope.mint(_rec())
+    r["provenance"]["at"] = "2026-07-20"          # a date, but not a date-TIME
+    assert any("date-time" in e for e in envelope.validate(r))
+
+
+def test_well_formed_date_time_still_validates():
+    r = envelope.mint(_rec())                      # _rec() uses AT = "...T...Z"
+    assert envelope.validate(r) == []

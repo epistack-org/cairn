@@ -141,9 +141,36 @@ def load_schema() -> dict:
     return json.loads(SCHEMA_PATH.read_text())
 
 
+@lru_cache(maxsize=1)
+def _format_checker():
+    """A FormatChecker that actually enforces ``format: date-time`` (dev/cairn#37, finding 7).
+
+    ``jsonschema`` treats ``format`` as an annotation and only checks ``date-time`` when an
+    optional dependency (``rfc3339-validator``/``fqdn``) is installed — which it is not here —
+    so ``at: "not-a-date"`` used to validate clean. We register a stdlib-only check (no new
+    dependency): the value must carry a time component and parse as an ISO-8601 timestamp,
+    with a trailing ``Z`` normalised to ``+00:00`` for ``datetime.fromisoformat``.
+    """
+    from jsonschema import FormatChecker
+
+    fc = FormatChecker()
+
+    @fc.checks("date-time", raises=(ValueError, TypeError))
+    def _is_date_time(value):  # jsonschema calls this with the raw instance value
+        if not isinstance(value, str):
+            return True  # non-strings are caught by the schema's `type` keyword, not here
+        if "T" not in value:
+            raise ValueError("date-time requires a time component (got a bare date)")
+        normalised = value[:-1] + "+00:00" if value.endswith("Z") else value
+        datetime.fromisoformat(normalised)  # raises ValueError on a malformed timestamp
+        return True
+
+    return fc
+
+
 def validate(record: dict) -> list[str]:
     """Return a list of human-readable schema violations ([] == valid)."""
     from jsonschema import Draft202012Validator
 
-    v = Draft202012Validator(load_schema())
+    v = Draft202012Validator(load_schema(), format_checker=_format_checker())
     return [f"{'/'.join(map(str, e.path)) or '<root>'}: {e.message}" for e in v.iter_errors(record)]

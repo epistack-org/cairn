@@ -64,6 +64,27 @@ DEFAULT_PRIOR = 0.5             # P(H); with 0.5 the posterior odds equal the co
 DEFAULT_MAX_WIDTH_DECADES = 0.5  # a point unstatable within half an order of magnitude is not a point
 
 
+# --- boundary input validation (fail closed on NaN/Inf) ---------------------
+
+def _require_finite(name: str, x: float, *, lo: float | None = None, hi: float | None = None,
+                    lo_inclusive: bool = True, hi_inclusive: bool = True) -> float:
+    """Reject a non-finite (NaN/Inf) or out-of-domain scalar (dev/cairn#37, finding 4).
+
+    ``NaN`` silently defeats every ``x > threshold`` comparison (they all return
+    ``False``), so a single ``NaN`` LR / prior / width knob used to flip a trio that
+    should refuse into a vacuous COMBINABLE. We refuse the *input* instead of emitting a
+    number over garbage. ``lo``/``hi`` enforce the domain when supplied.
+    """
+    xf = float(x)
+    if not math.isfinite(xf):
+        raise ValueError(f"{name} must be a finite number, got {x!r}")
+    if lo is not None and (xf < lo or (xf == lo and not lo_inclusive)):
+        raise ValueError(f"{name}={xf} is below its domain ({'>=' if lo_inclusive else '>'} {lo})")
+    if hi is not None and (xf > hi or (xf == hi and not hi_inclusive)):
+        raise ValueError(f"{name}={xf} is above its domain ({'<=' if hi_inclusive else '<'} {hi})")
+    return xf
+
+
 # --- probability / odds plumbing --------------------------------------------
 
 def posterior(prior: float, lr: float) -> float:
@@ -226,7 +247,16 @@ def frechet_verdict(lrs: Sequence[float], *, shared_upstream: bool,
     the honest point; the interval degenerates to ``[prod, prod]`` (width 0) and the
     verdict is COMBINABLE-WITH-INTERVAL.
     """
-    lrs = [float(x) for x in lrs]
+    # Fail closed on non-finite / out-of-domain inputs (dev/cairn#37, finding 4) BEFORE any
+    # comparison that a NaN would silently pass. LRs are positive likelihood ratios; the
+    # width knob is a non-negative decade count; prior/base_neg are probabilities.
+    lrs = [_require_finite(f"illustrative_LR[{i}]", x, lo=0.0, lo_inclusive=False)
+           for i, x in enumerate(lrs)]
+    prior = _require_finite("prior", prior, lo=0.0, hi=1.0)
+    base_neg = _require_finite("base_neg", base_neg, lo=0.0, hi=1.0, lo_inclusive=False, hi_inclusive=False)
+    max_width_decades = _require_finite("max_width_decades", max_width_decades, lo=0.0)
+    if n_eff is not None:
+        n_eff = _require_finite("n_eff", n_eff, lo=0.0, lo_inclusive=False)
     k = len(lrs)
     if k == 0:
         raise ValueError("frechet_verdict: no likelihood ratios to combine (empty claim set)")

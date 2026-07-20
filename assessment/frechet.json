@@ -142,7 +142,7 @@
       "degenerate": false,
       "phi_bar": 1.0,
       "kish_ess": 1.0,
-      "eigenvalue_ess": 1.0,
+      "eigenvalue_ess": 0.9999999999999998,
       "bootstrap_ci": {
         "phi_bar_lo": 1.0,
         "phi_bar_hi": 1.0,
@@ -161,7 +161,7 @@
       "degenerate": false,
       "phi_bar": 0.9365079365079365,
       "kish_ess": 1.0598130841121496,
-      "eigenvalue_ess": 1.0537109888709892,
+      "eigenvalue_ess": 1.053710988870989,
       "bootstrap_ci": {
         "phi_bar_lo": 0.8419278076877362,
         "phi_bar_hi": 1.0,
@@ -180,7 +180,7 @@
       "degenerate": false,
       "phi_bar": 0.9478987681383928,
       "kish_ess": 1.048561181547453,
-      "eigenvalue_ess": 1.0474035790211356,
+      "eigenvalue_ess": 1.047403579021136,
       "bootstrap_ci": {
         "phi_bar_lo": 0.845619934671594,
         "phi_bar_hi": 1.0,
@@ -199,7 +199,7 @@
       "degenerate": false,
       "phi_bar": 0.5644532462892413,
       "kish_ess": 1.6317277582706993,
-      "eigenvalue_ess": 1.5483183838279113,
+      "eigenvalue_ess": 1.5483183838279087,
       "bootstrap_ci": {
         "phi_bar_lo": 0.43027508857369157,
         "phi_bar_hi": 0.9229419266686346,

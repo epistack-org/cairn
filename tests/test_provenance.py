@@ -65,10 +65,14 @@ def test_single_claim_does_not_share_an_upstream_with_itself():
     assert s["ancestors"][c1["id"]] == {src["id"]}   # it still HAS an ancestor
 
 
-def test_empty_claim_set_is_vacuously_combinable():
+def test_empty_claim_set_is_invalid_not_vacuously_combinable():
+    # dev/cairn#37 finding 2: "no shared upstream" is vacuously true of the empty set, so the
+    # old code called it COMBINABLE (exit 0). An empty selection cannot be judged independent
+    # — it must fail CLOSED as INVALID.
     store = _store(_mk("epi:Source", {"title": "unused"}))
     v = provenance.combine_verdict([], store)
-    assert v["independent"] is True
+    assert v["verdict"] == "INVALID"
+    assert v["independent"] is False
     assert v["shared_upstreams"] == []
 
 
@@ -108,6 +112,109 @@ def test_ancestors_excludes_self_and_terminates_on_cycle_safe_input():
     store = _store(a, b)
     assert provenance.ancestors(b["id"], store) == {a["id"]}
     assert provenance.ancestors(a["id"], store) == set()
+
+
+# ---------------------------------------------------------------------------
+# dev/cairn#37 — fail-closed at ingestion (adversarial)
+# ---------------------------------------------------------------------------
+
+def test_direct_parent_child_derivation_is_refused():
+    # dev/cairn#37 finding 1: B is derived DIRECTLY from A. Combining [A, B] as independent
+    # must REFUSE — A is B's parent. The old ancestor-set-excludes-self bug made this the
+    # central detector's blind spot: refl(A)={A} vs refl(B)={A,B} now intersect on {A}.
+    a = _mk("epi:Source", {"title": "parent dataset"})
+    b = _mk("epi:Claim", {"text": "derived directly from A"}, [a["id"]])
+    store = _store(a, b)
+    v = provenance.combine_verdict([a["id"], b["id"]], store)
+    assert v["verdict"] == "REFUSE-TO-COMBINE"
+    assert v["independent"] is False
+    assert a["id"] in v["shared_upstreams"]
+
+
+def test_child_parent_order_is_symmetric():
+    # order of the two ids must not matter — reachability is undirected for the refusal.
+    a = _mk("epi:Source", {"title": "parent"})
+    b = _mk("epi:Claim", {"text": "child"}, [a["id"]])
+    store = _store(a, b)
+    assert provenance.combine_verdict([b["id"], a["id"]], store)["verdict"] == "REFUSE-TO-COMBINE"
+
+
+def test_grandparent_derivation_is_refused():
+    # A -> B -> C chain; combining the endpoints [A, C] must refuse (transitive self-inclusion).
+    a = _mk("epi:Source", {"title": "A"})
+    b = _mk("epi:Claim", {"text": "B from A"}, [a["id"]])
+    c = _mk("epi:Claim", {"text": "C from B"}, [b["id"]])
+    store = _store(a, b, c)
+    v = provenance.combine_verdict([a["id"], c["id"]], store)
+    assert v["verdict"] == "REFUSE-TO-COMBINE"
+    assert a["id"] in v["shared_upstreams"]
+
+
+def test_missing_only_claim_set_is_invalid_not_combinable():
+    # dev/cairn#37 finding 2: two ids that resolve to NO record must be INVALID, never the
+    # old vacuous COMBINABLE from treating them as opaque ancestor-free roots.
+    store = _store(_mk("epi:Source", {"title": "present"}))
+    v = provenance.combine_verdict(["missing-a", "missing-b"], store)
+    assert v["verdict"] == "INVALID"
+    assert v["independent"] is False
+    assert sorted(v["missing"]) == ["missing-a", "missing-b"]
+
+
+def test_partially_missing_claim_set_is_invalid():
+    # even ONE unresolved selected id fails closed — you cannot judge a set you can't load.
+    src = _mk("epi:Source", {"title": "s"})
+    c1 = _mk("epi:Claim", {"text": "real"}, [src["id"]])
+    store = _store(src, c1)
+    v = provenance.combine_verdict([c1["id"], "ghost"], store)
+    assert v["verdict"] == "INVALID"
+    assert v["missing"] == ["ghost"]
+
+
+def test_backstop_that_does_not_resolve_stays_bare_refuse():
+    # dev/cairn#37 finding 3: a typoed / nonexistent backstop must NOT upgrade a refusal.
+    at_risk = _mk("epi:Entity", {"name": "at-risk premise"})
+    shared = _mk("epi:Entity", {"name": "shared premise"})
+    c1 = _mk("epi:Claim", {"text": "a"}, [shared["id"]])
+    c2 = _mk("epi:Claim", {"text": "b"}, [shared["id"]])
+    store = _store(at_risk, shared, c1, c2)
+    v = provenance.combine_verdict(
+        [c1["id"], c2["id"]], store,
+        backstop="totally-missing-id", at_risk_upstream=at_risk["id"])
+    assert v["verdict"] == "REFUSE-TO-COMBINE"           # NOT ...-AS-INDEPENDENT
+    assert v["conclusion_unchanged"] is False
+    assert "UNRESOLVED" in v["note"]
+
+
+def test_backstop_upgrade_requires_a_named_at_risk_premise():
+    # omitting the at-risk premise must not short-circuit disjointness to True.
+    shared = _mk("epi:Entity", {"name": "shared premise"})
+    c1 = _mk("epi:Claim", {"text": "a"}, [shared["id"]])
+    c2 = _mk("epi:Claim", {"text": "b"}, [shared["id"]])
+    store = _store(shared, c1, c2)
+    v = provenance.combine_verdict(
+        [c1["id"], c2["id"]], store, backstop=c2["id"], at_risk_upstream=None)
+    assert v["verdict"] == "REFUSE-TO-COMBINE"
+    assert v["conclusion_unchanged"] is False
+
+
+def test_backstop_with_missing_at_risk_premise_stays_bare_refuse():
+    # a named-but-unresolved at-risk premise is also insufficient for the upgrade.
+    shared = _mk("epi:Entity", {"name": "shared premise"})
+    c1 = _mk("epi:Claim", {"text": "a"}, [shared["id"]])
+    c2 = _mk("epi:Claim", {"text": "b"}, [shared["id"]])
+    store = _store(shared, c1, c2)
+    v = provenance.combine_verdict(
+        [c1["id"], c2["id"]], store, backstop=c2["id"], at_risk_upstream="ghost-premise")
+    assert v["verdict"] == "REFUSE-TO-COMBINE"
+    assert v["conclusion_unchanged"] is False
+
+
+def test_explain_invalid_says_it_cannot_be_judged():
+    store = _store(_mk("epi:Source", {"title": "s"}))
+    v = provenance.combine_verdict([], store)
+    text = provenance.explain_verdict(v, store)
+    assert "cannot be judged" in text
+    assert "not vacuously combinable" in text
 
 
 def test_explain_combinable_says_nothing_to_un_refuse():

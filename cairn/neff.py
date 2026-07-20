@@ -57,6 +57,11 @@ def is_degenerate(v: Vector) -> bool:
     return len(set(v)) <= 1
 
 
+def _is_binary(v: Vector) -> bool:
+    """Every element is 0 or 1 (bools and 0.0/1.0 count — they compare equal)."""
+    return all(x == 0 or x == 1 for x in v)
+
+
 def phi(a: Vector, b: Vector) -> float:
     """Phi coefficient = Pearson correlation of two equal-length binary vectors.
 
@@ -73,6 +78,10 @@ def phi(a: Vector, b: Vector) -> float:
     n = len(a)
     if n == 0:
         raise ValueError("empty vectors")
+    # φ is only defined on binary data; a stray 2 (or a NaN) would produce a meaningless
+    # "correlation" and quietly corrupt n_eff (dev/cairn#37, finding 8).
+    if not (_is_binary(a) and _is_binary(b)):
+        raise ValueError("phi expects binary 0/1 vectors")
     sa, sb = sum(a), sum(b)
     sab = sum(x * y for x, y in zip(a, b))
     num = n * sab - sa * sb
@@ -97,17 +106,20 @@ def mean_phi(vectors: Sequence[Vector]) -> float:
 def kish_neff(k: int, phi_bar: float) -> float:
     """Kish design-effect ESS (clustering component) from panel size and mean φ.
 
-    Guard: a sufficiently anti-correlated panel drives the denominator to <= 0
-    (e.g. a perfectly anti-correlated pair, phi_bar = -1). Effective independent
-    votes cannot exceed the real panel size, so we cap at ``k`` there rather than
-    returning a blow-up.
+    Effective independent votes cannot exceed the real panel size, so the result is
+    capped at ``k``. Two regimes reach that cap: a sufficiently anti-correlated panel
+    drives the denominator ``1 + (k-1)·φ̄`` to ``<= 0`` (e.g. a perfectly anti-correlated
+    pair, φ̄ = -1), and a *moderately* anti-correlated panel leaves ``0 < denom < 1`` so
+    the raw quotient exceeds ``k`` (e.g. ``kish_neff(2, -0.4)`` = 3.33). Both used to leak
+    a count above the panel size (dev/cairn#37, finding 6); the cap closes it so the stat
+    honours its own contract that n_eff ≤ k.
     """
     if k <= 1:
         return float(k)
     denom = 1.0 + (k - 1) * phi_bar
     if denom <= 0:
         return float(k)
-    return k / denom
+    return min(float(k), k / denom)
 
 
 def _corr_matrix(vectors: Sequence[Vector]) -> list[list[float]]:
@@ -120,31 +132,67 @@ def _corr_matrix(vectors: Sequence[Vector]) -> list[list[float]]:
     return R
 
 
-def _lambda_max(R: Sequence[Sequence[float]], iters: int = 2000, tol: float = 1e-13) -> float:
-    """Largest eigenvalue of a symmetric PSD (correlation) matrix, via power iteration.
+def _jacobi_eigenvalues(A: Sequence[Sequence[float]], *, max_sweeps: int = 100,
+                        tol: float = 1e-13) -> list[float]:
+    """All eigenvalues of a symmetric matrix via the cyclic Jacobi rotation method.
 
-    Stdlib-only (no numpy). A correlation matrix is PSD so every eigenvalue is >= 0
-    and λ_max is the largest in magnitude — exactly what power iteration converges
-    to. Returns the Rayleigh quotient of the converged (unit) vector.
+    Stdlib-only, deterministic, and correct for *any* symmetric matrix — including the
+    negative- and block-correlation structures that broke the old power iteration
+    (dev/cairn#37, finding 5). Power iteration seeded at the all-ones vector converges to
+    whichever eigenvalue that vector overlaps; for an anti-correlated pair the all-ones
+    vector *is* the sub-dominant eigenvector (φ̄-pair eigenvectors are [1,1] and [1,-1]),
+    so it returned λ_min and reported n_eff *above* the true value. Jacobi diagonalizes the
+    whole matrix, so λ_max = max(diagonal) regardless of the seed.
+    """
+    n = len(A)
+    if n == 0:
+        return []
+    if n == 1:
+        return [float(A[0][0])]
+    a = [[float(A[i][j]) for j in range(n)] for i in range(n)]
+    for _ in range(max_sweeps):
+        # largest off-diagonal magnitude (classical Jacobi pivot)
+        off, p, q = 0.0, 0, 1
+        for i in range(n):
+            for j in range(i + 1, n):
+                if abs(a[i][j]) > off:
+                    off, p, q = abs(a[i][j]), i, j
+        if off < tol:
+            break
+        app, aqq, apq = a[p][p], a[q][q], a[p][q]
+        # Algebraic (trig-free) rotation that zeros a[p][q] — the Numerical-Recipes form.
+        # Uses only sqrt and arithmetic (all IEEE-754 correctly-rounded, so the result is
+        # bit-reproducible across platforms), avoiding atan2/sin/cos, which glibc does NOT
+        # guarantee to round identically across versions — important because eigenvalue_ess
+        # feeds a byte-pinned recompute artifact.
+        tau = (aqq - app) / (2.0 * apq)
+        t = (1.0 if tau >= 0.0 else -1.0) / (abs(tau) + math.sqrt(tau * tau + 1.0))
+        c = 1.0 / math.sqrt(t * t + 1.0)
+        s = t * c
+        for i in range(n):
+            aip, aiq = a[i][p], a[i][q]
+            a[i][p] = c * aip - s * aiq
+            a[i][q] = s * aip + c * aiq
+        for i in range(n):
+            api, aqi = a[p][i], a[q][i]
+            a[p][i] = c * api - s * aqi
+            a[q][i] = s * api + c * aqi
+    return [a[i][i] for i in range(n)]
+
+
+def _lambda_max(R: Sequence[Sequence[float]]) -> float:
+    """Largest eigenvalue of a symmetric (correlation) matrix — robust via Jacobi.
+
+    A correlation matrix is PSD in exact arithmetic, but the φ estimator can yield an
+    *indefinite* sample matrix (negative eigenvalues), so we take the true maximum over
+    every eigenvalue rather than assuming the largest-magnitude one is positive.
     """
     n = len(R)
     if n == 0:
         return 0.0
     if n == 1:
         return float(R[0][0])
-    x = [1.0] * n
-    lam = 0.0
-    for _ in range(iters):
-        y = [sum(R[i][j] * x[j] for j in range(n)) for i in range(n)]
-        norm = math.sqrt(sum(v * v for v in y))
-        if norm == 0.0:
-            return 0.0
-        x = [v / norm for v in y]
-        rq = sum(x[i] * sum(R[i][j] * x[j] for j in range(n)) for i in range(n))
-        if abs(rq - lam) < tol:
-            return rq
-        lam = rq
-    return lam
+    return max(_jacobi_eigenvalues(R))
 
 
 def eigenvalue_ess(vectors: Sequence[Vector]) -> float | None:
@@ -235,7 +283,17 @@ def neff_from_matrix(vectors: Sequence[Vector]) -> dict:
     A wholly degenerate panel is **inert**: ``phi_bar``/``kish_ess``/``n_eff`` are
     ``None``. That is the correct reading of a control in which nobody affirmed
     anything — not the ceiling ``k``.
+
+    Validates the panel at the public boundary (dev/cairn#37, finding 8): every assessor
+    vector must be the same length and binary 0/1, so a ragged or non-binary matrix fails
+    loudly here instead of yielding a silently wrong φ deep inside the pairwise loop.
     """
+    if vectors:
+        lengths = {len(v) for v in vectors}
+        if len(lengths) != 1:
+            raise ValueError(f"neff_from_matrix: assessor vectors must be equal length, got {sorted(lengths)}")
+        if not all(_is_binary(v) for v in vectors):
+            raise ValueError("neff_from_matrix: assessor vectors must be binary 0/1")
     k = len(vectors)
     excluded = [i for i, v in enumerate(vectors) if is_degenerate(v)]
     kept = [v for v in vectors if not is_degenerate(v)]

@@ -56,7 +56,7 @@ def import_corpus(spec: Mapping) -> list[dict]:
         assertion: dict = {"text": c["text"]}
         if c.get("slug"):
             assertion["label"] = c["slug"]        # readable name for `cairn explain`
-        if c.get("support_strength"):
+        if c.get("support_strength") is not None:  # keep a valid 0 (dev/cairn#37, finding 8)
             assertion["support_strength"] = c["support_strength"]
         edges = [normalise_ref(r) for r in c.get("derivedFrom", [])]
         rec = envelope.new_record(

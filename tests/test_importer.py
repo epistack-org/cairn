@@ -61,3 +61,23 @@ def test_disjoint_imported_claims_combine():
     store = {r["id"]: r for r in recs}
     v = provenance.combine_verdict(list(store), store)
     assert v["verdict"] == "COMBINABLE"
+
+
+def test_support_strength_zero_is_preserved():
+    # dev/cairn#37 finding 8: `if c.get("support_strength")` dropped a valid 0 (falsy).
+    # An explicit 0 is data, not absence, and must survive onto the record.
+    spec = {
+        "minted_by": "import:test", "at": "2026-07-15T00:00:00Z",
+        "claims": [{"slug": "z", "text": "null-effect line", "support_strength": 0}],
+    }
+    rec = importer.import_corpus(spec)[0]
+    assert rec["assertion"]["support_strength"] == 0
+
+
+def test_support_strength_absent_is_omitted():
+    spec = {
+        "minted_by": "import:test", "at": "2026-07-15T00:00:00Z",
+        "claims": [{"slug": "z", "text": "no strength given"}],
+    }
+    rec = importer.import_corpus(spec)[0]
+    assert "support_strength" not in rec["assertion"]

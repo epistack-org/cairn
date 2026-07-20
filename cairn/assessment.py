@@ -60,6 +60,10 @@ def pairwise_phi(vectors: Sequence[Sequence[int]]) -> list[dict]:
 
 
 def hamming(u: Sequence[int], v: Sequence[int]) -> int:
+    # zip() silently truncates to the shorter vector, so mismatched lengths used to report
+    # a too-small distance instead of failing (dev/cairn#37, finding 8). Require equal length.
+    if len(u) != len(v):
+        raise ValueError(f"hamming: vectors must be the same length ({len(u)} != {len(v)})")
     return sum(1 for a, b in zip(u, v) if a != b)
 
 

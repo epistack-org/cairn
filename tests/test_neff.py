@@ -1,5 +1,7 @@
 import math
 
+import pytest
+
 from cairn.neff import (
     bootstrap_phi_ci,
     eigenvalue_ess,
@@ -137,3 +139,64 @@ def test_bootstrap_ci_flags_full_redundancy():
 def test_bootstrap_ci_none_when_too_few():
     assert bootstrap_phi_ci([[1, 0, 1, 0]]) is None            # one assessor
     assert bootstrap_phi_ci([[0, 0], [0, 0]]) is None          # all degenerate
+
+
+# ---------------------------------------------------------------------------
+# dev/cairn#37 — eigenvalue / cap / input-validation (adversarial)
+# ---------------------------------------------------------------------------
+
+def _pair_with_phi(target):
+    """A concrete binary pair whose φ equals ``target`` (searched, so the test is honest)."""
+    import itertools
+    for la in itertools.product([0, 1], repeat=6):
+        for lb in itertools.product([0, 1], repeat=6):
+            if len(set(la)) > 1 and len(set(lb)) > 1 and math.isclose(phi(list(la), list(lb)), target, abs_tol=1e-12):
+                return [list(la), list(lb)]
+    raise AssertionError(f"no binary pair with phi={target}")
+
+
+def test_eigenvalue_ess_negative_correlation_is_correct():
+    # dev/cairn#37 finding 5: power iteration from the all-ones vector returned λ_MIN for a
+    # negative-correlation pair (all-ones IS the sub-dominant eigenvector), reporting 3.0
+    # where the truth is k/λ_max = 2/(1+1/3) = 1.5. Jacobi diagonalization gets it right.
+    v = _pair_with_phi(-1.0 / 3.0)
+    assert math.isclose(eigenvalue_ess(v), 1.5, rel_tol=1e-9)
+
+
+def test_eigenvalue_ess_perfect_anticorrelation_is_one():
+    # anti-correlated pair: λ_max = 2, so ESS = k/λ_max = 1.0 (old bug returned 2.0).
+    assert math.isclose(eigenvalue_ess([[1, 0, 1, 0], [0, 1, 0, 1]]), 1.0, rel_tol=1e-9)
+
+
+def test_eigenvalue_ess_block_matrix_via_lambda_max():
+    # a 3-vector panel with mixed-sign correlations (an indefinite sample matrix): the
+    # eigenvalues must sum to the trace (k=3) and λ_max must be the true maximum.
+    from cairn.neff import _jacobi_eigenvalues, _lambda_max
+    R = [[1.0, 0.9, -0.5], [0.9, 1.0, -0.5], [-0.5, -0.5, 1.0]]
+    eigs = _jacobi_eigenvalues(R)
+    assert math.isclose(sum(eigs), 3.0, abs_tol=1e-9)          # trace preserved
+    assert math.isclose(_lambda_max(R), max(eigs), rel_tol=1e-12)
+    assert _lambda_max(R) > 2.0                                 # dominant, not sub-dominant
+
+
+def test_kish_neff_never_exceeds_k_for_moderate_negative_phi():
+    # dev/cairn#37 finding 6: kish_neff(2, -0.4) = 2/0.6 = 3.33 used to exceed the panel.
+    assert kish_neff(2, -0.4) == 2.0
+    assert kish_neff(9, -0.05) <= 9.0
+    # positive-φ values are unaffected (still below k, never touched by the cap)
+    assert math.isclose(kish_neff(9, 0.386), 2.2, abs_tol=0.01)
+
+
+def test_neff_from_matrix_rejects_ragged_panel():
+    with pytest.raises(ValueError):
+        neff_from_matrix([[1, 0, 1], [1, 0]])
+
+
+def test_neff_from_matrix_rejects_non_binary():
+    with pytest.raises(ValueError):
+        neff_from_matrix([[1, 0, 2], [1, 0, 1]])
+
+
+def test_phi_rejects_non_binary():
+    with pytest.raises(ValueError):
+        phi([1, 0, 2, 0], [1, 0, 1, 0])

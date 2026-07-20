@@ -31,7 +31,11 @@ from typing import Iterable, Mapping
 #                                        and independently sufficient survives, so
 #                                        the *conclusion* is unchanged (only the
 #                                        "these are N independent votes" claim fails).
-VERDICTS = ("COMBINABLE", "REFUSE-TO-COMBINE", "REFUSE-TO-COMBINE-AS-INDEPENDENT")
+#   * INVALID                          — the *input* cannot be judged: an empty set,
+#                                        or a selected id that resolves to no record
+#                                        in the store. Fails CLOSED — an unresolved
+#                                        set is never vacuously COMBINABLE (dev/cairn#37).
+VERDICTS = ("COMBINABLE", "REFUSE-TO-COMBINE", "REFUSE-TO-COMBINE-AS-INDEPENDENT", "INVALID")
 
 
 def upstreams(record: Mapping) -> set[str]:
@@ -86,18 +90,29 @@ def ancestors(record_id: str, store: Mapping[str, Mapping], *, _seen: set | None
 
 
 def shared_upstreams(record_ids: Iterable[str], store: Mapping[str, Mapping]) -> dict:
-    """Pairwise + collective shared ancestors across a set proposed as independent."""
+    """Pairwise + collective shared ancestors across a set proposed as independent.
+
+    Intersections run over the **reflexive** closure ``ancestors(x) | {x}`` (dev/cairn#37,
+    finding 1). The bare ancestor set excludes the record itself, so a direct parent→child
+    derivation (``B derivedFrom A``, combine ``[A, B]``) had an empty intersection and was
+    silently declared COMBINABLE — the central non-independence detector missing the most
+    direct dependence there is. Folding each record into its own closure catches it: A is in
+    A's reflexive closure, so ``refl(A) ∩ refl(B) = {A}`` and the pair refuses. Distinct
+    record ids never collide with each other, so sibling claims are unaffected; the reported
+    ``ancestors`` field stays non-reflexive (it means "the ancestors *of* x").
+    """
     ids = list(record_ids)
     anc = {rid: ancestors(rid, store) for rid in ids}
+    refl = {rid: anc[rid] | {rid} for rid in ids}
     pairwise = {}
     for i, j in itertools.combinations(range(len(ids)), 2):
-        common = anc[ids[i]] & anc[ids[j]]
+        common = refl[ids[i]] & refl[ids[j]]
         if common:
             pairwise[(ids[i], ids[j])] = sorted(common)
     # Sharing requires at least two parties. set.intersection over a single set
     # returns that set, which would report a lone claim as sharing every one of
     # its own ancestors with itself -> a spurious REFUSE-TO-COMBINE.
-    collective = set.intersection(*anc.values()) if len(ids) >= 2 else set()
+    collective = set.intersection(*refl.values()) if len(ids) >= 2 else set()
     return {"ancestors": anc, "pairwise_shared": pairwise, "collective_shared": sorted(collective)}
 
 
@@ -151,6 +166,14 @@ def explain_verdict(verdict: Mapping, store: Mapping[str, Mapping]) -> str:
     verdict dict already holds; ``explain`` just renders it for a human. It takes no
     new position: everything here is a restatement of the mechanical verdict.
     """
+    if verdict.get("verdict") == "INVALID":
+        # Bad input, not a judgement about the world: say so plainly and stop.
+        return (
+            "This set cannot be judged: " + str(verdict.get("reason", "invalid input")) +
+            ". An unresolved or empty selection is not vacuously combinable — nothing was "
+            "combined and no independence claim is made."
+        )
+
     ids = list(verdict.get("claims", []))
     n = len(ids)
     names = [label(i, store) for i in ids]
@@ -253,6 +276,32 @@ def combine_verdict(
     a note saying so.
     """
     ids = list(record_ids)
+
+    # Fail CLOSED at ingestion (dev/cairn#37, finding 2). An empty selected set, or one
+    # naming an id that resolves to no record in the store, cannot be judged independent:
+    # "no shared upstream" is vacuously true of nothing, and a missing selected id must
+    # NOT be silently treated as an opaque upstream root. Both used to return COMBINABLE /
+    # exit 0. (An *upstream* referenced by derivedFrom may still be opaque — that is how a
+    # shared external DOI is caught; only the *selected* records are required to resolve.)
+    missing = [rid for rid in ids if rid not in store]
+    if not ids or missing:
+        reason = (
+            "empty selected set — nothing to combine (independence is not vacuously true)"
+            if not ids else
+            f"selected id(s) resolve to no record in the store: {sorted(missing)}; "
+            "refusing to treat a missing selection as an opaque upstream root"
+        )
+        return {
+            "claims": ids,
+            "independent": False,
+            "verdict": "INVALID",
+            "shared_upstreams": [],
+            "pairwise_shared": {},
+            "shared_funders": [],
+            "missing": sorted(missing),
+            "reason": reason,
+        }
+
     s = shared_upstreams(ids, store)
     # the union of all shared upstreams across any pair (the laundered dependence)
     shared_any: set[str] = set(s["collective_shared"])
@@ -299,8 +348,27 @@ def combine_verdict(
     }
 
     if backstop is not None:
+        # Fail CLOSED (dev/cairn#37, finding 3). The "conclusion unchanged" upgrade rests on
+        # the backstop being upstream-disjoint from a NAMED at-risk premise and itself real.
+        # Previously a typo or an omitted premise sailed through: `at_risk_upstream is None`
+        # short-circuited `disjoint` to True, and neither id had to exist — so a missing
+        # backstop laundered a bare refusal into REFUSE-TO-COMBINE-AS-INDEPENDENT. Require
+        # BOTH to resolve to records in the store before the disjointness check even runs.
+        if backstop not in store or at_risk_upstream is None or at_risk_upstream not in store:
+            out["conclusion_unchanged"] = False
+            out["backstop"] = backstop
+            out["at_risk_upstream"] = at_risk_upstream
+            out["note"] = (
+                f"the backstop upgrade was NOT applied: it requires both a backstop and a "
+                f"named at-risk premise that each resolve to a record in the store "
+                f"(backstop={backstop!r} {'ok' if backstop in store else 'UNRESOLVED'}, "
+                f"at_risk_upstream={at_risk_upstream!r} "
+                f"{'ok' if at_risk_upstream in store else 'MISSING/UNRESOLVED'}). "
+                f"A bare REFUSE-TO-COMBINE stands rather than a fabricated reassurance."
+            )
+            return out
         backstop_closure = ancestors(backstop, store) | {backstop}
-        disjoint = at_risk_upstream is None or at_risk_upstream not in backstop_closure
+        disjoint = at_risk_upstream not in backstop_closure
         if disjoint:
             out["verdict"] = "REFUSE-TO-COMBINE-AS-INDEPENDENT"
             out["conclusion_unchanged"] = True

@@ -128,10 +128,14 @@ def cmd_frechet(args) -> int:
     if args.neff_run:
         run = json.loads(Path(args.neff_run).read_text())
         n_eff = run["assertion"]["neff"]["n_eff_capped"]  # A2 same-evidence witness of redundancy
-    v = frechet.frechet_verdict(
-        lrs, prior=args.prior, shared_upstream=not prov["independent"],
-        base_neg=args.base_neg, n_eff=n_eff, max_width_decades=args.max_width_decades,
-    )
+    try:
+        v = frechet.frechet_verdict(
+            lrs, prior=args.prior, shared_upstream=not prov["independent"],
+            base_neg=args.base_neg, n_eff=n_eff, max_width_decades=args.max_width_decades,
+        )
+    except ValueError as e:
+        print(f"FRECHET: rejected input: {e}", file=sys.stderr)
+        return 2  # non-finite / out-of-domain input -> fail closed, never a vacuous point
     v["claims"] = ids
     v["provenance"] = {"verdict": prov["verdict"], "shared_upstreams": prov["shared_upstreams"]}
     print(json.dumps(v, indent=2))
@@ -188,7 +192,9 @@ def cmd_intersect(args) -> int:
         {"a": a, "b": b, "shared": shared} for (a, b), shared in verdict["pairwise_shared"].items()
     ]
     print(json.dumps(verdict, indent=2))
-    return 0 if verdict["independent"] else 2  # nonzero == refused (script-detectable)
+    # 0 == COMBINABLE; 2 == refused; 3 == INVALID input (empty/unresolved set) — all
+    # non-zero paths fail closed, an unresolved set is never a silent exit-0 COMBINABLE.
+    return 0 if verdict["verdict"] == "COMBINABLE" else (3 if verdict["verdict"] == "INVALID" else 2)
 
 
 def cmd_import(args) -> int:
@@ -223,7 +229,8 @@ def cmd_explain(args) -> int:
     at_risk = alias.get(args.at_risk_upstream, args.at_risk_upstream) if args.at_risk_upstream else None
     verdict = provenance.combine_verdict(ids, store, backstop=backstop, at_risk_upstream=at_risk)
     print(provenance.explain_verdict(verdict, store))
-    return 0 if verdict["independent"] else 2  # same exit contract as intersect
+    # same exit contract as intersect: 0 COMBINABLE / 3 INVALID / 2 refused.
+    return 0 if verdict["verdict"] == "COMBINABLE" else (3 if verdict["verdict"] == "INVALID" else 2)
 
 
 def cmd_cases_verify(args) -> int:
